@@ -5,7 +5,9 @@ from __future__ import annotations
 import hashlib
 import json
 import time
-from collections.abc import Callable
+from collections.abc import Callable, Iterator
+from contextlib import contextmanager
+from contextvars import ContextVar
 from decimal import Decimal
 from typing import Any
 
@@ -24,6 +26,19 @@ from apps.ai.providers import (
 )
 
 log = structlog.get_logger(__name__)
+CACHE_ENABLED: ContextVar[bool] = ContextVar("ai_stage_cache_enabled", default=True)
+
+
+@contextmanager
+def cache_disabled() -> Iterator[None]:
+    """Bypass stage caching (`ai_reprocess --force`)."""
+    token = CACHE_ENABLED.set(False)
+    try:
+        yield
+    finally:
+        CACHE_ENABLED.reset(token)
+
+
 VALIDATION_FEEDBACK = (
     "XATO: oldingi javob JSON sxemaga mos kelmadi. Faqat sxemaga mos JSON qaytaring. Xato matni: {error}"
 )
@@ -67,7 +82,7 @@ def call_llm[SchemaT: BaseModel](
     provider = get_provider()
     user = render_user("")
     digest = input_hash(stage, model, schema.__name__, system, user)
-    if use_cache and (hit := _cached(stage, digest)) is not None:
+    if use_cache and CACHE_ENABLED.get() and (hit := _cached(stage, digest)) is not None:
         run = AIRun.objects.create(
             post_id=post_id,
             article_id=article_id,

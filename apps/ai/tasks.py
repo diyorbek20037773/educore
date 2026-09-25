@@ -129,3 +129,48 @@ def process_post(
             return {"status": "failed", "error": str(exc)}
     _mark_processed(outbox_id)
     return outcome.as_dict()
+
+
+@shared_task(bind=True, name="ai.translate_article", acks_late=True, max_retries=MAX_RETRIES)
+def translate_article(self: Any, article_id: int, lang: str) -> str:
+    """ru/en translation after publication; never blocks the uz article (FR-AI-6)."""
+    from apps.ai.translation import mark_translation_failed
+    from apps.ai.translation import translate_article as _translate
+
+    try:
+        return _translate(article_id, lang)
+    except BudgetExhaustedError:
+        mark_translation_failed(article_id, lang)
+        return "budget_exhausted"
+    except ProviderTransientError as exc:
+        if self.request.retries < self.max_retries:
+            raise self.retry(exc=exc, countdown=backoff_seconds(self.request.retries)) from exc
+        mark_translation_failed(article_id, lang)
+        return "failed"
+    except ProviderPermanentError:
+        mark_translation_failed(article_id, lang)
+        return "failed"
+
+
+@shared_task(name="ai.weekly_digest", ignore_result=True)
+def weekly_digest() -> int | None:
+    """Monday 07:00: "Haftalik sharh" to review (FR-AI-8)."""
+    from apps.ai.translation import weekly_digest as _digest
+
+    try:
+        article = _digest()
+    except (BudgetExhaustedError, ProviderPermanentError, ProviderTransientError) as exc:
+        send_alert(
+            "weekly_digest_failed", f"weekly_digest:{timezone.localdate().isoformat()}", f"Digest: {exc}"
+        )
+        return None
+    return article.pk if article else None
+
+
+@shared_task(name="ai.prune_runs", ignore_result=True)
+def prune_runs(days: int = 180) -> int:
+    """Drop AIRun payloads older than 180 days; tokens and cost stay (ARCHITECTURE §6)."""
+    from apps.ai.models import AIRun
+
+    cutoff = timezone.now() - timedelta(days=days)
+    return AIRun.objects.filter(created_at__lt=cutoff).exclude(output=None).update(output=None)

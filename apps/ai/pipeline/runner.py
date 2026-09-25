@@ -17,7 +17,7 @@ from apps.ai.pipeline import articles, dedupe, rules
 from apps.ai.pipeline.context import PostContext, base_prompt_context, load_context, models, system_prompt
 from apps.ai.pipeline.structured import upsert_structured
 from apps.ai.prompts import prompt_version, render
-from apps.ai.runs import call_llm, log_rule_run
+from apps.ai.runs import cache_disabled, call_llm, log_rule_run
 from apps.ai.schemas import DedupeVerdict, Draft, Extraction, FactCheck
 from apps.content.models import Article, ArticleSource, Category
 from apps.core.sanitize import strip_tags
@@ -186,6 +186,13 @@ def _confirm_duplicate(ctx: PostContext, system: str, candidate: dedupe.Candidat
 
 def process(post_id: int, event_type: str = OutboxEventType.CREATED, *, force: bool = False) -> Outcome:
     """Run the pipeline for one post. Raises provider/budget errors for the task layer to handle."""
+    if force:
+        with cache_disabled():
+            return _process(post_id, event_type, force=True)
+    return _process(post_id, event_type, force=False)
+
+
+def _process(post_id: int, event_type: str, *, force: bool) -> Outcome:
     ctx = load_context(post_id)
     post = ctx.post
     if event_type == OutboxEventType.DELETED or post.is_deleted:
