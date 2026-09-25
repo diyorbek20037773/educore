@@ -22,6 +22,26 @@ class TimeStampedModel(models.Model):
         abstract = True
 
 
+class SanitizedHTMLMixin(models.Model):
+    """Sanitize rich-text fields (and their `_uz/_uz_cyrl/_ru/_en` variants) on every save (SPEC §2)."""
+
+    sanitized_fields: ClassVar[tuple[str, ...]] = ()
+
+    class Meta:
+        abstract = True
+
+    def save(self, *args: object, **kwargs: object) -> None:
+        from apps.core.sanitize import sanitize_html
+
+        for base in self.sanitized_fields:
+            for suffix in ("", "_uz", "_uz_cyrl", "_ru", "_en"):
+                name = f"{base}{suffix}"
+                value = getattr(self, name, None)
+                if isinstance(value, str) and value:
+                    setattr(self, name, sanitize_html(value))
+        super().save(*args, **kwargs)  # type: ignore[arg-type]
+
+
 class PublishMode(models.TextChoices):
     AUTO = "auto", _("Avtomatik")
     REVIEW = "review", _("Tahririyat koʻrigi")
@@ -86,8 +106,10 @@ class SiteSetting(TimeStampedModel):
         return obj
 
 
-class Page(TimeStampedModel):
+class Page(SanitizedHTMLMixin, TimeStampedModel):
     """Static page (about, contacts, privacy, terms, hub intros)."""
+
+    sanitized_fields = ("body",)
 
     slug = models.SlugField(_("slug"), max_length=120, unique=True)
     title = models.CharField(_("title"), max_length=200)
@@ -117,8 +139,10 @@ class FAQTopic(models.TextChoices):
     UMUMIY = "umumiy", _("Umumiy")
 
 
-class FAQ(TimeStampedModel):
+class FAQ(SanitizedHTMLMixin, TimeStampedModel):
     """Frequently asked question, optionally scoped to an institution."""
+
+    sanitized_fields = ("answer",)
 
     question = models.CharField(_("question"), max_length=300)
     answer = models.TextField(_("answer"))

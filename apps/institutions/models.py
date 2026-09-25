@@ -9,7 +9,7 @@ from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
 from apps.core.colors import validate_hex_color, validate_text_color_on_white
-from apps.core.models import TimeStampedModel
+from apps.core.models import SanitizedHTMLMixin, TimeStampedModel
 
 
 class InstitutionKind(models.TextChoices):
@@ -22,8 +22,10 @@ def institution_upload_to(instance: Institution, filename: str) -> str:
     return f"institutions/{instance.slug}/{filename}"
 
 
-class Institution(TimeStampedModel):
+class Institution(SanitizedHTMLMixin, TimeStampedModel):
     """One of the five education institutions. `order` is the fixed chart series order (ADR-007)."""
+
+    sanitized_fields = ("description", "mission")
 
     slug = models.SlugField(_("slug"), max_length=80, unique=True)
     short_name = models.CharField(_("short name"), max_length=120)
@@ -148,8 +150,10 @@ def program_cover_upload_to(instance: Program, filename: str) -> str:
     return f"programs/{instance.institution_id}/{filename}"
 
 
-class Program(TimeStampedModel):
+class Program(SanitizedHTMLMixin, TimeStampedModel):
     """Education program (yoʻnalish) of an institution."""
+
+    sanitized_fields = ("description", "admission_requirements")
 
     institution = models.ForeignKey(
         Institution, verbose_name=_("institution"), on_delete=models.CASCADE, related_name="programs"
@@ -195,8 +199,10 @@ def profession_cover_upload_to(instance: Profession, filename: str) -> str:
     return f"professions/{instance.slug}/{filename}"
 
 
-class Profession(TimeStampedModel):
+class Profession(SanitizedHTMLMixin, TimeStampedModel):
     """Profession (kasb) that graduates of the institutions go into."""
+
+    sanitized_fields = ("description",)
 
     slug = models.SlugField(_("slug"), max_length=120, unique=True)
     name = models.CharField(_("name"), max_length=200)

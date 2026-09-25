@@ -13,7 +13,7 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
 from apps.core.colors import validate_hex_color
-from apps.core.models import TimeStampedModel
+from apps.core.models import SanitizedHTMLMixin, TimeStampedModel
 
 
 class Category(TimeStampedModel):
@@ -84,8 +84,10 @@ class ArticleQuerySet(models.QuerySet["Article"]):
         return self.filter(status=ArticleStatus.PUBLISHED, published_at__lte=timezone.now())
 
 
-class Article(TimeStampedModel):
+class Article(SanitizedHTMLMixin, TimeStampedModel):
     """AI-generated or editor-written article; every AI article links its Telegram sources."""
+
+    sanitized_fields = ("body",)
 
     slug = models.SlugField(_("slug"), max_length=120, unique=True)
     title = models.CharField(_("title"), max_length=200)
@@ -263,7 +265,9 @@ class EventKind(models.TextChoices):
     BOSHQA = "boshqa", _("Boshqa")
 
 
-class Event(TimeStampedModel):
+class Event(SanitizedHTMLMixin, TimeStampedModel):
+    sanitized_fields = ("description",)
+
     slug = models.SlugField(_("slug"), max_length=140, unique=True)
     title = models.CharField(_("title"), max_length=300)
     description = models.TextField(_("description"), blank=True)
@@ -331,7 +335,9 @@ class AdmissionStatus(models.TextChoices):
     CLOSED = "closed", _("Yopilgan")
 
 
-class Admission(TimeStampedModel):
+class Admission(SanitizedHTMLMixin, TimeStampedModel):
+    sanitized_fields = ("description", "requirements", "documents")
+
     institution = models.ForeignKey(
         "institutions.Institution",
         verbose_name=_("institution"),
@@ -390,8 +396,10 @@ class Admission(TimeStampedModel):
         return f"{self.institution.abbreviation} {self.year}: {self.title}"
 
 
-class Story(TimeStampedModel):
+class Story(SanitizedHTMLMixin, TimeStampedModel):
     """Motivation story (motivatsiya)."""
+
+    sanitized_fields = ("body",)
 
     slug = models.SlugField(_("slug"), max_length=140, unique=True)
     title = models.CharField(_("title"), max_length=300)
