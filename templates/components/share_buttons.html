@@ -1,0 +1,9 @@
+{% load i18n web_tags %}{# url, title #}
+<div class="flex flex-wrap items-center gap-2" role="group" aria-label="{% translate 'Ulashish' %}">
+  <a class="icon-btn border border-line" href="https://t.me/share/url?url={{ url|urlencode }}&amp;text={{ title|urlencode }}" rel="noopener" target="_blank" aria-label="Telegram">{% icon "send" "size-4" %}</a>
+  <a class="icon-btn border border-line" href="https://www.facebook.com/sharer/sharer.php?u={{ url|urlencode }}" rel="noopener" target="_blank" aria-label="Facebook"><span class="text-sm font-bold" aria-hidden="true">f</span></a>
+  <a class="icon-btn border border-line" href="https://x.com/intent/post?url={{ url|urlencode }}&amp;text={{ title|urlencode }}" rel="noopener" target="_blank" aria-label="X"><span class="text-sm font-bold" aria-hidden="true">X</span></a>
+  <button type="button" class="icon-btn border border-line" x-data="shareLink" data-url="{{ url }}" x-on:click="copy" aria-label="{% translate 'Havolani nusxalash' %}">
+    <span x-show="notCopied">{% icon "link" "size-4" %}</span><span x-show="copied" x-cloak>{% icon "check" "size-4" %}</span>
+  </button>
+</div>

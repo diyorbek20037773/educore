@@ -1,13 +1,30 @@
-{% load static i18n %}<!doctype html>
+{% load static i18n web_tags %}<!doctype html>
 {% get_current_language as LANGUAGE_CODE %}
-<html lang="{{ LANGUAGE_CODE }}" data-theme="light">
+<html lang="{% if LANGUAGE_CODE == 'uz-cyrl' %}uz-Cyrl{% elif LANGUAGE_CODE == 'uz' %}uz-Latn{% else %}{{ LANGUAGE_CODE }}{% endif %}" data-theme="light">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{% block title %}EDUCORE{% endblock %}</title>
+  <title>{% block title %}{% if crumbs %}{% with c=crumbs|last %}{{ c.0 }}{% endwith %}{% else %}EDUCORE{% endif %}{% endblock %}{% block title_suffix %} — EDUCORE{% endblock %}</title>
   <meta name="description" content="{% block meta_description %}{% translate "Huquqni muhofaza qilish taʼlim muassasalarining yagona rasmiy axborot-tahliliy platformasi" %}{% endblock %}">
+  <link rel="canonical" href="{{ site_url }}{% block canonical %}{{ request.path }}{% endblock %}">
+  {% block hreflang %}
+  <link rel="alternate" hreflang="uz-Latn" href="{{ site_url }}{% language_url 'uz' %}">
+  <link rel="alternate" hreflang="uz-Cyrl" href="{{ site_url }}{% language_url 'uz-cyrl' %}">
+  <link rel="alternate" hreflang="ru" href="{{ site_url }}{% language_url 'ru' %}">
+  <link rel="alternate" hreflang="en" href="{{ site_url }}{% language_url 'en' %}">
+  <link rel="alternate" hreflang="x-default" href="{{ site_url }}{% language_url 'uz' %}">
+  {% endblock %}
+  <meta property="og:site_name" content="EDUCORE">
+  <meta property="og:type" content="{% block og_type %}website{% endblock %}">
+  <meta property="og:title" content="{% block og_title %}{% if crumbs %}{% with c=crumbs|last %}{{ c.0 }}{% endwith %}{% else %}EDUCORE{% endif %}{% endblock %}">
+  <meta property="og:description" content="{% block og_description %}{% translate "Huquqni muhofaza qilish taʼlim muassasalarining yagona rasmiy axborot-tahliliy platformasi" %}{% endblock %}">
+  <meta property="og:url" content="{{ site_url }}{{ request.path }}">
+  <meta property="og:image" content="{% block og_image %}{{ site_url }}{% static 'img/og-default.png' %}{% endblock %}">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="theme-color" content="#0B1F3A">
-  {# Theme is applied before first paint to avoid a flash; nonce-allowed under the CSP. #}
+  <link rel="icon" href="{% static 'img/favicon.svg' %}" type="image/svg+xml">
+  <link rel="manifest" href="{% url 'manifest' %}">
+  <link rel="alternate" type="application/rss+xml" title="EDUCORE" href="{% url 'web:rss' %}">
   <script nonce="{{ request.csp_nonce }}">
     (function () {
       try {
@@ -17,20 +34,25 @@
       } catch (e) {}
     })();
   </script>
-  <meta name="htmx-config" content='{"allowEval": false, "allowScriptTags": false, "includeIndicatorStyles": false, "inlineScriptNonce": "{{ request.csp_nonce }}", "inlineStyleNonce": "{{ request.csp_nonce }}"}'>
+  <meta name="htmx-config" content='{"allowEval": false, "allowScriptTags": false, "includeIndicatorStyles": false, "inlineScriptNonce": "{{ request.csp_nonce }}", "inlineStyleNonce": "{{ request.csp_nonce }}", "historyCacheSize": 0}'>
   <link rel="preload" href="{% static 'fonts/manrope-latin-wght-normal.woff2' %}" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="{% static 'css/output.css' %}">
   <script src="{% static 'vendor/htmx/htmx.min.js' %}" defer></script>
   <script src="{% static 'js/app.js' %}" defer></script>
   <script src="{% static 'vendor/alpine/alpine-csp.min.js' %}" defer></script>
   {% block head %}{% endblock %}
+  {% block jsonld %}{% endblock %}
 </head>
 <body class="min-h-screen bg-surface text-ink antialiased" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
   <a class="skip-link" href="#main">{% translate "Asosiy mazmunga oʻtish" %}</a>
-  {% block header %}{% endblock %}
+  {% block header %}{% include "components/header.html" %}{% endblock %}
   <main id="main" tabindex="-1">
-    {% block main %}{% block content %}{% endblock %}{% endblock %}
+    {% block main %}
+      {% block breadcrumbs %}{% if crumbs %}{% include "components/breadcrumbs.html" %}{% endif %}{% endblock %}
+      {% block content %}{% endblock %}
+    {% endblock %}
   </main>
-  {% block footer %}{% endblock %}
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  {% block footer %}{% include "components/footer.html" %}{% endblock %}
 </body>
 </html>

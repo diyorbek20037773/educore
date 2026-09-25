@@ -78,7 +78,7 @@ PROFESSIONS: list[dict[str, Any]] = [
     {
         "slug": "profilaktika-inspektori",
         "name": "Profilaktika inspektori",
-        "icon": "home",
+        "icon": "house",
         "institutions": ["IIV", "JXU"],
         "summary": "Mahallada huquqbuzarliklarning oldini olish ishlarini tashkil etadi.",
         "responsibilities": "Aholi bilan profilaktik suhbatlar; ijtimoiy xavfli oilalar bilan ishlash; "
@@ -121,7 +121,7 @@ PROFESSIONS: list[dict[str, Any]] = [
     {
         "slug": "kriminalist-ekspert",
         "name": "Kriminalist-ekspert",
-        "icon": "fingerprint",
+        "icon": "fingerprint-pattern",
         "institutions": ["IIV", "HMQA"],
         "summary": "Ashyoviy dalillarni ilmiy usullar bilan tadqiq qiladi.",
         "responsibilities": "Hodisa joyini koʻzdan kechirishda ishtirok etish; daktiloskopik, trasologik va boshqa "

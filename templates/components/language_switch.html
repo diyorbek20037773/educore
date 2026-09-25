@@ -1,0 +1,13 @@
+{% load i18n web_tags %}{% get_current_language as LANGUAGE_CODE %}
+<div class="relative" x-data="dropdown" x-on:keydown.escape="close" x-on:click.outside="close">
+  <button type="button" class="icon-btn gap-1 px-2" x-on:click="toggle" x-bind:aria-expanded="expanded" aria-haspopup="true"
+          aria-label="{% translate 'Tilni tanlash' %}">
+    {% icon "globe" "size-4" %}<span class="uppercase">{% if LANGUAGE_CODE == 'uz-cyrl' %}Ўз{% elif LANGUAGE_CODE == 'uz' %}Oʻz{% else %}{{ LANGUAGE_CODE }}{% endif %}</span>
+  </button>
+  <ul class="popover right-0" x-show="open" x-cloak role="menu">
+    <li><a role="menuitem" lang="uz-Latn" href="{% language_url 'uz' %}"{% if LANGUAGE_CODE == 'uz' %} aria-current="true"{% endif %}>Oʻzbekcha</a></li>
+    <li><a role="menuitem" lang="uz-Cyrl" href="{% language_url 'uz-cyrl' %}"{% if LANGUAGE_CODE == 'uz-cyrl' %} aria-current="true"{% endif %}>Ўзбекча</a></li>
+    <li><a role="menuitem" lang="ru" href="{% language_url 'ru' %}"{% if LANGUAGE_CODE == 'ru' %} aria-current="true"{% endif %}>Русский</a></li>
+    <li><a role="menuitem" lang="en" href="{% language_url 'en' %}"{% if LANGUAGE_CODE == 'en' %} aria-current="true"{% endif %}>English</a></li>
+  </ul>
+</div>

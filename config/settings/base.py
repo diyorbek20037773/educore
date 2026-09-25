@@ -119,6 +119,7 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 "csp.context_processors.nonce",
+                "apps.web.context_processors.site",
             ],
         },
     },

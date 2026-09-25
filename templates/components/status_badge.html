@@ -1,0 +1,2 @@
+{% load web_tags %}{# status, label — always icon + label #}
+<span class="status-badge status-{{ status }}">{% if status == "answered" or status == "closed" or status == "open" %}{% icon "circle-check" "size-3.5" %}{% elif status == "rejected" %}{% icon "circle-x" "size-3.5" %}{% else %}{% icon "clock" "size-3.5" %}{% endif %}{{ label }}</span>

@@ -1,0 +1,11 @@
+{% load i18n web_tags %}{# crumbs: list of (label, url) — the last item is the current page #}
+<nav class="container-page pt-6" aria-label="{% translate 'Navigatsiya zanjiri' %}">
+  <ol class="breadcrumbs">
+    <li><a href="{% url 'web:home' %}">{% translate "Bosh sahifa" %}</a></li>
+    {% for label, url in crumbs %}
+      <li aria-hidden="true">/</li>
+      <li>{% if forloop.last %}<span aria-current="page" class="text-ink">{{ label }}</span>{% else %}<a href="{{ url }}">{{ label }}</a>{% endif %}</li>
+    {% endfor %}
+  </ol>
+</nav>
+<script type="application/ld+json" nonce="{{ request.csp_nonce }}">{{ breadcrumb_ld|jsonld }}</script>

@@ -1,0 +1,6 @@
+{% load web_tags %}
+<a href="{{ url }}" class="card card-link flex flex-col gap-2 p-4">
+  <span class="kpi-label">{{ label }}</span>
+  <span class="kpi-value">{{ value|intcomma_uz }}</span>
+  {% if spark %}{% sparkline spark %}{% else %}<span class="h-8" aria-hidden="true"></span>{% endif %}
+</a>

@@ -1,0 +1,8 @@
+{# name, label, options (list of (value,label)), current, all_label #}
+<div class="form-field min-w-40">
+  <label for="f-{{ name }}">{{ label }}</label>
+  <select id="f-{{ name }}" name="{{ name }}" class="form-input">
+    <option value="">{{ all_label }}</option>
+    {% for value, text in options %}<option value="{{ value }}"{% if current == value %} selected{% endif %}>{{ text }}</option>{% endfor %}
+  </select>
+</div>

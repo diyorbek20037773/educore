@@ -1,0 +1,5 @@
+{% load i18n web_tags %}
+<div class="card flex flex-col items-center gap-2 p-10 text-center text-ink-2">
+  {% icon "info" "size-6" %}
+  <p>{{ message|default:_("Hozircha maʼlumot yoʻq.") }}</p>
+</div>

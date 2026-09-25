@@ -1,6 +1,7 @@
 /* EDUCORE design tokens (SPEC §7.2). Source lives outside STATICFILES_DIRS (ADR-013). */
 @import "tailwindcss";
 @import "./fonts.css";
+@import "./components.css";
 
 @source "../../templates";
 @source "../../apps";
@@ -145,12 +146,6 @@
     top: 1rem;
   }
 
-  .card {
-    border: 1px solid var(--color-line);
-    border-radius: var(--radius-md);
-    background: var(--color-surface);
-    box-shadow: var(--shadow-sm);
-  }
 }
 
 @layer components {

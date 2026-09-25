@@ -1,0 +1,12 @@
+{% load i18n web_tags %}
+{% if sources %}
+<aside class="notice mt-8 flex-col" aria-labelledby="source-title">
+  <h2 id="source-title" class="flex items-center gap-2 font-sans text-base font-bold">{% icon "radio" "size-4" %}{% translate "Manba" %}</h2>
+  {% for src in sources %}
+    <p class="text-sm">
+      {% blocktranslate with name=src.institution.short_name|default:src.post.source.title %}Ushbu maqola {{ name }} rasmiy Telegram kanalidagi xabar asosida tayyorlandi.{% endblocktranslate %}
+      {% if src.post.url %}<a class="font-semibold underline" href="{{ src.post.url }}" rel="noopener nofollow" target="_blank">{% translate "Asl xabarni koʻrish" %} →</a>{% endif %}
+    </p>
+  {% endfor %}
+</aside>
+{% endif %}

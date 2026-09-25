@@ -1,0 +1,11 @@
+{% load i18n web_tags %}
+<div id="mobile-drawer" class="drawer lg:hidden" x-show="drawerOpen" x-cloak x-on:keydown.escape.window="closeDrawer">
+  <div class="drawer-backdrop" x-on:click="closeDrawer" aria-hidden="true"></div>
+  <nav class="drawer-panel" aria-label="{% translate 'Mobil menyu' %}">
+    <div class="mb-4 flex items-center justify-between">
+      <span class="brand-name">EDUCORE</span>
+      <button type="button" class="icon-btn" x-on:click="closeDrawer" aria-label="{% translate 'Menyuni yopish' %}">{% icon "x" %}</button>
+    </div>
+    {% include "components/nav_links.html" with mode="mobile" %}
+  </nav>
+</div>

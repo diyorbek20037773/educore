@@ -1,0 +1,13 @@
+{% load i18n web_tags %}
+<figure class="card chart-card flex flex-col p-5" data-chart data-url="{{ data_url }}" id="{{ chart_id }}">
+  <figcaption>
+    <h3 class="font-sans text-lg font-bold">{{ title }}</h3>
+    {% if description %}<p class="text-sm text-ink-2">{{ description }}</p>{% endif %}
+  </figcaption>
+  <div class="chart-canvas mt-4 h-72 w-full" role="img" aria-label="{{ title }}"><div class="skeleton h-full w-full"></div></div>
+  <div class="chart-table mt-4 hidden overflow-x-auto" aria-live="polite"></div>
+  <div class="mt-4 flex items-center gap-4 text-sm">
+    <button type="button" class="more-link" data-chart-toggle aria-pressed="false">{% icon "table" "size-4" %}<span>{% translate "Jadval koʻrinishi" %}</span></button>
+    <a class="more-link" href="{{ data_url }}{% if '?' in data_url %}&amp;{% else %}?{% endif %}format=csv" download>{% icon "download" "size-4" %}CSV</a>
+  </div>
+</figure>

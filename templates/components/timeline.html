@@ -1,0 +1,6 @@
+{% load i18n web_tags %}{# admission: announced → open → closed #}
+<ol class="timeline mt-4" aria-label="{% translate 'Qabul bosqichlari' %}">
+  <li class="{% if admission.status == 'announced' %}is-current{% else %}is-done{% endif %}">{% translate "Eʼlon qilindi" %}</li>
+  <li class="{% if admission.status == 'open' %}is-current{% elif admission.status == 'closed' %}is-done{% endif %}">{% translate "Qabul ochiq" %}{% if admission.starts_at %} · {{ admission.starts_at|uz_date }}{% endif %}</li>
+  <li class="{% if admission.status == 'closed' %}is-current{% endif %}">{% translate "Yakunlandi" %}{% if admission.ends_at %} · {{ admission.ends_at|uz_date }}{% endif %}</li>
+</ol>

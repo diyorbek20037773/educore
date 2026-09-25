@@ -1,0 +1,2 @@
+{% load i18n web_tags %}{# obj + field: shown when the active language falls back to Uzbek (FR-I18N-3) #}
+{% if not obj|translated:field %}<p class="notice my-4">{% icon "languages" "size-4 flex-none mt-0.5" %}<span>{% translate "Ushbu sahifa hali tarjima qilinmagan" %}</span></p>{% endif %}

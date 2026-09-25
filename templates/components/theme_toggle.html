@@ -1,0 +1,6 @@
+{% load i18n web_tags %}
+<button type="button" class="icon-btn" x-data="themeToggle" x-on:click="toggle" x-bind:aria-pressed="pressed"
+        aria-label="{% translate 'Yorugʻ yoki qorongʻi rejim' %}">
+  <span x-show="isDark" x-cloak>{% icon "sun" "size-4" %}</span>
+  <span x-show="isLight">{% icon "moon" "size-4" %}</span>
+</button>

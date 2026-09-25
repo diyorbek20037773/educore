@@ -20,7 +20,7 @@ CATEGORIES: list[tuple[str, str, str, bool, str]] = [
     (
         "rahbariyat",
         "Rahbariyat va tashriflar",
-        "building-2",
+        "building",
         False,
         "Rahbariyat faoliyati va rasmiy tashriflar.",
     ),

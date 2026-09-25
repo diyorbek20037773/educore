@@ -1,0 +1,13 @@
+{% load i18n web_tags static %}
+<article class="card card-link inst-{{ inst.order }} inst-stripe relative flex h-full flex-col p-5">
+  <div class="flex items-center gap-3">
+    {% if inst.logo %}<img src="{{ inst.logo.url }}" alt="" width="44" height="44" class="size-11 rounded-lg" loading="lazy">{% else %}<span class="inst-bg grid size-11 place-items-center rounded-lg font-bold">{{ inst.abbreviation }}</span>{% endif %}
+    <h3 class="font-sans text-base font-bold leading-snug"><a href="{{ inst.get_absolute_url }}" class="after:absolute after:inset-0">{{ inst.short_name }}</a></h3>
+  </div>
+  <dl class="mt-4 grid grid-cols-3 gap-2 text-center">
+    <div><dt class="text-xs text-ink-2">{% translate "Yangiliklar (30 kun)" %}</dt><dd class="text-lg font-bold">{{ news_30|default:0 }}</dd></div>
+    <div><dt class="text-xs text-ink-2">{% translate "Yoʻnalishlar" %}</dt><dd class="text-lg font-bold">{{ programs_n|default:0 }}</dd></div>
+    <div><dt class="text-xs text-ink-2">{% translate "Tadbirlar" %}</dt><dd class="text-lg font-bold">{{ events_n|default:0 }}</dd></div>
+  </dl>
+  <div class="inst-text mt-3">{% sparkline spark "currentColor" 240 36 %}</div>
+</article>

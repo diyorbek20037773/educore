@@ -1,0 +1,21 @@
+{% load i18n web_tags %}
+<article class="card inst-{{ adm.institution.order }} inst-stripe p-5">
+  <div class="flex flex-wrap items-start justify-between gap-3">
+    <div>
+      <p class="text-xs font-semibold uppercase text-ink-2">{{ adm.institution.short_name }} · {{ adm.year }}</p>
+      <h3 class="mt-1 font-sans text-lg font-bold">{{ adm.title }}</h3>
+    </div>
+    {% include "components/status_badge.html" with status=adm.status label=adm.get_status_display %}
+  </div>
+  {% include "components/timeline.html" with admission=adm %}
+  {% if adm.ends_at and adm.status != "closed" %}<p class="mt-2 text-sm text-ink-2" x-data="countdown" data-end="{{ adm.ends_at|date:'Y-m-d' }}T23:59:59" data-template="{% translate 'Tugashiga {d} kun qoldi' %}"><span x-text="label">{% translate "Muddat" %}: {{ adm.ends_at|uz_date }}</span></p>{% endif %}
+  <dl class="mt-4 grid gap-3 text-sm sm:grid-cols-2">
+    {% if adm.quota %}<div><dt class="text-ink-2">{% translate "Kvota" %}</dt><dd class="font-semibold">{{ adm.quota|intcomma_uz }}</dd></div>{% endif %}
+    {% if adm.contact %}<div><dt class="text-ink-2">{% translate "Aloqa" %}</dt><dd class="font-semibold">{{ adm.contact }}</dd></div>{% endif %}
+  </dl>
+  {% if adm.description %}<div class="prose-educore mt-3 text-base">{{ adm.description|safe }}</div>{% endif %}
+  {% if adm.requirements %}<details class="mt-3"><summary class="cursor-pointer font-semibold">{% translate "Talablar" %}</summary><div class="prose-educore mt-2 text-base">{{ adm.requirements|linebreaks }}</div></details>{% endif %}
+  {% if adm.documents %}<details class="mt-2"><summary class="cursor-pointer font-semibold">{% translate "Hujjatlar" %}</summary><div class="prose-educore mt-2 text-base">{{ adm.documents|linebreaks }}</div></details>{% endif %}
+  {% with programs=adm.programs.all %}{% if programs %}<p class="mt-3 text-sm"><span class="text-ink-2">{% translate "Yoʻnalishlar" %}:</span> {% for p in programs %}<a class="hover:underline" href="{{ p.get_absolute_url }}">{{ p.name }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</p>{% endif %}{% endwith %}
+  {% if adm.apply_url %}<a class="btn-primary mt-4" href="{{ adm.apply_url }}" rel="noopener" target="_blank">{% translate "Hujjat topshirish" %} {% icon "external-link" "size-4" %}</a>{% endif %}
+</article>

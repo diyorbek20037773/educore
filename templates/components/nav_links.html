@@ -1,0 +1,33 @@
+{% load i18n %}{% with p=request.path %}
+<ul class="{% if mode == 'desktop' %}flex items-center gap-1{% else %}flex flex-col gap-1{% endif %}">
+  <li><a class="nav-link{% if request.resolver_match.url_name == 'home' %} is-active{% endif %}" href="{% url 'web:home' %}"{% if request.resolver_match.url_name == 'home' %} aria-current="page"{% endif %}>{% translate "Bosh sahifa" %}</a></li>
+  <li><a class="nav-link{% if '/muassasalar/' in p %} is-active{% endif %}" href="{% url 'web:institution_list' %}">{% translate "Muassasalar" %}</a></li>
+  <li><a class="nav-link{% if '/yangiliklar/' in p %} is-active{% endif %}" href="{% url 'web:news_list' %}">{% translate "Yangiliklar" %}</a></li>
+  <li class="relative" {% if mode == 'desktop' %}x-data="dropdown" x-on:keydown.escape="close" x-on:click.outside="close"{% endif %}>
+    {% if mode == 'desktop' %}
+      <button type="button" class="nav-link inline-flex items-center gap-1" x-on:click="toggle" x-bind:aria-expanded="expanded" aria-haspopup="true">
+        {% translate "Taʼlim" %}<svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+      <div class="mega-menu" x-show="open" x-cloak>
+        <a href="{% url 'web:program_list' %}"><strong>{% translate "Yoʻnalishlar" %}</strong><span>{% translate "Taʼlim dasturlari katalogi" %}</span></a>
+        <a href="{% url 'web:admissions' %}"><strong>{% translate "Qabul" %}</strong><span>{% translate "Muddatlar, talablar, hujjatlar" %}</span></a>
+        <a href="{% url 'web:students_hub' %}"><strong>{% translate "Talabalar" %}</strong><span>{% translate "Talabalar hayoti va imkoniyatlar" %}</span></a>
+        <a href="{% url 'web:cadets_hub' %}"><strong>{% translate "Kursantlar" %}</strong><span>{% translate "Xizmat va tayyorgarlik" %}</span></a>
+      </div>
+    {% else %}
+      <span class="nav-group-label">{% translate "Taʼlim" %}</span>
+      <ul class="ml-3 flex flex-col gap-1">
+        <li><a class="nav-link" href="{% url 'web:program_list' %}">{% translate "Yoʻnalishlar" %}</a></li>
+        <li><a class="nav-link" href="{% url 'web:admissions' %}">{% translate "Qabul" %}</a></li>
+        <li><a class="nav-link" href="{% url 'web:students_hub' %}">{% translate "Talabalar" %}</a></li>
+        <li><a class="nav-link" href="{% url 'web:cadets_hub' %}">{% translate "Kursantlar" %}</a></li>
+      </ul>
+    {% endif %}
+  </li>
+  <li><a class="nav-link{% if '/kasblar/' in p %} is-active{% endif %}" href="{% url 'web:profession_list' %}">{% translate "Kasblar" %}</a></li>
+  <li><a class="nav-link{% if '/tadbirlar/' in p %} is-active{% endif %}" href="{% url 'web:event_list' %}">{% translate "Tadbirlar" %}</a></li>
+  <li><a class="nav-link{% if '/motivatsiya/' in p %} is-active{% endif %}" href="{% url 'web:story_list' %}">{% translate "Motivatsiya" %}</a></li>
+  <li><a class="nav-link{% if '/analitika/' in p %} is-active{% endif %}" href="{% url 'web:analytics' %}">{% translate "Analitika" %}</a></li>
+  <li><a class="nav-link nav-cta{% if '/murojaat/' in p %} is-active{% endif %}" href="{% url 'web:appeal_form' %}">{% translate "Murojaat" %}</a></li>
+</ul>
+{% endwith %}

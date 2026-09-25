@@ -1,0 +1,9 @@
+{% load i18n web_tags %}
+<article class="card card-link relative flex h-full flex-col p-6{% if story.institution %} inst-{{ story.institution.order }} inst-stripe{% endif %}">
+  <span class="text-gold" aria-hidden="true">{% icon "quote" "size-7" %}</span>
+  <blockquote class="mt-3 font-serif text-lg leading-relaxed">{{ story.quote|default:story.title }}</blockquote>
+  <div class="mt-auto pt-5">
+    <a href="{{ story.get_absolute_url }}" class="font-semibold after:absolute after:inset-0">{{ story.person_name }}</a>
+    <p class="text-sm text-ink-2">{{ story.person_role }}{% if story.institution %} · {{ story.institution.short_name }}{% endif %}</p>
+  </div>
+</article>

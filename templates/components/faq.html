@@ -1,0 +1,14 @@
+{% load i18n %}
+{% if faqs %}
+<section class="mt-10" aria-labelledby="faq-title">
+  <div class="section-title"><h2 id="faq-title">{% translate "Koʻp beriladigan savollar" %}</h2></div>
+  <div class="card divide-y divide-line">
+    {% for faq in faqs %}
+      <details class="group p-4">
+        <summary class="cursor-pointer font-semibold">{{ faq.question }}</summary>
+        <div class="prose-educore mt-3 text-base">{{ faq.answer|safe }}</div>
+      </details>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}

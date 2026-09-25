@@ -1,0 +1,7 @@
+{% load i18n %}{# HTMX infinite scroll: fetches the next page when revealed and replaces itself #}
+{% if page_obj.has_next %}
+<div class="col-span-full flex justify-center py-6" hx-get="?{% if querystring %}{{ querystring }}&amp;{% endif %}page={{ page_obj.next_page_number }}"
+     hx-trigger="revealed" hx-swap="outerHTML">
+  <span class="skeleton h-4 w-40" aria-hidden="true"></span><span class="sr-only">{% translate "Yuklanmoqda…" %}</span>
+</div>
+{% endif %}

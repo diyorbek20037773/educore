@@ -1,0 +1,13 @@
+{% load media_tags %}{# cover media with WebP srcset; placeholder with the institution colour when there is none #}
+{% with media=article.cover_media %}
+<div class="media-frame {{ ratio|default:'aspect-[16/9]' }}{% if article.primary_institution %} inst-{{ article.primary_institution.order }}{% endif %}">
+  {% if media %}
+    <img src="{% media_url media '800' %}" srcset="{% media_srcset media %}" sizes="{{ sizes|default:'(min-width: 1024px) 33vw, 100vw' }}"
+         alt="{% if article.primary_institution %}{{ article.primary_institution.short_name }}: {% endif %}{{ article.title }}"
+         width="{{ media.width|default:1280 }}" height="{{ media.height|default:853 }}"
+         {% if eager %}fetchpriority="high"{% else %}loading="lazy" decoding="async"{% endif %}>
+  {% else %}
+    <div class="placeholder-cover" aria-hidden="true">{{ article.primary_institution.abbreviation|default:"EDUCORE" }}</div>
+  {% endif %}
+</div>
+{% endwith %}

@@ -1,0 +1,8 @@
+{% load i18n web_tags %}{# page_obj + querystring; accessible fallback for the infinite scroll #}
+{% if page_obj.paginator.num_pages > 1 %}
+<nav class="mt-8 flex items-center justify-between gap-3 text-sm" aria-label="{% translate 'Sahifalar' %}">
+  {% if page_obj.has_previous %}<a class="btn-secondary" rel="prev" href="?{% if querystring %}{{ querystring }}&amp;{% endif %}page={{ page_obj.previous_page_number }}">{% icon "arrow-left" "size-4" %}{% translate "Oldingi" %}</a>{% else %}<span></span>{% endif %}
+  <span class="text-ink-2">{{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</span>
+  {% if page_obj.has_next %}<a class="btn-secondary" rel="next" href="?{% if querystring %}{{ querystring }}&amp;{% endif %}page={{ page_obj.next_page_number }}">{% translate "Keyingi" %}{% icon "arrow-right" "size-4" %}</a>{% else %}<span></span>{% endif %}
+</nav>
+{% endif %}

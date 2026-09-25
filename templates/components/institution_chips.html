@@ -1,0 +1,8 @@
+{% load i18n %}{# current, institutions — radio chips inside a filter form #}
+<fieldset class="flex flex-wrap gap-2">
+  <legend class="sr-only">{% translate "Muassasa" %}</legend>
+  <label class="filter-chip"><input class="sr-only" type="radio" name="inst" value=""{% if not current %} checked{% endif %}>{% translate "Barchasi" %}</label>
+  {% for inst in institutions %}
+    <label class="filter-chip"><input class="sr-only" type="radio" name="inst" value="{{ inst.slug }}"{% if current == inst.slug %} checked{% endif %}><span class="inst-dot inst-{{ inst.order }} mr-1.5 inline-block" aria-hidden="true"></span>{{ inst.abbreviation }}</label>
+  {% endfor %}
+</fieldset>

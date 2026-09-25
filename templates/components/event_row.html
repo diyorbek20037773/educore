@@ -1,0 +1,15 @@
+{% load i18n web_tags %}
+<article class="group relative flex items-start gap-4 py-3">
+  <div class="flex w-14 flex-none flex-col items-center rounded-md border border-line py-1.5">
+    <span class="text-xl font-bold leading-none">{{ event.starts_at|date:"d" }}</span>
+    <span class="text-xs uppercase text-ink-2">{{ event.starts_at|month_short }}</span>
+  </div>
+  <div class="min-w-0">
+    <h3 class="font-sans text-base font-semibold leading-snug"><a href="{{ event.get_absolute_url }}" class="after:absolute after:inset-0 hover:underline">{{ event.title }}</a></h3>
+    <p class="mt-1 flex flex-wrap items-center gap-x-3 text-xs text-ink-2">
+      {% if event.institution %}<span class="inline-flex items-center gap-1"><span class="inst-dot inst-{{ event.institution.order }}"></span>{{ event.institution.short_name }}</span>{% endif %}
+      {% if event.location %}<span class="inline-flex items-center gap-1">{% icon "map-pin" "size-3.5" %}{{ event.location }}</span>{% endif %}
+      <span class="inline-flex items-center gap-1">{% icon "clock" "size-3.5" %}{{ event.starts_at|time:"H:i" }}</span>
+    </p>
+  </div>
+</article>
