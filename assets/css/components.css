@@ -771,4 +771,13 @@
     opacity: 0.55;
     transition: opacity 150ms;
   }
+
+  .chart-empty {
+    display: grid;
+    place-items: center;
+    border: 1px dashed var(--color-line);
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+    color: var(--color-ink-2);
+  }
 }

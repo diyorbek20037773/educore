@@ -91,6 +91,8 @@ def test_article_detail_has_jsonld_source_and_breadcrumbs(client: Client, site_d
     assert '"@type":"NewsArticle"' in body
     assert "BreadcrumbList" in body
     assert "rasmiy Telegram kanalidagi xabar asosida tayyorlandi" in body
+    post = site_data.article.sources.get().post
+    assert post.telegram_url and f'href="{post.telegram_url}"' in body
     assert 'property="og:type" content="article"' in body
 
 

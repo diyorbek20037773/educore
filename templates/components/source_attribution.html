@@ -5,7 +5,7 @@
   {% for src in sources %}
     <p class="text-sm">
       {% blocktranslate with name=src.institution.short_name|default:src.post.source.title %}Ushbu maqola {{ name }} rasmiy Telegram kanalidagi xabar asosida tayyorlandi.{% endblocktranslate %}
-      {% if src.post.url %}<a class="font-semibold underline" href="{{ src.post.url }}" rel="noopener nofollow" target="_blank">{% translate "Asl xabarni koʻrish" %} →</a>{% endif %}
+      {% if src.post.telegram_url %}<a class="font-semibold underline" href="{{ src.post.telegram_url }}" rel="noopener nofollow" target="_blank">{% translate "Asl xabarni koʻrish" %} →</a>{% endif %}
     </p>
   {% endfor %}
 </aside>

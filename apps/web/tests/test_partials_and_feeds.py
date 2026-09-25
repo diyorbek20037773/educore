@@ -174,3 +174,20 @@ def test_theme_toggle_and_skip_link_present(client: Client, site_data: SiteData)
     assert 'x-data="themeToggle"' in body and "aria-pressed" in body
     assert 'class="skip-link" href="#main"' in body
     assert 'localStorage.getItem("educore-theme")' in body
+
+
+def test_compare_shows_only_metrics_with_values(client: Client, site_data: SiteData) -> None:
+    from apps.institutions.models import InstitutionMetric
+
+    InstitutionMetric.objects.all().update(value=None)
+    empty = client.get(reverse("web:institution_compare")).content.decode()
+    assert "data-chart" not in empty
+    InstitutionMetric.objects.filter(institution=site_data.institution, key="students").update(value=1234)
+    from django.core.cache import cache
+
+    cache.clear()  # queryset.update() does not bump the content version
+    body = client.get(reverse("web:institution_compare")).content.decode()
+    assert "234" in body and "compare-students" in body
+    assert client.get(reverse("web:analytics_data", args=["compare"]), {"metric": "students"}).json()[
+        "series"
+    ]

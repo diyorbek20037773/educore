@@ -1,5 +1,5 @@
 {% load i18n web_tags %}
-<figure class="card chart-card flex flex-col p-5" data-chart data-url="{{ data_url }}" id="{{ chart_id }}">
+<figure class="card chart-card flex flex-col p-5" data-chart data-url="{{ data_url }}" data-empty="{% translate 'Tanlangan davr uchun maʼlumot hali yoʻq.' %}" id="{{ chart_id }}">
   <figcaption>
     <h3 class="font-sans text-lg font-bold">{{ title }}</h3>
     {% if description %}<p class="text-sm text-ink-2">{{ description }}</p>{% endif %}

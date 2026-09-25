@@ -49,7 +49,7 @@ def _metric_table() -> tuple[list[Institution], list[dict[str, Any]]]:
     rows = []
     for key, label in MetricKey.choices:
         cells = [latest.get((i.pk, key)) for i in institutions]
-        if any(cells):
+        if any(cell is not None and cell.value is not None for cell in cells):
             rows.append({"key": key, "label": label, "cells": cells})
     return institutions, rows
 

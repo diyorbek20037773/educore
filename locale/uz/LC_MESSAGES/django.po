@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-25 14:43+0500\n"
+"POT-Creation-Date: 2026-09-25 15:23+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -401,7 +401,7 @@ msgstr ""
 #: templates/components/nav_links.html:21
 #: templates/pages/education/admissions.html:5
 #: templates/pages/education/program_detail.html:28
-#: templates/pages/home.html:62
+#: templates/pages/home.html:64
 msgid "Qabul"
 msgstr ""
 
@@ -1137,7 +1137,7 @@ msgstr ""
 
 #: apps/core/admin.py:29 apps/web/views/analytics.py:44 config/unfold.py:74
 #: templates/components/footer.html:32 templates/components/nav_links.html:30
-#: templates/pages/analytics.html:5 templates/pages/home.html:51
+#: templates/pages/analytics.html:5 templates/pages/home.html:53
 msgid "Analitika"
 msgstr ""
 
@@ -1279,13 +1279,13 @@ msgstr ""
 
 #: apps/core/models.py:151 apps/institutions/models.py:98
 #: apps/web/views/education.py:98 templates/components/nav_links.html:15
-#: templates/components/nav_links.html:23 templates/pages/home.html:93
+#: templates/components/nav_links.html:23 templates/pages/home.html:95
 msgid "Kursantlar"
 msgstr ""
 
 #: apps/core/models.py:152 apps/institutions/models.py:97
 #: apps/web/views/education.py:92 templates/components/nav_links.html:14
-#: templates/components/nav_links.html:22 templates/pages/home.html:93
+#: templates/components/nav_links.html:22 templates/pages/home.html:95
 msgid "Talabalar"
 msgstr ""
 
@@ -1293,7 +1293,7 @@ msgstr ""
 #: apps/web/views/professions.py:48 config/unfold.py:64
 #: templates/components/nav_links.html:27 templates/pages/analytics.html:22
 #: templates/pages/education/program_detail.html:27
-#: templates/pages/home.html:31 templates/pages/home.html:101
+#: templates/pages/home.html:33 templates/pages/home.html:103
 #: templates/pages/professions/list.html:5 templates/pages/search.html:22
 msgid "Kasblar"
 msgstr ""
@@ -1448,8 +1448,8 @@ msgstr ""
 #: templates/components/institution_card.html:9
 #: templates/components/nav_links.html:12
 #: templates/components/nav_links.html:20 templates/pages/analytics.html:21
-#: templates/pages/education/program_list.html:5 templates/pages/home.html:30
-#: templates/pages/home.html:76 templates/pages/professions/detail.html:25
+#: templates/pages/education/program_list.html:5 templates/pages/home.html:32
+#: templates/pages/home.html:78 templates/pages/professions/detail.html:25
 #: templates/pages/search.html:21
 msgid "Yoʻnalishlar"
 msgstr ""
@@ -2222,7 +2222,7 @@ msgstr ""
 #: templates/components/institution_card.html:10
 #: templates/components/nav_links.html:28
 #: templates/pages/education/hub.html:11 templates/pages/events/list.html:5
-#: templates/pages/home.html:108 templates/pages/search.html:23
+#: templates/pages/home.html:110 templates/pages/search.html:23
 msgid "Tadbirlar"
 msgstr ""
 
@@ -2242,12 +2242,12 @@ msgstr ""
 #: apps/web/views/institutions.py:103 config/unfold.py:61
 #: templates/components/footer.html:10 templates/components/nav_links.html:4
 #: templates/pages/analytics.html:11 templates/pages/analytics.html:18
-#: templates/pages/home.html:27 templates/pages/home.html:40
+#: templates/pages/home.html:29 templates/pages/home.html:42
 #: templates/pages/institutions/list.html:6 templates/pages/search.html:19
 msgid "Muassasalar"
 msgstr ""
 
-#: apps/web/views/institutions.py:69 templates/pages/home.html:40
+#: apps/web/views/institutions.py:69 templates/pages/home.html:42
 #: templates/pages/institutions/list.html:7
 msgid "Taqqoslash"
 msgstr ""
@@ -2279,7 +2279,7 @@ msgstr ""
 
 #: apps/web/views/stories.py:20 apps/web/views/stories.py:38
 #: templates/components/nav_links.html:29
-#: templates/pages/education/hub.html:16 templates/pages/home.html:112
+#: templates/pages/education/hub.html:16 templates/pages/home.html:114
 #: templates/pages/stories/list.html:5
 msgid "Motivatsiya"
 msgstr ""
@@ -2419,17 +2419,17 @@ msgid ""
 "tahliliy platformasi"
 msgstr ""
 
-#: templates/base.html:49
+#: templates/base.html:50
 msgid "Asosiy mazmunga oʻtish"
 msgstr ""
 
-#: templates/components/admission_card.html:11 templates/pages/home.html:69
+#: templates/components/admission_card.html:11 templates/pages/home.html:71
 #, python-brace-format
 msgid "Tugashiga {d} kun qoldi"
 msgstr ""
 
 #: templates/components/admission_card.html:11
-#: templates/components/program_table.html:4 templates/pages/home.html:69
+#: templates/components/program_table.html:4 templates/pages/home.html:71
 msgid "Muddat"
 msgstr ""
 
@@ -2459,6 +2459,10 @@ msgstr ""
 
 #: templates/components/breadcrumbs.html:2
 msgid "Navigatsiya zanjiri"
+msgstr ""
+
+#: templates/components/chart_card.html:2
+msgid "Tanlangan davr uchun maʼlumot hali yoʻq."
 msgstr ""
 
 #: templates/components/chart_card.html:10
@@ -2658,16 +2662,16 @@ msgstr ""
 msgid "Qoʻllash"
 msgstr ""
 
-#: templates/pages/analytics.html:19 templates/pages/home.html:28
+#: templates/pages/analytics.html:19 templates/pages/home.html:30
 msgid "Bugungi yangiliklar"
 msgstr ""
 
-#: templates/pages/analytics.html:20 templates/pages/home.html:29
+#: templates/pages/analytics.html:20 templates/pages/home.html:31
 #: templates/pages/institutions/events.html:5
 msgid "Yaqin tadbirlar"
 msgstr ""
 
-#: templates/pages/analytics.html:26 templates/pages/home.html:54
+#: templates/pages/analytics.html:26 templates/pages/home.html:56
 msgid "Faollik dinamikasi"
 msgstr ""
 
@@ -2718,7 +2722,7 @@ msgid "Qabul jadvali"
 msgstr ""
 
 #: templates/pages/analytics.html:36
-#: templates/pages/education/admissions.html:8 templates/pages/home.html:72
+#: templates/pages/education/admissions.html:8 templates/pages/home.html:74
 msgid "Hozircha ochiq qabul eʼlonlari yoʻq."
 msgstr ""
 
@@ -2800,7 +2804,7 @@ msgstr ""
 msgid "Soʻnggi maqolalar"
 msgstr ""
 
-#: templates/pages/education/hub.html:11 templates/pages/home.html:109
+#: templates/pages/education/hub.html:11 templates/pages/home.html:111
 #: templates/pages/institutions/events.html:5
 msgid "Yaqin tadbirlar yoʻq."
 msgstr ""
@@ -2891,7 +2895,7 @@ msgstr ""
 msgid "Roʻyxat"
 msgstr ""
 
-#: templates/pages/events/list.html:10 templates/pages/home.html:108
+#: templates/pages/events/list.html:10 templates/pages/home.html:110
 msgid "Taqvim"
 msgstr ""
 
@@ -2907,85 +2911,85 @@ msgstr ""
 msgid "Huquqni muhofaza qilish taʼlim muassasalari axborot platformasi"
 msgstr ""
 
-#: templates/pages/home.html:10
+#: templates/pages/home.html:12
 msgid "Asosiy yangiliklar"
 msgstr ""
 
-#: templates/pages/home.html:19
+#: templates/pages/home.html:21
 msgid "Yangiliklar tez orada paydo boʻladi."
 msgstr ""
 
-#: templates/pages/home.html:24
+#: templates/pages/home.html:26
 msgid "Asosiy koʻrsatkichlar"
 msgstr ""
 
-#: templates/pages/home.html:51
+#: templates/pages/home.html:53
 msgid "Faollik va mavzular"
 msgstr ""
 
-#: templates/pages/home.html:54
+#: templates/pages/home.html:56
 msgid "Soʻnggi 12 oy, muassasalar kesimida"
 msgstr ""
 
-#: templates/pages/home.html:56
+#: templates/pages/home.html:58
 msgid "Mavzular taqsimoti"
 msgstr ""
 
-#: templates/pages/home.html:56
+#: templates/pages/home.html:58
 msgid "Soʻnggi 30 kun"
 msgstr ""
 
-#: templates/pages/home.html:62
+#: templates/pages/home.html:64
 msgid "Taʼlim va qabul"
 msgstr ""
 
-#: templates/pages/home.html:85 templates/pages/professions/detail.html:25
+#: templates/pages/home.html:87 templates/pages/professions/detail.html:25
 msgid "Barcha yoʻnalishlar"
 msgstr ""
 
-#: templates/pages/home.html:92
+#: templates/pages/home.html:94
 msgid "Kursantlar va talabalar"
 msgstr ""
 
-#: templates/pages/home.html:101
+#: templates/pages/home.html:103
 msgid "Barcha kasblar"
 msgstr ""
 
-#: templates/pages/home.html:112
+#: templates/pages/home.html:114
 msgid "Barcha hikoyalar"
 msgstr ""
 
-#: templates/pages/home.html:120
+#: templates/pages/home.html:122
 msgid "Analitika va murojaat"
 msgstr ""
 
-#: templates/pages/home.html:122
+#: templates/pages/home.html:124
 msgid "Maqolalar (30 kun)"
 msgstr ""
 
-#: templates/pages/home.html:123
+#: templates/pages/home.html:125
 msgid "Jami maqolalar"
 msgstr ""
 
-#: templates/pages/home.html:124
+#: templates/pages/home.html:126
 msgid "Manba kanallar"
 msgstr ""
 
-#: templates/pages/home.html:125
+#: templates/pages/home.html:127
 msgid "Toʻliq analitika"
 msgstr ""
 
-#: templates/pages/home.html:128
+#: templates/pages/home.html:130
 msgid "Murojaat yuboring"
 msgstr ""
 
-#: templates/pages/home.html:128
+#: templates/pages/home.html:130
 msgid ""
 "Savol, taklif yoki shikoyatingizni muassasaga yoʻllang va holatini kuzatib "
 "boring."
 msgstr ""
 
-#: templates/pages/home.html:129
+#: templates/pages/home.html:131
 msgid "Murojaat qilish"
 msgstr ""
 

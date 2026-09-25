@@ -85,8 +85,12 @@
       option.series = [{ type: "heatmap", data: data.series[0].data, itemStyle: { borderColor: css("--surface"), borderWidth: 2 } }];
     } else if (kind === "radar") {
       option.tooltip = { trigger: "item" };
+      var narrow = window.innerWidth < 640;
       option.radar = { indicator: data.categories.map(function (c) { return { name: c, max: 100 }; }),
-                       splitLine: { lineStyle: { color: css("--chart-grid") } }, axisName: { color: css("--ink-2") } };
+                       radius: narrow ? "52%" : "65%", center: ["50%", "55%"],
+                       splitLine: { lineStyle: { color: css("--chart-grid") } },
+                       axisName: { color: css("--ink-2"), fontSize: narrow ? 10 : 12, width: narrow ? 70 : 110, overflow: "break" } };
+      option.legend = { top: 0, icon: "roundRect", itemWidth: 10, itemHeight: 10, textStyle: { color: css("--ink-2") } };
       option.series = [{ type: "radar", data: data.series.map(function (s) {
         return { name: s.name, value: s.data, itemStyle: { color: s.color }, lineStyle: { width: 2 } };
       }) }];
@@ -120,6 +124,15 @@
     box.replaceChildren(table);
   }
 
+  function hasData(data) {
+    return (data.series || []).some(function (s) {
+      return (s.data || []).some(function (v) {
+        var value = Array.isArray(v) ? v[v.length - 1] : (v && typeof v === "object" ? v.value : v);
+        return value !== null && value !== undefined && Number(value) !== 0;
+      });
+    });
+  }
+
   function draw(card) {
     var canvas = card.querySelector(".chart-canvas");
     var url = card.getAttribute("data-url");
@@ -128,10 +141,15 @@
         var echarts = result[0];
         var data = result[1];
         canvas.replaceChildren();
+        renderTable(card, data);
+        if (!hasData(data)) {
+          canvas.classList.add("chart-empty");
+          canvas.textContent = card.getAttribute("data-empty") || "—";
+          return;
+        }
         var chart = echarts.init(canvas, null, { renderer: "svg" });
         chart.setOption(buildOption(data));
         charts.push({ chart: chart, data: data });
-        renderTable(card, data);
       })
       .catch(function () {
         canvas.textContent = canvas.getAttribute("aria-label") + " — maʼlumot yuklanmadi.";
