@@ -11,7 +11,7 @@ COV_GATE_APPS := apps/telegram apps/ai apps/content
 
 .DEFAULT_GOAL := help
 .PHONY: help env up down ps logs build migrate makemigrations seed seed-demo createsuperuser shell dbshell \
-        test test-fast cov lint fmt typecheck tailwind tailwind-build fonts icons brand-images messages compilemessages \
+        test test-fast cov lint fmt typecheck tailwind tailwind-build fonts icons brand-images crawl messages compilemessages \
         translit-po tg-login tg-run tg-backfill tg-gapcheck worker worker-ai beat flower ai-eval \
         stats-rebuild e2e check-deploy backup restore prod-deploy prod-rollback not-yet
 
@@ -93,6 +93,9 @@ tailwind-build: ## Tailwind production build
 
 fonts: ## Download + subset self-hosted fonts into static/fonts
 	$(RUN) python scripts/fetch_fonts.py
+
+crawl: ## AC4.1: fetch every sitemap URL in all languages (stack must be running)
+	uv run python scripts/crawl_check.py http://localhost:$${WEB_PORT:-8100}
 
 icons: ## Rebuild the Lucide subset sprite (static/icons/sprite.svg)
 	$(RUN) python scripts/build_icons.py
