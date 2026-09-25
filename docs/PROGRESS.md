@@ -4,8 +4,8 @@
 > git history is the source of truth for resuming work after a context reset.
 
 ## Current focus
-- Phase: **3 — AI editorial pipeline** (Phase 2 done except HA2-dependent AC2.2–AC2.4)
-- Current task: T3.5
+- Phase: **4 — Public website** (Phase 3 done except HA3-dependent AC3.3)
+- Current task: T4.1
 - Last updated: 2026-09-25, Claude Code
 
 ## Human actions needed (owner)
@@ -73,9 +73,11 @@
 - [x] T3.2 process_post stages — 2026-09-25 · triage → normalize → extract → embed → dedupe (pgvector ±72 h, confirm, merge + refresh) → generate → fact-guard (+1 regeneration) → media select → publish policy → article (history, uz-cyrl translit, tags, gallery) → structured upsert (Event/Admission/Story/Program/Profession) → post-publish (cache bump, ru/en queued, review alert); outbox semantics (lock renewal thread, 5 retries w/ backoff, terminal count, dead after 3, budget parking); idempotent per (post, hash, prompt version); 16 e2e tests
 - [x] T3.3 translate, digest, ai_reprocess — 2026-09-25 · `ai.translate_article` (tag-sequence check + one retry, `manual` never overwritten, failures never block uz), `ai.weekly_digest` (previous Mon–Sun, to review), `ai.prune_runs`, `ai_reprocess --post/--failed/--article/--force/--stage translate` (closes dead outbox rows on success)
 - [x] T3.4 editorial admin — 2026-09-25 · "Koʻrik navbati" proxy (sidebar landing, most important first), article actions regenerate / re-translate ru·en / merge duplicates (`content/services/editorial.py`), original Telegram text side panel, preview link, post "reprocess" action, `ai.regenerate_article` task; AI runs/budget/clusters admins from T1.4
-- [ ] T3.5 golden set + ai-eval + tests
+- [x] T3.5 golden set + ai-eval + tests — 2026-09-25 · 20-post golden set (uz-Latn/uz-Cyrl/ru, albums, congratulation, admission, event, ad, greeting), `ai_eval` (accuracy per field, cost, `--min-accuracy`, mock only with `--allow-mock`; CI runs it on the mock), unit tests for every stage, e2e: fixture post → published < 5 s, dedupe (2 sources → 1 article), edit → regenerate + history, delete → archived, budget → queued + alert, fact-guard fail → review, AS-7 (5 retries → terminal, dead after 3), invalid JSON retry; `seed_demo` (40 fixture posts + generated images, offline)
 - [ ] HA3 received
-- [ ] AC3.1 · [ ] AC3.2 · [ ] AC3.3 (latency measured: ___ s; cost/post: $___)
+- [x] AC3.1 — `pytest apps/ai` green; coverage `apps/ai` **92 %**, `apps/content` **92 %** (full suite 426 passed, overall 91 %)
+- [x] AC3.2 — `seed_demo` → **38 published** articles, all with cover, category, tags, sources and uz-cyrl; 10 events, 10 admissions, 2 stories; second run processes 0 posts (list pages themselves render in Phase 4 — re-checked by AC4.1)
+- [ ] AC3.3 (latency measured: ___ s; cost/post: $___) — **waiting for HA3** (`ANTHROPIC_API_KEY`)
 
 ### Phase 4 — Public website
 - [ ] T4.1 · [ ] T4.2 · [ ] T4.3 · [ ] T4.4 · [ ] T4.5 · [ ] T4.6 · [ ] T4.7
@@ -107,6 +109,7 @@
 ## Log (newest first)
 | Date | Phase/Task | Note |
 |---|---|---|
+| 2026-09-25 | Phase 3 | providers, full process_post pipeline, translations, digest, editorial admin, golden set, seed_demo; AC3.1–3.2 green; AC3.3 waits for HA3 |
 | 2026-09-25 | Phase 2 | ingestor, commands, tasks, derivatives, heartbeat alerts; AC2.1 green (86 % coverage); AC2.2–2.4 wait for HA2 |
 | 2026-09-25 | Phase 1 | models, migrations, seeds, admin + 2FA, translit, sanitizer, factories/selectors; AC1.1–AC1.3 green (305 tests) |
 | 2026-09-25 | Phase 0 | bootstrap complete; AC0.1–AC0.4 green; HA0 pending |

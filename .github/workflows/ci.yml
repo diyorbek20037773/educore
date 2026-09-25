@@ -66,8 +66,22 @@ jobs:
       - run: uv sync --group dev
       - name: Migrations are complete
         run: uv run python manage.py makemigrations --check --dry-run
+      - name: Golden set against the mock provider (schema coverage, AI_PIPELINE §6)
+        env:
+          DJANGO_SETTINGS_MODULE: config.settings.dev
+          SECRET_KEY: ci-dummy-secret
+          AI_PROVIDER: mock
+          EMBEDDING_BACKEND: fake
+        run: |
+          uv run python manage.py migrate --noinput
+          uv run python manage.py seed_all
+          uv run python manage.py ai_eval --allow-mock
       - name: Tests with coverage (mirrors make test / make cov)
-        run: uv run pytest -q --cov=apps --cov-report=term --cov-report=html
+        run: |
+          uv run pytest -q --cov=apps --cov-report=term --cov-report=html --cov-fail-under=70
+          for app in apps/telegram apps/ai apps/content; do
+            uv run coverage report --include="$app/*" --fail-under=80 > /dev/null || { echo "coverage < 80% in $app"; exit 1; }
+          done
       - uses: actions/upload-artifact@v4
         if: always()
         with:

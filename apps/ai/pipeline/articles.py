@@ -11,7 +11,7 @@ from django.db import transaction
 from django.db.models import F
 from django.utils import timezone
 
-from apps.ai.pipeline.context import PostContext
+from apps.ai.pipeline.context import SKIP_TRANSLATIONS, PostContext
 from apps.ai.pipeline.rules import Decision, MediaSelection, article_content_type
 from apps.ai.schemas import Draft, Extraction, FactCheck
 from apps.content.models import Article, ArticleMedia, ArticleSource, ArticleStatus, Category, Tag
@@ -166,7 +166,7 @@ def after_save(article_id: int) -> None:
     article = Article.objects.filter(pk=article_id).first()
     if article is None:
         return
-    if article.status == ArticleStatus.PUBLISHED:
+    if article.status == ArticleStatus.PUBLISHED and not SKIP_TRANSLATIONS.get():
         from config.celery import app
 
         status = article.translation_status or {}

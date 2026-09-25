@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from contextvars import ContextVar
 from dataclasses import dataclass
 from typing import Any
 
@@ -13,6 +14,10 @@ from apps.core.sanitize import strip_tags
 from apps.core.services.settings import get_setting
 from apps.institutions.models import Institution
 from apps.telegram.models import TelegramMedia, TelegramPost, TelegramSource
+
+# `seed_demo` publishes demo articles without touching the owner's SiteSetting and skips AI translations.
+PUBLISH_MODE_OVERRIDE: ContextVar[str | None] = ContextVar("publish_mode_override", default=None)
+SKIP_TRANSLATIONS: ContextVar[bool] = ContextVar("skip_translations", default=False)
 
 
 @dataclass
@@ -40,7 +45,7 @@ def load_context(post_id: int) -> PostContext:
         source=post.source,
         institution=post.source.institution,
         media=list(post.media.order_by("order")),
-        publish_mode=str(get_setting("publish_mode")),
+        publish_mode=PUBLISH_MODE_OVERRIDE.get() or str(get_setting("publish_mode")),
         threshold=float(get_setting("publish_confidence_threshold")),
     )
 
