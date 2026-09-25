@@ -29,7 +29,7 @@
     {% url 'web:analytics_data' 'heatmap' as u %}<div class="lg:col-span-2">{% include "components/chart_card.html" with chart_id="an-heatmap" title=_("Nashr vaqti xaritasi") description=_("Hafta kuni × soat (Toshkent vaqti)") data_url=u|add:"?"|add:chart_query %}</div>
     {% url 'web:analytics_data' 'engagement' as u %}{% include "components/chart_card.html" with chart_id="an-views" title=_("Oʻrtacha koʻrishlar") description=_("Telegram, bitta xabarga") data_url=u|add:"?"|add:chart_query %}
     {% include "components/chart_card.html" with chart_id="an-forwards" title=_("Oʻrtacha ulashishlar") description=_("Telegram, bitta xabarga") data_url=u|add:"?metric=forwards&"|add:chart_query %}
-    {% url 'web:analytics_data' 'radar' as u %}{% include "components/chart_card.html" with chart_id="an-radar" title=_("Muassasalar taqqoslami") description=_("Normallashtirilgan koʻrsatkichlar") data_url=u %}
+    {% url 'web:analytics_data' 'radar' as u %}{% include "components/chart_card.html" with chart_id="an-radar" title=_("Muassasalarni taqqoslash") description=_("Normallashtirilgan koʻrsatkichlar") data_url=u %}
     <section class="card p-5" aria-labelledby="adm-title">
       <h3 id="adm-title" class="font-sans text-lg font-bold">{% translate "Qabul jadvali" %}</h3>
       <ul class="mt-4 space-y-4">

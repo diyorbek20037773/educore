@@ -29,8 +29,11 @@ RUN --mount=type=cache,target=/root/.cache/uv \
     if [ "$INSTALL_DEV" = "1" ]; then uv sync --frozen --no-install-project; \
     else uv sync --frozen --no-install-project --no-dev; fi
 COPY . .
-# Tailwind standalone binary (downloaded by django-tailwind-cli) → static/css/output.css, then collectstatic.
+# Tailwind standalone binary (downloaded by django-tailwind-cli) → static/css/output.css, then collectstatic;
+# gettext catalogs are compiled here too (.mo files are build artefacts, not committed).
 RUN DJANGO_SETTINGS_MODULE=config.settings.dev SECRET_KEY=build-only-dummy \
+        python manage.py compilemessages --ignore=.venv --verbosity 0 \
+    && DJANGO_SETTINGS_MODULE=config.settings.dev SECRET_KEY=build-only-dummy \
         python manage.py tailwind build \
     && DJANGO_SETTINGS_MODULE=config.settings.dev SECRET_KEY=build-only-dummy \
         python manage.py collectstatic --noinput --verbosity 0 \

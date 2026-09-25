@@ -19,3 +19,9 @@ def test_placeholders_and_tags_preserved() -> None:
     module = _load()
     out = module.translit_keep_placeholders("%(n)d ta maqola <strong>eʼlon</strong> qilindi {name}")  # type: ignore[attr-defined]
     assert out == "%(n)d та мақола <strong>эълон</strong> қилинди {name}"
+
+
+def test_precision_format_specs_preserved() -> None:
+    module = _load()
+    out = module.translit_keep_placeholders("kontrast %(ratio).2f:1, %5.1f%% va %s")  # type: ignore[attr-defined]
+    assert out == "контраст %(ratio).2f:1, %5.1f%% ва %s"

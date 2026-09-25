@@ -1,0 +1,3280 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-25 14:43+0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: apps/accounts/admin.py:41
+msgid "Shaxsiy maʼlumotlar"
+msgstr ""
+
+#: apps/accounts/admin.py:43
+msgid "Huquqlar"
+msgstr ""
+
+#: apps/accounts/admin.py:46
+msgid "Sanalar"
+msgstr ""
+
+#: apps/accounts/models.py:49 apps/appeals/models.py:63
+#: apps/institutions/models.py:41 apps/institutions/models.py:83
+msgid "e-mail"
+msgstr "E-pochta"
+
+#: apps/accounts/models.py:50 apps/appeals/models.py:61
+#: apps/institutions/models.py:32
+msgid "full name"
+msgstr "F.I.Sh."
+
+#: apps/accounts/models.py:51 apps/appeals/models.py:62
+#: apps/institutions/models.py:42 apps/institutions/models.py:82
+msgid "phone"
+msgstr "Telefon"
+
+#: apps/accounts/models.py:52
+msgid "interface language"
+msgstr "Interfeys tili"
+
+#: apps/accounts/models.py:61
+msgid "user"
+msgstr "foydalanuvchi"
+
+#: apps/accounts/models.py:62
+msgid "users"
+msgstr "foydalanuvchilar"
+
+#: apps/ai/admin.py:36
+msgid "Natija"
+msgstr ""
+
+#: apps/ai/models.py:41
+msgid "OK"
+msgstr ""
+
+#: apps/ai/models.py:42 apps/telegram/models.py:100
+#: apps/telegram/models.py:150 apps/telegram/models.py:254
+msgid "Xato"
+msgstr ""
+
+#: apps/ai/models.py:43
+msgid "Oʻtkazildi"
+msgstr ""
+
+#: apps/ai/models.py:44
+msgid "Keshdan"
+msgstr ""
+
+#: apps/ai/models.py:52 apps/content/models.py:208 apps/telegram/models.py:261
+#: apps/telegram/models.py:304
+msgid "post"
+msgstr ""
+
+#: apps/ai/models.py:60 apps/content/models.py:176 apps/content/models.py:204
+#: apps/content/models.py:234 apps/content/models.py:284
+#: apps/content/models.py:377 apps/content/models.py:429
+msgid "article"
+msgstr "maqola"
+
+#: apps/ai/models.py:66
+msgid "stage"
+msgstr "bosqich"
+
+#: apps/ai/models.py:67
+msgid "provider"
+msgstr "provayder"
+
+#: apps/ai/models.py:68
+msgid "model"
+msgstr ""
+
+#: apps/ai/models.py:69
+msgid "prompt version"
+msgstr "prompt versiyasi"
+
+#: apps/ai/models.py:70
+msgid "input hash"
+msgstr "kirish xeshi"
+
+#: apps/ai/models.py:71 apps/ai/models.py:99
+msgid "input tokens"
+msgstr "kirish tokenlari"
+
+#: apps/ai/models.py:72 apps/ai/models.py:100
+msgid "output tokens"
+msgstr "chiqish tokenlari"
+
+#: apps/ai/models.py:73
+msgid "cost (USD)"
+msgstr "narx (USD)"
+
+#: apps/ai/models.py:74
+msgid "duration (ms)"
+msgstr "davomiylik (ms)"
+
+#: apps/ai/models.py:75 apps/appeals/models.py:67 apps/content/models.py:127
+#: apps/content/models.py:361 apps/telegram/models.py:57
+#: apps/telegram/models.py:118 apps/telegram/models.py:276
+msgid "status"
+msgstr "holat"
+
+#: apps/ai/models.py:76 apps/telegram/models.py:130
+#: apps/telegram/models.py:278
+msgid "error"
+msgstr "xato"
+
+#: apps/ai/models.py:77
+msgid "request id"
+msgstr "soʻrov ID"
+
+#: apps/ai/models.py:78
+msgid "output"
+msgstr "natija"
+
+#: apps/ai/models.py:82
+msgid "AI run"
+msgstr "AI ishga tushirish"
+
+#: apps/ai/models.py:83 apps/analytics/models.py:19
+msgid "AI runs"
+msgstr "AI ishga tushirishlar"
+
+#: apps/ai/models.py:97 apps/analytics/models.py:15
+#: apps/analytics/models.py:38
+msgid "date"
+msgstr "sana"
+
+#: apps/ai/models.py:98
+msgid "spent (USD)"
+msgstr "sarflangan (USD)"
+
+#: apps/ai/models.py:101
+msgid "runs"
+msgstr "ishga tushirishlar"
+
+#: apps/ai/models.py:102
+msgid "exhausted"
+msgstr "tugagan"
+
+#: apps/ai/models.py:106
+msgid "AI budget day"
+msgstr "AI byudjet kuni"
+
+#: apps/ai/models.py:107
+msgid "AI budget days"
+msgstr "AI byudjet kunlari"
+
+#: apps/ai/models.py:116 apps/content/models.py:93 apps/content/models.py:272
+#: apps/content/models.py:348 apps/content/models.py:405
+#: apps/core/models.py:115 apps/institutions/models.py:81
+#: apps/telegram/models.py:47
+msgid "title"
+msgstr "sarlavha"
+
+#: apps/ai/models.py:117
+msgid "first seen"
+msgstr "birinchi aniqlangan"
+
+#: apps/ai/models.py:118
+msgid "last seen"
+msgstr "oxirgi aniqlangan"
+
+#: apps/ai/models.py:119 apps/telegram/models.py:191
+msgid "embedding"
+msgstr ""
+
+#: apps/ai/models.py:122
+msgid "canonical article"
+msgstr "asosiy maqola"
+
+#: apps/ai/models.py:128 apps/analytics/models.py:45
+msgid "posts"
+msgstr "postlar"
+
+#: apps/ai/models.py:129
+msgid "sources"
+msgstr "manbalar"
+
+#: apps/ai/models.py:133
+msgid "event cluster"
+msgstr "hodisa klasteri"
+
+#: apps/ai/models.py:134
+msgid "event clusters"
+msgstr "hodisa klasterlari"
+
+#: apps/analytics/models.py:16
+msgid "posts ingested"
+msgstr "qabul qilingan postlar"
+
+#: apps/analytics/models.py:17
+msgid "articles published"
+msgstr "eʼlon qilingan maqolalar"
+
+#: apps/analytics/models.py:18
+msgid "articles sent to review"
+msgstr "koʻrikka yuborilgan maqolalar"
+
+#: apps/analytics/models.py:21
+msgid "AI cost (USD)"
+msgstr "AI xarajati (USD)"
+
+#: apps/analytics/models.py:23
+msgid "new appeals"
+msgstr "yangi murojaatlar"
+
+#: apps/analytics/models.py:24
+msgid "page views"
+msgstr "sahifa koʻrishlari"
+
+#: apps/analytics/models.py:25
+msgid "unique visitors"
+msgstr "noyob tashrifchilar"
+
+#: apps/analytics/models.py:26 apps/analytics/models.py:78
+msgid "search queries"
+msgstr "qidiruv soʻrovlari"
+
+#: apps/analytics/models.py:30
+msgid "daily statistic"
+msgstr "kunlik statistika"
+
+#: apps/analytics/models.py:31
+msgid "daily statistics"
+msgstr "kunlik statistika"
+
+#: apps/analytics/models.py:41 apps/appeals/models.py:54
+#: apps/content/models.py:214 apps/content/models.py:276
+#: apps/content/models.py:343 apps/content/models.py:410
+#: apps/core/models.py:168 apps/institutions/models.py:58
+#: apps/institutions/models.py:78 apps/institutions/models.py:111
+#: apps/institutions/models.py:159 apps/telegram/models.py:38
+msgid "institution"
+msgstr "muassasa"
+
+#: apps/analytics/models.py:46 apps/content/models.py:177
+msgid "articles"
+msgstr "maqolalar"
+
+#: apps/analytics/models.py:47
+msgid "Telegram views"
+msgstr "Telegram koʻrishlari"
+
+#: apps/analytics/models.py:48
+msgid "Telegram forwards"
+msgstr "Telegram ulashishlari"
+
+#: apps/analytics/models.py:49
+msgid "by category"
+msgstr "kategoriyalar boʻyicha"
+
+#: apps/analytics/models.py:50
+msgid "by content type"
+msgstr "kontent turi boʻyicha"
+
+#: apps/analytics/models.py:51
+msgid "by hour"
+msgstr "soatlar boʻyicha"
+
+#: apps/analytics/models.py:55
+msgid "institution daily statistic"
+msgstr "muassasa kunlik statistikasi"
+
+#: apps/analytics/models.py:56
+msgid "institution daily statistics"
+msgstr "muassasalar kunlik statistikasi"
+
+#: apps/analytics/models.py:71
+msgid "normalized query"
+msgstr "normallashtirilgan soʻrov"
+
+#: apps/analytics/models.py:72
+msgid "count"
+msgstr "soni"
+
+#: apps/analytics/models.py:73
+msgid "last searched at"
+msgstr "oxirgi qidirilgan vaqt"
+
+#: apps/analytics/models.py:77
+msgid "search query"
+msgstr "qidiruv soʻrovi"
+
+#: apps/appeals/admin.py:59
+msgid "Murojaatchi"
+msgstr ""
+
+#: apps/appeals/admin.py:60
+msgid "Matn"
+msgstr ""
+
+#: apps/appeals/admin.py:61
+msgid "Texnik"
+msgstr ""
+
+#: apps/appeals/forms.py:29 apps/web/services/charts.py:179
+#: templates/admin/index.html:22 templates/components/institution_chips.html:3
+#: templates/components/program_table.html:4
+#: templates/pages/appeals/track.html:22
+#: templates/pages/institutions/list.html:17
+msgid "Muassasa"
+msgstr ""
+
+#: apps/appeals/forms.py:32
+msgid "Umumiy murojaat"
+msgstr ""
+
+#: apps/appeals/forms.py:34 templates/pages/appeals/track.html:21
+msgid "Mavzu"
+msgstr ""
+
+#: apps/appeals/forms.py:35
+msgid "F.I.Sh."
+msgstr ""
+
+#: apps/appeals/forms.py:37 templates/pages/institutions/contacts.html:7
+#: templates/pages/institutions/contacts.html:15
+#: templates/pages/static_page.html:14
+msgid "Telefon"
+msgstr ""
+
+#: apps/appeals/forms.py:39
+msgid "+998 XX XXX XX XX formatida"
+msgstr ""
+
+#: apps/appeals/forms.py:43 templates/pages/institutions/contacts.html:8
+#: templates/pages/institutions/contacts.html:15
+#: templates/pages/static_page.html:13
+msgid "E-pochta"
+msgstr ""
+
+#: apps/appeals/forms.py:46
+msgid "Murojaat matni"
+msgstr ""
+
+#: apps/appeals/forms.py:49
+msgid "Ilova (ixtiyoriy)"
+msgstr ""
+
+#: apps/appeals/forms.py:49
+msgid "PDF, JPG yoki PNG, 5 MB gacha"
+msgstr ""
+
+#: apps/appeals/forms.py:51
+msgid "Shaxsiy maʼlumotlarimni qayta ishlashga roziman"
+msgstr ""
+
+#: apps/appeals/forms.py:74
+msgid ""
+"Telefon raqami +998 bilan boshlanib, 12 ta raqamdan iborat boʻlishi kerak."
+msgstr ""
+
+#: apps/appeals/forms.py:83
+msgid "Fayl hajmi 5 MB dan oshmasligi kerak."
+msgstr ""
+
+#: apps/appeals/forms.py:85
+msgid "Faqat PDF, JPG yoki PNG fayllar qabul qilinadi."
+msgstr ""
+
+#: apps/appeals/forms.py:94
+msgid "Kuzatish kodi"
+msgstr ""
+
+#: apps/appeals/models.py:28 apps/content/models.py:63 apps/core/models.py:149
+#: apps/web/views/education.py:68 apps/web/views/institutions.py:144
+#: config/unfold.py:33 templates/components/footer.html:31
+#: templates/components/nav_links.html:13
+#: templates/components/nav_links.html:21
+#: templates/pages/education/admissions.html:5
+#: templates/pages/education/program_detail.html:28
+#: templates/pages/home.html:62
+msgid "Qabul"
+msgstr ""
+
+#: apps/appeals/models.py:29
+msgid "Taʼlim jarayoni"
+msgstr ""
+
+#: apps/appeals/models.py:30
+msgid "Kursant va talabalar"
+msgstr ""
+
+#: apps/appeals/models.py:31
+msgid "Shikoyat"
+msgstr ""
+
+#: apps/appeals/models.py:32
+msgid "Taklif"
+msgstr ""
+
+#: apps/appeals/models.py:33
+msgid "Hamkorlik"
+msgstr ""
+
+#: apps/appeals/models.py:34 apps/content/models.py:70
+#: apps/content/models.py:265 apps/telegram/models.py:247
+#: apps/web/services/charts.py:121
+msgid "Boshqa"
+msgstr ""
+
+#: apps/appeals/models.py:38
+msgid "Yangi"
+msgstr ""
+
+#: apps/appeals/models.py:39
+msgid "Koʻrib chiqilmoqda"
+msgstr ""
+
+#: apps/appeals/models.py:40
+msgid "Javob berildi"
+msgstr ""
+
+#: apps/appeals/models.py:41 apps/content/models.py:335
+msgid "Yopilgan"
+msgstr ""
+
+#: apps/appeals/models.py:42 apps/content/models.py:78
+msgid "Rad etilgan"
+msgstr ""
+
+#: apps/appeals/models.py:46
+msgid "Oddiy"
+msgstr ""
+
+#: apps/appeals/models.py:47
+msgid "Yuqori"
+msgstr ""
+
+#: apps/appeals/models.py:51
+msgid "tracking code"
+msgstr "kuzatish kodi"
+
+#: apps/appeals/models.py:60 apps/core/models.py:165
+msgid "topic"
+msgstr "mavzu"
+
+#: apps/appeals/models.py:64 apps/ops/models.py:24
+msgid "message"
+msgstr "xabar"
+
+#: apps/appeals/models.py:65
+msgid "consent to data processing"
+msgstr "maʼlumotlarni qayta ishlashga rozilik"
+
+#: apps/appeals/models.py:70
+msgid "priority"
+msgstr "ustuvorlik"
+
+#: apps/appeals/models.py:74
+msgid "assigned to"
+msgstr "masʼul xodim"
+
+#: apps/appeals/models.py:80
+msgid "IP hash"
+msgstr "IP xeshi"
+
+#: apps/appeals/models.py:81
+msgid "user agent"
+msgstr ""
+
+#: apps/appeals/models.py:82 apps/telegram/models.py:181
+msgid "language"
+msgstr "til"
+
+#: apps/appeals/models.py:83
+msgid "answered at"
+msgstr "javob berilgan vaqt"
+
+#: apps/appeals/models.py:84
+msgid "closed at"
+msgstr "yopilgan vaqt"
+
+#: apps/appeals/models.py:85
+msgid "internal note"
+msgstr "ichki izoh"
+
+#: apps/appeals/models.py:89 apps/appeals/models.py:108
+#: apps/appeals/models.py:130
+msgid "appeal"
+msgstr "murojaat"
+
+#: apps/appeals/models.py:90
+msgid "appeals"
+msgstr "murojaatlar"
+
+#: apps/appeals/models.py:111
+msgid "file"
+msgstr "fayl"
+
+#: apps/appeals/models.py:113
+msgid "original name"
+msgstr "asl nomi"
+
+#: apps/appeals/models.py:114 apps/telegram/models.py:268
+msgid "size (bytes)"
+msgstr "hajmi (bayt)"
+
+#: apps/appeals/models.py:115 apps/telegram/models.py:267
+msgid "MIME type"
+msgstr "MIME turi"
+
+#: apps/appeals/models.py:119
+msgid "appeal attachment"
+msgstr "murojaat ilovasi"
+
+#: apps/appeals/models.py:120
+msgid "appeal attachments"
+msgstr "murojaat ilovalari"
+
+#: apps/appeals/models.py:134 apps/content/models.py:153
+msgid "author"
+msgstr "muallif"
+
+#: apps/appeals/models.py:140 apps/telegram/models.py:161
+msgid "text"
+msgstr "matn"
+
+#: apps/appeals/models.py:141
+msgid "visible to applicant"
+msgstr "murojaatchiga koʻrinadi"
+
+#: apps/appeals/models.py:142
+msgid "notified at"
+msgstr "xabardor qilingan vaqt"
+
+#: apps/appeals/models.py:146
+msgid "appeal message"
+msgstr "murojaat xabari"
+
+#: apps/appeals/models.py:147
+msgid "appeal messages"
+msgstr "murojaat xabarlari"
+
+#: apps/content/admin.py:37
+msgid "Asl xabar"
+msgstr ""
+
+#: apps/content/admin.py:42 apps/content/admin.py:217
+msgid "ochish"
+msgstr ""
+
+#: apps/content/admin.py:119
+msgid "Asl manba (Telegram)"
+msgstr ""
+
+#: apps/content/admin.py:121
+msgid "Tasnif"
+msgstr ""
+
+#: apps/content/admin.py:136
+msgid "Nashr"
+msgstr ""
+
+#: apps/content/admin.py:139 config/unfold.py:43
+msgid "Media"
+msgstr ""
+
+#: apps/content/admin.py:140
+msgid "SEO"
+msgstr ""
+
+#: apps/content/admin.py:142 apps/core/admin.py:24 config/unfold.py:49
+msgid "AI"
+msgstr ""
+
+#: apps/content/admin.py:154
+msgid "Muallif"
+msgstr ""
+
+#: apps/content/admin.py:163
+msgid "Eʼlon qilish"
+msgstr ""
+
+#: apps/content/admin.py:173
+#, python-format
+msgid "%(n)d ta maqola eʼlon qilindi."
+msgstr ""
+
+#: apps/content/admin.py:175 apps/core/models.py:52
+msgid "Arxivlash"
+msgstr ""
+
+#: apps/content/admin.py:178
+#, python-format
+msgid "%(n)d ta maqola arxivlandi."
+msgstr ""
+
+#: apps/content/admin.py:180
+msgid "Koʻrikka yuborish"
+msgstr ""
+
+#: apps/content/admin.py:183
+#, python-format
+msgid "%(n)d ta maqola koʻrikka yuborildi."
+msgstr ""
+
+#: apps/content/admin.py:185
+msgid "Tanlanganlarga qoʻshish (featured)"
+msgstr ""
+
+#: apps/content/admin.py:188
+#, python-format
+msgid "%(n)d ta maqola belgilandi."
+msgstr ""
+
+#: apps/content/admin.py:190
+msgid "Qadash (pin)"
+msgstr ""
+
+#: apps/content/admin.py:193
+#, python-format
+msgid "%(n)d ta maqola qadaldi."
+msgstr ""
+
+#: apps/content/admin.py:195
+msgid "Koʻrish"
+msgstr ""
+
+#: apps/content/admin.py:202
+msgid "Saytda koʻrish"
+msgstr ""
+
+#: apps/content/admin.py:205
+msgid "Asl Telegram matni"
+msgstr ""
+
+#: apps/content/admin.py:229
+msgid "Qayta yaratish (AI)"
+msgstr ""
+
+#: apps/content/admin.py:234
+#, python-format
+msgid "%(n)d ta maqola navbatga qoʻyildi."
+msgstr ""
+
+#: apps/content/admin.py:242
+#, python-format
+msgid "%(n)d ta tarjima navbatga qoʻyildi."
+msgstr ""
+
+#: apps/content/admin.py:244
+msgid "Qayta tarjima: ruscha"
+msgstr ""
+
+#: apps/content/admin.py:248
+msgid "Qayta tarjima: inglizcha"
+msgstr ""
+
+#: apps/content/admin.py:252
+msgid "Dublikatlarni birlashtirish (eng eskisiga)"
+msgstr ""
+
+#: apps/content/admin.py:258
+msgid "Kamida ikkita maqolani tanlang."
+msgstr ""
+
+#: apps/content/admin.py:265
+#, python-format
+msgid "%(n)d ta manba «%(t)s» maqolasiga koʻchirildi."
+msgstr ""
+
+#: apps/content/models.py:20 apps/content/models.py:47
+#: apps/content/models.py:92 apps/content/models.py:271
+#: apps/content/models.py:404 apps/core/models.py:114
+#: apps/institutions/models.py:30 apps/institutions/models.py:161
+#: apps/institutions/models.py:207
+msgid "slug"
+msgstr ""
+
+#: apps/content/models.py:21 apps/content/models.py:48
+#: apps/institutions/models.py:163 apps/institutions/models.py:208
+msgid "name"
+msgstr "nomi"
+
+#: apps/content/models.py:22 apps/content/models.py:273
+#: apps/content/models.py:349 apps/institutions/models.py:36
+#: apps/institutions/models.py:170 apps/institutions/models.py:210
+msgid "description"
+msgstr "tavsif"
+
+#: apps/content/models.py:23 apps/institutions/models.py:217
+msgid "icon (lucide name)"
+msgstr "belgi (lucide nomi)"
+
+#: apps/content/models.py:24
+msgid "color"
+msgstr "rang"
+
+#: apps/content/models.py:25 apps/content/models.py:244
+#: apps/content/models.py:445 apps/core/models.py:119 apps/core/models.py:174
+#: apps/institutions/models.py:51 apps/institutions/models.py:85
+#: apps/institutions/models.py:226 apps/telegram/models.py:264
+msgid "order"
+msgstr "tartib"
+
+#: apps/content/models.py:28
+msgid "parent"
+msgstr "yuqori element"
+
+#: apps/content/models.py:34 apps/institutions/models.py:52
+#: apps/institutions/models.py:176 apps/telegram/models.py:55
+msgid "active"
+msgstr "faol"
+
+#: apps/content/models.py:35
+msgid "show in navigation"
+msgstr "navigatsiyada koʻrsatish"
+
+#: apps/content/models.py:39 apps/content/models.py:101
+msgid "category"
+msgstr "kategoriya"
+
+#: apps/content/models.py:40
+msgid "categories"
+msgstr "kategoriyalar"
+
+#: apps/content/models.py:49
+msgid "usage count"
+msgstr "foydalanish soni"
+
+#: apps/content/models.py:53
+msgid "tag"
+msgstr "teg"
+
+#: apps/content/models.py:54 apps/content/models.py:103
+msgid "tags"
+msgstr "teglar"
+
+#: apps/content/models.py:61
+msgid "Yangilik"
+msgstr ""
+
+#: apps/content/models.py:62
+msgid "Tadbir"
+msgstr ""
+
+#: apps/content/models.py:64 templates/components/program_table.html:4
+msgid "Yoʻnalish"
+msgstr ""
+
+#: apps/content/models.py:65
+msgid "Kasb"
+msgstr ""
+
+#: apps/content/models.py:66
+msgid "Hikoya"
+msgstr ""
+
+#: apps/content/models.py:67
+msgid "Eʼlon"
+msgstr ""
+
+#: apps/content/models.py:68
+msgid "Tahlil"
+msgstr ""
+
+#: apps/content/models.py:69
+msgid "Sharh"
+msgstr ""
+
+#: apps/content/models.py:74
+msgid "Qoralama"
+msgstr ""
+
+#: apps/content/models.py:75
+msgid "Koʻrikda"
+msgstr ""
+
+#: apps/content/models.py:76 apps/content/models.py:333
+msgid "Eʼlon qilingan"
+msgstr ""
+
+#: apps/content/models.py:77
+msgid "Arxivlangan"
+msgstr ""
+
+#: apps/content/models.py:94
+msgid "lead"
+msgstr "lid"
+
+#: apps/content/models.py:95 apps/content/models.py:417
+#: apps/core/models.py:116
+msgid "body"
+msgstr "asosiy matn"
+
+#: apps/content/models.py:97
+msgid "content type"
+msgstr "kontent turi"
+
+#: apps/content/models.py:99 apps/telegram/models.py:201
+msgid "importance"
+msgstr "muhimlik"
+
+#: apps/content/models.py:106
+msgid "primary institution"
+msgstr "asosiy muassasa"
+
+#: apps/content/models.py:113 apps/institutions/models.py:59
+#: apps/institutions/models.py:221
+msgid "institutions"
+msgstr "muassasalar"
+
+#: apps/content/models.py:117 apps/content/models.py:421
+msgid "cover (Telegram media)"
+msgstr "muqova (Telegram media)"
+
+#: apps/content/models.py:124
+msgid "cover (upload)"
+msgstr "muqova (yuklash)"
+
+#: apps/content/models.py:129
+msgid "review reason"
+msgstr "koʻrik sababi"
+
+#: apps/content/models.py:130 apps/content/models.py:444
+#: apps/telegram/models.py:165
+msgid "published at"
+msgstr "eʼlon qilingan vaqt"
+
+#: apps/content/models.py:131
+msgid "source published at"
+msgstr "manbada eʼlon qilingan vaqt"
+
+#: apps/content/models.py:132
+msgid "featured"
+msgstr "tanlangan"
+
+#: apps/content/models.py:133
+msgid "featured until"
+msgstr "tanlangan muddati"
+
+#: apps/content/models.py:134
+msgid "pinned"
+msgstr "qadalgan"
+
+#: apps/content/models.py:135
+msgid "AI generated"
+msgstr "AI tomonidan yaratilgan"
+
+#: apps/content/models.py:136
+msgid "AI confidence"
+msgstr "AI ishonch darajasi"
+
+#: apps/content/models.py:137
+msgid "AI metadata"
+msgstr "AI metamaʼlumotlari"
+
+#: apps/content/models.py:140 apps/telegram/models.py:194
+msgid "cluster"
+msgstr "klaster"
+
+#: apps/content/models.py:146 apps/telegram/models.py:171
+msgid "views"
+msgstr "koʻrishlar"
+
+#: apps/content/models.py:147
+msgid "reading time (min)"
+msgstr "oʻqish vaqti (daq.)"
+
+#: apps/content/models.py:148 apps/core/models.py:120
+msgid "SEO title"
+msgstr "SEO sarlavha"
+
+#: apps/content/models.py:149 apps/core/models.py:121
+msgid "SEO description"
+msgstr "SEO tavsif"
+
+#: apps/content/models.py:150
+msgid "OG image"
+msgstr "OG rasm"
+
+#: apps/content/models.py:161
+msgid "editor"
+msgstr "muharrir"
+
+#: apps/content/models.py:167 apps/telegram/models.py:166
+msgid "edited at"
+msgstr "tahrirlangan vaqt"
+
+#: apps/content/models.py:168
+msgid "needs refresh"
+msgstr "yangilash talab qilinadi"
+
+#: apps/content/models.py:169
+msgid "translation status"
+msgstr "tarjima holati"
+
+#: apps/content/models.py:220
+msgid "primary"
+msgstr "asosiy"
+
+#: apps/content/models.py:221
+msgid "added at"
+msgstr "qoʻshilgan vaqt"
+
+#: apps/content/models.py:225
+msgid "article source"
+msgstr "maqola manbasi"
+
+#: apps/content/models.py:226
+msgid "article sources"
+msgstr "maqola manbalari"
+
+#: apps/content/models.py:238 apps/telegram/models.py:282
+#: apps/telegram/models.py:283
+msgid "Telegram media"
+msgstr ""
+
+#: apps/content/models.py:243
+msgid "image (upload)"
+msgstr "rasm (yuklash)"
+
+#: apps/content/models.py:245 apps/telegram/models.py:274
+msgid "caption"
+msgstr "izoh"
+
+#: apps/content/models.py:246 apps/content/models.py:305
+#: apps/content/models.py:418 apps/institutions/models.py:175
+#: apps/institutions/models.py:218
+msgid "cover"
+msgstr "muqova"
+
+#: apps/content/models.py:250 apps/content/models.py:251
+msgid "article media"
+msgstr "maqola mediasi"
+
+#: apps/content/models.py:258
+msgid "Seminar"
+msgstr ""
+
+#: apps/content/models.py:259
+msgid "Konferensiya"
+msgstr ""
+
+#: apps/content/models.py:260
+msgid "Ochiq eshiklar kuni"
+msgstr ""
+
+#: apps/content/models.py:261
+msgid "Tanlov"
+msgstr ""
+
+#: apps/content/models.py:262
+msgid "Sport"
+msgstr ""
+
+#: apps/content/models.py:263
+msgid "Madaniy tadbir"
+msgstr ""
+
+#: apps/content/models.py:264
+msgid "Uchrashuv"
+msgstr ""
+
+#: apps/content/models.py:292 apps/content/models.py:369
+#: apps/content/models.py:437
+msgid "source post"
+msgstr "manba post"
+
+#: apps/content/models.py:298
+msgid "starts at"
+msgstr "boshlanish vaqti"
+
+#: apps/content/models.py:299
+msgid "ends at"
+msgstr "tugash vaqti"
+
+#: apps/content/models.py:300
+msgid "all day"
+msgstr "kun boʻyi"
+
+#: apps/content/models.py:301
+msgid "location"
+msgstr "joy"
+
+#: apps/content/models.py:302
+msgid "online"
+msgstr "onlayn"
+
+#: apps/content/models.py:303
+msgid "registration URL"
+msgstr "roʻyxatdan oʻtish URL"
+
+#: apps/content/models.py:304 apps/institutions/models.py:34
+#: apps/institutions/models.py:80 apps/ops/models.py:22
+#: apps/telegram/models.py:106 apps/telegram/models.py:265
+msgid "kind"
+msgstr "turi"
+
+#: apps/content/models.py:306 apps/content/models.py:383
+#: apps/content/models.py:443 apps/core/models.py:117 apps/core/models.py:175
+#: apps/institutions/models.py:227
+msgid "published"
+msgstr "eʼlon qilingan"
+
+#: apps/content/models.py:307 apps/institutions/models.py:54
+#: apps/institutions/models.py:119 apps/institutions/models.py:178
+#: apps/institutions/models.py:228
+msgid "needs verification"
+msgstr "tekshirish talab qilinadi"
+
+#: apps/content/models.py:311
+msgid "event"
+msgstr "tadbir"
+
+#: apps/content/models.py:312
+msgid "events"
+msgstr "tadbirlar"
+
+#: apps/content/models.py:334
+msgid "Ochiq"
+msgstr ""
+
+#: apps/content/models.py:347 apps/institutions/models.py:113
+msgid "year"
+msgstr "yil"
+
+#: apps/content/models.py:350
+msgid "starts"
+msgstr "boshlanishi"
+
+#: apps/content/models.py:351
+msgid "ends"
+msgstr "tugashi"
+
+#: apps/content/models.py:353 apps/institutions/models.py:186
+msgid "programs"
+msgstr "yoʻnalishlar"
+
+#: apps/content/models.py:355 apps/institutions/models.py:212
+msgid "requirements"
+msgstr "talablar"
+
+#: apps/content/models.py:356
+msgid "documents"
+msgstr "hujjatlar"
+
+#: apps/content/models.py:357 apps/institutions/models.py:173
+msgid "quota"
+msgstr "kvota"
+
+#: apps/content/models.py:358
+msgid "apply URL"
+msgstr "hujjat topshirish URL"
+
+#: apps/content/models.py:359
+msgid "contact"
+msgstr "aloqa"
+
+#: apps/content/models.py:387
+msgid "admission"
+msgstr "qabul"
+
+#: apps/content/models.py:388
+msgid "admissions"
+msgstr "qabullar"
+
+#: apps/content/models.py:406
+msgid "person"
+msgstr "shaxs"
+
+#: apps/content/models.py:407
+msgid "role"
+msgstr "lavozim"
+
+#: apps/content/models.py:416
+msgid "quote"
+msgstr "iqtibos"
+
+#: apps/content/models.py:449
+msgid "story"
+msgstr "hikoya"
+
+#: apps/content/models.py:450
+msgid "stories"
+msgstr "hikoyalar"
+
+#: apps/content/models.py:464
+msgid "review queue item"
+msgstr "koʻrik navbati elementi"
+
+#: apps/content/models.py:465
+msgid "review queue"
+msgstr "koʻrik navbati"
+
+#: apps/core/admin.py:16
+msgid "Sayt"
+msgstr ""
+
+#: apps/core/admin.py:18
+msgid "Nashr siyosati"
+msgstr ""
+
+#: apps/core/admin.py:21
+msgid "Boʻsh qiymat .env dagi standart qiymatni bildiradi."
+msgstr ""
+
+#: apps/core/admin.py:26 apps/institutions/admin.py:57
+#: apps/web/views/institutions.py:195
+#: templates/components/admission_card.html:14
+#: templates/pages/institutions/list.html:17
+msgid "Aloqa"
+msgstr ""
+
+#: apps/core/admin.py:29 apps/web/views/analytics.py:44 config/unfold.py:74
+#: templates/components/footer.html:32 templates/components/nav_links.html:30
+#: templates/pages/analytics.html:5 templates/pages/home.html:51
+msgid "Analitika"
+msgstr ""
+
+#: apps/core/admin_base.py:53
+msgid "Tasdiqlangan deb belgilash"
+msgstr ""
+
+#: apps/core/admin_base.py:57
+#, python-format
+msgid "%(n)d ta yozuv tasdiqlandi."
+msgstr ""
+
+#: apps/core/admin_base.py:60
+msgid "Tekshirish talab qilinadi deb belgilash"
+msgstr ""
+
+#: apps/core/admin_base.py:63
+#, python-format
+msgid "%(n)d ta yozuv belgilandi."
+msgstr ""
+
+#: apps/core/colors.py:17
+msgid "Enter a color as #RRGGBB."
+msgstr "Rangni #RRGGBB koʻrinishida kiriting."
+
+#: apps/core/colors.py:43
+#, python-format
+msgid "Contrast on white is %(ratio).2f:1; at least 4.5:1 is required."
+msgstr "Oq fondagi kontrast %(ratio).2f:1; kamida 4.5:1 talab qilinadi."
+
+#: apps/core/models.py:18
+msgid "created at"
+msgstr "Yaratilgan vaqt"
+
+#: apps/core/models.py:19
+msgid "updated at"
+msgstr "Yangilangan vaqt"
+
+#: apps/core/models.py:46
+msgid "Avtomatik"
+msgstr ""
+
+#: apps/core/models.py:47
+msgid "Tahririyat koʻrigi"
+msgstr ""
+
+#: apps/core/models.py:48 apps/telegram/models.py:25
+msgid "Oʻchirilgan"
+msgstr ""
+
+#: apps/core/models.py:53
+msgid "Saqlab qolish"
+msgstr ""
+
+#: apps/core/models.py:59
+msgid "site name"
+msgstr "sayt nomi"
+
+#: apps/core/models.py:60
+msgid "tagline"
+msgstr "shior"
+
+#: apps/core/models.py:62
+msgid "publish mode"
+msgstr "nashr rejimi"
+
+#: apps/core/models.py:64
+msgid "publish confidence threshold"
+msgstr "nashr uchun ishonch chegarasi"
+
+#: apps/core/models.py:66
+msgid "on source delete"
+msgstr "manba oʻchirilganda"
+
+#: apps/core/models.py:69
+msgid "AI daily budget (USD)"
+msgstr "AI kunlik byudjeti (USD)"
+
+#: apps/core/models.py:71
+msgid "AI translation languages"
+msgstr "AI tarjima tillari"
+
+#: apps/core/models.py:72
+msgid "live panel refresh (s)"
+msgstr "jonli panel yangilanishi (s)"
+
+#: apps/core/models.py:73
+msgid "maintenance mode"
+msgstr "texnik xizmat rejimi"
+
+#: apps/core/models.py:74
+msgid "contact e-mail"
+msgstr "aloqa e-pochtasi"
+
+#: apps/core/models.py:75
+msgid "contact phone"
+msgstr "aloqa telefoni"
+
+#: apps/core/models.py:76 apps/institutions/models.py:43
+msgid "address"
+msgstr "manzil"
+
+#: apps/core/models.py:77
+msgid "footer text"
+msgstr "pastki qism matni"
+
+#: apps/core/models.py:78
+msgid "social links"
+msgstr "ijtimoiy tarmoq havolalari"
+
+#: apps/core/models.py:79
+msgid "GA measurement id"
+msgstr "GA oʻlchov ID"
+
+#: apps/core/models.py:83 apps/core/models.py:84
+msgid "site settings"
+msgstr "sayt sozlamalari"
+
+#: apps/core/models.py:87
+msgid "Site settings"
+msgstr "Sayt sozlamalari"
+
+#: apps/core/models.py:118
+msgid "show in footer"
+msgstr "pastki qismda koʻrsatish"
+
+#: apps/core/models.py:125
+msgid "page"
+msgstr "sahifa"
+
+#: apps/core/models.py:126
+msgid "pages"
+msgstr "sahifalar"
+
+#: apps/core/models.py:150 templates/components/nav_links.html:9
+#: templates/components/nav_links.html:18
+msgid "Taʼlim"
+msgstr ""
+
+#: apps/core/models.py:151 apps/institutions/models.py:98
+#: apps/web/views/education.py:98 templates/components/nav_links.html:15
+#: templates/components/nav_links.html:23 templates/pages/home.html:93
+msgid "Kursantlar"
+msgstr ""
+
+#: apps/core/models.py:152 apps/institutions/models.py:97
+#: apps/web/views/education.py:92 templates/components/nav_links.html:14
+#: templates/components/nav_links.html:22 templates/pages/home.html:93
+msgid "Talabalar"
+msgstr ""
+
+#: apps/core/models.py:153 apps/web/views/professions.py:27
+#: apps/web/views/professions.py:48 config/unfold.py:64
+#: templates/components/nav_links.html:27 templates/pages/analytics.html:22
+#: templates/pages/education/program_detail.html:27
+#: templates/pages/home.html:31 templates/pages/home.html:101
+#: templates/pages/professions/list.html:5 templates/pages/search.html:22
+msgid "Kasblar"
+msgstr ""
+
+#: apps/core/models.py:154 apps/web/views/appeals.py:38
+#: apps/web/views/appeals.py:47 apps/web/views/appeals.py:70
+#: templates/components/footer.html:33 templates/components/nav_links.html:31
+#: templates/pages/appeals/form.html:5
+msgid "Murojaat"
+msgstr ""
+
+#: apps/core/models.py:155 apps/institutions/models.py:72
+msgid "Umumiy"
+msgstr ""
+
+#: apps/core/models.py:163
+msgid "question"
+msgstr "savol"
+
+#: apps/core/models.py:164
+msgid "answer"
+msgstr "javob"
+
+#: apps/core/models.py:179 apps/core/models.py:180 config/unfold.py:66
+msgid "FAQ"
+msgstr "Koʻp beriladigan savollar"
+
+#: apps/institutions/admin.py:55
+msgid "Tavsif"
+msgstr ""
+
+#: apps/institutions/admin.py:71
+msgid "Brend"
+msgstr ""
+
+#: apps/institutions/admin.py:72 templates/admin/index.html:23
+msgid "Holat"
+msgstr ""
+
+#: apps/institutions/admin.py:75
+msgid "Rang"
+msgstr ""
+
+#: apps/institutions/models.py:16
+msgid "Akademiya"
+msgstr ""
+
+#: apps/institutions/models.py:17
+msgid "Institut"
+msgstr ""
+
+#: apps/institutions/models.py:18
+msgid "Universitet"
+msgstr ""
+
+#: apps/institutions/models.py:31
+msgid "short name"
+msgstr "qisqa nomi"
+
+#: apps/institutions/models.py:33
+msgid "abbreviation"
+msgstr "qisqartma"
+
+#: apps/institutions/models.py:35
+msgid "parent body"
+msgstr "yuqori turuvchi idora"
+
+#: apps/institutions/models.py:37
+msgid "mission"
+msgstr "missiya"
+
+#: apps/institutions/models.py:38
+msgid "founded"
+msgstr "tashkil etilgan"
+
+#: apps/institutions/models.py:39
+msgid "website"
+msgstr "veb-sayt"
+
+#: apps/institutions/models.py:40
+msgid "Telegram username"
+msgstr "Telegram foydalanuvchi nomi"
+
+#: apps/institutions/models.py:44
+msgid "city"
+msgstr "shahar"
+
+#: apps/institutions/models.py:45
+msgid "latitude"
+msgstr "kenglik"
+
+#: apps/institutions/models.py:46
+msgid "longitude"
+msgstr "uzunlik"
+
+#: apps/institutions/models.py:47
+msgid "logo"
+msgstr "logotip"
+
+#: apps/institutions/models.py:48
+msgid "hero image"
+msgstr "asosiy rasm"
+
+#: apps/institutions/models.py:49
+msgid "chart color"
+msgstr "diagramma rangi"
+
+#: apps/institutions/models.py:50
+msgid "text color"
+msgstr "matn rangi"
+
+#: apps/institutions/models.py:53
+msgid "stats cache"
+msgstr "statistika keshi"
+
+#: apps/institutions/models.py:69
+msgid "Qabul komissiyasi"
+msgstr ""
+
+#: apps/institutions/models.py:70
+msgid "Matbuot xizmati"
+msgstr ""
+
+#: apps/institutions/models.py:71 config/unfold.py:70 config/unfold.py:71
+msgid "Murojaatlar"
+msgstr ""
+
+#: apps/institutions/models.py:73
+msgid "Yotoqxona"
+msgstr ""
+
+#: apps/institutions/models.py:84
+msgid "working hours"
+msgstr "ish vaqti"
+
+#: apps/institutions/models.py:89
+msgid "institution contact"
+msgstr "muassasa aloqasi"
+
+#: apps/institutions/models.py:90
+msgid "institution contacts"
+msgstr "muassasa aloqalari"
+
+#: apps/institutions/models.py:99
+msgid "Professor-oʻqituvchilar"
+msgstr ""
+
+#: apps/institutions/models.py:100 apps/web/views/education.py:36
+#: apps/web/views/education.py:56 apps/web/views/institutions.py:134
+#: config/unfold.py:63 templates/components/admission_card.html:19
+#: templates/components/footer.html:30
+#: templates/components/institution_card.html:9
+#: templates/components/nav_links.html:12
+#: templates/components/nav_links.html:20 templates/pages/analytics.html:21
+#: templates/pages/education/program_list.html:5 templates/pages/home.html:30
+#: templates/pages/home.html:76 templates/pages/professions/detail.html:25
+#: templates/pages/search.html:21
+msgid "Yoʻnalishlar"
+msgstr ""
+
+#: apps/institutions/models.py:101
+msgid "Bitiruvchilar"
+msgstr ""
+
+#: apps/institutions/models.py:102
+msgid "Yotoqxona oʻrinlari"
+msgstr ""
+
+#: apps/institutions/models.py:103
+msgid "Laboratoriyalar"
+msgstr ""
+
+#: apps/institutions/models.py:104
+msgid "Xalqaro hamkorlar"
+msgstr ""
+
+#: apps/institutions/models.py:114
+msgid "indicator"
+msgstr "koʻrsatkich"
+
+#: apps/institutions/models.py:115
+msgid "value"
+msgstr "qiymat"
+
+#: apps/institutions/models.py:116
+msgid "unit"
+msgstr "oʻlchov birligi"
+
+#: apps/institutions/models.py:117 apps/institutions/models.py:250
+msgid "note"
+msgstr "izoh"
+
+#: apps/institutions/models.py:118 apps/institutions/models.py:177
+msgid "source URL"
+msgstr "manba URL"
+
+#: apps/institutions/models.py:123
+msgid "institution metric"
+msgstr "muassasa koʻrsatkichi"
+
+#: apps/institutions/models.py:124
+msgid "institution metrics"
+msgstr "muassasa koʻrsatkichlari"
+
+#: apps/institutions/models.py:134
+msgid "Kurs"
+msgstr ""
+
+#: apps/institutions/models.py:135
+msgid "Bakalavriat"
+msgstr ""
+
+#: apps/institutions/models.py:136
+msgid "Magistratura"
+msgstr ""
+
+#: apps/institutions/models.py:137
+msgid "Qayta tayyorlash"
+msgstr ""
+
+#: apps/institutions/models.py:138
+msgid "Malaka oshirish"
+msgstr ""
+
+#: apps/institutions/models.py:139
+msgid "Doktorantura"
+msgstr ""
+
+#: apps/institutions/models.py:143
+msgid "Kunduzgi"
+msgstr ""
+
+#: apps/institutions/models.py:144
+msgid "Sirtqi"
+msgstr ""
+
+#: apps/institutions/models.py:145
+msgid "Masofaviy"
+msgstr ""
+
+#: apps/institutions/models.py:146
+msgid "Aralash"
+msgstr ""
+
+#: apps/institutions/models.py:162
+msgid "code"
+msgstr "kod"
+
+#: apps/institutions/models.py:164
+msgid "level"
+msgstr "daraja"
+
+#: apps/institutions/models.py:165
+msgid "form"
+msgstr "taʼlim shakli"
+
+#: apps/institutions/models.py:167
+msgid "duration (years)"
+msgstr "davomiyligi (yil)"
+
+#: apps/institutions/models.py:169
+msgid "language of instruction"
+msgstr "taʼlim tili"
+
+#: apps/institutions/models.py:171
+msgid "admission requirements"
+msgstr "qabul talablari"
+
+#: apps/institutions/models.py:172
+msgid "qualification"
+msgstr "malaka"
+
+#: apps/institutions/models.py:174
+msgid "tuition note"
+msgstr "toʻlov haqida izoh"
+
+#: apps/institutions/models.py:180 apps/institutions/models.py:233
+msgid "professions"
+msgstr "kasblar"
+
+#: apps/institutions/models.py:185 apps/institutions/models.py:248
+msgid "program"
+msgstr "yoʻnalish"
+
+#: apps/institutions/models.py:209
+msgid "summary"
+msgstr "qisqacha mazmun"
+
+#: apps/institutions/models.py:211
+msgid "responsibilities"
+msgstr "vazifalar"
+
+#: apps/institutions/models.py:213
+msgid "education path"
+msgstr "taʼlim yoʻli"
+
+#: apps/institutions/models.py:214
+msgid "rank system"
+msgstr "unvonlar tizimi"
+
+#: apps/institutions/models.py:215
+msgid "work places"
+msgstr "ish joylari"
+
+#: apps/institutions/models.py:216
+msgid "salary note"
+msgstr "ish haqi haqida izoh"
+
+#: apps/institutions/models.py:232
+msgid "profession"
+msgstr "kasb"
+
+#: apps/institutions/models.py:254
+msgid "profession–institution link"
+msgstr "kasb–muassasa bogʻlanishi"
+
+#: apps/institutions/models.py:255
+msgid "profession–institution links"
+msgstr "kasb–muassasa bogʻlanishlari"
+
+#: apps/ops/dashboard.py:25
+msgid "Bugun kelgan postlar"
+msgstr ""
+
+#: apps/ops/dashboard.py:30
+msgid "Qayta ishlangan"
+msgstr ""
+
+#: apps/ops/dashboard.py:35
+msgid "Koʻrik kutmoqda"
+msgstr ""
+
+#: apps/ops/dashboard.py:40
+msgid "Bugun eʼlon qilingan"
+msgstr ""
+
+#: apps/ops/dashboard.py:47
+msgid "Xatolar"
+msgstr ""
+
+#: apps/ops/dashboard.py:52
+msgid "Oʻlik outbox hodisalari"
+msgstr ""
+
+#: apps/ops/dashboard.py:57
+msgid "Ochiq murojaatlar"
+msgstr ""
+
+#: apps/ops/dashboard.py:62
+msgid "Ingestor heartbeat"
+msgstr "Ingestor holati (heartbeat)"
+
+#: apps/ops/models.py:23
+msgid "dedupe key"
+msgstr "takrorlanish kaliti"
+
+#: apps/ops/models.py:25
+msgid "sent at"
+msgstr "yuborilgan vaqt"
+
+#: apps/ops/models.py:27
+msgid "channel"
+msgstr "kanal"
+
+#: apps/ops/models.py:32
+msgid "alert"
+msgstr "ogohlantirish"
+
+#: apps/ops/models.py:33
+msgid "alerts"
+msgstr "ogohlantirishlar"
+
+#: apps/telegram/admin.py:78
+msgid "Kechikish"
+msgstr ""
+
+#: apps/telegram/admin.py:83
+msgid "Maʼlumotlarni yangilash (resolve)"
+msgstr ""
+
+#: apps/telegram/admin.py:86 apps/telegram/admin.py:97
+#: apps/telegram/admin.py:102
+#, python-format
+msgid "%(n)d ta soʻrov navbatga qoʻyildi."
+msgstr ""
+
+#: apps/telegram/admin.py:88
+msgid "Tarixni yuklash (backfill)"
+msgstr ""
+
+#: apps/telegram/admin.py:99
+msgid "Boʻshliqlarni tekshirish (gap check)"
+msgstr ""
+
+#: apps/telegram/admin.py:104
+msgid "Oʻchirish (disable)"
+msgstr ""
+
+#: apps/telegram/admin.py:107
+#, python-format
+msgid "%(n)d ta manba oʻchirildi."
+msgstr ""
+
+#: apps/telegram/admin.py:129 templates/pages/events/list.html:8
+msgid "Koʻrinish"
+msgstr ""
+
+#: apps/telegram/admin.py:160
+msgid "Xom maʼlumot (JSON)"
+msgstr ""
+
+#: apps/telegram/admin.py:164
+msgid "Telegram havola"
+msgstr ""
+
+#: apps/telegram/admin.py:170
+msgid "Embedding"
+msgstr ""
+
+#: apps/telegram/admin.py:172
+msgid "bor"
+msgstr ""
+
+#: apps/telegram/admin.py:174
+msgid "Qayta ishlash (AI)"
+msgstr ""
+
+#: apps/telegram/admin.py:181
+#, python-format
+msgid "%(n)d ta post navbatga qoʻyildi."
+msgstr ""
+
+#: apps/telegram/admin.py:184
+msgid "Oʻtkazib yuborish (skip)"
+msgstr ""
+
+#: apps/telegram/admin.py:187
+#, python-format
+msgid "%(n)d ta post oʻtkazib yuborildi."
+msgstr ""
+
+#: apps/telegram/admin.py:208
+msgid "Qayta urinish (retry)"
+msgstr ""
+
+#: apps/telegram/admin.py:213
+#, python-format
+msgid "%(n)d ta hodisa qayta navbatga qoʻyildi."
+msgstr ""
+
+#: apps/telegram/models.py:22
+msgid "Jonli"
+msgstr ""
+
+#: apps/telegram/models.py:23
+msgid "Nosoz"
+msgstr ""
+
+#: apps/telegram/models.py:24
+msgid "Oflayn"
+msgstr ""
+
+#: apps/telegram/models.py:29
+msgid "MTProto (user session)"
+msgstr "MTProto (foydalanuvchi sessiyasi)"
+
+#: apps/telegram/models.py:30
+msgid "Bot API (reserved)"
+msgstr "Bot API (zaxira)"
+
+#: apps/telegram/models.py:45
+msgid "username"
+msgstr "foydalanuvchi nomi"
+
+#: apps/telegram/models.py:45
+msgid "Without @, lowercase."
+msgstr "@ belgisisiz, kichik harflarda."
+
+#: apps/telegram/models.py:48
+msgid "about"
+msgstr "tavsif"
+
+#: apps/telegram/models.py:49
+msgid "photo"
+msgstr "rasm"
+
+#: apps/telegram/models.py:50
+msgid "channel id"
+msgstr "kanal ID"
+
+#: apps/telegram/models.py:51
+msgid "access hash"
+msgstr "kirish xeshi (access hash)"
+
+#: apps/telegram/models.py:53
+msgid "ingest method"
+msgstr "qabul qilish usuli"
+
+#: apps/telegram/models.py:59
+msgid "last message id"
+msgstr "oxirgi xabar ID"
+
+#: apps/telegram/models.py:60
+msgid "last message at"
+msgstr "oxirgi xabar vaqti"
+
+#: apps/telegram/models.py:61
+msgid "last update seen at"
+msgstr "oxirgi yangilanish vaqti"
+
+#: apps/telegram/models.py:62
+msgid "last gap check at"
+msgstr "oxirgi boʻshliq tekshiruvi vaqti"
+
+#: apps/telegram/models.py:63
+msgid "backfill done at"
+msgstr "tarix yuklangan vaqt"
+
+#: apps/telegram/models.py:64
+msgid "subscribers"
+msgstr "obunachilar"
+
+#: apps/telegram/models.py:65
+msgid "error count"
+msgstr "xatolar soni"
+
+#: apps/telegram/models.py:66 apps/telegram/models.py:311
+msgid "last error"
+msgstr "oxirgi xato"
+
+#: apps/telegram/models.py:67
+msgid "joined at"
+msgstr "qoʻshilgan vaqt"
+
+#: apps/telegram/models.py:69
+msgid "signature patterns"
+msgstr "imzo shablonlari"
+
+#: apps/telegram/models.py:72
+msgid "Regexes stripped from post text before AI."
+msgstr ""
+"AI dan oldin post matnidan olib tashlanadigan muntazam ifodalar (regex)."
+
+#: apps/telegram/models.py:77
+msgid "Telegram source"
+msgstr "Telegram manbasi"
+
+#: apps/telegram/models.py:78
+msgid "Telegram sources"
+msgstr "Telegram manbalari"
+
+#: apps/telegram/models.py:89
+msgid "Backfill"
+msgstr "Tarixni yuklash"
+
+#: apps/telegram/models.py:90
+msgid "Gap check"
+msgstr "Boʻshliqlarni tekshirish"
+
+#: apps/telegram/models.py:91
+msgid "Engagement refresh"
+msgstr "Faollikni yangilash"
+
+#: apps/telegram/models.py:92
+msgid "Resolve source"
+msgstr "Manbani aniqlash"
+
+#: apps/telegram/models.py:93
+msgid "Retry media"
+msgstr "Mediani qayta yuklash"
+
+#: apps/telegram/models.py:97 apps/telegram/models.py:145
+#: apps/telegram/models.py:251
+msgid "Kutilmoqda"
+msgstr ""
+
+#: apps/telegram/models.py:98
+msgid "Bajarilmoqda"
+msgstr ""
+
+#: apps/telegram/models.py:99
+msgid "Bajarildi"
+msgstr ""
+
+#: apps/telegram/models.py:109 apps/telegram/models.py:157
+msgid "source"
+msgstr "manba"
+
+#: apps/telegram/models.py:114
+msgid "Empty = all active sources."
+msgstr "Boʻsh = barcha faol manbalar."
+
+#: apps/telegram/models.py:116
+msgid "parameters"
+msgstr "parametrlar"
+
+#: apps/telegram/models.py:122
+msgid "requested by"
+msgstr "soʻrov beruvchi"
+
+#: apps/telegram/models.py:127
+msgid "started at"
+msgstr "boshlangan vaqt"
+
+#: apps/telegram/models.py:128
+msgid "finished at"
+msgstr "tugagan vaqt"
+
+#: apps/telegram/models.py:129
+msgid "result"
+msgstr "natija"
+
+#: apps/telegram/models.py:134
+msgid "ingestion request"
+msgstr "qabul qilish soʻrovi"
+
+#: apps/telegram/models.py:135
+msgid "ingestion requests"
+msgstr "qabul qilish soʻrovlari"
+
+#: apps/telegram/models.py:146
+msgid "Navbatda"
+msgstr ""
+
+#: apps/telegram/models.py:147
+msgid "Qayta ishlanmoqda"
+msgstr ""
+
+#: apps/telegram/models.py:148
+msgid "Qayta ishlandi"
+msgstr ""
+
+#: apps/telegram/models.py:149
+msgid "Oʻtkazib yuborildi"
+msgstr ""
+
+#: apps/telegram/models.py:159 apps/telegram/models.py:263
+msgid "message id"
+msgstr "xabar ID"
+
+#: apps/telegram/models.py:160
+msgid "album id"
+msgstr "albom ID"
+
+#: apps/telegram/models.py:162
+msgid "entities"
+msgstr "obyektlar"
+
+#: apps/telegram/models.py:163
+msgid "links"
+msgstr "havolalar"
+
+#: apps/telegram/models.py:164
+msgid "hashtags"
+msgstr "heshteglar"
+
+#: apps/telegram/models.py:167
+msgid "Telegram URL"
+msgstr ""
+
+#: apps/telegram/models.py:168
+msgid "content hash"
+msgstr "kontent xeshi"
+
+#: apps/telegram/models.py:169
+msgid "has media"
+msgstr "media mavjud"
+
+#: apps/telegram/models.py:170
+msgid "media count"
+msgstr "media soni"
+
+#: apps/telegram/models.py:172
+msgid "forwards"
+msgstr "ulashishlar"
+
+#: apps/telegram/models.py:173
+msgid "reactions"
+msgstr "reaksiyalar"
+
+#: apps/telegram/models.py:174
+msgid "reply to"
+msgstr "javob berilgan xabar"
+
+#: apps/telegram/models.py:175
+msgid "forwarded"
+msgstr "uzatilgan"
+
+#: apps/telegram/models.py:176
+msgid "forwarded from"
+msgstr "qayerdan uzatilgan"
+
+#: apps/telegram/models.py:177
+msgid "deleted"
+msgstr "oʻchirilgan"
+
+#: apps/telegram/models.py:178
+msgid "deleted at"
+msgstr "oʻchirilgan vaqt"
+
+#: apps/telegram/models.py:179
+msgid "from backfill"
+msgstr "tarix yuklashdan"
+
+#: apps/telegram/models.py:180
+msgid "raw message"
+msgstr "xom xabar"
+
+#: apps/telegram/models.py:183
+msgid "processing status"
+msgstr "qayta ishlash holati"
+
+#: apps/telegram/models.py:188
+msgid "processing error"
+msgstr "qayta ishlash xatosi"
+
+#: apps/telegram/models.py:189 apps/telegram/models.py:309
+msgid "processed at"
+msgstr "qayta ishlangan vaqt"
+
+#: apps/telegram/models.py:190
+msgid "skip reason"
+msgstr "oʻtkazib yuborish sababi"
+
+#: apps/telegram/models.py:203
+msgid "consecutive gap-check misses"
+msgstr "ketma-ket boʻshliq tekshiruvida topilmaganlar"
+
+#: apps/telegram/models.py:203
+msgid "Deleted after two consecutive misses."
+msgstr "Ketma-ket ikki marta topilmagach oʻchirilgan deb hisoblanadi."
+
+#: apps/telegram/models.py:208
+msgid "Telegram post"
+msgstr ""
+
+#: apps/telegram/models.py:209
+msgid "Telegram posts"
+msgstr "Telegram postlar"
+
+#: apps/telegram/models.py:239 templates/components/lightbox.html:2
+msgid "Rasm"
+msgstr ""
+
+#: apps/telegram/models.py:240
+msgid "Video"
+msgstr ""
+
+#: apps/telegram/models.py:241
+msgid "Hujjat"
+msgstr ""
+
+#: apps/telegram/models.py:242
+msgid "Audio"
+msgstr ""
+
+#: apps/telegram/models.py:243
+msgid "Ovozli xabar"
+msgstr ""
+
+#: apps/telegram/models.py:244
+msgid "Animatsiya"
+msgstr ""
+
+#: apps/telegram/models.py:245
+msgid "Stiker"
+msgstr ""
+
+#: apps/telegram/models.py:246
+msgid "Veb sahifa"
+msgstr ""
+
+#: apps/telegram/models.py:252
+msgid "Yuklandi"
+msgstr ""
+
+#: apps/telegram/models.py:253
+msgid "Tayyor"
+msgstr ""
+
+#: apps/telegram/models.py:266
+msgid "file id"
+msgstr "fayl ID"
+
+#: apps/telegram/models.py:269
+msgid "width"
+msgstr "kenglik"
+
+#: apps/telegram/models.py:270
+msgid "height"
+msgstr "balandlik"
+
+#: apps/telegram/models.py:271
+msgid "duration (s)"
+msgstr "davomiylik (s)"
+
+#: apps/telegram/models.py:272
+msgid "original"
+msgstr "asl nusxa"
+
+#: apps/telegram/models.py:273
+msgid "derivatives"
+msgstr "hosila fayllar"
+
+#: apps/telegram/models.py:302
+msgid "event type"
+msgstr "hodisa turi"
+
+#: apps/telegram/models.py:306
+msgid "payload"
+msgstr "maʼlumot yuki (payload)"
+
+#: apps/telegram/models.py:307
+msgid "payload hash"
+msgstr "payload xeshi"
+
+#: apps/telegram/models.py:308
+msgid "locked until"
+msgstr "bloklangan muddat"
+
+#: apps/telegram/models.py:310
+msgid "terminal failures"
+msgstr "yakuniy xatolar"
+
+#: apps/telegram/models.py:312
+msgid "dead"
+msgstr "oʻlik"
+
+#: apps/telegram/models.py:316
+msgid "outbox event"
+msgstr "outbox hodisasi"
+
+#: apps/telegram/models.py:317
+msgid "outbox events"
+msgstr "outbox hodisalari"
+
+#: apps/web/services/charts.py:108 templates/pages/analytics.html:8
+#: templates/pages/events/list.html:13
+msgid "Davr"
+msgstr ""
+
+#: apps/web/services/charts.py:125 apps/web/services/charts.py:126
+#: apps/web/services/charts.py:202 apps/web/services/charts.py:204
+#: apps/web/views/news.py:83 apps/web/views/news.py:155 config/unfold.py:29
+#: templates/pages/news/longread_list.html:5 templates/pages/search.html:20
+msgid "Maqolalar"
+msgstr ""
+
+#: apps/web/services/charts.py:126 templates/pages/news/list.html:12
+msgid "Kategoriya"
+msgstr ""
+
+#: apps/web/services/charts.py:151
+msgid "Xabarlar"
+msgstr ""
+
+#: apps/web/services/charts.py:153
+msgid "Kun"
+msgstr ""
+
+#: apps/web/services/charts.py:173 templates/pages/analytics.html:30
+msgid "Oʻrtacha koʻrishlar"
+msgstr ""
+
+#: apps/web/services/charts.py:173 templates/pages/analytics.html:31
+msgid "Oʻrtacha ulashishlar"
+msgstr ""
+
+#: apps/web/services/charts.py:204
+msgid "Teg"
+msgstr ""
+
+#: apps/web/services/charts.py:204
+msgid "Oldingi davr"
+msgstr ""
+
+#: apps/web/services/charts.py:204
+msgid "Oʻzgarish"
+msgstr ""
+
+#: apps/web/services/charts.py:234
+msgid "Yil"
+msgstr ""
+
+#: apps/web/services/charts.py:265 apps/web/views/institutions.py:81
+#: templates/pages/institutions/compare.html:12
+msgid "Koʻrsatkich"
+msgstr ""
+
+#: apps/web/templatetags/web_tags.py:145
+msgid "hozirgina"
+msgstr ""
+
+#: apps/web/templatetags/web_tags.py:148
+#, python-format
+msgid "%(n)d daqiqa oldin"
+msgstr ""
+
+#: apps/web/templatetags/web_tags.py:150
+#, python-format
+msgid "%(n)d soat oldin"
+msgstr ""
+
+#: apps/web/templatetags/web_tags.py:152
+#, python-format
+msgid "%(n)d kun oldin"
+msgstr ""
+
+#: apps/web/views/_helpers.py:16 templates/components/breadcrumbs.html:4
+#: templates/components/header.html:24 templates/components/nav_links.html:3
+#: templates/errors/_error.html:9
+msgid "Bosh sahifa"
+msgstr ""
+
+#: apps/web/views/appeals.py:47
+msgid "Yuborildi"
+msgstr ""
+
+#: apps/web/views/appeals.py:70 templates/pages/appeals/form.html:35
+#: templates/pages/appeals/track.html:6
+msgid "Murojaatni kuzatish"
+msgstr ""
+
+#: apps/web/views/events.py:92 apps/web/views/events.py:111
+#: apps/web/views/institutions.py:182 config/unfold.py:32
+#: templates/components/institution_card.html:10
+#: templates/components/nav_links.html:28
+#: templates/pages/education/hub.html:11 templates/pages/events/list.html:5
+#: templates/pages/home.html:108 templates/pages/search.html:23
+msgid "Tadbirlar"
+msgstr ""
+
+#: apps/web/views/events.py:159 templates/pages/events/detail.html:17
+msgid "Onlayn"
+msgstr ""
+
+#: apps/web/views/feeds.py:23
+msgid "EDUCORE — soʻnggi yangiliklar"
+msgstr ""
+
+#: apps/web/views/feeds.py:29
+msgid "Huquqni muhofaza qilish taʼlim muassasalarining rasmiy yangiliklari"
+msgstr ""
+
+#: apps/web/views/institutions.py:38 apps/web/views/institutions.py:69
+#: apps/web/views/institutions.py:103 config/unfold.py:61
+#: templates/components/footer.html:10 templates/components/nav_links.html:4
+#: templates/pages/analytics.html:11 templates/pages/analytics.html:18
+#: templates/pages/home.html:27 templates/pages/home.html:40
+#: templates/pages/institutions/list.html:6 templates/pages/search.html:19
+msgid "Muassasalar"
+msgstr ""
+
+#: apps/web/views/institutions.py:69 templates/pages/home.html:40
+#: templates/pages/institutions/list.html:7
+msgid "Taqqoslash"
+msgstr ""
+
+#: apps/web/views/institutions.py:156
+msgid "Talabalar va kursantlar"
+msgstr ""
+
+#: apps/web/views/institutions.py:172 apps/web/views/news.py:72
+#: apps/web/views/news.py:116 apps/web/views/news.py:157
+#: templates/components/footer.html:29 templates/components/nav_links.html:5
+#: templates/pages/education/program_detail.html:29
+#: templates/pages/news/list.html:6
+msgid "Yangiliklar"
+msgstr ""
+
+#: apps/web/views/news.py:59
+msgid "Eng eski"
+msgstr ""
+
+#: apps/web/views/news.py:59
+msgid "Koʻp oʻqilgan"
+msgstr ""
+
+#: apps/web/views/search.py:23 templates/components/header.html:18
+#: templates/errors/_error.html:9 templates/pages/search.html:6
+msgid "Qidiruv"
+msgstr ""
+
+#: apps/web/views/stories.py:20 apps/web/views/stories.py:38
+#: templates/components/nav_links.html:29
+#: templates/pages/education/hub.html:16 templates/pages/home.html:112
+#: templates/pages/stories/list.html:5
+msgid "Motivatsiya"
+msgstr ""
+
+#: config/unfold.py:21
+msgid "Boshqaruv"
+msgstr ""
+
+#: config/unfold.py:22 templates/admin/index.html:5
+msgid "Dashboard"
+msgstr ""
+
+#: config/unfold.py:25
+msgid "Tahririyat"
+msgstr ""
+
+#: config/unfold.py:28
+msgid "Koʻrik navbati"
+msgstr ""
+
+#: config/unfold.py:30
+msgid "Kategoriyalar"
+msgstr ""
+
+#: config/unfold.py:31
+msgid "Teglar"
+msgstr ""
+
+#: config/unfold.py:34
+msgid "Hikoyalar"
+msgstr ""
+
+#: config/unfold.py:38
+msgid "Telegram"
+msgstr ""
+
+#: config/unfold.py:41
+msgid "Manbalar"
+msgstr ""
+
+#: config/unfold.py:42
+msgid "Postlar"
+msgstr ""
+
+#: config/unfold.py:44
+msgid "Soʻrovlar"
+msgstr ""
+
+#: config/unfold.py:45
+msgid "Outbox"
+msgstr ""
+
+#: config/unfold.py:52
+msgid "AI ishga tushirishlar"
+msgstr ""
+
+#: config/unfold.py:53
+msgid "Byudjet"
+msgstr ""
+
+#: config/unfold.py:54
+msgid "Klasterlar"
+msgstr ""
+
+#: config/unfold.py:58
+msgid "Kontent"
+msgstr ""
+
+#: config/unfold.py:62
+msgid "Koʻrsatkichlar"
+msgstr ""
+
+#: config/unfold.py:65 templates/components/pagination.html:3
+msgid "Sahifalar"
+msgstr ""
+
+#: config/unfold.py:77
+msgid "Kunlik statistika"
+msgstr ""
+
+#: config/unfold.py:78
+msgid "Muassasalar statistikasi"
+msgstr ""
+
+#: config/unfold.py:79
+msgid "Qidiruvlar"
+msgstr ""
+
+#: config/unfold.py:80
+msgid "Ogohlantirishlar"
+msgstr ""
+
+#: config/unfold.py:84
+msgid "Sozlamalar"
+msgstr ""
+
+#: config/unfold.py:87
+msgid "Sayt sozlamalari"
+msgstr ""
+
+#: config/unfold.py:88
+msgid "Foydalanuvchilar"
+msgstr ""
+
+#: config/unfold.py:89
+msgid "Rollar"
+msgstr ""
+
+#: config/unfold.py:90
+msgid "Davriy vazifalar"
+msgstr ""
+
+#: templates/admin/index.html:5
+msgid "Django site admin"
+msgstr "Django sayt boshqaruvi"
+
+#: templates/admin/index.html:19
+msgid "Telegram manbalari"
+msgstr ""
+
+#: templates/admin/index.html:22
+msgid "Kanal"
+msgstr ""
+
+#: templates/admin/index.html:23 templates/components/header.html:9
+msgid "Oxirgi xabar"
+msgstr ""
+
+#: templates/admin/index.html:34
+msgid "Manbalar yoʻq"
+msgstr ""
+
+#: templates/base.html:8 templates/base.html:20
+#: templates/components/footer.html:6
+msgid ""
+"Huquqni muhofaza qilish taʼlim muassasalarining yagona rasmiy axborot-"
+"tahliliy platformasi"
+msgstr ""
+
+#: templates/base.html:49
+msgid "Asosiy mazmunga oʻtish"
+msgstr ""
+
+#: templates/components/admission_card.html:11 templates/pages/home.html:69
+#, python-brace-format
+msgid "Tugashiga {d} kun qoldi"
+msgstr ""
+
+#: templates/components/admission_card.html:11
+#: templates/components/program_table.html:4 templates/pages/home.html:69
+msgid "Muddat"
+msgstr ""
+
+#: templates/components/admission_card.html:13
+#: templates/pages/education/program_detail.html:19
+msgid "Kvota"
+msgstr ""
+
+#: templates/components/admission_card.html:17
+#: templates/pages/professions/detail.html:17
+msgid "Talablar"
+msgstr ""
+
+#: templates/components/admission_card.html:18
+msgid "Hujjatlar"
+msgstr ""
+
+#: templates/components/admission_card.html:20
+msgid "Hujjat topshirish"
+msgstr ""
+
+#: templates/components/article_card.html:9
+#: templates/components/article_card.html:33
+#: templates/pages/news/detail.html:19
+msgid "Yangilangan"
+msgstr ""
+
+#: templates/components/breadcrumbs.html:2
+msgid "Navigatsiya zanjiri"
+msgstr ""
+
+#: templates/components/chart_card.html:10
+msgid "Jadval koʻrinishi"
+msgstr ""
+
+#: templates/components/empty_state.html:4
+msgid "Hozircha maʼlumot yoʻq."
+msgstr ""
+
+#: templates/components/fallback_notice.html:2
+msgid "Ushbu sahifa hali tarjima qilinmagan"
+msgstr ""
+
+#: templates/components/faq.html:4
+msgid "Koʻp beriladigan savollar"
+msgstr ""
+
+#: templates/components/footer.html:7
+msgid "Manba: muassasalarning rasmiy Telegram kanallari"
+msgstr ""
+
+#: templates/components/footer.html:19
+#: templates/pages/institutions/contacts.html:9
+msgid "Veb-sayt"
+msgstr ""
+
+#: templates/components/footer.html:27
+msgid "Sayt xaritasi"
+msgstr ""
+
+#: templates/components/footer.html:41
+msgid "Barcha huquqlar himoyalangan."
+msgstr ""
+
+#: templates/components/footer.html:42
+msgid ""
+"Maqolalar rasmiy manbalar asosida tayyorlanadi va manbaga havola beriladi."
+msgstr ""
+
+#: templates/components/header.html:28
+msgid "Rasmiy axborot-tahliliy platforma"
+msgstr ""
+
+#: templates/components/header.html:31
+msgid "Asosiy menyu"
+msgstr ""
+
+#: templates/components/header.html:35
+msgid "Menyuni ochish"
+msgstr ""
+
+#: templates/components/infinite_sentinel.html:5
+msgid "Yuklanmoqda…"
+msgstr ""
+
+#: templates/components/institution_card.html:8
+msgid "Yangiliklar (30 kun)"
+msgstr ""
+
+#: templates/components/institution_chips.html:4
+#: templates/pages/education/admissions.html:12
+#: templates/pages/education/hub.html:7 templates/partials/live_items.html:10
+msgid "Barchasi"
+msgstr ""
+
+#: templates/components/language_switch.html:4
+msgid "Tilni tanlash"
+msgstr ""
+
+#: templates/components/lightbox.html:4
+msgid "Yopish"
+msgstr ""
+
+#: templates/components/mobile_drawer.html:4
+msgid "Mobil menyu"
+msgstr ""
+
+#: templates/components/mobile_drawer.html:7
+msgid "Menyuni yopish"
+msgstr ""
+
+#: templates/components/nav_links.html:12
+msgid "Taʼlim dasturlari katalogi"
+msgstr ""
+
+#: templates/components/nav_links.html:13
+msgid "Muddatlar, talablar, hujjatlar"
+msgstr ""
+
+#: templates/components/nav_links.html:14
+msgid "Talabalar hayoti va imkoniyatlar"
+msgstr ""
+
+#: templates/components/nav_links.html:15
+msgid "Xizmat va tayyorgarlik"
+msgstr ""
+
+#: templates/components/pagination.html:4 templates/pages/news/detail.html:57
+msgid "Oldingi"
+msgstr ""
+
+#: templates/components/pagination.html:6 templates/pages/news/detail.html:58
+msgid "Keyingi"
+msgstr ""
+
+#: templates/components/program_table.html:4
+#: templates/pages/education/program_detail.html:14
+#: templates/pages/education/program_list.html:10
+msgid "Daraja"
+msgstr ""
+
+#: templates/components/program_table.html:4
+msgid "Shakl"
+msgstr ""
+
+#: templates/components/program_table.html:12
+#: templates/pages/education/program_detail.html:16
+msgid "yil"
+msgstr ""
+
+#: templates/components/share_buttons.html:2
+msgid "Ulashish"
+msgstr ""
+
+#: templates/components/share_buttons.html:6
+msgid "Havolani nusxalash"
+msgstr ""
+
+#: templates/components/source_attribution.html:4
+#: templates/pages/education/program_detail.html:24
+msgid "Manba"
+msgstr ""
+
+#: templates/components/source_attribution.html:7
+#, python-format
+msgid ""
+"Ushbu maqola %(name)s rasmiy Telegram kanalidagi xabar asosida tayyorlandi."
+msgstr ""
+
+#: templates/components/source_attribution.html:8
+msgid "Asl xabarni koʻrish"
+msgstr ""
+
+#: templates/components/theme_toggle.html:3
+msgid "Yorugʻ yoki qorongʻi rejim"
+msgstr ""
+
+#: templates/components/timeline.html:2
+msgid "Qabul bosqichlari"
+msgstr ""
+
+#: templates/components/timeline.html:3
+msgid "Eʼlon qilindi"
+msgstr ""
+
+#: templates/components/timeline.html:4
+msgid "Qabul ochiq"
+msgstr ""
+
+#: templates/components/timeline.html:5
+msgid "Yakunlandi"
+msgstr ""
+
+#: templates/errors/404.html:3 templates/errors/404.html:5
+msgid "Sahifa topilmadi"
+msgstr ""
+
+#: templates/errors/404.html:6
+msgid ""
+"Soʻralgan sahifa mavjud emas yoki koʻchirilgan. Bosh sahifaga qayting yoki "
+"qidiruvdan foydalaning."
+msgstr ""
+
+#: templates/errors/410.html:3 templates/errors/410.html:5
+msgid "Maqola arxivlangan"
+msgstr ""
+
+#: templates/errors/410.html:6
+msgid "Ushbu maqola manbada oʻchirilgani sababli arxivga olindi."
+msgstr ""
+
+#: templates/pages/analytics.html:6
+msgid ""
+"Muassasalar faolligi, mavzular va qabul koʻrsatkichlari rasmiy manbalar "
+"asosida."
+msgstr ""
+
+#: templates/pages/analytics.html:9
+#, python-format
+msgid "%(n)s kun"
+msgstr ""
+
+#: templates/pages/analytics.html:14
+#: templates/pages/education/program_list.html:12
+#: templates/pages/events/list.html:19 templates/pages/news/list.html:16
+msgid "Qoʻllash"
+msgstr ""
+
+#: templates/pages/analytics.html:19 templates/pages/home.html:28
+msgid "Bugungi yangiliklar"
+msgstr ""
+
+#: templates/pages/analytics.html:20 templates/pages/home.html:29
+#: templates/pages/institutions/events.html:5
+msgid "Yaqin tadbirlar"
+msgstr ""
+
+#: templates/pages/analytics.html:26 templates/pages/home.html:54
+msgid "Faollik dinamikasi"
+msgstr ""
+
+#: templates/pages/analytics.html:26
+msgid "Muassasalar kesimida eʼlon qilingan maqolalar"
+msgstr ""
+
+#: templates/pages/analytics.html:27
+msgid "Kategoriyalar taqsimoti"
+msgstr ""
+
+#: templates/pages/analytics.html:27
+msgid "Tanlangan davr"
+msgstr ""
+
+#: templates/pages/analytics.html:28
+msgid "Trend mavzular"
+msgstr ""
+
+#: templates/pages/analytics.html:28
+msgid "Top 15 teg, oldingi davrga nisbatan"
+msgstr ""
+
+#: templates/pages/analytics.html:29
+#: templates/pages/institutions/overview.html:29
+msgid "Nashr vaqti xaritasi"
+msgstr ""
+
+#: templates/pages/analytics.html:29
+msgid "Hafta kuni × soat (Toshkent vaqti)"
+msgstr ""
+
+#: templates/pages/analytics.html:30 templates/pages/analytics.html:31
+msgid "Telegram, bitta xabarga"
+msgstr ""
+
+#: templates/pages/analytics.html:32
+#: templates/pages/institutions/compare.html:6
+msgid "Muassasalarni taqqoslash"
+msgstr ""
+
+#: templates/pages/analytics.html:32
+msgid "Normallashtirilgan koʻrsatkichlar"
+msgstr ""
+
+#: templates/pages/analytics.html:34
+msgid "Qabul jadvali"
+msgstr ""
+
+#: templates/pages/analytics.html:36
+#: templates/pages/education/admissions.html:8 templates/pages/home.html:72
+msgid "Hozircha ochiq qabul eʼlonlari yoʻq."
+msgstr ""
+
+#: templates/pages/appeals/form.html:6
+msgid ""
+"Savol, taklif yoki shikoyatingizni muassasaga yoʻllang. Murojaatingizga "
+"kuzatish kodi beriladi."
+msgstr ""
+
+#: templates/pages/appeals/form.html:10
+msgid ""
+"Maʼlumotlar toʻgʻri toʻldirildi. Murojaatlarni qabul qilish tez orada ishga "
+"tushadi."
+msgstr ""
+
+#: templates/pages/appeals/form.html:27
+msgid "Maxfiylik siyosati"
+msgstr ""
+
+#: templates/pages/appeals/form.html:31
+msgid "Yuborish"
+msgstr ""
+
+#: templates/pages/appeals/form.html:35
+msgid "Kuzatish kodi orqali holatni tekshiring."
+msgstr ""
+
+#: templates/pages/appeals/form.html:36
+msgid "Muassasalar aloqalari"
+msgstr ""
+
+#: templates/pages/appeals/success.html:7
+msgid "Murojaatingiz qabul qilindi"
+msgstr ""
+
+#: templates/pages/appeals/success.html:8
+msgid "Kuzatish kodingiz:"
+msgstr ""
+
+#: templates/pages/appeals/success.html:10
+msgid ""
+"Murojaatlar odatda 15 ish kuni ichida koʻrib chiqiladi. Kodni saqlab "
+"qoʻying."
+msgstr ""
+
+#: templates/pages/appeals/success.html:11
+msgid "Holatni tekshirish"
+msgstr ""
+
+#: templates/pages/appeals/track.html:9
+msgid "Tekshirish"
+msgstr ""
+
+#: templates/pages/appeals/track.html:12
+msgid "Bu kod boʻyicha murojaat topilmadi. Kodni tekshirib qayta kiriting."
+msgstr ""
+
+#: templates/pages/appeals/track.html:20
+msgid "Yuborilgan"
+msgstr ""
+
+#: templates/pages/appeals/track.html:24
+msgid "Javoblar"
+msgstr ""
+
+#: templates/pages/appeals/track.html:25
+msgid "Hozircha javob yoʻq."
+msgstr ""
+
+#: templates/pages/education/admissions.html:6
+msgid "Muassasalarga qabul muddatlari, talablar, hujjatlar va kvotalar."
+msgstr ""
+
+#: templates/pages/education/admissions.html:12
+msgid "Qabul yangiliklari"
+msgstr ""
+
+#: templates/pages/education/hub.html:7
+msgid "Soʻnggi maqolalar"
+msgstr ""
+
+#: templates/pages/education/hub.html:11 templates/pages/home.html:109
+#: templates/pages/institutions/events.html:5
+msgid "Yaqin tadbirlar yoʻq."
+msgstr ""
+
+#: templates/pages/education/hub.html:12
+msgid "Foydali aloqalar"
+msgstr ""
+
+#: templates/pages/education/hub.html:13
+#: templates/pages/institutions/events.html:6
+msgid "Maʼlumot yoʻq."
+msgstr ""
+
+#: templates/pages/education/program_detail.html:9
+msgid "Maʼlumotlar muassasa tomonidan tasdiqlanmoqda."
+msgstr ""
+
+#: templates/pages/education/program_detail.html:13
+msgid "Kod"
+msgstr ""
+
+#: templates/pages/education/program_detail.html:15
+#: templates/pages/education/program_list.html:11
+msgid "Taʼlim shakli"
+msgstr ""
+
+#: templates/pages/education/program_detail.html:16
+msgid "Oʻqish muddati"
+msgstr ""
+
+#: templates/pages/education/program_detail.html:17
+msgid "Taʼlim tili"
+msgstr ""
+
+#: templates/pages/education/program_detail.html:18
+msgid "Malaka"
+msgstr ""
+
+#: templates/pages/education/program_detail.html:20
+msgid "Toʻlov"
+msgstr ""
+
+#: templates/pages/education/program_detail.html:23
+msgid "Qabul talablari"
+msgstr ""
+
+#: templates/pages/education/program_list.html:6
+msgid "Muassasalardagi taʼlim yoʻnalishlari, darajalar va taʼlim shakllari."
+msgstr ""
+
+#: templates/pages/education/program_list.html:10
+msgid "Barcha darajalar"
+msgstr ""
+
+#: templates/pages/education/program_list.html:11
+msgid "Barcha shakllar"
+msgstr ""
+
+#: templates/pages/events/detail.html:12
+msgid "Oʻtgan tadbir"
+msgstr ""
+
+#: templates/pages/events/detail.html:16
+msgid "Sana"
+msgstr ""
+
+#: templates/pages/events/detail.html:17
+msgid "Joy"
+msgstr ""
+
+#: templates/pages/events/detail.html:17
+msgid "Xaritada"
+msgstr ""
+
+#: templates/pages/events/detail.html:19
+msgid "Taqvimga qoʻshish"
+msgstr ""
+
+#: templates/pages/events/detail.html:20
+msgid "Roʻyxatdan oʻtish"
+msgstr ""
+
+#: templates/pages/events/detail.html:25
+msgid "Manba maqola"
+msgstr ""
+
+#: templates/pages/events/list.html:9
+msgid "Roʻyxat"
+msgstr ""
+
+#: templates/pages/events/list.html:10 templates/pages/home.html:108
+msgid "Taqvim"
+msgstr ""
+
+#: templates/pages/events/list.html:14
+msgid "Yaqinlashayotgan"
+msgstr ""
+
+#: templates/pages/events/list.html:15
+msgid "Oʻtgan"
+msgstr ""
+
+#: templates/pages/home.html:3
+msgid "Huquqni muhofaza qilish taʼlim muassasalari axborot platformasi"
+msgstr ""
+
+#: templates/pages/home.html:10
+msgid "Asosiy yangiliklar"
+msgstr ""
+
+#: templates/pages/home.html:19
+msgid "Yangiliklar tez orada paydo boʻladi."
+msgstr ""
+
+#: templates/pages/home.html:24
+msgid "Asosiy koʻrsatkichlar"
+msgstr ""
+
+#: templates/pages/home.html:51
+msgid "Faollik va mavzular"
+msgstr ""
+
+#: templates/pages/home.html:54
+msgid "Soʻnggi 12 oy, muassasalar kesimida"
+msgstr ""
+
+#: templates/pages/home.html:56
+msgid "Mavzular taqsimoti"
+msgstr ""
+
+#: templates/pages/home.html:56
+msgid "Soʻnggi 30 kun"
+msgstr ""
+
+#: templates/pages/home.html:62
+msgid "Taʼlim va qabul"
+msgstr ""
+
+#: templates/pages/home.html:85 templates/pages/professions/detail.html:25
+msgid "Barcha yoʻnalishlar"
+msgstr ""
+
+#: templates/pages/home.html:92
+msgid "Kursantlar va talabalar"
+msgstr ""
+
+#: templates/pages/home.html:101
+msgid "Barcha kasblar"
+msgstr ""
+
+#: templates/pages/home.html:112
+msgid "Barcha hikoyalar"
+msgstr ""
+
+#: templates/pages/home.html:120
+msgid "Analitika va murojaat"
+msgstr ""
+
+#: templates/pages/home.html:122
+msgid "Maqolalar (30 kun)"
+msgstr ""
+
+#: templates/pages/home.html:123
+msgid "Jami maqolalar"
+msgstr ""
+
+#: templates/pages/home.html:124
+msgid "Manba kanallar"
+msgstr ""
+
+#: templates/pages/home.html:125
+msgid "Toʻliq analitika"
+msgstr ""
+
+#: templates/pages/home.html:128
+msgid "Murojaat yuboring"
+msgstr ""
+
+#: templates/pages/home.html:128
+msgid ""
+"Savol, taklif yoki shikoyatingizni muassasaga yoʻllang va holatini kuzatib "
+"boring."
+msgstr ""
+
+#: templates/pages/home.html:129
+msgid "Murojaat qilish"
+msgstr ""
+
+#: templates/pages/institutions/_base.html:14
+#, python-format
+msgid "%(y)s-yilda tashkil etilgan"
+msgstr ""
+
+#: templates/pages/institutions/_base.html:16
+msgid "obunachi"
+msgstr ""
+
+#: templates/pages/institutions/_base.html:21
+msgid "Muassasa boʻlimlari"
+msgstr ""
+
+#: templates/pages/institutions/admissions.html:5
+msgid "Hozircha qabul eʼlonlari yoʻq."
+msgstr ""
+
+#: templates/pages/institutions/compare.html:11
+msgid "Koʻrsatkichlar jadvali"
+msgstr ""
+
+#: templates/pages/institutions/compare.html:17
+msgid "Koʻrsatkichlar tez orada qoʻshiladi."
+msgstr ""
+
+#: templates/pages/institutions/compare.html:22
+msgid "Maʼlumot tasdiqlanmoqda."
+msgstr ""
+
+#: templates/pages/institutions/compare.html:26
+msgid "Umumiy profil"
+msgstr ""
+
+#: templates/pages/institutions/compare.html:26
+msgid "Eng yuqori koʻrsatkich = 100"
+msgstr ""
+
+#: templates/pages/institutions/compare.html:29
+msgid "Yillar kesimida"
+msgstr ""
+
+#: templates/pages/institutions/contacts.html:6
+#: templates/pages/institutions/list.html:17
+#: templates/pages/static_page.html:15
+msgid "Manzil"
+msgstr ""
+
+#: templates/pages/institutions/contacts.html:6
+msgid "Xaritada koʻrish"
+msgstr ""
+
+#: templates/pages/institutions/contacts.html:15
+msgid "Boʻlim"
+msgstr ""
+
+#: templates/pages/institutions/contacts.html:15
+msgid "Ish vaqti"
+msgstr ""
+
+#: templates/pages/institutions/contacts.html:20
+msgid "Murojaat yuborish"
+msgstr ""
+
+#: templates/pages/institutions/events.html:6
+msgid "Oʻtgan tadbirlar"
+msgstr ""
+
+#: templates/pages/institutions/list.html:6
+msgid "Huquqni muhofaza qilish sohasidagi beshta oliy taʼlim muassasasi."
+msgstr ""
+
+#: templates/pages/institutions/list.html:16
+msgid "Manzillar"
+msgstr ""
+
+#: templates/pages/institutions/news.html:9
+msgid "Hozircha yangiliklar yoʻq."
+msgstr ""
+
+#: templates/pages/institutions/overview.html:10
+msgid "Missiya"
+msgstr ""
+
+#: templates/pages/institutions/overview.html:16
+msgid "tasdiqlanmoqda"
+msgstr ""
+
+#: templates/pages/institutions/overview.html:21
+msgid "Soʻnggi yangiliklar"
+msgstr ""
+
+#: templates/pages/institutions/overview.html:27
+msgid "Yangiliklar dinamikasi"
+msgstr ""
+
+#: templates/pages/institutions/overview.html:27
+msgid "Soʻnggi 12 oy"
+msgstr ""
+
+#: templates/pages/institutions/overview.html:28
+msgid "Mavzular"
+msgstr ""
+
+#: templates/pages/institutions/overview.html:28
+msgid "Soʻnggi 90 kun"
+msgstr ""
+
+#: templates/pages/institutions/overview.html:29
+msgid "Hafta kuni × soat, soʻnggi 90 kun"
+msgstr ""
+
+#: templates/pages/institutions/programs.html:7
+msgid "Yoʻnalishlar haqida maʼlumot tez orada qoʻshiladi."
+msgstr ""
+
+#: templates/pages/news/detail.html:13
+msgid "Oldindan koʻrish: maqola hali eʼlon qilinmagan."
+msgstr ""
+
+#: templates/pages/news/detail.html:26
+#, python-format
+msgid "%(n)s daqiqa oʻqish"
+msgstr ""
+
+#: templates/pages/news/detail.html:31 templates/pages/news/detail.html:47
+msgid "Rasmni kattalashtirish"
+msgstr ""
+
+#: templates/pages/news/detail.html:39
+msgid "Mundarija"
+msgstr ""
+
+#: templates/pages/news/detail.html:45
+msgid "Galereya"
+msgstr ""
+
+#: templates/pages/news/detail.html:64
+#: templates/pages/professions/detail.html:26
+msgid "Aloqador maqolalar"
+msgstr ""
+
+#: templates/pages/news/list.html:12
+msgid "Barcha kategoriyalar"
+msgstr ""
+
+#: templates/pages/news/list.html:13
+msgid "Sanadan"
+msgstr ""
+
+#: templates/pages/news/list.html:14
+msgid "Sanagacha"
+msgstr ""
+
+#: templates/pages/news/list.html:15
+msgid "Saralash"
+msgstr ""
+
+#: templates/pages/news/list.html:15
+msgid "Eng yangi"
+msgstr ""
+
+#: templates/pages/news/longread_list.html:6
+msgid "Tahliliy maqolalar va haftalik sharhlar."
+msgstr ""
+
+#: templates/pages/professions/detail.html:16
+msgid "Vazifalar"
+msgstr ""
+
+#: templates/pages/professions/detail.html:18
+msgid "Taʼlim yoʻli"
+msgstr ""
+
+#: templates/pages/professions/detail.html:19
+msgid "Unvonlar tizimi"
+msgstr ""
+
+#: templates/pages/professions/detail.html:20
+msgid "Ish joylari"
+msgstr ""
+
+#: templates/pages/professions/detail.html:24
+msgid "Qayerda oʻqitiladi"
+msgstr ""
+
+#: templates/pages/professions/list.html:6
+msgid ""
+"Huquqni muhofaza qilish sohasidagi kasblar va ularga olib boruvchi taʼlim "
+"yoʻllari."
+msgstr ""
+
+#: templates/pages/professions/list.html:8
+msgid "Kasb nomi"
+msgstr ""
+
+#: templates/pages/search.html:8
+msgid "Qidiruv soʻrovi"
+msgstr ""
+
+#: templates/pages/search.html:12
+msgid "Maqola, yoʻnalish, kasb…"
+msgstr ""
+
+#: templates/pages/search.html:13
+msgid "Izlash"
+msgstr ""
+
+#: templates/pages/search.html:18
+#, python-format
+msgid "“%(q)s” boʻyicha %(n)s ta natija"
+msgid_plural "“%(q)s” boʻyicha %(n)s ta natija"
+msgstr[0] "“%(q)s” boʻyicha %(n)s ta natija"
+
+#: templates/pages/search.html:25
+msgid "Hech narsa topilmadi. Boshqa soʻz bilan urinib koʻring."
+msgstr ""
+
+#: templates/pages/stories/detail.html:15
+msgid "Toʻliq maqola"
+msgstr ""
+
+#: templates/pages/stories/detail.html:17
+msgid "Boshqa hikoyalar"
+msgstr ""
+
+#: templates/pages/stories/list.html:6
+msgid ""
+"Kursantlar, talabalar va bitiruvchilarning ilhomlantiruvchi hikoyalari."
+msgstr ""
+
+#: templates/partials/event_results.html:5
+msgid "Oldingi oy"
+msgstr ""
+
+#: templates/partials/event_results.html:7
+msgid "Keyingi oy"
+msgstr ""
+
+#: templates/partials/event_results.html:20
+msgid "Tadbirlar topilmadi."
+msgstr ""
+
+#: templates/partials/live_items.html:7
+msgid "Jonli lenta"
+msgstr ""
+
+#: templates/partials/live_items.html:8
+msgid "Muassasa boʻyicha filtr"
+msgstr ""
+
+#: templates/partials/live_items.html:21
+msgid "Hozircha xabarlar yoʻq."
+msgstr ""
+
+#: templates/partials/live_items.html:24
+msgid "Barcha yangiliklar"
+msgstr ""
+
+#: templates/partials/news_results.html:3
+#, python-format
+msgid "%(n)s ta maqola"
+msgid_plural "%(n)s ta maqola"
+msgstr[0] "%(n)s ta maqola"
+
+#: templates/partials/news_results.html:8
+msgid "Tanlangan filtrlar boʻyicha maqola topilmadi."
+msgstr ""
+
+#: templates/partials/profession_results.html:6
+msgid "Kasb topilmadi."
+msgstr ""
+
+#: templates/partials/program_results.html:3
+#, python-format
+msgid "%(n)s ta yoʻnalish"
+msgid_plural "%(n)s ta yoʻnalish"
+msgstr[0] "%(n)s ta yoʻnalish"
+
+#: templates/partials/program_results.html:8
+msgid "Tanlangan filtrlar boʻyicha yoʻnalish topilmadi."
+msgstr ""
+
+#: templates/partials/search_suggest.html:3
+msgid "Takliflar"
+msgstr ""
+
+#: templates/two_factor/_base.html:3
+msgid "Boshqaruv paneliga kirish"
+msgstr ""

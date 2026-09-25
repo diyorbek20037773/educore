@@ -64,6 +64,8 @@ jobs:
           enable-cache: true
       - run: uv python install ${{ env.PYTHON_VERSION }}
       - run: uv sync --group dev
+      - name: Compile translations
+        run: uv run python manage.py compilemessages --ignore=.venv
       - name: Migrations are complete
         run: uv run python manage.py makemigrations --check --dry-run
       - name: Golden set against the mock provider (schema coverage, AI_PIPELINE §6)

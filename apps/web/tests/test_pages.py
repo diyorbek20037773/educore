@@ -163,9 +163,8 @@ def test_fallback_notice_for_untranslated_content(client: Client, site_data: Sit
     uz_url = site_data.article.get_absolute_url()
     with translation.override("ru"):
         ru_url = site_data.article.get_absolute_url()
-    notice = "Ushbu sahifa hali tarjima qilinmagan"
-    assert notice in client.get(ru_url).content.decode()
-    assert notice not in client.get(uz_url).content.decode()
+    assert "Эта страница ещё не переведена" in client.get(ru_url).content.decode()
+    assert "Ushbu sahifa hali tarjima qilinmagan" not in client.get(uz_url).content.decode()
 
 
 def test_missing_cms_page_is_404(client: Client, db: Any) -> None:

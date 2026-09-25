@@ -25,7 +25,7 @@ from apps.core.translit import to_cyrillic  # noqa: E402
 
 SOURCE = ROOT / "locale" / "uz" / "LC_MESSAGES" / "django.po"
 TARGET = ROOT / "locale" / "uz_Cyrl" / "LC_MESSAGES" / "django.po"
-_KEEP = re.compile(r"(%\(\w+\)[sdif]|%[sdif]|\{[^{}]*\}|<[^>]+>|&\w+;)")
+_KEEP = re.compile(r"(%(?:\(\w+\))?[-+ #0]*\d*(?:\.\d+)?[sdifr%]|\{[^{}]*\}|<[^>]+>|&\w+;)")
 
 
 def translit_keep_placeholders(text: str) -> str:

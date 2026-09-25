@@ -46,3 +46,6 @@ _bundle_original/
 backups/
 *.dump
 .claude/settings.local.json
+
+# Compiled gettext catalogs (built in the image and in CI)
+*.mo
