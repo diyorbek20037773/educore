@@ -199,6 +199,9 @@ class TelegramPost(TimeStampedModel):
     )
     search_vector = SearchVectorField(null=True, editable=False)
     importance = models.PositiveSmallIntegerField(_("importance"), null=True, blank=True)
+    missing_checks = models.PositiveSmallIntegerField(
+        _("consecutive gap-check misses"), default=0, help_text=_("Deleted after two consecutive misses.")
+    )
 
     class Meta:
         ordering = ("-published_at",)
