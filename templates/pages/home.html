@@ -2,7 +2,8 @@
 {% load i18n web_tags static %}
 {% block title %}EDUCORE — {% translate "Huquqni muhofaza qilish taʼlim muassasalari axborot platformasi" %}{% endblock %}
 {% block title_suffix %}{% endblock %}
-{% block jsonld %}<script type="application/ld+json" nonce="{{ request.csp_nonce }}">{"@context":"https://schema.org","@type":"WebSite","name":"EDUCORE","url":"{{ site_url }}/","potentialAction":{"@type":"SearchAction","target":"{{ site_url }}{% url 'web:search' %}?q={query}","query-input":"required name=query"}}</script>{% endblock %}
+{% block jsonld %}<script type="application/ld+json" nonce="{{ request.csp_nonce }}">{"@context":"https://schema.org","@type":"WebSite","name":"EDUCORE","url":"{{ site_url }}/","potentialAction":{"@type":"SearchAction","target":"{{ site_url }}{% url 'web:search' %}?q={query}","query-input":"required name=query"}}</script>
+<script type="application/ld+json" nonce="{{ request.csp_nonce }}">{"@context":"https://schema.org","@type":"Organization","name":"EDUCORE","url":"{{ site_url }}/","logo":"{{ site_url }}{% static 'img/icon-512.png' %}","subOrganization":[{% for inst in nav_institutions %}{"@type":"CollegeOrUniversity","name":{{ inst.full_name|jsonld }},"url":"{{ site_url }}{{ inst.get_absolute_url }}"}{% if not forloop.last %},{% endif %}{% endfor %}]}</script>{% endblock %}
 {% block content %}
 <h1 class="sr-only">EDUCORE</h1>
 

@@ -198,3 +198,28 @@ def test_appeal_tracking(client: Client, site_data: SiteData) -> None:
     # Applicant's own messages (author=None) are not listed as replies.
     assert "Javob matni" not in body
     assert "topilmadi" in client.get(url, {"code": "NOPE"}).content.decode()
+
+
+def test_jsonld_blocks_are_valid_json(client: Client, site_data: SiteData) -> None:
+    import json
+    import re
+
+    pattern = re.compile(r'<script type="application/ld\+json"[^>]*>(.*?)</script>', re.S)
+    urls = [
+        "/",
+        site_data.article.get_absolute_url(),
+        site_data.event.get_absolute_url(),
+        site_data.institution.get_absolute_url(),
+    ]
+    types = set()
+    for url in urls:
+        for block in pattern.findall(client.get(url).content.decode()):
+            types.add(json.loads(block)["@type"])
+    assert {
+        "WebSite",
+        "Organization",
+        "NewsArticle",
+        "Event",
+        "CollegeOrUniversity",
+        "BreadcrumbList",
+    } <= types

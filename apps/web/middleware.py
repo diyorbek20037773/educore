@@ -31,8 +31,14 @@ class MaintenanceMiddleware:
         return self.get_response(request)
 
 
-class HtmxVaryMiddleware:
-    """Fragments and full pages share URLs, so shared caches must key on the HTMX headers."""
+PERMISSIONS_POLICY = "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()"
+
+
+class ResponseHeadersMiddleware:
+    """`Vary` on the HTMX headers (fragments and full pages share URLs) and a strict Permissions-Policy.
+
+    Set in Django rather than only in Caddy so dev, tests and prod send the same headers.
+    """
 
     def __init__(self, get_response: Callable[[HttpRequest], HttpResponse]) -> None:
         self.get_response = get_response
@@ -40,4 +46,5 @@ class HtmxVaryMiddleware:
     def __call__(self, request: HttpRequest) -> HttpResponse:
         response = self.get_response(request)
         patch_vary_headers(response, ("HX-Request", "HX-Boosted", "HX-History-Restore-Request"))
+        response.setdefault("Permissions-Policy", PERMISSIONS_POLICY)
         return response

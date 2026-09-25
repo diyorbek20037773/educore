@@ -102,7 +102,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "apps.core.middleware.EducoreCSPMiddleware",
     "django_htmx.middleware.HtmxMiddleware",
-    "apps.web.middleware.HtmxVaryMiddleware",
+    "apps.web.middleware.ResponseHeadersMiddleware",
     "apps.web.middleware.MaintenanceMiddleware",
     "simple_history.middleware.HistoryRequestMiddleware",
     "django_structlog.middlewares.RequestMiddleware",

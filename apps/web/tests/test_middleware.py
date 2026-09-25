@@ -64,6 +64,13 @@ def test_maintenance_mode_lets_staff_through(verified_admin_client: Client, main
     assert verified_admin_client.get("/").status_code == 200
 
 
-def test_responses_vary_on_htmx_headers(client: Client, db: Any) -> None:
-    vary = client.get("/robots.txt")["Vary"]
-    assert "HX-Request" in vary and "HX-Boosted" in vary
+def test_security_and_vary_headers(client: Client, db: Any) -> None:
+    response = client.get("/robots.txt")
+    assert "HX-Request" in response["Vary"] and "HX-Boosted" in response["Vary"]
+    assert "camera=()" in response["Permissions-Policy"]
+    home = client.get("/")
+    assert home["X-Content-Type-Options"] == "nosniff"
+    assert home["Referrer-Policy"] == "strict-origin-when-cross-origin"
+    assert (
+        "nonce-" in home["Content-Security-Policy"] and "unsafe-eval" not in home["Content-Security-Policy"]
+    )
