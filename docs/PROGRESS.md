@@ -11,7 +11,7 @@
 ## Human actions needed (owner)
 | # | Needed for | What exactly | Status |
 |---|---|---|---|
-| HA0 | Phase 0 | GitHub repository + remote URL; GNU make (`winget install ezwinports.make`); Chrome (Node 22 already present) | repo received 2026-09-25 (`github.com/diyorbek20037773/educore`); Chrome present; make still missing |
+| HA0 | Phase 0 | GitHub repository + remote URL; GNU make (`winget install ezwinports.make`); Chrome (Node 22 already present) | done 2026-09-25: `origin` = github.com/diyorbek20037773/educore, `main` pushed, CI green (lint, test, security/pip-audit, build + Trivy); Chrome present; GNU make still missing (optional) |
 | HA2 | Phase 2 | `TELEGRAM_API_ID`, `TELEGRAM_API_HASH` from https://my.telegram.org → "API development tools"; dedicated phone number; run `make tg-login` and enter the code; a private test channel you administer | pending |
 | HA3 | Phase 3 | `ANTHROPIC_API_KEY` (https://platform.claude.com) | pending |
 | HA7 | Phase 7 | optional: Turnstile keys, ops bot token + chat id, SMTP, Sentry DSN | pending |
@@ -19,7 +19,7 @@
 | HA9 | Phase 9 | official About/contact texts; verify seeded programs/professions/metrics in admin | pending |
 
 ## Blockers
-- none (HA0 pending — work continues locally)
+- none (real Telegram ingestion waits for HA2 — work continues with fixtures)
 
 ## Open follow-ups
 - GNU make is not installed on the dev machine yet (asked in HA0); Phase 0 checks were run with the equivalent
