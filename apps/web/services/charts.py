@@ -2,7 +2,7 @@
 
 Every builder returns the `charts.js` contract: `kind`, `categories`, `series` (institution series carry the
 fixed palette colour from `Institution.color`, ADR-007) and a `table` used for the table view and CSV.
-Phase 5 swaps the live aggregates for `InstitutionDailyStat` rollups; the payload shape stays the same.
+Time series read the daily rollups (`InstitutionDailyStat`); today's row is refreshed hourly (ADR-026).
 """
 
 from __future__ import annotations
@@ -14,14 +14,13 @@ from collections.abc import Callable
 from datetime import date, timedelta
 from typing import Any
 
-from django.db.models import Avg, Count, Q, QuerySet
-from django.db.models.functions import ExtractHour, ExtractIsoWeekDay, TruncDate, TruncMonth, TruncWeek
+from django.db.models import Count, Q
 from django.utils import timezone
 from django.utils.translation import gettext as _
 
-from apps.content.models import Article, ArticleStatus, Category, Tag
+from apps.analytics.models import InstitutionDailyStat
+from apps.content.models import ArticleStatus, Category, Tag
 from apps.institutions.models import Institution, InstitutionMetric, MetricKey
-from apps.telegram.models import TelegramPost
 
 MAX_DAYS = 730
 WEEKDAYS = ("Du", "Se", "Ch", "Pa", "Ju", "Sh", "Ya")
@@ -55,10 +54,6 @@ class ChartParams:
         return list(qs)
 
 
-def _published(params: ChartParams) -> QuerySet[Article]:
-    return Article.objects.filter(status=ArticleStatus.PUBLISHED, published_at__gte=params.since)
-
-
 def _periods(params: ChartParams) -> list[date]:
     today = timezone.localdate()
     if params.monthly:
@@ -78,23 +73,28 @@ def _period_label(day: date, params: ChartParams) -> str:
     return day.strftime("%Y-%m") if params.monthly else day.strftime("%d.%m")
 
 
+def _stats(params: ChartParams, institutions: list[Institution]) -> list[InstitutionDailyStat]:
+    since = timezone.localdate() - timedelta(days=params.days - 1)
+    return list(
+        InstitutionDailyStat.objects.filter(date__gte=since, institution__in=institutions).order_by("date")
+    )
+
+
+def _bucket(day: date, params: ChartParams) -> date:
+    if params.monthly:
+        return day.replace(day=1)
+    if params.days > 90:
+        return day - timedelta(days=day.weekday())
+    return day
+
+
 def activity(params: ChartParams) -> dict[str, Any]:
-    """Articles per institution over time — one line per institution, fixed colours."""
+    """Published articles per institution over time (daily rollups) — one line each, fixed colours."""
     institutions = params.institutions()
     periods = _periods(params)
-    trunc = TruncMonth if params.monthly else (TruncWeek if params.days > 90 else TruncDate)
-    rows = (
-        _published(params)
-        .filter(primary_institution__in=institutions)
-        .annotate(bucket=trunc("published_at"))
-        .order_by()
-        .values("primary_institution", "bucket")
-        .annotate(n=Count("id"))
-    )
-    counts: dict[int, dict[date, int]] = defaultdict(dict)
-    for row in rows:
-        bucket = row["bucket"]
-        counts[row["primary_institution"]][bucket.date() if hasattr(bucket, "date") else bucket] = row["n"]
+    counts: dict[int, dict[date, int]] = defaultdict(lambda: defaultdict(int))
+    for stat in _stats(params, institutions):
+        counts[stat.institution_id][_bucket(stat.date, params)] += stat.articles
     categories = [_period_label(p, params) for p in periods]
     series = [
         {"name": i.abbreviation, "color": i.color, "data": [counts[i.pk].get(p, 0) for p in periods]}
@@ -112,13 +112,13 @@ def activity(params: ChartParams) -> dict[str, Any]:
 
 
 def categories(params: ChartParams) -> dict[str, Any]:
-    """Articles by category — horizontal bars in a single hue."""
-    qs = _published(params)
-    if params.institution_slugs:
-        qs = qs.filter(institutions__slug__in=params.institution_slugs).distinct()
-    rows = qs.order_by().values("category").annotate(n=Count("id", distinct=True)).order_by("-n")
-    names = dict(Category.objects.values_list("pk", "name"))
-    data = [(names.get(r["category"], _("Boshqa")), r["n"]) for r in rows]
+    """Published articles by category — horizontal bars in a single hue."""
+    totals: dict[str, int] = defaultdict(int)
+    for stat in _stats(params, params.institutions()):
+        for slug, n in (stat.by_category or {}).items():
+            totals[slug] += n
+    names = dict(Category.objects.values_list("slug", "name"))
+    data = sorted(((names.get(slug, _("Boshqa")), n) for slug, n in totals.items() if n), key=lambda d: -d[1])
     return {
         "kind": "hbar",
         "categories": [d[0] for d in data],
@@ -128,26 +128,17 @@ def categories(params: ChartParams) -> dict[str, Any]:
 
 
 def heatmap(params: ChartParams) -> dict[str, Any]:
-    """Posting time: weekday × hour of the source Telegram posts (local time)."""
-    qs = TelegramPost.objects.filter(published_at__gte=params.since, is_deleted=False)
-    if params.institution_slugs:
-        qs = qs.filter(source__institution__slug__in=params.institution_slugs)
-    tz = timezone.get_current_timezone()
-    rows = (
-        qs.annotate(
-            wd=ExtractIsoWeekDay("published_at", tzinfo=tz), hour=ExtractHour("published_at", tzinfo=tz)
-        )
-        .order_by()
-        .values("wd", "hour")
-        .annotate(n=Count("id"))
-    )
-    grid = {(r["wd"] - 1, r["hour"]): r["n"] for r in rows}
+    """Posting time: weekday × hour of the source Telegram posts (Asia/Tashkent)."""
+    grid: dict[tuple[int, int], int] = defaultdict(int)
+    for stat in _stats(params, params.institutions()):
+        for hour, n in enumerate(stat.by_hour or []):
+            grid[(stat.date.weekday(), hour)] += n
     data = [[hour, wd, grid.get((wd, hour), 0)] for wd in range(7) for hour in range(24)]
     return {
         "kind": "heatmap",
         "xLabels": [f"{h:02d}" for h in range(24)],
         "yLabels": list(WEEKDAYS),
-        "max": max(grid.values(), default=1),
+        "max": max(grid.values(), default=0) or 1,
         "series": [{"name": _("Xabarlar"), "data": data}],
         "table": {
             "columns": [_("Kun"), *[f"{h:02d}" for h in range(24)]],
@@ -157,20 +148,16 @@ def heatmap(params: ChartParams) -> dict[str, Any]:
 
 
 def engagement(params: ChartParams) -> dict[str, Any]:
-    """Average Telegram views per post per institution (forwards are a separate chart — no dual axes)."""
+    """Average Telegram views (or forwards) per post per institution — two measures, two charts."""
     institutions = params.institutions()
-    measure = "forwards" if params.metric == "forwards" else "views"
-    rows = (
-        TelegramPost.objects.filter(
-            published_at__gte=params.since, is_deleted=False, **{f"{measure}__isnull": False}
-        )
-        .order_by()
-        .values("source__institution")
-        .annotate(avg=Avg(measure))
-    )
-    by_inst = {r["source__institution"]: round(r["avg"] or 0) for r in rows}
+    forwards = params.metric == "forwards"
+    sums: dict[int, list[int]] = defaultdict(lambda: [0, 0])
+    for stat in _stats(params, institutions):
+        sums[stat.institution_id][0] += stat.tg_forwards_sum if forwards else stat.tg_views_sum
+        sums[stat.institution_id][1] += stat.posts
+    by_inst = {pk: round(total / posts) if posts else 0 for pk, (total, posts) in sums.items()}
     data = [{"value": by_inst.get(i.pk, 0), "itemStyle": {"color": i.color}} for i in institutions]
-    label = _("Oʻrtacha koʻrishlar") if measure == "views" else _("Oʻrtacha ulashishlar")
+    label = _("Oʻrtacha ulashishlar") if forwards else _("Oʻrtacha koʻrishlar")
     return {
         "kind": "bar",
         "categories": [i.abbreviation for i in institutions],

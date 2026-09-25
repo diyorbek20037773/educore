@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-25 15:23+0500\n"
+"POT-Creation-Date: 2026-09-25 15:49+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -325,8 +325,8 @@ msgstr "Text"
 msgid "Texnik"
 msgstr "Technical"
 
-#: apps/appeals/forms.py:29 apps/web/services/charts.py:179
-#: templates/admin/index.html:22 templates/components/institution_chips.html:3
+#: apps/appeals/forms.py:29 apps/web/services/charts.py:166
+#: templates/admin/index.html:40 templates/components/institution_chips.html:3
 #: templates/components/program_table.html:4
 #: templates/pages/appeals/track.html:22
 #: templates/pages/institutions/list.html:17
@@ -800,6 +800,7 @@ msgid "Koʻrikda"
 msgstr "In review"
 
 #: apps/content/models.py:76 apps/content/models.py:333
+#: apps/ops/dashboard.py:95
 msgid "Eʼlon qilingan"
 msgstr "Published"
 
@@ -1329,7 +1330,7 @@ msgstr "Description"
 msgid "Brend"
 msgstr "Brand"
 
-#: apps/institutions/admin.py:72 templates/admin/index.html:23
+#: apps/institutions/admin.py:72 templates/admin/index.html:41
 msgid "Holat"
 msgstr "Status"
 
@@ -1614,37 +1615,41 @@ msgstr "Profession–institution link"
 msgid "profession–institution links"
 msgstr "Profession–institution links"
 
-#: apps/ops/dashboard.py:25
+#: apps/ops/dashboard.py:29
 msgid "Bugun kelgan postlar"
 msgstr "Posts received today"
 
-#: apps/ops/dashboard.py:30
+#: apps/ops/dashboard.py:34
 msgid "Qayta ishlangan"
 msgstr "Processed"
 
-#: apps/ops/dashboard.py:35
+#: apps/ops/dashboard.py:39
 msgid "Koʻrik kutmoqda"
 msgstr "Awaiting review"
 
-#: apps/ops/dashboard.py:40
+#: apps/ops/dashboard.py:44
 msgid "Bugun eʼlon qilingan"
 msgstr "Published today"
 
-#: apps/ops/dashboard.py:47
+#: apps/ops/dashboard.py:51
 msgid "Xatolar"
 msgstr "Errors"
 
-#: apps/ops/dashboard.py:52
+#: apps/ops/dashboard.py:56
 msgid "Oʻlik outbox hodisalari"
 msgstr "Dead outbox events"
 
-#: apps/ops/dashboard.py:57
+#: apps/ops/dashboard.py:61
 msgid "Ochiq murojaatlar"
 msgstr "Open appeals"
 
-#: apps/ops/dashboard.py:62
+#: apps/ops/dashboard.py:66
 msgid "Ingestor heartbeat"
 msgstr "Ingestor heartbeat"
+
+#: apps/ops/dashboard.py:93 config/unfold.py:42
+msgid "Postlar"
+msgstr "Posts"
 
 #: apps/ops/models.py:23
 msgid "dedupe key"
@@ -2135,8 +2140,8 @@ msgid "Davr"
 msgstr "Period"
 
 #: apps/web/services/charts.py:125 apps/web/services/charts.py:126
-#: apps/web/services/charts.py:202 apps/web/services/charts.py:204
-#: apps/web/views/news.py:83 apps/web/views/news.py:155 config/unfold.py:29
+#: apps/web/services/charts.py:189 apps/web/services/charts.py:191
+#: apps/web/views/news.py:84 apps/web/views/news.py:156 config/unfold.py:29
 #: templates/pages/news/longread_list.html:5 templates/pages/search.html:20
 msgid "Maqolalar"
 msgstr "Articles"
@@ -2145,39 +2150,39 @@ msgstr "Articles"
 msgid "Kategoriya"
 msgstr "Category"
 
-#: apps/web/services/charts.py:151
+#: apps/web/services/charts.py:142
 msgid "Xabarlar"
 msgstr "Posts"
 
-#: apps/web/services/charts.py:153
+#: apps/web/services/charts.py:144
 msgid "Kun"
 msgstr "Day"
 
-#: apps/web/services/charts.py:173 templates/pages/analytics.html:30
-msgid "Oʻrtacha koʻrishlar"
-msgstr "Average views"
-
-#: apps/web/services/charts.py:173 templates/pages/analytics.html:31
+#: apps/web/services/charts.py:160 templates/pages/analytics.html:31
 msgid "Oʻrtacha ulashishlar"
 msgstr "Average forwards"
 
-#: apps/web/services/charts.py:204
+#: apps/web/services/charts.py:160 templates/pages/analytics.html:30
+msgid "Oʻrtacha koʻrishlar"
+msgstr "Average views"
+
+#: apps/web/services/charts.py:191
 msgid "Teg"
 msgstr "Tag"
 
-#: apps/web/services/charts.py:204
+#: apps/web/services/charts.py:191
 msgid "Oldingi davr"
 msgstr "Previous period"
 
-#: apps/web/services/charts.py:204
+#: apps/web/services/charts.py:191
 msgid "Oʻzgarish"
 msgstr "Change"
 
-#: apps/web/services/charts.py:234
+#: apps/web/services/charts.py:221
 msgid "Yil"
 msgstr "Year"
 
-#: apps/web/services/charts.py:265 apps/web/views/institutions.py:81
+#: apps/web/services/charts.py:252 apps/web/views/institutions.py:81
 #: templates/pages/institutions/compare.html:12
 msgid "Koʻrsatkich"
 msgstr "Indicator"
@@ -2255,23 +2260,23 @@ msgstr "Comparison"
 msgid "Talabalar va kursantlar"
 msgstr "Students and cadets"
 
-#: apps/web/views/institutions.py:172 apps/web/views/news.py:72
-#: apps/web/views/news.py:116 apps/web/views/news.py:157
+#: apps/web/views/institutions.py:172 apps/web/views/news.py:73
+#: apps/web/views/news.py:117 apps/web/views/news.py:158
 #: templates/components/footer.html:29 templates/components/nav_links.html:5
 #: templates/pages/education/program_detail.html:29
 #: templates/pages/news/list.html:6
 msgid "Yangiliklar"
 msgstr "News"
 
-#: apps/web/views/news.py:59
+#: apps/web/views/news.py:60
 msgid "Eng eski"
 msgstr "Oldest"
 
-#: apps/web/views/news.py:59
+#: apps/web/views/news.py:60
 msgid "Koʻp oʻqilgan"
 msgstr "Most read"
 
-#: apps/web/views/search.py:23 templates/components/header.html:18
+#: apps/web/views/search.py:27 templates/components/header.html:18
 #: templates/errors/_error.html:9 templates/pages/search.html:6
 msgid "Qidiruv"
 msgstr "Search"
@@ -2318,10 +2323,6 @@ msgstr "Telegram"
 #: config/unfold.py:41
 msgid "Manbalar"
 msgstr "Sources"
-
-#: config/unfold.py:42
-msgid "Postlar"
-msgstr "Posts"
 
 #: config/unfold.py:44
 msgid "Soʻrovlar"
@@ -2395,19 +2396,38 @@ msgstr "Periodic tasks"
 msgid "Django site admin"
 msgstr "Django site admin"
 
-#: templates/admin/index.html:19
+#: templates/admin/index.html:21
+#| msgid "Muassasalar kesimida eʼlon qilingan maqolalar"
+msgid "Soʻnggi 14 kun: postlar va eʼlon qilingan maqolalar"
+msgstr "Last 14 days: posts and published articles"
+
+#: templates/admin/index.html:26
+msgid "AI xarajati (bugun)"
+msgstr "AI spend (today)"
+
+#: templates/admin/index.html:30
+#| msgid "Oʻrtacha koʻrishlar"
+msgid "Sahifa koʻrishlari (14 kun)"
+msgstr "Page views (14 days)"
+
+#: templates/admin/index.html:32
+#| msgid "Bugungi yangiliklar"
+msgid "Bugungi noyob tashrifchilar"
+msgstr "Unique visitors today"
+
+#: templates/admin/index.html:37
 msgid "Telegram manbalari"
 msgstr "Telegram sources"
 
-#: templates/admin/index.html:22
+#: templates/admin/index.html:40
 msgid "Kanal"
 msgstr "Channel"
 
-#: templates/admin/index.html:23 templates/components/header.html:9
+#: templates/admin/index.html:41 templates/components/header.html:9
 msgid "Oxirgi xabar"
 msgstr "Last post"
 
-#: templates/admin/index.html:34
+#: templates/admin/index.html:52
 msgid "Manbalar yoʻq"
 msgstr "No sources"
 

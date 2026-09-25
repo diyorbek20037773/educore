@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-25 15:23+0500\n"
+"POT-Creation-Date: 2026-09-25 15:49+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -65,8 +65,8 @@ msgstr ""
 msgid "OK"
 msgstr ""
 
-#: apps/ai/models.py:42 apps/telegram/models.py:100
-#: apps/telegram/models.py:150 apps/telegram/models.py:254
+#: apps/ai/models.py:42 apps/telegram/models.py:100 apps/telegram/models.py:150
+#: apps/telegram/models.py:254
 msgid "Xato"
 msgstr ""
 
@@ -131,8 +131,7 @@ msgstr "davomiylik (ms)"
 msgid "status"
 msgstr "holat"
 
-#: apps/ai/models.py:76 apps/telegram/models.py:130
-#: apps/telegram/models.py:278
+#: apps/ai/models.py:76 apps/telegram/models.py:130 apps/telegram/models.py:278
 msgid "error"
 msgstr "xato"
 
@@ -152,8 +151,7 @@ msgstr "AI ishga tushirish"
 msgid "AI runs"
 msgstr "AI ishga tushirishlar"
 
-#: apps/ai/models.py:97 apps/analytics/models.py:15
-#: apps/analytics/models.py:38
+#: apps/ai/models.py:97 apps/analytics/models.py:15 apps/analytics/models.py:38
 msgid "date"
 msgstr "sana"
 
@@ -325,8 +323,8 @@ msgstr ""
 msgid "Texnik"
 msgstr ""
 
-#: apps/appeals/forms.py:29 apps/web/services/charts.py:179
-#: templates/admin/index.html:22 templates/components/institution_chips.html:3
+#: apps/appeals/forms.py:29 apps/web/services/charts.py:166
+#: templates/admin/index.html:40 templates/components/institution_chips.html:3
 #: templates/components/program_table.html:4
 #: templates/pages/appeals/track.html:22
 #: templates/pages/institutions/list.html:17
@@ -800,6 +798,7 @@ msgid "Koʻrikda"
 msgstr ""
 
 #: apps/content/models.py:76 apps/content/models.py:333
+#: apps/ops/dashboard.py:95
 msgid "Eʼlon qilingan"
 msgstr ""
 
@@ -811,8 +810,7 @@ msgstr ""
 msgid "lead"
 msgstr "lid"
 
-#: apps/content/models.py:95 apps/content/models.py:417
-#: apps/core/models.py:116
+#: apps/content/models.py:95 apps/content/models.py:417 apps/core/models.py:116
 msgid "body"
 msgstr "asosiy matn"
 
@@ -1329,7 +1327,7 @@ msgstr ""
 msgid "Brend"
 msgstr ""
 
-#: apps/institutions/admin.py:72 templates/admin/index.html:23
+#: apps/institutions/admin.py:72 templates/admin/index.html:41
 msgid "Holat"
 msgstr ""
 
@@ -1614,37 +1612,41 @@ msgstr "kasb–muassasa bogʻlanishi"
 msgid "profession–institution links"
 msgstr "kasb–muassasa bogʻlanishlari"
 
-#: apps/ops/dashboard.py:25
+#: apps/ops/dashboard.py:29
 msgid "Bugun kelgan postlar"
 msgstr ""
 
-#: apps/ops/dashboard.py:30
+#: apps/ops/dashboard.py:34
 msgid "Qayta ishlangan"
 msgstr ""
 
-#: apps/ops/dashboard.py:35
+#: apps/ops/dashboard.py:39
 msgid "Koʻrik kutmoqda"
 msgstr ""
 
-#: apps/ops/dashboard.py:40
+#: apps/ops/dashboard.py:44
 msgid "Bugun eʼlon qilingan"
 msgstr ""
 
-#: apps/ops/dashboard.py:47
+#: apps/ops/dashboard.py:51
 msgid "Xatolar"
 msgstr ""
 
-#: apps/ops/dashboard.py:52
+#: apps/ops/dashboard.py:56
 msgid "Oʻlik outbox hodisalari"
 msgstr ""
 
-#: apps/ops/dashboard.py:57
+#: apps/ops/dashboard.py:61
 msgid "Ochiq murojaatlar"
 msgstr ""
 
-#: apps/ops/dashboard.py:62
+#: apps/ops/dashboard.py:66
 msgid "Ingestor heartbeat"
 msgstr "Ingestor holati (heartbeat)"
+
+#: apps/ops/dashboard.py:93 config/unfold.py:42
+msgid "Postlar"
+msgstr ""
 
 #: apps/ops/models.py:23
 msgid "dedupe key"
@@ -2136,8 +2138,8 @@ msgid "Davr"
 msgstr ""
 
 #: apps/web/services/charts.py:125 apps/web/services/charts.py:126
-#: apps/web/services/charts.py:202 apps/web/services/charts.py:204
-#: apps/web/views/news.py:83 apps/web/views/news.py:155 config/unfold.py:29
+#: apps/web/services/charts.py:189 apps/web/services/charts.py:191
+#: apps/web/views/news.py:84 apps/web/views/news.py:156 config/unfold.py:29
 #: templates/pages/news/longread_list.html:5 templates/pages/search.html:20
 msgid "Maqolalar"
 msgstr ""
@@ -2146,39 +2148,39 @@ msgstr ""
 msgid "Kategoriya"
 msgstr ""
 
-#: apps/web/services/charts.py:151
+#: apps/web/services/charts.py:142
 msgid "Xabarlar"
 msgstr ""
 
-#: apps/web/services/charts.py:153
+#: apps/web/services/charts.py:144
 msgid "Kun"
 msgstr ""
 
-#: apps/web/services/charts.py:173 templates/pages/analytics.html:30
-msgid "Oʻrtacha koʻrishlar"
-msgstr ""
-
-#: apps/web/services/charts.py:173 templates/pages/analytics.html:31
+#: apps/web/services/charts.py:160 templates/pages/analytics.html:31
 msgid "Oʻrtacha ulashishlar"
 msgstr ""
 
-#: apps/web/services/charts.py:204
+#: apps/web/services/charts.py:160 templates/pages/analytics.html:30
+msgid "Oʻrtacha koʻrishlar"
+msgstr ""
+
+#: apps/web/services/charts.py:191
 msgid "Teg"
 msgstr ""
 
-#: apps/web/services/charts.py:204
+#: apps/web/services/charts.py:191
 msgid "Oldingi davr"
 msgstr ""
 
-#: apps/web/services/charts.py:204
+#: apps/web/services/charts.py:191
 msgid "Oʻzgarish"
 msgstr ""
 
-#: apps/web/services/charts.py:234
+#: apps/web/services/charts.py:221
 msgid "Yil"
 msgstr ""
 
-#: apps/web/services/charts.py:265 apps/web/views/institutions.py:81
+#: apps/web/services/charts.py:252 apps/web/views/institutions.py:81
 #: templates/pages/institutions/compare.html:12
 msgid "Koʻrsatkich"
 msgstr ""
@@ -2220,9 +2222,9 @@ msgstr ""
 #: apps/web/views/events.py:92 apps/web/views/events.py:111
 #: apps/web/views/institutions.py:182 config/unfold.py:32
 #: templates/components/institution_card.html:10
-#: templates/components/nav_links.html:28
-#: templates/pages/education/hub.html:11 templates/pages/events/list.html:5
-#: templates/pages/home.html:110 templates/pages/search.html:23
+#: templates/components/nav_links.html:28 templates/pages/education/hub.html:11
+#: templates/pages/events/list.html:5 templates/pages/home.html:110
+#: templates/pages/search.html:23
 msgid "Tadbirlar"
 msgstr ""
 
@@ -2256,31 +2258,30 @@ msgstr ""
 msgid "Talabalar va kursantlar"
 msgstr ""
 
-#: apps/web/views/institutions.py:172 apps/web/views/news.py:72
-#: apps/web/views/news.py:116 apps/web/views/news.py:157
+#: apps/web/views/institutions.py:172 apps/web/views/news.py:73
+#: apps/web/views/news.py:117 apps/web/views/news.py:158
 #: templates/components/footer.html:29 templates/components/nav_links.html:5
 #: templates/pages/education/program_detail.html:29
 #: templates/pages/news/list.html:6
 msgid "Yangiliklar"
 msgstr ""
 
-#: apps/web/views/news.py:59
+#: apps/web/views/news.py:60
 msgid "Eng eski"
 msgstr ""
 
-#: apps/web/views/news.py:59
+#: apps/web/views/news.py:60
 msgid "Koʻp oʻqilgan"
 msgstr ""
 
-#: apps/web/views/search.py:23 templates/components/header.html:18
+#: apps/web/views/search.py:27 templates/components/header.html:18
 #: templates/errors/_error.html:9 templates/pages/search.html:6
 msgid "Qidiruv"
 msgstr ""
 
 #: apps/web/views/stories.py:20 apps/web/views/stories.py:38
-#: templates/components/nav_links.html:29
-#: templates/pages/education/hub.html:16 templates/pages/home.html:114
-#: templates/pages/stories/list.html:5
+#: templates/components/nav_links.html:29 templates/pages/education/hub.html:16
+#: templates/pages/home.html:114 templates/pages/stories/list.html:5
 msgid "Motivatsiya"
 msgstr ""
 
@@ -2318,10 +2319,6 @@ msgstr ""
 
 #: config/unfold.py:41
 msgid "Manbalar"
-msgstr ""
-
-#: config/unfold.py:42
-msgid "Postlar"
 msgstr ""
 
 #: config/unfold.py:44
@@ -2396,19 +2393,35 @@ msgstr ""
 msgid "Django site admin"
 msgstr "Django sayt boshqaruvi"
 
-#: templates/admin/index.html:19
+#: templates/admin/index.html:21
+msgid "Soʻnggi 14 kun: postlar va eʼlon qilingan maqolalar"
+msgstr ""
+
+#: templates/admin/index.html:26
+msgid "AI xarajati (bugun)"
+msgstr ""
+
+#: templates/admin/index.html:30
+msgid "Sahifa koʻrishlari (14 kun)"
+msgstr ""
+
+#: templates/admin/index.html:32
+msgid "Bugungi noyob tashrifchilar"
+msgstr ""
+
+#: templates/admin/index.html:37
 msgid "Telegram manbalari"
 msgstr ""
 
-#: templates/admin/index.html:22
+#: templates/admin/index.html:40
 msgid "Kanal"
 msgstr ""
 
-#: templates/admin/index.html:23 templates/components/header.html:9
+#: templates/admin/index.html:41 templates/components/header.html:9
 msgid "Oxirgi xabar"
 msgstr ""
 
-#: templates/admin/index.html:34
+#: templates/admin/index.html:52
 msgid "Manbalar yoʻq"
 msgstr ""
 
@@ -2764,8 +2777,7 @@ msgstr ""
 
 #: templates/pages/appeals/success.html:10
 msgid ""
-"Murojaatlar odatda 15 ish kuni ichida koʻrib chiqiladi. Kodni saqlab "
-"qoʻying."
+"Murojaatlar odatda 15 ish kuni ichida koʻrib chiqiladi. Kodni saqlab qoʻying."
 msgstr ""
 
 #: templates/pages/appeals/success.html:11
@@ -3219,8 +3231,7 @@ msgid "Boshqa hikoyalar"
 msgstr ""
 
 #: templates/pages/stories/list.html:6
-msgid ""
-"Kursantlar, talabalar va bitiruvchilarning ilhomlantiruvchi hikoyalari."
+msgid "Kursantlar, talabalar va bitiruvchilarning ilhomlantiruvchi hikoyalari."
 msgstr ""
 
 #: templates/partials/event_results.html:5

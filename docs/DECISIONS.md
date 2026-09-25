@@ -184,3 +184,14 @@ untrusted peers. **Decision:** the middleware is first in the stack; axes uses
 `AXES_IPWARE_META_PRECEDENCE_ORDER=("REMOTE_ADDR",)` with `AXES_IPWARE_PROXY_COUNT=0`. Rate limits (`key="ip"`),
 IP allowlists and page-view hashing already read `REMOTE_ADDR`. **Consequences:** one place decides the client
 IP; lockouts work behind Caddy and cannot be dodged with a forged header.
+
+## ADR-026 — Charts read daily rollups; "today" refreshed hourly; page views in Redis
+**Status:** accepted (2026-09-25). **Context:** SPEC §6.9 charts must render from aggregated data, but a nightly-only
+rollup would hide today's activity until 02:00. **Decision:** time-series charts (activity, categories, posting
+heatmap, engagement) read `InstitutionDailyStat`; `analytics.flush_pageviews` (hourly) also re-aggregates today, and
+`analytics.aggregate_daily` (02:00) recomputes the last 7 days because Telegram views/forwards keep growing after
+publication. Aggregation is idempotent per Asia/Tashkent day. Trend tags, comparison and radar stay live queries
+(small, cached 5 min). Page views follow SPEC §2.8: Redis counters + a HyperLogLog of a salted, daily-rotated hash
+of IP + user agent (no cookies, no stored IPs); bots, staff, fragments and non-200 responses are not counted; article
+views and search terms are drained atomically (`RENAME`) and added to the DB hourly. **Consequences:** charts lag by
+at most one hour; request handling never depends on Redis (all counter writes are best effort).

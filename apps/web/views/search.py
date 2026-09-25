@@ -8,6 +8,7 @@ from django.utils.translation import gettext as _
 from django.views.decorators.http import require_GET
 from django_ratelimit.decorators import ratelimit
 
+from apps.analytics.services.pageviews import record_search
 from apps.web.services.search import search as run_search
 from apps.web.services.search import suggestions
 from apps.web.views._helpers import breadcrumbs
@@ -17,9 +18,12 @@ from apps.web.views._helpers import breadcrumbs
 @ratelimit(key="ip", rate="30/m", block=True)
 def search(request: HttpRequest) -> HttpResponse:
     raw = request.GET.get("q", "")
+    results = run_search(raw) if raw.strip() else None
+    if results is not None and len(results.query) >= 2:
+        record_search(results.query)
     context = {
         "q": raw.strip()[:100],
-        "results": run_search(raw) if raw.strip() else None,
+        "results": results,
         **breadcrumbs(request, (_("Qidiruv"), request.path)),
     }
     return render(request, "pages/search.html", context)

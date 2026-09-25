@@ -16,6 +16,24 @@
       {% endfor %}
     </div>
 
+    <div class="grid gap-6 mb-8 lg:grid-cols-3">
+      <div class="lg:col-span-2">
+        {% component "unfold/components/card.html" with title=_("Soʻnggi 14 kun: postlar va eʼlon qilingan maqolalar") %}
+          {% component "unfold/components/chart/bar.html" with data=activity_chart height=260 %}{% endcomponent %}
+        {% endcomponent %}
+      </div>
+      <div class="flex flex-col gap-6">
+        {% component "unfold/components/card.html" with title=_("AI xarajati (bugun)") %}
+          {% component "unfold/components/title.html" %}${{ ai_spent_today }} / ${{ ai_budget }}{% endcomponent %}
+          {% component "unfold/components/progress.html" with value=ai_budget_percent %}{% endcomponent %}
+        {% endcomponent %}
+        {% component "unfold/components/card.html" with title=_("Sahifa koʻrishlari (14 kun)") %}
+          {% component "unfold/components/title.html" %}{{ pageviews_14 }}{% endcomponent %}
+          {% component "unfold/components/text.html" %}{% translate "Bugungi noyob tashrifchilar" %}: {{ visitors_today }}{% endcomponent %}
+        {% endcomponent %}
+      </div>
+    </div>
+
     {% component "unfold/components/card.html" with title=_("Telegram manbalari") %}
       <table class="w-full text-sm">
         <thead><tr class="text-left">

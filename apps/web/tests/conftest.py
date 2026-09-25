@@ -11,6 +11,8 @@ import pytest
 from django.core.cache import cache
 from django.utils import timezone, translation
 
+from apps.analytics.services.aggregation import rebuild
+from apps.analytics.tests.utils import clear_counters
 from apps.content.models import Article, Category, Event, Story
 from apps.content.tests.factories import (
     AdmissionFactory,
@@ -40,6 +42,7 @@ class SiteData:
 def _clean_state() -> Iterator[None]:
     """Fresh cache, and Uzbek active: LocaleMiddleware leaves the last request's language activated."""
     cache.clear()
+    clear_counters()
     translation.activate("uz")
     yield
     translation.deactivate()
@@ -76,4 +79,5 @@ def site_data(db: Any) -> SiteData:
     program = Program.objects.filter(institution=institution, is_active=True).first()
     profession = Profession.objects.filter(is_published=True).first()
     assert program is not None and profession is not None
+    rebuild()  # charts read the daily rollups
     return SiteData(institution, articles[0], longread, event, story, program, profession)

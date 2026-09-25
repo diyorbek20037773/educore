@@ -97,9 +97,15 @@ def test_article_detail_has_jsonld_source_and_breadcrumbs(client: Client, site_d
 
 
 def test_article_view_counter(client: Client, site_data: SiteData) -> None:
+    from apps.analytics.services.pageviews import flush
+
+    client.get(site_data.article.get_absolute_url())
     client.get(site_data.article.get_absolute_url())
     site_data.article.refresh_from_db()
-    assert site_data.article.view_count == 1
+    assert site_data.article.view_count == 0  # counted in Redis first
+    flush()
+    site_data.article.refresh_from_db()
+    assert site_data.article.view_count == 2
 
 
 def test_longread_has_toc_and_redirects_from_news_route(client: Client, site_data: SiteData) -> None:

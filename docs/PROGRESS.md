@@ -4,14 +4,14 @@
 > git history is the source of truth for resuming work after a context reset.
 
 ## Current focus
-- Phase: **5 — Analytics** (Phase 4 done; Phase 3 done except HA3-dependent AC3.3)
-- Current task: Phase 5 — T5.1
+- Phase: **6 — Appeals** (Phases 4–5 done; Phase 3 done except HA3-dependent AC3.3)
+- Current task: Phase 6 — T6.1
 - Last updated: 2026-09-25, Claude Code
 
 ## Human actions needed (owner)
 | # | Needed for | What exactly | Status |
 |---|---|---|---|
-| HA0 | Phase 0 | GitHub repository + remote URL; GNU make (`winget install ezwinports.make`); Chrome (Node 22 already present) | pending (asked 2026-09-25) |
+| HA0 | Phase 0 | GitHub repository + remote URL; GNU make (`winget install ezwinports.make`); Chrome (Node 22 already present) | repo received 2026-09-25 (`github.com/diyorbek20037773/educore`); Chrome present; make still missing |
 | HA2 | Phase 2 | `TELEGRAM_API_ID`, `TELEGRAM_API_HASH` from https://my.telegram.org → "API development tools"; dedicated phone number; run `make tg-login` and enter the code; a private test channel you administer | pending |
 | HA3 | Phase 3 | `ANTHROPIC_API_KEY` (https://platform.claude.com) | pending |
 | HA7 | Phase 7 | optional: Turnstile keys, ops bot token + chat id, SMTP, Sentry DSN | pending |
@@ -91,8 +91,12 @@
 - [x] AC4.3 — 2026-09-25 · headless Chrome (puppeteer-core) at 360/768/1280 × light/dark on 18 pages: no horizontal overflow, no console errors, HTMX + Alpine loaded, every chart renders (or shows the no-data state) with its table view, live-panel filter swap and theme toggle work; screenshots reviewed. Fixed: home grid overflow at 360 px (`min-w-0`), radar labels on narrow screens, source link in the "Manba" block (`telegram_url`), empty charts/metric rows
 
 ### Phase 5 — Analytics
-- [ ] T5.1 · [ ] T5.2 · [ ] T5.3 · [ ] T5.4
-- [ ] AC5.1 · [ ] AC5.2
+- [x] T5.1 aggregation — 2026-09-25 · `apps/analytics/services/aggregation.py` (`aggregate_day` per Asia/Tashkent day: posts, articles, TG views/forwards, by category/content type/hour, AI runs + cost, appeals), `stats_rebuild` command, `Institution.stats_cache` refresh, cookie-less page views (Redis + HLL, `PageViewMiddleware`), article views/search terms flushed hourly; tasks `analytics.aggregate_daily` / `flush_pageviews` / `refresh_institution_stats` (ADR-026)
+- [x] T5.2 chart services — 2026-09-25 · activity/categories/heatmap/engagement read `InstitutionDailyStat`; tags, comparison, radar live; JSON + CSV, cached 5 min
+- [x] T5.3 admin dashboard — 2026-09-25 · Unfold index: KPIs, 14-day posts/published bar chart from `DailyStat`, AI spend vs daily budget (progress), page views + unique visitors, sources table
+- [x] T5.4 tests — 2026-09-25 · known counts, Tashkent day boundaries (23:30 vs 00:30 local), deleted posts excluded, idempotent re-aggregation keeps page views, empty days, rebuild/command/task, page-view rules (bots, staff, fragments, errors, boosted), HLL uniques, flush drains once, Redis outage safe; `apps/analytics` 95–100 %
+- [x] AC5.1 — 2026-09-25 · `stats_rebuild` on the demo DB: 30 days, 5 institutions; chart endpoints report 38 articles (activity/categories), 39 posts (heatmap), tags 64; `/analitika/` 7 charts + tables render (AC4.3 check), comparison page correct (metrics without values hidden until HA9)
+- [x] AC5.2 — 2026-09-25 · `seed_all` → 14 beat rows, 12 enabled; `ops.check_ai_failure_rate` and `ops.review_digest` stay disabled until their tasks exist (Phase 7, ADR-018)
 
 ### Phase 6 — Appeals
 - [ ] T6.1 · [ ] T6.2 · [ ] T6.3 · [ ] T6.4

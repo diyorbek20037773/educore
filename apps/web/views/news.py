@@ -6,7 +6,7 @@ import re
 from datetime import date
 from typing import Any
 
-from django.db.models import F, Q
+from django.db.models import Q
 from django.http import Http404, HttpRequest, HttpResponse, HttpResponsePermanentRedirect
 from django.shortcuts import render
 from django.urls import reverse
@@ -15,6 +15,7 @@ from django.utils.text import slugify
 from django.utils.translation import gettext as _
 from django.views.decorators.http import require_GET
 
+from apps.analytics.services.pageviews import record_article_view
 from apps.content import selectors as content
 from apps.content.models import Article, ArticleStatus, Category, ContentType
 from apps.institutions.selectors import active_institutions
@@ -148,7 +149,7 @@ def _detail(request: HttpRequest, slug: str, *, longread: bool) -> HttpResponse:
     if (article.content_type in LONGREAD_TYPES) != longread:
         return HttpResponsePermanentRedirect(article.get_absolute_url())
     if not request.user.is_staff:
-        Article.objects.filter(pk=article.pk).update(view_count=F("view_count") + 1)
+        record_article_view(article.pk)  # flushed hourly into view_count
     body, toc = with_toc(article.body) if longread else (article.body, [])
     older, newer = _neighbours(article)
     section = (

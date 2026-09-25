@@ -104,6 +104,7 @@ MIDDLEWARE = [
     "django_htmx.middleware.HtmxMiddleware",
     "apps.web.middleware.ResponseHeadersMiddleware",
     "apps.web.middleware.MaintenanceMiddleware",
+    "apps.analytics.middleware.PageViewMiddleware",
     "simple_history.middleware.HistoryRequestMiddleware",
     "django_structlog.middlewares.RequestMiddleware",
     "axes.middleware.AxesMiddleware",
