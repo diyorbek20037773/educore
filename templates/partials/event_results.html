@@ -1,0 +1,24 @@
+{% load i18n web_tags %}
+<div id="results">
+  {% if view == "calendar" %}
+    <div class="mb-4 flex items-center justify-between">
+      <a class="icon-btn border border-line" href="?view=calendar&amp;month={{ prev_month|date:'Y-m' }}{% if filters.inst %}&amp;inst={{ filters.inst }}{% endif %}" aria-label="{% translate 'Oldingi oy' %}">{% icon "chevron-left" "size-4" %}</a>
+      <h2 class="text-xl">{{ month|date:"F Y" }}</h2>
+      <a class="icon-btn border border-line" href="?view=calendar&amp;month={{ next_month|date:'Y-m' }}{% if filters.inst %}&amp;inst={{ filters.inst }}{% endif %}" aria-label="{% translate 'Keyingi oy' %}">{% icon "chevron-right" "size-4" %}</a>
+    </div>
+    <div class="overflow-x-auto"><div class="calendar min-w-[42rem]" role="grid">
+      {% for label in weekday_labels %}<div class="calendar-head" role="columnheader">{{ label }}</div>{% endfor %}
+      {% for week in weeks %}{% for cell in week %}
+        <div class="{% if not cell.in_month %}is-outside{% endif %}{% if cell.is_today %} is-today{% endif %}" role="gridcell">
+          <span class="day-number">{{ cell.day.day }}</span>
+          {% for event in cell.events %}<a class="mt-1 block truncate rounded px-1 py-0.5 inst-{{ event.institution.order }} inst-bg hover:underline" href="{{ event.get_absolute_url }}">{{ event.title }}</a>{% endfor %}
+        </div>
+      {% endfor %}{% endfor %}
+    </div></div>
+  {% else %}
+    <div class="card divide-y divide-line px-4">
+      {% for event in page_obj %}{% include "components/event_row.html" %}{% empty %}<p class="py-8 text-center text-ink-2">{% translate "Tadbirlar topilmadi." %}</p>{% endfor %}
+    </div>
+    {% include "components/pagination.html" %}
+  {% endif %}
+</div>

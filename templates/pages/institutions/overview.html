@@ -1,0 +1,32 @@
+{% extends "pages/institutions/_base.html" %}
+{% load i18n web_tags static %}
+{% block title %}{{ institution.short_name }}{% endblock %}
+{% block og_title %}{{ institution.full_name }}{% endblock %}
+{% block head %}<script src="{% static 'js/charts.js' %}" defer></script>{% endblock %}
+{% block tab %}
+<div class="grid gap-8 lg:grid-cols-12">
+  <div class="lg:col-span-7">
+    {% include "components/fallback_notice.html" with obj=institution field="description" %}
+    <div class="prose-educore">{{ institution.description|safe }}</div>
+    {% if institution.mission %}<h2 class="mt-8 text-xl">{% translate "Missiya" %}</h2><div class="prose-educore mt-3">{{ institution.mission|safe }}</div>{% endif %}
+  </div>
+  <aside class="lg:col-span-5">
+    {% if metrics %}
+      <div class="grid grid-cols-2 gap-3">
+        {% for m in metrics %}
+          <div class="card p-4"><p class="kpi-label">{{ m.get_key_display }}</p><p class="kpi-value">{{ m.value|intcomma_uz }}</p><p class="text-xs text-ink-muted">{{ m.year }}{% if m.needs_verification %} · {% translate "tasdiqlanmoqda" %}{% endif %}</p></div>
+        {% endfor %}
+      </div>
+    {% endif %}
+    {% if latest_articles %}
+      <h2 class="mt-8 text-xl">{% translate "Soʻnggi yangiliklar" %}</h2>
+      <div class="divide-y divide-line">{% for article in latest_articles %}{% include "components/article_card.html" with variant="compact" %}{% endfor %}</div>
+    {% endif %}
+  </aside>
+</div>
+<div class="mt-10 grid gap-6 lg:grid-cols-2">
+  {% url 'web:analytics_data' 'activity' as u1 %}{% include "components/chart_card.html" with chart_id="inst-activity" title=_("Yangiliklar dinamikasi") description=_("Soʻnggi 12 oy") data_url=u1|add:"?period=12m&"|add:chart_query %}
+  {% url 'web:analytics_data' 'categories' as u2 %}{% include "components/chart_card.html" with chart_id="inst-categories" title=_("Mavzular") description=_("Soʻnggi 90 kun") data_url=u2|add:"?days=90&"|add:chart_query %}
+  <div class="lg:col-span-2">{% url 'web:analytics_data' 'heatmap' as u3 %}{% include "components/chart_card.html" with chart_id="inst-heatmap" title=_("Nashr vaqti xaritasi") description=_("Hafta kuni × soat, soʻnggi 90 kun") data_url=u3|add:"?days=90&"|add:chart_query %}</div>
+</div>
+{% endblock %}

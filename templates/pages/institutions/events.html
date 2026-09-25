@@ -1,0 +1,8 @@
+{% extends "pages/institutions/_base.html" %}
+{% load i18n %}
+{% block tab %}
+<div class="grid gap-8 lg:grid-cols-2">
+  <section><h2 class="mb-3 text-xl">{% translate "Yaqin tadbirlar" %}</h2><div class="card divide-y divide-line px-4">{% for event in upcoming %}{% include "components/event_row.html" %}{% empty %}<p class="py-6 text-center text-ink-2">{% translate "Yaqin tadbirlar yoʻq." %}</p>{% endfor %}</div></section>
+  <section><h2 class="mb-3 text-xl">{% translate "Oʻtgan tadbirlar" %}</h2><div class="card divide-y divide-line px-4">{% for event in past %}{% include "components/event_row.html" %}{% empty %}<p class="py-6 text-center text-ink-2">{% translate "Maʼlumot yoʻq." %}</p>{% endfor %}</div></section>
+</div>
+{% endblock %}

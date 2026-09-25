@@ -1,0 +1,8 @@
+{% extends "pages/institutions/_base.html" %}
+{% load i18n %}
+{% block tab %}
+<div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+  {% for article in articles %}{% include "components/article_card.html" %}{% empty %}<div class="col-span-full">{% include "components/empty_state.html" %}</div>{% endfor %}
+</div>
+{% include "components/faq.html" %}
+{% endblock %}

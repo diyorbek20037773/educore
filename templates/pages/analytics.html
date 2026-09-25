@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load i18n web_tags static %}
+{% block head %}<script src="{% static 'js/charts.js' %}" defer></script>{% endblock %}
+{% block content %}
+<section class="container-page py-8">
+  <h1 class="text-3xl md:text-4xl">{% translate "Analitika" %}</h1>
+  <p class="mt-2 max-w-2xl text-ink-2">{% translate "Muassasalar faolligi, mavzular va qabul koʻrsatkichlari rasmiy manbalar asosida." %}</p>
+  <form class="card mt-6 flex flex-col gap-4 p-4" method="get">
+    <fieldset class="flex flex-wrap gap-2"><legend class="mb-2 text-sm font-semibold">{% translate "Davr" %}</legend>
+      {% for p in periods %}<label class="filter-chip"><input class="sr-only" type="radio" name="days" value="{{ p }}"{% if p == days %} checked{% endif %}>{% blocktranslate with n=p %}{{ n }} kun{% endblocktranslate %}</label>{% endfor %}
+    </fieldset>
+    <fieldset class="flex flex-wrap gap-2"><legend class="mb-2 text-sm font-semibold">{% translate "Muassasalar" %}</legend>
+      {% for inst in institutions %}<label class="filter-chip"><input class="sr-only" type="checkbox" name="inst" value="{{ inst.slug }}"{% if inst.slug in selected %} checked{% endif %}><span class="inst-dot inst-{{ inst.order }} mr-1.5 inline-block" aria-hidden="true"></span>{{ inst.abbreviation }}</label>{% endfor %}
+    </fieldset>
+    <button class="btn-primary self-start" type="submit">{% translate "Qoʻllash" %}</button>
+  </form>
+  <div class="mt-6 grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-5">
+    {% for kpi in kpis %}{% url kpi.url as u %}
+      {% if kpi.key == "institutions" %}{% include "components/kpi_tile.html" with label=_("Muassasalar") value=kpi.value url=u spark=kpi.spark %}
+      {% elif kpi.key == "news_today" %}{% include "components/kpi_tile.html" with label=_("Bugungi yangiliklar") value=kpi.value url=u spark=kpi.spark %}
+      {% elif kpi.key == "events" %}{% include "components/kpi_tile.html" with label=_("Yaqin tadbirlar") value=kpi.value url=u spark=kpi.spark %}
+      {% elif kpi.key == "programs" %}{% include "components/kpi_tile.html" with label=_("Yoʻnalishlar") value=kpi.value url=u spark=kpi.spark %}
+      {% else %}{% include "components/kpi_tile.html" with label=_("Kasblar") value=kpi.value url=u spark=kpi.spark %}{% endif %}
+    {% endfor %}
+  </div>
+  <div class="mt-8 grid gap-6 lg:grid-cols-2">
+    {% url 'web:analytics_data' 'activity' as u %}<div class="lg:col-span-2">{% include "components/chart_card.html" with chart_id="an-activity" title=_("Faollik dinamikasi") description=_("Muassasalar kesimida eʼlon qilingan maqolalar") data_url=u|add:"?"|add:chart_query %}</div>
+    {% url 'web:analytics_data' 'categories' as u %}{% include "components/chart_card.html" with chart_id="an-categories" title=_("Kategoriyalar taqsimoti") description=_("Tanlangan davr") data_url=u|add:"?"|add:chart_query %}
+    {% url 'web:analytics_data' 'tags' as u %}{% include "components/chart_card.html" with chart_id="an-tags" title=_("Trend mavzular") description=_("Top 15 teg, oldingi davrga nisbatan") data_url=u|add:"?"|add:chart_query %}
+    {% url 'web:analytics_data' 'heatmap' as u %}<div class="lg:col-span-2">{% include "components/chart_card.html" with chart_id="an-heatmap" title=_("Nashr vaqti xaritasi") description=_("Hafta kuni × soat (Toshkent vaqti)") data_url=u|add:"?"|add:chart_query %}</div>
+    {% url 'web:analytics_data' 'engagement' as u %}{% include "components/chart_card.html" with chart_id="an-views" title=_("Oʻrtacha koʻrishlar") description=_("Telegram, bitta xabarga") data_url=u|add:"?"|add:chart_query %}
+    {% include "components/chart_card.html" with chart_id="an-forwards" title=_("Oʻrtacha ulashishlar") description=_("Telegram, bitta xabarga") data_url=u|add:"?metric=forwards&"|add:chart_query %}
+    {% url 'web:analytics_data' 'radar' as u %}{% include "components/chart_card.html" with chart_id="an-radar" title=_("Muassasalar taqqoslami") description=_("Normallashtirilgan koʻrsatkichlar") data_url=u %}
+    <section class="card p-5" aria-labelledby="adm-title">
+      <h3 id="adm-title" class="font-sans text-lg font-bold">{% translate "Qabul jadvali" %}</h3>
+      <ul class="mt-4 space-y-4">
+        {% for adm in admissions %}<li><p class="flex items-center gap-2 text-sm font-semibold"><span class="inst-dot inst-{{ adm.institution.order }}" aria-hidden="true"></span>{{ adm.institution.abbreviation }} · {{ adm.title }}</p>{% include "components/timeline.html" with admission=adm %}</li>{% empty %}<li class="text-ink-2">{% translate "Hozircha ochiq qabul eʼlonlari yoʻq." %}</li>{% endfor %}
+      </ul>
+    </section>
+  </div>
+</section>
+{% endblock %}

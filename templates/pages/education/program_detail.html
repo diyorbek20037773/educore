@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load i18n web_tags %}
+{% block title %}{{ program.name }} — {{ program.institution.abbreviation }}{% endblock %}
+{% block meta_description %}{{ program.name }}, {{ program.institution.short_name }}{% endblock %}
+{% block content %}
+<article class="container-page py-8">
+  <p class="flex items-center gap-2 text-sm font-semibold"><span class="inst-dot inst-{{ program.institution.order }}" aria-hidden="true"></span><a class="hover:underline" href="{{ program.institution.get_absolute_url }}">{{ program.institution.short_name }}</a></p>
+  <h1 class="mt-2 text-3xl md:text-4xl">{{ program.name }}</h1>
+  {% if program.needs_verification %}<p class="notice mt-4">{% icon "info" "size-4 flex-none mt-0.5" %}<span>{% translate "Maʼlumotlar muassasa tomonidan tasdiqlanmoqda." %}</span></p>{% endif %}
+  <div class="mt-6 grid gap-8 lg:grid-cols-12">
+    <div class="lg:col-span-8">
+      <div class="card overflow-x-auto"><table class="data-table"><tbody>
+        {% if program.code %}<tr><th scope="row">{% translate "Kod" %}</th><td class="font-mono">{{ program.code }}</td></tr>{% endif %}
+        <tr><th scope="row">{% translate "Daraja" %}</th><td>{{ program.get_level_display }}</td></tr>
+        <tr><th scope="row">{% translate "Taʼlim shakli" %}</th><td>{{ program.get_form_display }}</td></tr>
+        {% if program.duration_years %}<tr><th scope="row">{% translate "Oʻqish muddati" %}</th><td>{{ program.duration_years|floatformat:"-1" }} {% translate "yil" %}</td></tr>{% endif %}
+        {% if program.language %}<tr><th scope="row">{% translate "Taʼlim tili" %}</th><td>{{ program.language }}</td></tr>{% endif %}
+        {% if program.qualification %}<tr><th scope="row">{% translate "Malaka" %}</th><td>{{ program.qualification }}</td></tr>{% endif %}
+        {% if program.quota %}<tr><th scope="row">{% translate "Kvota" %}</th><td>{{ program.quota|intcomma_uz }}</td></tr>{% endif %}
+        {% if program.tuition_note %}<tr><th scope="row">{% translate "Toʻlov" %}</th><td>{{ program.tuition_note }}</td></tr>{% endif %}
+      </tbody></table></div>
+      {% if program.description %}<div class="prose-educore mt-8">{{ program.description|safe }}</div>{% endif %}
+      {% if program.admission_requirements %}<h2 class="mt-8 text-xl">{% translate "Qabul talablari" %}</h2><div class="prose-educore mt-3">{{ program.admission_requirements|safe }}</div>{% endif %}
+      {% if program.source_url %}<p class="mt-6 text-sm text-ink-2">{% translate "Manba" %}: <a class="underline" href="{{ program.source_url }}" rel="noopener" target="_blank">{{ program.source_url|truncatechars:60 }}</a></p>{% endif %}
+    </div>
+    <aside class="space-y-8 lg:col-span-4">
+      {% if professions %}<section><h2 class="text-xl">{% translate "Kasblar" %}</h2><ul class="mt-3 space-y-2">{% for p in professions %}<li><a class="flex items-center gap-2 hover:underline" href="{{ p.get_absolute_url }}">{% icon p.icon "size-4" %}{{ p.name }}</a></li>{% endfor %}</ul></section>{% endif %}
+      {% if admissions %}<section><h2 class="text-xl">{% translate "Qabul" %}</h2>{% for adm in admissions %}<a class="card card-link mt-3 block p-4" href="{% url 'web:institution_admissions' program.institution.slug %}"><span class="font-semibold">{{ adm.title }}</span><span class="mt-1 block text-sm text-ink-2">{{ adm.get_status_display }}</span></a>{% endfor %}</section>{% endif %}
+      {% if related_news %}<section><h2 class="text-xl">{% translate "Yangiliklar" %}</h2><div class="mt-2 divide-y divide-line">{% for article in related_news %}{% include "components/article_card.html" with variant="compact" %}{% endfor %}</div></section>{% endif %}
+    </aside>
+  </div>
+</article>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load i18n web_tags static %}
+{% block head %}<script src="{% static 'js/charts.js' %}" defer></script>{% endblock %}
+{% block content %}
+<section class="container-page py-8">
+  <div class="flex flex-wrap items-end justify-between gap-4">
+    <h1 class="text-3xl md:text-4xl">{% translate "Muassasalarni taqqoslash" %}</h1>
+    <a class="btn-secondary" href="{% url 'web:institution_compare_csv' %}" download>{% icon "download" "size-4" %}CSV</a>
+  </div>
+  <div class="card mt-6 overflow-x-auto">
+    <table class="data-table">
+      <caption class="sr-only">{% translate "Koʻrsatkichlar jadvali" %}</caption>
+      <thead><tr><th scope="col">{% translate "Koʻrsatkich" %}</th>{% for inst in institutions %}<th scope="col" class="num"><span class="inst-dot inst-{{ inst.order }} mr-1.5 inline-block" aria-hidden="true"></span>{{ inst.abbreviation }}</th>{% endfor %}</tr></thead>
+      <tbody>
+        {% for row in rows %}
+          <tr><th scope="row">{{ row.label }}</th>{% for cell in row.cells %}<td class="num">{% if cell and cell.value is not None %}{{ cell.value|intcomma_uz }}<span class="block text-xs text-ink-muted">{{ cell.year }}{% if cell.needs_verification %}*{% endif %}</span>{% else %}—{% endif %}</td>{% endfor %}</tr>
+        {% empty %}
+          <tr><td colspan="6" class="text-center text-ink-2">{% translate "Koʻrsatkichlar tez orada qoʻshiladi." %}</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <p class="mt-2 text-xs text-ink-muted">* {% translate "Maʼlumot tasdiqlanmoqda." %}</p>
+  {% if rows %}
+  <div class="mt-10 grid gap-6 lg:grid-cols-2">
+    {% url 'web:analytics_data' 'radar' as radar_url %}
+    {% include "components/chart_card.html" with chart_id="compare-radar" title=_("Umumiy profil") description=_("Eng yuqori koʻrsatkich = 100") data_url=radar_url %}
+    {% for row in rows %}
+      {% url 'web:analytics_data' 'compare' as compare_url %}
+      {% include "components/chart_card.html" with chart_id="compare-"|add:row.key title=row.label description=_("Yillar kesimida") data_url=compare_url|add:"?metric="|add:row.key %}
+    {% endfor %}
+  </div>
+  {% endif %}
+</section>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load i18n web_tags %}
+{% block jsonld %}<script type="application/ld+json" nonce="{{ request.csp_nonce }}">{"@context":"https://schema.org","@type":"CollegeOrUniversity","name":{{ institution.full_name|jsonld }},"alternateName":{{ institution.abbreviation|jsonld }},"url":"{{ site_url }}{{ institution.get_absolute_url }}"{% if institution.address %},"address":{{ institution.address|jsonld }}{% endif %}{% if institution.founded_year %},"foundingDate":"{{ institution.founded_year }}"{% endif %}{% if institution.telegram_username %},"sameAs":["https://t.me/{{ institution.telegram_username }}"]{% endif %}}</script>{% endblock %}
+{% block meta_description %}{{ institution.full_name }}{% endblock %}
+{% block content %}
+<header class="inst-{{ institution.order }} border-b border-line">
+  <div class="inst-bg">
+    <div class="container-page flex flex-col gap-5 py-8 md:flex-row md:items-center">
+      {% if institution.logo %}<img src="{{ institution.logo.url }}" alt="" width="80" height="80" class="size-20 rounded-xl bg-white p-1">{% else %}<span class="grid size-20 place-items-center rounded-xl bg-surface text-2xl font-bold inst-text">{{ institution.abbreviation }}</span>{% endif %}
+      <div class="min-w-0">
+        <p class="text-sm font-semibold inst-text">{{ institution.parent_body }}</p>
+        <h1 class="text-2xl md:text-3xl">{{ institution.full_name }}</h1>
+        <p class="mt-2 flex flex-wrap gap-x-5 gap-y-1 text-sm text-ink-2">
+          {% if institution.founded_year %}<span>{% icon "calendar" "size-4 inline -mt-0.5" %} {% blocktranslate with y=institution.founded_year %}{{ y }}-yilda tashkil etilgan{% endblocktranslate %}</span>{% endif %}
+          {% if institution.city %}<span>{% icon "map-pin" "size-4 inline -mt-0.5" %} {{ institution.city }}</span>{% endif %}
+          {% if institution.telegram_username %}<a class="hover:underline" href="https://t.me/{{ institution.telegram_username }}" rel="noopener" target="_blank">{% icon "send" "size-4 inline -mt-0.5" %} @{{ institution.telegram_username }}{% if subscribers %} · {{ subscribers|intcomma_uz }} {% translate "obunachi" %}{% endif %}</a>{% endif %}
+        </p>
+      </div>
+    </div>
+  </div>
+  <nav class="container-page tabs" aria-label="{% translate 'Muassasa boʻlimlari' %}">
+    {% for tab in tabs %}<a href="{{ tab.url }}"{% if tab.name == active_tab %} aria-current="page"{% endif %}>{{ tab.label }}</a>{% endfor %}
+  </nav>
+</header>
+<div class="container-page py-8">{% block tab %}{% endblock %}</div>
+{% endblock %}

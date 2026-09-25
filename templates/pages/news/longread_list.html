@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% load i18n web_tags %}
+{% block content %}
+<section class="container-page py-8">
+  <h1 class="text-3xl md:text-4xl">{% translate "Maqolalar" %}</h1>
+  <p class="mt-2 max-w-2xl text-ink-2">{% translate "Tahliliy maqolalar va haftalik sharhlar." %}</p>
+  <div class="mt-6">{% include "partials/news_results.html" %}</div>
+</section>
+{% endblock %}

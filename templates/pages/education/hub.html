@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block content %}
+<section class="container-page py-8">
+  <h1 class="text-3xl md:text-4xl">{{ hub_title }}</h1>
+  {% if intro %}<div class="prose-educore mt-4 max-w-3xl">{{ intro.body|safe }}</div>{% endif %}
+  <section class="mt-10"><div class="section-title"><h2>{% translate "Soʻnggi maqolalar" %}</h2><a class="more-link" href="{% url 'web:news_list' %}?category={{ category_slug }}">{% translate "Barchasi" %}</a></div>
+    <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">{% for article in articles %}{% include "components/article_card.html" %}{% empty %}<div class="col-span-full">{% include "components/empty_state.html" %}</div>{% endfor %}</div>
+  </section>
+  <div class="mt-10 grid gap-8 lg:grid-cols-2">
+    <section><div class="section-title"><h2>{% translate "Tadbirlar" %}</h2></div><div class="card divide-y divide-line px-4">{% for event in events %}{% include "components/event_row.html" %}{% empty %}<p class="py-6 text-center text-ink-2">{% translate "Yaqin tadbirlar yoʻq." %}</p>{% endfor %}</div></section>
+    <section><div class="section-title"><h2>{% translate "Foydali aloqalar" %}</h2></div>
+      <ul class="card divide-y divide-line">{% for c in contacts %}<li class="flex flex-wrap justify-between gap-2 p-4 text-sm"><span><span class="inst-dot inst-{{ c.institution.order }} mr-1.5 inline-block" aria-hidden="true"></span><strong>{{ c.institution.abbreviation }}</strong> · {{ c.title }}</span><span class="text-ink-2">{{ c.phone }}</span></li>{% empty %}<li class="p-6 text-center text-ink-2">{% translate "Maʼlumot yoʻq." %}</li>{% endfor %}</ul>
+    </section>
+  </div>
+  {% if stories %}<section class="mt-10"><div class="section-title"><h2>{% translate "Motivatsiya" %}</h2></div><div class="grid gap-5 md:grid-cols-3">{% for story in stories %}{% include "components/story_card.html" %}{% endfor %}</div></section>{% endif %}
+  {% include "components/faq.html" %}
+</section>
+{% endblock %}

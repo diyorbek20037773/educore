@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load i18n web_tags %}
+{% block content %}
+<section class="container-page py-8">
+  <div class="flex flex-wrap items-end justify-between gap-4">
+    <div><h1 class="text-3xl md:text-4xl">{% translate "Muassasalar" %}</h1><p class="mt-2 max-w-2xl text-ink-2">{% translate "Huquqni muhofaza qilish sohasidagi beshta oliy taʼlim muassasasi." %}</p></div>
+    <a class="btn-primary" href="{% url 'web:institution_compare' %}">{% icon "chart-column" "size-4" %}{% translate "Taqqoslash" %}</a>
+  </div>
+  <div class="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+    {% for card in institution_cards %}
+      {% include "components/institution_card.html" with inst=card.institution news_30=card.institution.news_30 programs_n=card.institution.programs_n events_n=card.institution.events_n spark=card.spark %}
+    {% endfor %}
+  </div>
+  <div class="mt-10 card overflow-x-auto">
+    <table class="data-table">
+      <caption class="sr-only">{% translate "Manzillar" %}</caption>
+      <thead><tr><th scope="col">{% translate "Muassasa" %}</th><th scope="col">{% translate "Manzil" %}</th><th scope="col">{% translate "Aloqa" %}</th></tr></thead>
+      <tbody>{% for card in institution_cards %}{% with inst=card.institution %}<tr><td><a class="font-semibold hover:underline" href="{{ inst.get_absolute_url }}">{{ inst.short_name }}</a></td><td>{{ inst.address|default:"—" }}</td><td>{{ inst.phone|default:"—" }}</td></tr>{% endwith %}{% endfor %}</tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}

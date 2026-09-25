@@ -1,0 +1,8 @@
+{% load i18n %}
+<div id="results">
+  {% if professions %}
+    <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">{% for profession in professions %}{% include "components/profession_card.html" %}{% endfor %}</div>
+  {% else %}
+    {% include "components/empty_state.html" with message=_("Kasb topilmadi.") %}
+  {% endif %}
+</div>

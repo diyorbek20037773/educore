@@ -1,0 +1,7 @@
+{% extends "errors/_error.html" %}
+{% load i18n %}
+{% block title %}{% translate "Maqola arxivlangan" %}{% endblock %}
+{% block code %}410{% endblock %}
+{% block heading %}{% translate "Maqola arxivlangan" %}{% endblock %}
+{% block message %}{% translate "Ushbu maqola manbada oʻchirilgani sababli arxivga olindi." %}{% endblock %}
+{% block actions %}<a class="btn-primary" href="{{ back_url }}">{{ back_label }}</a>{% endblock %}

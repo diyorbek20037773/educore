@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block content %}
+<section class="container-page py-8">
+  <h1 class="text-3xl md:text-4xl">{% translate "Yoʻnalishlar" %}</h1>
+  <p class="mt-2 max-w-2xl text-ink-2">{% translate "Muassasalardagi taʼlim yoʻnalishlari, darajalar va taʼlim shakllari." %}</p>
+  <form class="card mt-6 flex flex-col gap-4 p-4" method="get" hx-get="{{ request.path }}" hx-target="#results" hx-swap="outerHTML" hx-push-url="true" hx-trigger="change">
+    {% include "components/institution_chips.html" with current=filters.inst %}
+    <div class="flex flex-wrap items-end gap-3">
+      {% include "components/filter_select.html" with name="level" label=_("Daraja") options=levels current=filters.level all_label=_("Barcha darajalar") %}
+      {% include "components/filter_select.html" with name="form" label=_("Taʼlim shakli") options=forms current=filters.form all_label=_("Barcha shakllar") %}
+      <noscript><button class="btn-primary" type="submit">{% translate "Qoʻllash" %}</button></noscript>
+    </div>
+  </form>
+  <div class="mt-6">{% include "partials/program_results.html" %}</div>
+</section>
+{% endblock %}

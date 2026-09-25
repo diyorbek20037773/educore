@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block content %}
+<section class="container-page py-8">
+  <h1 class="text-3xl md:text-4xl">{% translate "Qabul" %}</h1>
+  <p class="mt-2 max-w-2xl text-ink-2">{% translate "Muassasalarga qabul muddatlari, talablar, hujjatlar va kvotalar." %}</p>
+  <div class="mt-8 grid gap-5 lg:grid-cols-2">
+    {% for adm in admissions %}{% include "components/admission_card.html" %}{% empty %}<div class="lg:col-span-2">{% include "components/empty_state.html" with message=_("Hozircha ochiq qabul eʼlonlari yoʻq.") %}</div>{% endfor %}
+  </div>
+  {% include "components/faq.html" %}
+  {% if articles %}
+    <section class="mt-10"><div class="section-title"><h2>{% translate "Qabul yangiliklari" %}</h2><a class="more-link" href="{% url 'web:news_list' %}?category=qabul">{% translate "Barchasi" %}</a></div>
+    <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">{% for article in articles %}{% include "components/article_card.html" %}{% endfor %}</div></section>
+  {% endif %}
+</section>
+{% endblock %}

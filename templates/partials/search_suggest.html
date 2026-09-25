@@ -1,0 +1,6 @@
+{% load i18n web_tags %}
+{% if items %}
+<ul class="popover mt-1 w-full divide-y divide-line" aria-label="{% translate 'Takliflar' %}">
+  {% for item in items %}<li><a class="flex items-center gap-2 px-3 py-2 text-sm hover:bg-surface-2" href="{{ item.url }}">{% if item.kind == "institution" %}{% icon "landmark" "size-4 flex-none" %}{% else %}{% icon "newspaper" "size-4 flex-none" %}{% endif %}<span class="line-clamp-2">{{ item.label }}</span></a></li>{% endfor %}
+</ul>
+{% endif %}

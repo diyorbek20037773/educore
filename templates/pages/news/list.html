@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load i18n web_tags %}
+{% block content %}
+<section class="container-page py-8">
+  <div class="flex flex-wrap items-end justify-between gap-4">
+    <h1 class="text-3xl md:text-4xl">{% translate "Yangiliklar" %}</h1>
+    <a class="more-link" href="{% url 'web:rss' %}">{% icon "rss" "size-4" %}RSS</a>
+  </div>
+  <form class="card mt-6 flex flex-col gap-4 p-4" method="get" hx-get="{{ request.path }}" hx-target="#results" hx-select="#results" hx-swap="outerHTML" hx-push-url="true" hx-trigger="change, submit">
+    {% include "components/institution_chips.html" with current=filters.institution_slug %}
+    <div class="flex flex-wrap items-end gap-3">
+      {% include "components/filter_select.html" with name="category" label=_("Kategoriya") options=category_options current=filters.category_slug all_label=_("Barcha kategoriyalar") %}
+      <div class="form-field"><label for="f-from">{% translate "Sanadan" %}</label><input id="f-from" class="form-input" type="date" name="from" value="{{ filters.date_from|date:'Y-m-d' }}"></div>
+      <div class="form-field"><label for="f-to">{% translate "Sanagacha" %}</label><input id="f-to" class="form-input" type="date" name="to" value="{{ filters.date_to|date:'Y-m-d' }}"></div>
+      {% include "components/filter_select.html" with name="sort" label=_("Saralash") options=sorts current=filters.sort all_label=_("Eng yangi") %}
+      <noscript><button class="btn-primary" type="submit">{% translate "Qoʻllash" %}</button></noscript>
+    </div>
+  </form>
+  <div class="mt-6">{% include "partials/news_results.html" %}</div>
+</section>
+{% endblock %}

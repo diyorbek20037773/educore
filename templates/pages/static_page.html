@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{{ page.seo_title|default:page.title }}{% endblock %}
+{% block og_title %}{{ page.seo_title|default:page.title }}{% endblock %}
+{% block meta_description %}{{ page.seo_description|default:page.title }}{% endblock %}
+{% block content %}
+<article class="container-page max-w-3xl py-8">
+  <h1 class="text-3xl md:text-4xl">{{ page.title }}</h1>
+  {% include "components/fallback_notice.html" with obj=page field="body" %}
+  <div class="prose-educore mt-6">{{ page.body|safe }}</div>
+  {% if request.resolver_match.url_name == "contact" and site_setting %}
+    <dl class="card mt-8 grid gap-4 p-6 sm:grid-cols-3">
+      {% if site_setting.contact_email %}<div><dt class="kpi-label">{% translate "E-pochta" %}</dt><dd><a class="font-semibold hover:underline" href="mailto:{{ site_setting.contact_email }}">{{ site_setting.contact_email }}</a></dd></div>{% endif %}
+      {% if site_setting.contact_phone %}<div><dt class="kpi-label">{% translate "Telefon" %}</dt><dd class="font-semibold">{{ site_setting.contact_phone }}</dd></div>{% endif %}
+      {% if site_setting.address %}<div><dt class="kpi-label">{% translate "Manzil" %}</dt><dd class="font-semibold">{{ site_setting.address }}</dd></div>{% endif %}
+    </dl>
+  {% endif %}
+</article>
+{% endblock %}

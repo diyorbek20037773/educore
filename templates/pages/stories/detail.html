@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load i18n web_tags %}
+{% block title %}{{ story.title }}{% endblock %}
+{% block og_title %}{{ story.title }}{% endblock %}
+{% block meta_description %}{{ story.quote|default:story.title|truncatechars:160 }}{% endblock %}
+{% block content %}
+<article class="container-page max-w-3xl py-8">
+  <span class="text-gold" aria-hidden="true">{% icon "quote" "size-10" %}</span>
+  <h1 class="mt-2 text-3xl md:text-4xl">{{ story.title }}</h1>
+  {% if story.quote %}<blockquote class="mt-6 font-serif text-2xl leading-relaxed">{{ story.quote }}</blockquote>{% endif %}
+  <p class="mt-4 font-semibold">{{ story.person_name }}{% if story.person_role %} <span class="font-normal text-ink-2">· {{ story.person_role }}</span>{% endif %}</p>
+  {% if story.institution %}<p class="mt-1"><a class="inline-flex items-center gap-2 text-sm hover:underline" href="{{ story.institution.get_absolute_url }}"><span class="inst-dot inst-{{ story.institution.order }}" aria-hidden="true"></span>{{ story.institution.short_name }}</a></p>{% endif %}
+  {% include "components/fallback_notice.html" with obj=story field="body" %}
+  {% if story.body %}<div class="prose-educore mt-8">{{ story.body|safe }}</div>{% endif %}
+  {% if story.article %}<p class="mt-8"><a class="more-link" href="{{ story.article.get_absolute_url }}">{% translate "Toʻliq maqola" %} {% icon "arrow-right" "size-4" %}</a></p>{% endif %}
+</article>
+{% if others %}<section class="container-page pb-10"><div class="section-title"><h2>{% translate "Boshqa hikoyalar" %}</h2></div><div class="grid gap-5 md:grid-cols-3">{% for story in others %}{% include "components/story_card.html" %}{% endfor %}</div></section>{% endif %}
+{% endblock %}

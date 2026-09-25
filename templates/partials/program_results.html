@@ -1,0 +1,10 @@
+{% load i18n %}
+<div id="results">
+  <p class="mb-4 text-sm text-ink-2" aria-live="polite">{% blocktranslate count n=page_obj.paginator.count %}{{ n }} ta yoʻnalish{% plural %}{{ n }} ta yoʻnalish{% endblocktranslate %}</p>
+  {% if page_obj.object_list %}
+    <div class="card overflow-hidden">{% include "components/program_table.html" with programs=page_obj.object_list show_institution=True %}</div>
+    {% include "components/pagination.html" %}
+  {% else %}
+    {% include "components/empty_state.html" with message=_("Tanlangan filtrlar boʻyicha yoʻnalish topilmadi.") %}
+  {% endif %}
+</div>

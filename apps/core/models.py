@@ -128,6 +128,22 @@ class Page(SanitizedHTMLMixin, TimeStampedModel):
     def __str__(self) -> str:
         return self.title
 
+    def get_absolute_url(self) -> str:
+        from django.urls import NoReverseMatch, reverse
+
+        names = {
+            "biz-haqimizda": "about",
+            "aloqa": "contact",
+            "maxfiylik-siyosati": "privacy",
+            "foydalanish-shartlari": "terms",
+            "talabalar": "students_hub",
+            "kursantlar": "cadets_hub",
+        }
+        try:
+            return reverse(f"web:{names[self.slug]}") if self.slug in names else f"/{self.slug}/"
+        except NoReverseMatch:
+            return f"/{self.slug}/"
+
 
 class FAQTopic(models.TextChoices):
     QABUL = "qabul", _("Qabul")

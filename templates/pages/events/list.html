@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load i18n web_tags %}
+{% block content %}
+<section class="container-page py-8">
+  <h1 class="text-3xl md:text-4xl">{% translate "Tadbirlar" %}</h1>
+  <form class="card mt-6 flex flex-col gap-4 p-4" method="get" hx-get="{{ request.path }}" hx-target="#results" hx-swap="outerHTML" hx-push-url="true" hx-trigger="change">
+    <div class="flex flex-wrap items-center gap-2">
+      <fieldset class="flex flex-wrap gap-2"><legend class="sr-only">{% translate "Koʻrinish" %}</legend>
+        <label class="filter-chip"><input class="sr-only" type="radio" name="view" value="list"{% if view == "list" %} checked{% endif %}>{% icon "list" "size-4 mr-1 inline" %}{% translate "Roʻyxat" %}</label>
+        <label class="filter-chip"><input class="sr-only" type="radio" name="view" value="calendar"{% if view == "calendar" %} checked{% endif %}>{% icon "calendar-days" "size-4 mr-1 inline" %}{% translate "Taqvim" %}</label>
+      </fieldset>
+      <span class="mx-2 h-6 w-px bg-line" aria-hidden="true"></span>
+      <fieldset class="flex flex-wrap gap-2"><legend class="sr-only">{% translate "Davr" %}</legend>
+        <label class="filter-chip"><input class="sr-only" type="radio" name="when" value="upcoming"{% if when == "upcoming" %} checked{% endif %}>{% translate "Yaqinlashayotgan" %}</label>
+        <label class="filter-chip"><input class="sr-only" type="radio" name="when" value="past"{% if when == "past" %} checked{% endif %}>{% translate "Oʻtgan" %}</label>
+      </fieldset>
+    </div>
+    {% include "components/institution_chips.html" with current=filters.inst %}
+    <noscript><button class="btn-primary self-start" type="submit">{% translate "Qoʻllash" %}</button></noscript>
+  </form>
+  <div class="mt-6">{% include "partials/event_results.html" %}</div>
+</section>
+{% endblock %}

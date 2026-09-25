@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load i18n web_tags %}
+{% block title %}{{ event.title }}{% endblock %}
+{% block og_title %}{{ event.title }}{% endblock %}
+{% block meta_description %}{{ event.description|striptags|truncatechars:160|default:event.title }}{% endblock %}
+{% block jsonld %}<script type="application/ld+json" nonce="{{ request.csp_nonce }}">{"@context":"https://schema.org","@type":"Event","name":{{ event.title|jsonld }},"startDate":"{{ event.starts_at|date:'c' }}"{% if event.ends_at %},"endDate":"{{ event.ends_at|date:'c' }}"{% endif %},"eventAttendanceMode":"https://schema.org/{% if event.is_online %}OnlineEventAttendanceMode{% else %}OfflineEventAttendanceMode{% endif %}","eventStatus":"https://schema.org/EventScheduled","location":{% if event.is_online %}{"@type":"VirtualLocation","url":"{{ event.registration_url|default:site_url }}"}{% else %}{"@type":"Place","name":{{ event.location|default:event.institution.short_name|jsonld }},"address":{{ event.location|default:event.institution.address|default:"Oʻzbekiston"|jsonld }}}{% endif %}{% if event.institution %},"organizer":{"@type":"Organization","name":{{ event.institution.full_name|jsonld }},"url":"{{ site_url }}{{ event.institution.get_absolute_url }}"}{% endif %}}</script>{% endblock %}
+{% block content %}
+<article class="container-page max-w-4xl py-8">
+  <div class="flex flex-wrap items-center gap-2">
+    <span class="chip chip-brand">{{ event.get_kind_display }}</span>
+    {% if event.institution %}<a class="chip" href="{{ event.institution.get_absolute_url }}"><span class="inst-dot inst-{{ event.institution.order }}" aria-hidden="true"></span>{{ event.institution.short_name }}</a>{% endif %}
+    {% if is_past %}<span class="chip">{% translate "Oʻtgan tadbir" %}</span>{% endif %}
+  </div>
+  <h1 class="mt-4 text-3xl md:text-4xl">{{ event.title }}</h1>
+  <dl class="card mt-6 grid gap-4 p-5 sm:grid-cols-3">
+    <div><dt class="kpi-label">{% translate "Sana" %}</dt><dd class="font-semibold"><time datetime="{{ event.starts_at|date:'c' }}">{% if event.all_day %}{{ event.starts_at|uz_date }}{% else %}{{ event.starts_at|uz_datetime }}{% endif %}</time>{% if event.ends_at %} — {{ event.ends_at|uz_date }}{% endif %}</dd></div>
+    <div><dt class="kpi-label">{% translate "Joy" %}</dt><dd class="font-semibold">{% if event.is_online %}{% translate "Onlayn" %}{% else %}{{ event.location|default:"—" }}{% endif %}</dd>{% if event.location and not event.is_online %}<dd><a class="more-link text-sm" href="https://www.openstreetmap.org/search?query={{ event.location|urlencode }}" rel="noopener" target="_blank">{% translate "Xaritada" %} {% icon "external-link" "size-3.5" %}</a></dd>{% endif %}</div>
+    <div class="flex flex-col gap-2">
+      <a class="btn-secondary" href="{% url 'web:event_ics' event.slug %}" download>{% icon "calendar-plus" "size-4" %}{% translate "Taqvimga qoʻshish" %}</a>
+      {% if event.registration_url and not is_past %}<a class="btn-primary" href="{{ event.registration_url }}" rel="noopener" target="_blank">{% translate "Roʻyxatdan oʻtish" %}</a>{% endif %}
+    </div>
+  </dl>
+  {% include "components/fallback_notice.html" with obj=event field="title" %}
+  {% if event.description %}<div class="prose-educore mt-8">{{ event.description|safe }}</div>{% endif %}
+  {% if event.article %}<p class="mt-8"><a class="more-link" href="{{ event.article.get_absolute_url }}">{% translate "Manba maqola" %}: {{ event.article.title }} {% icon "arrow-right" "size-4" %}</a></p>{% endif %}
+</article>
+{% endblock %}

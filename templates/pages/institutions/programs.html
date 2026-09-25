@@ -1,0 +1,9 @@
+{% extends "pages/institutions/_base.html" %}
+{% load i18n %}
+{% block tab %}
+{% for level, programs in program_groups.items %}
+  <section class="mb-8"><h2 class="mb-3 text-xl">{{ level }}</h2><div class="card overflow-hidden">{% include "components/program_table.html" %}</div></section>
+{% empty %}
+  {% include "components/empty_state.html" with message=_("Yoʻnalishlar haqida maʼlumot tez orada qoʻshiladi.") %}
+{% endfor %}
+{% endblock %}

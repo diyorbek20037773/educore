@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block content %}
+<section class="container-page py-8">
+  <h1 class="text-3xl md:text-4xl">{% translate "Motivatsiya" %}</h1>
+  <p class="mt-2 max-w-2xl text-ink-2">{% translate "Kursantlar, talabalar va bitiruvchilarning ilhomlantiruvchi hikoyalari." %}</p>
+  <div class="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+    {% for story in stories %}{% include "components/story_card.html" %}{% empty %}<div class="col-span-full">{% include "components/empty_state.html" %}</div>{% endfor %}
+  </div>
+</section>
+{% endblock %}

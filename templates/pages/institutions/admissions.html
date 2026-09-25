@@ -1,0 +1,8 @@
+{% extends "pages/institutions/_base.html" %}
+{% load i18n %}
+{% block tab %}
+<div class="grid gap-5 lg:grid-cols-2">
+  {% for adm in admissions %}{% include "components/admission_card.html" %}{% empty %}<div class="lg:col-span-2">{% include "components/empty_state.html" with message=_("Hozircha qabul eʼlonlari yoʻq.") %}</div>{% endfor %}
+</div>
+{% include "components/faq.html" %}
+{% endblock %}

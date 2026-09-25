@@ -1,0 +1,23 @@
+{% extends "pages/institutions/_base.html" %}
+{% load i18n web_tags %}
+{% block tab %}
+<div class="grid gap-8 lg:grid-cols-12">
+  <dl class="card grid gap-4 p-6 lg:col-span-5">
+    {% if institution.address %}<div><dt class="kpi-label">{% translate "Manzil" %}</dt><dd class="font-semibold">{{ institution.address }}</dd><dd><a class="more-link text-sm" href="https://www.openstreetmap.org/search?query={{ institution.address|urlencode }}" rel="noopener" target="_blank">{% translate "Xaritada koʻrish" %} {% icon "external-link" "size-3.5" %}</a></dd></div>{% endif %}
+    {% if institution.phone %}<div><dt class="kpi-label">{% translate "Telefon" %}</dt><dd class="font-semibold"><a href="tel:{{ institution.phone|cut:' ' }}">{{ institution.phone }}</a></dd></div>{% endif %}
+    {% if institution.email %}<div><dt class="kpi-label">{% translate "E-pochta" %}</dt><dd class="font-semibold"><a href="mailto:{{ institution.email }}">{{ institution.email }}</a></dd></div>{% endif %}
+    {% if institution.website_url %}<div><dt class="kpi-label">{% translate "Veb-sayt" %}</dt><dd class="font-semibold"><a href="{{ institution.website_url }}" rel="noopener" target="_blank">{{ institution.website_url }}</a></dd></div>{% endif %}
+  </dl>
+  <div class="lg:col-span-7">
+    {% with contacts=institution.contacts.all %}
+    {% if contacts %}
+    <div class="card overflow-x-auto"><table class="data-table">
+      <thead><tr><th scope="col">{% translate "Boʻlim" %}</th><th scope="col">{% translate "Telefon" %}</th><th scope="col">{% translate "E-pochta" %}</th><th scope="col">{% translate "Ish vaqti" %}</th></tr></thead>
+      <tbody>{% for c in contacts %}<tr><td class="font-semibold">{{ c.title }}</td><td>{{ c.phone|default:"—" }}</td><td>{{ c.email|default:"—" }}</td><td>{{ c.hours|default:"—" }}</td></tr>{% endfor %}</tbody>
+    </table></div>
+    {% else %}{% include "components/empty_state.html" %}{% endif %}
+    {% endwith %}
+    <a class="btn-primary mt-6" href="{% url 'web:appeal_form' %}?institution={{ institution.pk }}">{% icon "send" "size-4" %}{% translate "Murojaat yuborish" %}</a>
+  </div>
+</div>
+{% endblock %}
