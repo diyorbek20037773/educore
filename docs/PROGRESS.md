@@ -4,7 +4,7 @@
 > git history is the source of truth for resuming work after a context reset.
 
 ## Current focus
-- Phase: **0 — Bootstrap**
+- Phase: **1 — Domain models, seeds, admin** (Phase 0 done 2026-09-25)
 - Current task: T1.1 (Phase 1)
 - Last updated: 2026-09-25, Claude Code
 
