@@ -4,8 +4,8 @@
 > git history is the source of truth for resuming work after a context reset.
 
 ## Current focus
-- Phase: **1 — Domain models, seeds, admin** (Phase 0 done 2026-09-25)
-- Current task: AC1.1–AC1.3
+- Phase: **2 — Telegram ingestion** (Phase 1 done 2026-09-25)
+- Current task: T2.1
 - Last updated: 2026-09-25, Claude Code
 
 ## Human actions needed (owner)
@@ -52,7 +52,9 @@
 - [x] T1.4 unfold admin for every model — 2026-09-25 · every model registered (filters/search/inlines/actions: mark verified, publish/archive/review/feature/pin, source resolve/backfill/gapcheck/disable, post skip, outbox retry), SPEC §8 sidebar, dashboard callback with live counts, 2FA-only admin (ADR-020). Pipeline actions (reprocess/regenerate/re-translate/merge) arrive with T2.6/T3.4
 - [x] T1.5 translit + sanitize + translit_po — 2026-09-25 · `apps/core/translit.py` (207-word golden corpus, both directions + round trip, URLs/mentions/hashtags kept, HTML text nodes only), `apps/core/sanitize.py` (nh3 allowlist, safe schemes, forced rel, apostrophes), `SanitizedHTMLMixin` on every rich field, `scripts/translit_po.py` keeps placeholders (ADR-021)
 - [x] T1.6 factories + selectors + query-count tests — 2026-09-25 · 31 factories (each validated with `full_clean`), content + institution selectors, `django_assert_num_queries` tests (lists = 1–2 queries regardless of size); 305 tests green
-- [ ] AC1.1 · [ ] AC1.2 · [ ] AC1.3
+- [x] AC1.1 — `migrate` (no pending) + `seed_all` ×2 on the dev DB: second run `created …=0` everywhere; `Institution=5`, `Category=16`, `Profession=21`
+- [x] AC1.2 — every registered model's changelist returns 200 for a 2FA-verified superuser (test iterates `admin.site._registry`); Unfold sidebar/dashboard render; anonymous → 2FA login, staff without device → setup, TOTP setup wizard confirms a device end-to-end (`apps/accounts/tests/test_admin_2fa.py`, 7 passed); 2FA pages styled with site tokens
+- [x] AC1.3 — `pytest apps/core apps/institutions apps/content` → 298 passed; translit tests 218 passed (207-word corpus both directions + round trip)
 
 ### Phase 2 — Telegram ingestion
 - [ ] T2.1 · [ ] T2.2 · [ ] T2.3 · [ ] T2.4 · [ ] T2.5 · [ ] T2.6
@@ -94,5 +96,6 @@
 ## Log (newest first)
 | Date | Phase/Task | Note |
 |---|---|---|
+| 2026-09-25 | Phase 1 | models, migrations, seeds, admin + 2FA, translit, sanitizer, factories/selectors; AC1.1–AC1.3 green (305 tests) |
 | 2026-09-25 | Phase 0 | bootstrap complete; AC0.1–AC0.4 green; HA0 pending |
 | — | — | project bootstrapped from the specification bundle |
