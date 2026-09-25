@@ -31,7 +31,9 @@ def test_article_change_page_shows_original_telegram_text(verified_admin_client:
     source = ArticleSourceFactory(post=TelegramPostFactory(text="Asl xabar matni 12345"))
     response = verified_admin_client.get(reverse("admin:content_article_change", args=[source.article_id]))
     assert response.status_code == 200
-    assert "Asl xabar matni 12345" in response.content.decode()
+    body = response.content.decode()
+    assert "Asl xabar matni 12345" in body
+    assert f'href="{source.article.get_absolute_url()}?preview=1"' in body
 
 
 def _action(client: Client, action: str, ids: list[int]) -> Any:

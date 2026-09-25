@@ -5,7 +5,7 @@
 
 ## Current focus
 - Phase: **4 — Public website** (Phase 3 done except HA3-dependent AC3.3)
-- Current task: T4.1
+- Current task: T4.3
 - Last updated: 2026-09-25, Claude Code
 
 ## Human actions needed (owner)
@@ -26,7 +26,6 @@
   `docker compose` commands from the Makefile.
 - Prod image is 1.45 GB uncompressed (target ≤ 900 MB): trim in T8.1 (static ffmpeg, drop gettext from runtime).
 - Gunicorn access/error logs are plain text; switch to JSON in T7.3.
-- Re-assert the admin preview link (`?preview=1`) once `web:news_detail` exists (T4.2).
 
 ## Phase checklist
 
@@ -80,7 +79,9 @@
 - [ ] AC3.3 (latency measured: ___ s; cost/post: $___) — **waiting for HA3** (`ANTHROPIC_API_KEY`)
 
 ### Phase 4 — Public website
-- [ ] T4.1 · [ ] T4.2 · [ ] T4.3 · [ ] T4.4 · [ ] T4.5 · [ ] T4.6 · [ ] T4.7
+- [x] T4.1 design system — 2026-09-25 · component layer in `assets/css/components.css`, Alpine CSP components, Lucide subset sprite (79 icons, 19 KB, `make icons`, aliases for renamed icons), PWA icons + default OG image (`make brand-images`), `charts.js` (lazy ECharts, fixed palette, table view, CSV, theme re-render), sparkline SVG tag
+- [x] T4.2 pages — 2026-09-25 · all SPEC §6 routes: home (11 blocks), institutions (list, 7 profile tabs, comparison + CSV + charts), news/long-reads (filters, infinite scroll, 410, staff preview, TOC), programs, admissions, hubs, professions, events (list/calendar/.ics), stories, analytics + 7 chart endpoints (JSON/CSV), appeal UI + tracking (backend Phase 6), search (FTS + trigram, Cyrillic→Latin), CMS pages, 404/410/500/503, RSS ×3, i18n sitemaps, robots/humans/manifest; 40 web tests; admin preview link re-asserted
+- [ ] T4.3 · [ ] T4.4 · [ ] T4.5 · [ ] T4.6 · [ ] T4.7
 - [ ] AC4.1 · [ ] AC4.2 (scores: perf __ / seo __ / a11y __ / bp __) · [ ] AC4.3
 
 ### Phase 5 — Analytics

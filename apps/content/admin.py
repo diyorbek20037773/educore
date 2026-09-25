@@ -5,7 +5,6 @@ from __future__ import annotations
 from django.contrib import admin, messages
 from django.db.models import QuerySet
 from django.http import HttpRequest
-from django.urls import NoReverseMatch
 from django.utils import timezone
 from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
@@ -197,12 +196,10 @@ class ArticleAdmin(SimpleHistoryAdmin, TranslatedAdmin):
     def preview_link(self, obj: Article) -> str:
         if not obj.pk:
             return "—"
-        try:
-            url = obj.get_absolute_url()
-        except NoReverseMatch:  # public pages arrive in Phase 4
-            return "—"
         return format_html(
-            '<a href="{}?preview=1" target="_blank" rel="noopener">{}</a>', url, _("Saytda koʻrish")
+            '<a href="{}?preview=1" target="_blank" rel="noopener">{}</a>',
+            obj.get_absolute_url(),
+            _("Saytda koʻrish"),
         )
 
     @admin.display(description=_("Asl Telegram matni"))
