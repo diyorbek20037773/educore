@@ -24,6 +24,11 @@ class PrivateStorage(LazyObject):
 private_storage = PrivateStorage()
 
 
+def get_private_storage() -> PrivateStorage:
+    """Callable storage: migrations reference this function, not an environment-specific path."""
+    return private_storage
+
+
 class AppealTopic(models.TextChoices):
     QABUL = "qabul", _("Qabul")
     TALIM = "talim", _("Taʼlim jarayoni")
@@ -108,7 +113,7 @@ class AppealAttachment(TimeStampedModel):
         Appeal, verbose_name=_("appeal"), on_delete=models.CASCADE, related_name="attachments"
     )
     file = models.FileField(
-        _("file"), storage=private_storage, upload_to=attachment_upload_to, max_length=200
+        _("file"), storage=get_private_storage, upload_to=attachment_upload_to, max_length=200
     )
     original_name = models.CharField(_("original name"), max_length=255)
     size_bytes = models.PositiveIntegerField(_("size (bytes)"))

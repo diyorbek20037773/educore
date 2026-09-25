@@ -106,7 +106,7 @@ jobs:
       - name: pip-audit (locked production dependencies)
         run: |
           uv export --frozen --no-dev --no-hashes --format requirements-txt > /tmp/requirements.txt
-          uvx pip-audit --strict --disable-pip -r /tmp/requirements.txt
+          uvx pip-audit --strict --disable-pip --no-deps -r /tmp/requirements.txt
 
   build:
     runs-on: ubuntu-24.04
