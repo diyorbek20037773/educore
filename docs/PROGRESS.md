@@ -5,7 +5,7 @@
 
 ## Current focus
 - Phase: **1 — Domain models, seeds, admin** (Phase 0 done 2026-09-25)
-- Current task: T1.1 (Phase 1)
+- Current task: T1.3
 - Last updated: 2026-09-25, Claude Code
 
 ## Human actions needed (owner)
@@ -46,7 +46,12 @@
 - [x] AC0.4 — `ci.yml` parses; `actionlint` 0 errors; jobs mirror `make lint` / `make test` (+ check --deploy, pip-audit, Trivy)
 
 ### Phase 1 — Domain models, seeds, admin
-- [ ] T1.1 · [ ] T1.2 · [ ] T1.3 · [ ] T1.4 · [ ] T1.5 · [ ] T1.6
+- [x] T1.1 models + translations + history + indexes — 2026-09-25 · all SPEC §2 models (26 + 2 historical), `translation.py` in core/institutions/content, simple-history on Article/Appeal after modeltranslation (history has `_uz_cyrl/_ru/_en`), HNSW + GIN indexes, hex/contrast validators (ADR-007 palette tested)
+- [x] T1.2 named migrations + extensions + triggers — 2026-09-25 · `core.0001_postgres_extensions` (vector, pg_trgm, unaccent), descriptive names, DB triggers keep `search_vector` (post text; article title A / lead+ru/en title B / body C); `makemigrations --check` clean
+- [ ] T1.3 seed_all (create-only) + sync_roles
+- [ ] T1.4 unfold admin for every model
+- [ ] T1.5 translit + sanitize + translit_po
+- [ ] T1.6 factories + selectors + query-count tests
 - [ ] AC1.1 · [ ] AC1.2 · [ ] AC1.3
 
 ### Phase 2 — Telegram ingestion
