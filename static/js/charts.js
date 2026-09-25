@@ -139,8 +139,10 @@
   }
 
   function init() {
-    var cards = document.querySelectorAll("[data-chart]");
+    // Only cards not seen yet: HTMX swaps (live panel polling, boosted navigation) call init again.
+    var cards = document.querySelectorAll("[data-chart]:not([data-chart-bound])");
     if (!cards.length) return;
+    charts = charts.filter(function (item) { return document.body.contains(item.chart.getDom()); });
     var observer = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
@@ -149,7 +151,10 @@
         }
       });
     }, { rootMargin: "200px" });
-    cards.forEach(function (card) { observer.observe(card); });
+    cards.forEach(function (card) {
+      card.setAttribute("data-chart-bound", "1");
+      observer.observe(card);
+    });
   }
 
   document.addEventListener("click", function (event) {

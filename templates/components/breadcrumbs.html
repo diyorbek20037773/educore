@@ -1,5 +1,5 @@
 {% load i18n web_tags %}{# crumbs: list of (label, url) — the last item is the current page #}
-<nav class="container-page pt-6" aria-label="{% translate 'Navigatsiya zanjiri' %}">
+<nav class="container-page pt-6" hx-boost="true" hx-indicator="#page-progress" aria-label="{% translate 'Navigatsiya zanjiri' %}">
   <ol class="breadcrumbs">
     <li><a href="{% url 'web:home' %}">{% translate "Bosh sahifa" %}</a></li>
     {% for label, url in crumbs %}

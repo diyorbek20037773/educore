@@ -44,6 +44,13 @@ def test_news_filters_and_infinite_scroll(client: Client, site_data: SiteData) -
     assert "topilmadi" in empty
 
 
+def test_boosted_and_history_requests_get_full_pages(client: Client, site_data: SiteData) -> None:
+    url = reverse("web:news_list")
+    boosted = client.get(url, HTTP_HX_REQUEST="true", HTTP_HX_BOOSTED="true").content.decode()
+    restore = client.get(url, HTTP_HX_REQUEST="true", HTTP_HX_HISTORY_RESTORE_REQUEST="true").content.decode()
+    assert "<html" in boosted and "<html" in restore
+
+
 def test_news_list_query_count_is_constant(client: Client, site_data: SiteData) -> None:
     url = reverse("web:news_list")
     client.get(url)  # warm the global context cache

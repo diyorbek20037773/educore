@@ -39,11 +39,13 @@
   <link rel="stylesheet" href="{% static 'css/output.css' %}">
   <script src="{% static 'vendor/htmx/htmx.min.js' %}" defer></script>
   <script src="{% static 'js/app.js' %}" defer></script>
+  <script src="{% static 'js/charts.js' %}" defer></script>
   <script src="{% static 'vendor/alpine/alpine-csp.min.js' %}" defer></script>
   {% block head %}{% endblock %}
   {% block jsonld %}{% endblock %}
 </head>
 <body class="min-h-screen bg-surface text-ink antialiased" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+  <div id="page-progress" class="page-progress" aria-hidden="true"></div>
   <a class="skip-link" href="#main">{% translate "Asosiy mazmunga oʻtish" %}</a>
   {% block header %}{% include "components/header.html" %}{% endblock %}
   <main id="main" tabindex="-1">

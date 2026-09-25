@@ -5,7 +5,7 @@
 
 ## Current focus
 - Phase: **4 — Public website** (Phase 3 done except HA3-dependent AC3.3)
-- Current task: T4.3
+- Current task: T4.4
 - Last updated: 2026-09-25, Claude Code
 
 ## Human actions needed (owner)
@@ -81,7 +81,8 @@
 ### Phase 4 — Public website
 - [x] T4.1 design system — 2026-09-25 · component layer in `assets/css/components.css`, Alpine CSP components, Lucide subset sprite (79 icons, 19 KB, `make icons`, aliases for renamed icons), PWA icons + default OG image (`make brand-images`), `charts.js` (lazy ECharts, fixed palette, table view, CSV, theme re-render), sparkline SVG tag
 - [x] T4.2 pages — 2026-09-25 · all SPEC §6 routes: home (11 blocks), institutions (list, 7 profile tabs, comparison + CSV + charts), news/long-reads (filters, infinite scroll, 410, staff preview, TOC), programs, admissions, hubs, professions, events (list/calendar/.ics), stories, analytics + 7 chart endpoints (JSON/CSV), appeal UI + tracking (backend Phase 6), search (FTS + trigram, Cyrillic→Latin), CMS pages, 404/410/500/503, RSS ×3, i18n sitemaps, robots/humans/manifest; 40 web tests; admin preview link re-asserted
-- [ ] T4.3 · [ ] T4.4 · [ ] T4.5 · [ ] T4.6 · [ ] T4.7
+- [x] T4.3 HTMX — 2026-09-25 · live panel polling + filter chips, filter forms (`hx-push-url`, `#results` indicator), infinite scroll (`revealed`), search suggestions (300 ms), lazy chart loading (bound once, survives polling), `hx-boost` on header/footer/breadcrumbs with a top progress bar; boosted and history-restore requests get full pages; drawer scroll lock cleared on boosted swaps
+- [ ] T4.4 · [ ] T4.5 · [ ] T4.6 · [ ] T4.7
 - [ ] AC4.1 · [ ] AC4.2 (scores: perf __ / seo __ / a11y __ / bp __) · [ ] AC4.3
 
 ### Phase 5 — Analytics

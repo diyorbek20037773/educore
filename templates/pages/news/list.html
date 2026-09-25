@@ -6,7 +6,7 @@
     <h1 class="text-3xl md:text-4xl">{% translate "Yangiliklar" %}</h1>
     <a class="more-link" href="{% url 'web:rss' %}">{% icon "rss" "size-4" %}RSS</a>
   </div>
-  <form class="card mt-6 flex flex-col gap-4 p-4" method="get" hx-get="{{ request.path }}" hx-target="#results" hx-select="#results" hx-swap="outerHTML" hx-push-url="true" hx-trigger="change, submit">
+  <form class="card mt-6 flex flex-col gap-4 p-4" method="get" hx-get="{{ request.path }}" hx-target="#results" hx-indicator="#results" hx-select="#results" hx-swap="outerHTML" hx-push-url="true" hx-trigger="change, submit">
     {% include "components/institution_chips.html" with current=filters.institution_slug %}
     <div class="flex flex-wrap items-end gap-3">
       {% include "components/filter_select.html" with name="category" label=_("Kategoriya") options=category_options current=filters.category_slug all_label=_("Barcha kategoriyalar") %}

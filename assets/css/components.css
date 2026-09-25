@@ -744,4 +744,26 @@
     font-weight: 600;
     color: var(--color-ink-2);
   }
+
+  .page-progress {
+    position: fixed;
+    inset: 0 auto auto 0;
+    z-index: 70;
+    height: 3px;
+    width: 0;
+    background: var(--color-gold);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .page-progress.htmx-request {
+    width: 85%;
+    opacity: 1;
+    transition: width 2s ease-out;
+  }
+
+  #results.htmx-request {
+    opacity: 0.55;
+    transition: opacity 150ms;
+  }
 }

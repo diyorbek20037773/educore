@@ -124,6 +124,13 @@
     });
   });
 
+  /* Boosted navigation replaces the body: never leave the page scroll-locked by an open drawer. */
+  document.addEventListener("htmx:beforeSwap", function (event) {
+    if (event.detail && event.detail.boosted) {
+      document.documentElement.classList.remove("overflow-hidden");
+    }
+  });
+
   /* Live panel: highlight newly swapped items (aria-live handles announcements). */
   document.addEventListener("htmx:afterSwap", function (event) {
     var target = event.detail && event.detail.target;

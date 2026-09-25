@@ -4,7 +4,7 @@
 <section class="container-page py-8">
   <h1 class="text-3xl md:text-4xl">{% translate "Kasblar" %}</h1>
   <p class="mt-2 max-w-2xl text-ink-2">{% translate "Huquqni muhofaza qilish sohasidagi kasblar va ularga olib boruvchi taʼlim yoʻllari." %}</p>
-  <form class="card mt-6 flex flex-col gap-4 p-4" method="get" role="search" hx-get="{{ request.path }}" hx-target="#results" hx-swap="outerHTML" hx-push-url="true" hx-trigger="change, keyup changed delay:300ms from:#f-q, submit">
+  <form class="card mt-6 flex flex-col gap-4 p-4" method="get" role="search" hx-get="{{ request.path }}" hx-target="#results" hx-indicator="#results" hx-swap="outerHTML" hx-push-url="true" hx-trigger="change, keyup changed delay:300ms from:#f-q, submit">
     <div class="form-field"><label for="f-q">{% translate "Kasb nomi" %}</label><input id="f-q" class="form-input" type="search" name="q" value="{{ filters.q }}" autocomplete="off"></div>
     {% include "components/institution_chips.html" with current=filters.inst %}
   </form>

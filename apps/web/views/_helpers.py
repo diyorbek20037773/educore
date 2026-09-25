@@ -42,4 +42,6 @@ def paginate(request: HttpRequest, queryset: Any, per_page: int = 24) -> Page:
 
 
 def is_htmx(request: HttpRequest) -> bool:
-    return bool(getattr(request, "htmx", False))
+    """True for HTMX fragment requests; boosted navigation and history restores need the full page."""
+    htmx = getattr(request, "htmx", None)
+    return bool(htmx) and not htmx.boosted and not htmx.history_restore_request
