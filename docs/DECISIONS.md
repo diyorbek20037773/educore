@@ -130,3 +130,13 @@ URLs are mounted at `/<ADMIN_URL_PATH>/account/…`, the admin login redirects t
 `RequireTwoFactorForStaff` sends unverified staff to setup (no device) or to the 2FA login (device, unverified).
 **Consequences:** admin attack surface is limited by the secret path, mandatory TOTP, axes lockout and the optional
 `ADMIN_IP_ALLOWLIST` (T7.2); the public CSP stays strict.
+
+## ADR-021 — Rule-based transliteration with a loanword list; soft sign is not reconstructed
+**Status:** accepted (2026-09-25). **Context:** FR-I18N-5 requires deterministic Latin↔Cyrillic with round-trip tests.
+Two things cannot be derived from Latin letters alone: `ц` in loanwords (`sirk`, `stansiya`) and `й`+vowel after a
+vowel (`mayor`), and the Cyrillic soft sign `ь` (`kompyuter` → `компьютер`, `fakultet` → `факультет`).
+**Decision:** letter rules + `LOANWORDS_TO_CYR` (extendable) + the `-tsiya → -ция` suffix rule; Cyrillic → Latin is
+fully rule-based (`ц` → `s`/`ts` by position). Words that need `ь` are not guaranteed; the golden corpus (207 words)
+excludes them and editors can correct the `_uz_cyrl` field in admin. Apostrophes are normalized to U+02BB/U+02BC
+before transliteration and by the sanitizer on every save (`SanitizedHTMLMixin`). **Consequences:** uz-cyrl is
+instant and free; rare loanwords may need a list entry.

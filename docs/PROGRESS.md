@@ -5,7 +5,7 @@
 
 ## Current focus
 - Phase: **1 — Domain models, seeds, admin** (Phase 0 done 2026-09-25)
-- Current task: T1.5
+- Current task: AC1.1–AC1.3
 - Last updated: 2026-09-25, Claude Code
 
 ## Human actions needed (owner)
@@ -50,8 +50,8 @@
 - [x] T1.2 named migrations + extensions + triggers — 2026-09-25 · `core.0001_postgres_extensions` (vector, pg_trgm, unaccent), descriptive names, DB triggers keep `search_vector` (post text; article title A / lead+ru/en title B / body C); `makemigrations --check` clean
 - [x] T1.3 seed_all (create-only) + sync_roles — 2026-09-25 · 5 institutions (+SVG logos, 15 contacts, 40 KPI placeholders), 5 sources, 16 categories, 12 tags, 21 professions, 25 programs (5/institution, 6 levels), 6 pages, 16 FAQ, 4 roles, 13 beat rows; second run creates 0 (ADR-018, ADR-019)
 - [x] T1.4 unfold admin for every model — 2026-09-25 · every model registered (filters/search/inlines/actions: mark verified, publish/archive/review/feature/pin, source resolve/backfill/gapcheck/disable, post skip, outbox retry), SPEC §8 sidebar, dashboard callback with live counts, 2FA-only admin (ADR-020). Pipeline actions (reprocess/regenerate/re-translate/merge) arrive with T2.6/T3.4
-- [ ] T1.5 translit + sanitize + translit_po
-- [ ] T1.6 factories + selectors + query-count tests
+- [x] T1.5 translit + sanitize + translit_po — 2026-09-25 · `apps/core/translit.py` (207-word golden corpus, both directions + round trip, URLs/mentions/hashtags kept, HTML text nodes only), `apps/core/sanitize.py` (nh3 allowlist, safe schemes, forced rel, apostrophes), `SanitizedHTMLMixin` on every rich field, `scripts/translit_po.py` keeps placeholders (ADR-021)
+- [x] T1.6 factories + selectors + query-count tests — 2026-09-25 · 31 factories (each validated with `full_clean`), content + institution selectors, `django_assert_num_queries` tests (lists = 1–2 queries regardless of size); 305 tests green
 - [ ] AC1.1 · [ ] AC1.2 · [ ] AC1.3
 
 ### Phase 2 — Telegram ingestion
