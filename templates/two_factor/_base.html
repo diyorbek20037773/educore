@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Boshqaruv paneliga kirish" %} | EDUCORE{% endblock %}
+{% block head %}<meta name="robots" content="noindex, nofollow">{% block extra_media %}{% endblock %}{% endblock %}
+{% block main %}
+  <section class="auth-shell">
+    <div class="auth-card">
+      <p class="auth-brand">EDUCORE</p>
+      {% block content %}{% endblock %}
+    </div>
+  </section>
+{% endblock %}
