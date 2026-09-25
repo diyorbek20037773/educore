@@ -5,13 +5,13 @@
 
 ## Current focus
 - Phase: **0 — Bootstrap**
-- Current task: T0.4
+- Current task: T1.1 (Phase 1)
 - Last updated: 2026-09-25, Claude Code
 
 ## Human actions needed (owner)
 | # | Needed for | What exactly | Status |
 |---|---|---|---|
-| HA0 | Phase 0 | GitHub repository + remote URL; Node ≥ 20 + Chrome on the dev machine (Lighthouse) | pending |
+| HA0 | Phase 0 | GitHub repository + remote URL; GNU make (`winget install ezwinports.make`); Chrome (Node 22 already present) | pending (asked 2026-09-25) |
 | HA2 | Phase 2 | `TELEGRAM_API_ID`, `TELEGRAM_API_HASH` from https://my.telegram.org → "API development tools"; dedicated phone number; run `make tg-login` and enter the code; a private test channel you administer | pending |
 | HA3 | Phase 3 | `ANTHROPIC_API_KEY` (https://platform.claude.com) | pending |
 | HA7 | Phase 7 | optional: Turnstile keys, ops bot token + chat id, SMTP, Sentry DSN | pending |
@@ -19,7 +19,13 @@
 | HA9 | Phase 9 | official About/contact texts; verify seeded programs/professions/metrics in admin | pending |
 
 ## Blockers
-- none
+- none (HA0 pending — work continues locally)
+
+## Open follow-ups
+- GNU make is not installed on the dev machine yet (asked in HA0); Phase 0 checks were run with the equivalent
+  `docker compose` commands from the Makefile.
+- Prod image is 1.45 GB uncompressed (target ≤ 900 MB): trim in T8.1 (static ffmpeg, drop gettext from runtime).
+- Gunicorn access/error logs are plain text; switch to JSON in T7.3.
 
 ## Phase checklist
 
@@ -27,14 +33,17 @@
 - [x] T0.1 repo + .gitignore — 2026-09-25 · `git init -b main`, `.gitignore` + `.gitattributes` (LF enforced for Docker scripts on Windows)
 - [x] T0.2 pyproject + uv lock — 2026-09-25 · 139 pkgs locked (Django 5.2.17, Telethon 1.45.0, Celery 5.6.3, anthropic 1.8.0, fastembed 0.8.1)
 - [x] T0.3 Django project + settings split + apps + custom User — 2026-09-25 · 11 apps, `accounts.User` (email login) + `0001_initial_user`; dev/test import OK, prod refuses missing env; ADR-013
-- [ ] T0.4 Dockerfile, entrypoint, compose.yaml, .env.example
-- [ ] T0.5 Makefile (all targets exist)
-- [ ] T0.6 Celery, beat, health endpoints, logging, metrics
-- [ ] T0.7 Tailwind, base.html, vendored HTMX/Alpine/ECharts/Lucide, fonts
-- [ ] T0.8 ruff/mypy/pytest/pre-commit/CI/README
-- [ ] T0.9 PROGRESS + DECISIONS initialized
+- [x] T0.4 Dockerfile, entrypoint, compose.yaml, .env.example — 2026-09-25 · multi-stage non-root image (uid 10001), `SKIP_WAIT`, dev ports via env (ADR-014), comments on own lines (docker `--env-file` safe)
+- [x] T0.5 Makefile (all targets exist) — 2026-09-25 · every §5 target; later-phase ones print "not yet implemented" or call commands added later
+- [x] T0.6 Celery, beat, health endpoints, logging, metrics — 2026-09-25 · 4 queues + routes, DB beat scheduler, `HealthMiddleware` (`/healthz`, `/readyz`), structlog JSON, `/metrics` IP allowlist
+- [x] T0.7 Tailwind, base.html, vendored HTMX/Alpine/ECharts/Lucide, fonts — 2026-09-25 · Tailwind 4.3.3, tokens §7.2, dark via `data-theme`, CSP nonce boot, htmx 2.0.11 / Alpine CSP 3.17.4 / ECharts 5.6.0 / Lucide 1.48.0, 12 subset woff2 (ADR-013, ADR-016)
+- [x] T0.8 ruff/mypy/pytest/pre-commit/CI/README — 2026-09-25 · pytest forced to `config.settings.test` (`--ds`), CI jobs lint/test/security/build(+Trivy)
+- [x] T0.9 PROGRESS + DECISIONS initialized — 2026-09-25 · ADR-013…ADR-017 appended
 - [ ] HA0 received (remote pushed)
-- [ ] AC0.1 · [ ] AC0.2 · [ ] AC0.3 · [ ] AC0.4
+- [x] AC0.1 — stack up (`migrate` exited 0, web healthy); `curl localhost:8100/healthz` → `{"status": "ok"}` [200] (also with a foreign Host); `/` renders `<h1 …>EDUCORE</h1>`, `/static/css/output.css` 200 (17.7 KB, token classes present)
+- [x] AC0.2 — `pytest` in web container: 7 passed (settings import, healthz, readyz public/allowlisted, metrics 403, celery ping, home); `ruff check` + `ruff format --check` clean
+- [x] AC0.3 — `docker build .` (prod, no dev deps) OK; container runs `gunicorn` as uid 10001, `/healthz` 200; `check --deploy` with prod settings → "no issues (0 silenced)"
+- [x] AC0.4 — `ci.yml` parses; `actionlint` 0 errors; jobs mirror `make lint` / `make test` (+ check --deploy, pip-audit, Trivy)
 
 ### Phase 1 — Domain models, seeds, admin
 - [ ] T1.1 · [ ] T1.2 · [ ] T1.3 · [ ] T1.4 · [ ] T1.5 · [ ] T1.6
@@ -80,4 +89,5 @@
 ## Log (newest first)
 | Date | Phase/Task | Note |
 |---|---|---|
+| 2026-09-25 | Phase 0 | bootstrap complete; AC0.1–AC0.4 green; HA0 pending |
 | — | — | project bootstrapped from the specification bundle |

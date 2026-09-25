@@ -78,3 +78,31 @@ locks. **Decision:** `@alpinejs/csp`; ECharts loaded on reveal; `redis` (noevict
 `@import "tailwindcss"`. CLAUDE.md §4 / T0.7 name `static/src/css/input.css`. **Decision:** keep the source at
 `assets/css/input.css` (outside `STATICFILES_DIRS`); the built file goes to `static/css/output.css` (git-ignored,
 built in the image). **Consequences:** the path in CLAUDE.md §4 is superseded by this ADR; `make tailwind*` use the setting.
+
+## ADR-014 — Configurable dev host ports with non-default values
+**Status:** accepted (2026-09-25). **Context:** the owner's machine already runs other stacks on 80/443, 6379, 8000,
+1025/8025 (Docker) and a native PostgreSQL on 5432; publishing the spec defaults would fail. **Decision:** dev
+`compose.yaml` publishes only web, db, mailpit and flower, bound to `127.0.0.1`, on ports from `.env`
+(`EDUCORE_WEB_PORT=8100`, `EDUCORE_DB_PORT=5442`, `EDUCORE_MAILPIT_PORT=8125`, `EDUCORE_FLOWER_PORT=5655`); Redis is not
+published. Inside the compose network every service keeps its standard port (web 8000, db 5432, redis 6379).
+**Consequences:** local URLs are `http://localhost:8100/…`; AC checks that mention `localhost:8000` use `8100`.
+Production is unaffected (only Caddy publishes 80/443).
+
+## ADR-015 — Celery 5.6 within the pinned 5.x line
+**Status:** accepted (2026-09-25). **Context:** CLAUDE.md §3 names Celery 5.5; the resolver picked 5.6.3 for
+`celery[redis]>=5.5,<6`. **Decision:** accept 5.6.x (same major, maintained, same configuration surface).
+**Consequences:** none for the design; revisit only on a 6.0 release.
+
+## ADR-016 — ECharts stays on 5.x; vendored assets and subset fonts are committed
+**Status:** accepted (2026-09-25). **Context:** ECharts 6 is the latest release, the spec pins ECharts 5; a clean
+clone must build offline-friendly images. **Decision:** vendor ECharts 5.6.0, htmx 2.0.11, Alpine CSP 3.17.4 and the
+Lucide 1.48.0 sprite under `static/vendor/` (versions in `VERSIONS.md`); fonts are Fontsource variable woff2 files
+(latin, latin-ext, cyrillic, cyrillic-ext; ≈ 290 KB total) committed under `static/fonts/` and regenerated with
+`make fonts` (`scripts/fetch_fonts.py` writes `assets/css/fonts.css`). Tailwind CLI pinned to 4.3.3.
+**Consequences:** no network needed for static assets at build time except the Tailwind binary download.
+
+## ADR-017 — Embedding model pre-download moves to Phase 3
+**Status:** accepted (2026-09-25). **Context:** DEVOPS §3 pre-downloads the fastembed model during the image build;
+nothing uses embeddings before Phase 3 and the ONNX file (~470 MB) dominates build time and image size.
+**Decision:** the Phase 0 image does not pre-download it; T3.1 adds the download step (cached in the
+`fastembed_cache` volume in dev). **Consequences:** Phase 0 images are smaller; AC0.3 is unaffected.
