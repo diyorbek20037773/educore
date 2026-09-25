@@ -5,7 +5,7 @@
 
 ## Current focus
 - Phase: **3 — AI editorial pipeline** (Phase 2 done except HA2-dependent AC2.2–AC2.4)
-- Current task: T3.2
+- Current task: T3.3
 - Last updated: 2026-09-25, Claude Code
 
 ## Human actions needed (owner)
@@ -69,7 +69,7 @@
 
 ### Phase 3 — AI editorial pipeline
 - [x] T3.1 providers, pricing, budget, runs, embeddings, schemas, prompts — 2026-09-25 · `AnthropicProvider` (structured outputs, cacheable system block, typed error mapping), deterministic `MockProvider`, pricing table (+`AI_PRICING_JSON`), atomic `AIBudgetDay` guard, `call_llm` (cache, budget, one schema retry, AIRun), fastembed e5-small custom model + `FakeEmbedding`, Pydantic schemas with word-boundary truncation, prompts `v1/*.md` (ADR-023, ADR-024)
-- [ ] T3.2 process_post stages
+- [x] T3.2 process_post stages — 2026-09-25 · triage → normalize → extract → embed → dedupe (pgvector ±72 h, confirm, merge + refresh) → generate → fact-guard (+1 regeneration) → media select → publish policy → article (history, uz-cyrl translit, tags, gallery) → structured upsert (Event/Admission/Story/Program/Profession) → post-publish (cache bump, ru/en queued, review alert); outbox semantics (lock renewal thread, 5 retries w/ backoff, terminal count, dead after 3, budget parking); idempotent per (post, hash, prompt version); 16 e2e tests
 - [ ] T3.3 translate, digest, ai_reprocess
 - [ ] T3.4 editorial admin
 - [ ] T3.5 golden set + ai-eval + tests
