@@ -5,7 +5,7 @@
 
 ## Current focus
 - Phase: **4 — Public website** (Phase 3 done except HA3-dependent AC3.3)
-- Current task: AC4.2 / AC4.3 (need a browser)
+- Current task: AC4.3 (visual check)
 - Last updated: 2026-09-25, Claude Code
 
 ## Human actions needed (owner)
@@ -87,7 +87,7 @@
 - [x] T4.6 perf/security — 2026-09-25 · home/global/chart caches keyed by `content_version`, WhiteNoise, WebP srcset + lazy images, fonts subset, ECharts lazy on reveal, strict nonce CSP (Alpine CSP, `allowEval=false`), `TrustedProxyMiddleware` first (ADR-025), maintenance 503, `Vary` on HTMX headers, Permissions-Policy
 - [x] T4.7 tests — 2026-09-25 · 58 web tests: every route 200 in 4 languages, partials are fragments, boosted/history requests get full pages, query counts constant as data grows (news, home, events, programs, professions, stories, search), chart contract + CSV, RSS/sitemap XML, JSON-LD validity, 404/410/preview, maintenance, proxy IP, headers, theme toggle; `apps/web` 83–100 % per module, overall 92 % (484 passed). Playwright e2e left optional
 - [x] AC4.1 — 2026-09-25 · `seed_demo` data, `scripts/crawl_check.py` (`make crawl`): **592 sitemap URLs** (all sections × uz/uz-cyrl/ru/en alternates) → all 200, no template leaks, stylesheet on every page; N+1 guarded by the constant-query tests (T4.7); serial dev timings ≈ 0.25 s/page
-- [ ] AC4.2 (scores: perf __ / seo __ / a11y __ / bp __) · [ ] AC4.3
+- [x] AC4.2 — 2026-09-25 · Lighthouse 12 mobile, headless Chrome, prod-like local run (gunicorn, `DEBUG=False`, WhiteNoise compressed statics, HTML uncompressed): `/` perf **96** / a11y **100** / bp **100** / seo **100**; article perf **98–99** / 100 / 100 / 100. Fixed on the way: muted-text contrast (ink-muted no longer used for text), "Yangilangan"/status badges use text-safe gold, CTA button background, footer tap targets, dev media serving (`SERVE_MEDIA`), hero image + serif font preloads. On the Django dev server (no compression) `/` scores perf 88 — re-measure behind Caddy in Phase 8 · [ ] AC4.3
 
 ### Phase 5 — Analytics
 - [ ] T5.1 · [ ] T5.2 · [ ] T5.3 · [ ] T5.4

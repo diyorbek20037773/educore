@@ -15,8 +15,8 @@
             <div class="min-w-0">
               <a href="{{ inst.get_absolute_url }}" class="font-semibold hover:underline">{{ inst.short_name }}</a>
               <div class="flex flex-wrap gap-x-3 text-xs text-ink-2">
-                {% if inst.telegram_username %}<a href="https://t.me/{{ inst.telegram_username }}" rel="noopener" target="_blank" class="hover:underline">Telegram</a>{% endif %}
-                {% if inst.website_url %}<a href="{{ inst.website_url }}" rel="noopener" target="_blank" class="hover:underline">{% translate "Veb-sayt" %}</a>{% endif %}
+                {% if inst.telegram_username %}<a href="https://t.me/{{ inst.telegram_username }}" rel="noopener" target="_blank" class="inline-block py-1.5 hover:underline">Telegram</a>{% endif %}
+                {% if inst.website_url %}<a href="{{ inst.website_url }}" rel="noopener" target="_blank" class="inline-block py-1.5 hover:underline">{% translate "Veb-sayt" %}</a>{% endif %}
               </div>
             </div>
           </li>

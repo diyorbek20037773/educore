@@ -83,7 +83,7 @@
     font-weight: 700;
     letter-spacing: 0.06em;
     text-transform: uppercase;
-    color: var(--color-ink-muted);
+    color: var(--color-ink-2);
   }
 
   .mega-menu {
@@ -221,7 +221,7 @@
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--color-ink-muted);
+    color: var(--color-ink-2);
   }
 
   /* --- institution palette (ADR-007) ---------------------------------------------------------- */
@@ -324,7 +324,7 @@
     padding: 0.1rem 0.45rem;
     font-size: var(--text-xs);
     font-weight: 700;
-    color: var(--color-warning);
+    color: #7c5e0a; /* text-safe gold (SPEC §7.2) */
   }
 
   [data-theme="dark"] .badge-updated {
@@ -643,7 +643,12 @@
   .status-announced,
   .status-in_progress {
     background: color-mix(in oklab, var(--color-warning) 14%, transparent);
-    color: var(--color-warning);
+    color: #7c5e0a;
+  }
+
+  [data-theme="dark"] .status-announced,
+  [data-theme="dark"] .status-in_progress {
+    color: #f0b95c;
   }
 
   .status-rejected {
@@ -656,7 +661,7 @@
     flex-wrap: wrap;
     gap: 0.25rem 1.25rem;
     font-size: var(--text-sm);
-    color: var(--color-ink-muted);
+    color: var(--color-ink-2);
   }
 
   .timeline li {
@@ -725,7 +730,7 @@
 
   .calendar .is-outside {
     background: var(--color-surface-2);
-    color: var(--color-ink-muted);
+    color: var(--color-ink-2);
   }
 
   .calendar .is-today .day-number {

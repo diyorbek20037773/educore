@@ -12,14 +12,14 @@
       <thead><tr><th scope="col">{% translate "Koʻrsatkich" %}</th>{% for inst in institutions %}<th scope="col" class="num"><span class="inst-dot inst-{{ inst.order }} mr-1.5 inline-block" aria-hidden="true"></span>{{ inst.abbreviation }}</th>{% endfor %}</tr></thead>
       <tbody>
         {% for row in rows %}
-          <tr><th scope="row">{{ row.label }}</th>{% for cell in row.cells %}<td class="num">{% if cell and cell.value is not None %}{{ cell.value|intcomma_uz }}<span class="block text-xs text-ink-muted">{{ cell.year }}{% if cell.needs_verification %}*{% endif %}</span>{% else %}—{% endif %}</td>{% endfor %}</tr>
+          <tr><th scope="row">{{ row.label }}</th>{% for cell in row.cells %}<td class="num">{% if cell and cell.value is not None %}{{ cell.value|intcomma_uz }}<span class="block text-xs text-ink-2">{{ cell.year }}{% if cell.needs_verification %}*{% endif %}</span>{% else %}—{% endif %}</td>{% endfor %}</tr>
         {% empty %}
           <tr><td colspan="6" class="text-center text-ink-2">{% translate "Koʻrsatkichlar tez orada qoʻshiladi." %}</td></tr>
         {% endfor %}
       </tbody>
     </table>
   </div>
-  <p class="mt-2 text-xs text-ink-muted">* {% translate "Maʼlumot tasdiqlanmoqda." %}</p>
+  <p class="mt-2 text-xs text-ink-2">* {% translate "Maʼlumot tasdiqlanmoqda." %}</p>
   {% if rows %}
   <div class="mt-10 grid gap-6 lg:grid-cols-2">
     {% url 'web:analytics_data' 'radar' as radar_url %}

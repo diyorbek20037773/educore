@@ -6,9 +6,10 @@ from django.conf import settings
 from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
 from django.contrib.sitemaps.views import sitemap
-from django.urls import include, path
+from django.urls import include, path, re_path
 from django.views.generic import RedirectView
 from django.views.i18n import set_language
+from django.views.static import serve
 from two_factor.urls import urlpatterns as two_factor_urls
 
 from apps.ops import views as ops_views
@@ -29,6 +30,11 @@ urlpatterns = [
     path("humans.txt", pages.humans_txt, name="humans_txt"),
     path("manifest.webmanifest", pages.manifest, name="manifest"),
 ]
+
+if settings.SERVE_MEDIA:  # dev and local prod-like checks; production serves /media/ from Caddy
+    urlpatterns += [
+        re_path(r"^media/(?P<path>.*)$", serve, {"document_root": settings.MEDIA_ROOT}),
+    ]
 
 urlpatterns += i18n_patterns(path("", include("apps.web.urls")), prefix_default_language=False)
 

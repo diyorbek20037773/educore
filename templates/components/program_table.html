@@ -5,7 +5,7 @@
   <tbody>
     {% for program in programs %}
       <tr>
-        <td><a class="font-semibold hover:underline" href="{{ program.get_absolute_url }}">{{ program.name }}</a>{% if program.code %} <span class="font-mono text-xs text-ink-muted">{{ program.code }}</span>{% endif %}</td>
+        <td><a class="font-semibold hover:underline" href="{{ program.get_absolute_url }}">{{ program.name }}</a>{% if program.code %} <span class="font-mono text-xs text-ink-2">{{ program.code }}</span>{% endif %}</td>
         {% if show_institution %}<td><span class="inst-dot inst-{{ program.institution.order }} mr-1.5 inline-block" aria-hidden="true"></span>{{ program.institution.abbreviation }}</td>{% endif %}
         <td>{{ program.get_level_display }}</td>
         <td>{{ program.get_form_display }}</td>

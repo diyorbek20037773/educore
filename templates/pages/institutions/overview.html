@@ -13,7 +13,7 @@
     {% if metrics %}
       <div class="grid grid-cols-2 gap-3">
         {% for m in metrics %}
-          <div class="card p-4"><p class="kpi-label">{{ m.get_key_display }}</p><p class="kpi-value">{{ m.value|intcomma_uz }}</p><p class="text-xs text-ink-muted">{{ m.year }}{% if m.needs_verification %} · {% translate "tasdiqlanmoqda" %}{% endif %}</p></div>
+          <div class="card p-4"><p class="kpi-label">{{ m.get_key_display }}</p><p class="kpi-value">{{ m.value|intcomma_uz }}</p><p class="text-xs text-ink-2">{{ m.year }}{% if m.needs_verification %} · {% translate "tasdiqlanmoqda" %}{% endif %}</p></div>
         {% endfor %}
       </div>
     {% endif %}

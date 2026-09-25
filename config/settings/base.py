@@ -206,6 +206,7 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = Path(env("MEDIA_ROOT", default=str(BASE_DIR / "data" / "media")))
 PRIVATE_ROOT = Path(env("PRIVATE_ROOT", default=str(BASE_DIR / "data" / "private")))
 MEDIA_BACKEND: str = env("MEDIA_BACKEND", default="local")
+SERVE_MEDIA: bool = env.bool("SERVE_MEDIA", default=DEBUG)
 STORAGES = {
     "default": {"BACKEND": "django.core.files.storage.FileSystemStorage"},
     "staticfiles": {"BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage"},
