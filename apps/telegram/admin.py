@@ -155,7 +155,7 @@ class TelegramPostAdmin(EducoreAdmin):
     inlines = (MediaInline,)
     readonly_fields = ("raw_json_pretty", "telegram_link", "content_hash", "embedding_state")
     exclude = ("raw_json", "embedding", "entities")
-    actions = ("mark_skipped",)
+    actions = ("reprocess", "mark_skipped")
 
     @admin.display(description=_("Xom maʼlumot (JSON)"))
     def raw_json_pretty(self, obj: TelegramPost) -> str:
@@ -170,6 +170,16 @@ class TelegramPostAdmin(EducoreAdmin):
     @admin.display(description=_("Embedding"))
     def embedding_state(self, obj: TelegramPost) -> str:
         return _("bor") if obj.embedding is not None else "—"
+
+    @admin.action(description=_("Qayta ishlash (AI)"))
+    def reprocess(self, request: HttpRequest, queryset: QuerySet[TelegramPost]) -> None:
+        from config.celery import app
+
+        for post in queryset:
+            app.send_task("ai.process_post", args=[post.pk, "telegram.post.edited", None, True], queue="ai")
+        self.message_user(
+            request, _("%(n)d ta post navbatga qoʻyildi.") % {"n": queryset.count()}, messages.INFO
+        )
 
     @admin.action(description=_("Oʻtkazib yuborish (skip)"))
     def mark_skipped(self, request: HttpRequest, queryset: QuerySet[TelegramPost]) -> None:

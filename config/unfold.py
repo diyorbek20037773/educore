@@ -25,6 +25,7 @@ SIDEBAR_NAVIGATION: list[dict[str, Any]] = [
         "title": _("Tahririyat"),
         "collapsible": True,
         "items": [
+            _item(_("Koʻrik navbati"), "rate_review", _cl("content_reviewarticle")),
             _item(_("Maqolalar"), "article", _cl("content_article")),
             _item(_("Kategoriyalar"), "category", _cl("content_category")),
             _item(_("Teglar"), "sell", _cl("content_tag")),

@@ -5,7 +5,7 @@
 
 ## Current focus
 - Phase: **3 — AI editorial pipeline** (Phase 2 done except HA2-dependent AC2.2–AC2.4)
-- Current task: T3.4
+- Current task: T3.5
 - Last updated: 2026-09-25, Claude Code
 
 ## Human actions needed (owner)
@@ -26,6 +26,7 @@
   `docker compose` commands from the Makefile.
 - Prod image is 1.45 GB uncompressed (target ≤ 900 MB): trim in T8.1 (static ffmpeg, drop gettext from runtime).
 - Gunicorn access/error logs are plain text; switch to JSON in T7.3.
+- Re-assert the admin preview link (`?preview=1`) once `web:news_detail` exists (T4.2).
 
 ## Phase checklist
 
@@ -71,7 +72,7 @@
 - [x] T3.1 providers, pricing, budget, runs, embeddings, schemas, prompts — 2026-09-25 · `AnthropicProvider` (structured outputs, cacheable system block, typed error mapping), deterministic `MockProvider`, pricing table (+`AI_PRICING_JSON`), atomic `AIBudgetDay` guard, `call_llm` (cache, budget, one schema retry, AIRun), fastembed e5-small custom model + `FakeEmbedding`, Pydantic schemas with word-boundary truncation, prompts `v1/*.md` (ADR-023, ADR-024)
 - [x] T3.2 process_post stages — 2026-09-25 · triage → normalize → extract → embed → dedupe (pgvector ±72 h, confirm, merge + refresh) → generate → fact-guard (+1 regeneration) → media select → publish policy → article (history, uz-cyrl translit, tags, gallery) → structured upsert (Event/Admission/Story/Program/Profession) → post-publish (cache bump, ru/en queued, review alert); outbox semantics (lock renewal thread, 5 retries w/ backoff, terminal count, dead after 3, budget parking); idempotent per (post, hash, prompt version); 16 e2e tests
 - [x] T3.3 translate, digest, ai_reprocess — 2026-09-25 · `ai.translate_article` (tag-sequence check + one retry, `manual` never overwritten, failures never block uz), `ai.weekly_digest` (previous Mon–Sun, to review), `ai.prune_runs`, `ai_reprocess --post/--failed/--article/--force/--stage translate` (closes dead outbox rows on success)
-- [ ] T3.4 editorial admin
+- [x] T3.4 editorial admin — 2026-09-25 · "Koʻrik navbati" proxy (sidebar landing, most important first), article actions regenerate / re-translate ru·en / merge duplicates (`content/services/editorial.py`), original Telegram text side panel, preview link, post "reprocess" action, `ai.regenerate_article` task; AI runs/budget/clusters admins from T1.4
 - [ ] T3.5 golden set + ai-eval + tests
 - [ ] HA3 received
 - [ ] AC3.1 · [ ] AC3.2 · [ ] AC3.3 (latency measured: ___ s; cost/post: $___)

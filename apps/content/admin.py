@@ -5,6 +5,7 @@ from __future__ import annotations
 from django.contrib import admin, messages
 from django.db.models import QuerySet
 from django.http import HttpRequest
+from django.urls import NoReverseMatch
 from django.utils import timezone
 from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
@@ -20,6 +21,7 @@ from apps.content.models import (
     ArticleStatus,
     Category,
     Event,
+    ReviewArticle,
     Story,
     Tag,
 )
@@ -92,12 +94,30 @@ class ArticleAdmin(SimpleHistoryAdmin, TranslatedAdmin):
     autocomplete_fields = ("category", "primary_institution", "tags")
     filter_horizontal = ("institutions",)
     raw_id_fields = ("cover_media", "cluster", "author", "editor")
-    readonly_fields = ("ai_meta", "translation_status", "view_count", "edited_at")
+    readonly_fields = (
+        "source_panel",
+        "preview_link",
+        "ai_meta",
+        "translation_status",
+        "view_count",
+        "edited_at",
+    )
     inlines = (ArticleSourceInline, ArticleMediaInline)
     rich_text_fields = ("body",)
-    actions = ("publish", "archive", "send_to_review", "feature", "pin")
+    actions = (
+        "publish",
+        "archive",
+        "send_to_review",
+        "feature",
+        "pin",
+        "regenerate",
+        "retranslate_ru",
+        "retranslate_en",
+        "merge_duplicates",
+    )
     fieldsets = (
-        (None, {"fields": ("title", "slug", "lead", "body")}),
+        (None, {"fields": ("preview_link", "title", "slug", "lead", "body")}),
+        (_("Asl manba (Telegram)"), {"fields": ("source_panel",)}),
         (
             _("Tasnif"),
             {
@@ -172,6 +192,107 @@ class ArticleAdmin(SimpleHistoryAdmin, TranslatedAdmin):
     def pin(self, request: HttpRequest, queryset: QuerySet[Article]) -> None:
         n = queryset.update(is_pinned=True)
         self.message_user(request, _("%(n)d ta maqola qadaldi.") % {"n": n}, messages.SUCCESS)
+
+    @admin.display(description=_("Koʻrish"))
+    def preview_link(self, obj: Article) -> str:
+        if not obj.pk:
+            return "—"
+        try:
+            url = obj.get_absolute_url()
+        except NoReverseMatch:  # public pages arrive in Phase 4
+            return "—"
+        return format_html(
+            '<a href="{}?preview=1" target="_blank" rel="noopener">{}</a>', url, _("Saytda koʻrish")
+        )
+
+    @admin.display(description=_("Asl Telegram matni"))
+    def source_panel(self, obj: Article) -> str:
+        sources = (
+            obj.sources.select_related("post__source").order_by("-is_primary", "added_at") if obj.pk else []
+        )
+        parts = [
+            format_html(
+                '<div style="margin-bottom:12px"><strong>@{}</strong> · '
+                '<a href="{}" target="_blank" rel="noopener">'
+                '{}</a><pre style="white-space:pre-wrap;font-size:13px;margin-top:4px">{}</pre></div>',
+                s.post.source.username,
+                s.post.telegram_url,
+                _("ochish"),
+                s.post.text,
+            )
+            for s in sources
+        ]
+        return format_html("{}", "".join(str(p) for p in parts)) if parts else "—"
+
+    def _send(self, name: str, args: list[object]) -> None:
+        from config.celery import app
+
+        app.send_task(name, args=args, queue="ai")
+
+    @admin.action(description=_("Qayta yaratish (AI)"))
+    def regenerate(self, request: HttpRequest, queryset: QuerySet[Article]) -> None:
+        for article in queryset:
+            self._send("ai.regenerate_article", [article.pk])
+        self.message_user(
+            request, _("%(n)d ta maqola navbatga qoʻyildi.") % {"n": queryset.count()}, messages.INFO
+        )
+
+    def _retranslate(self, request: HttpRequest, queryset: QuerySet[Article], lang: str) -> None:
+        n = 0
+        for article in queryset.filter(status=ArticleStatus.PUBLISHED):
+            self._send("ai.translate_article", [article.pk, lang])
+            n += 1
+        self.message_user(request, _("%(n)d ta tarjima navbatga qoʻyildi.") % {"n": n}, messages.INFO)
+
+    @admin.action(description=_("Qayta tarjima: ruscha"))
+    def retranslate_ru(self, request: HttpRequest, queryset: QuerySet[Article]) -> None:
+        self._retranslate(request, queryset, "ru")
+
+    @admin.action(description=_("Qayta tarjima: inglizcha"))
+    def retranslate_en(self, request: HttpRequest, queryset: QuerySet[Article]) -> None:
+        self._retranslate(request, queryset, "en")
+
+    @admin.action(description=_("Dublikatlarni birlashtirish (eng eskisiga)"))
+    def merge_duplicates(self, request: HttpRequest, queryset: QuerySet[Article]) -> None:
+        from apps.content.services.editorial import merge_articles
+
+        articles = list(queryset.order_by("source_published_at", "pk"))
+        if len(articles) < 2:
+            self.message_user(request, _("Kamida ikkita maqolani tanlang."), messages.WARNING)
+            return
+        target, *duplicates = articles
+        moved = merge_articles(target, duplicates)
+        self._send("ai.regenerate_article", [target.pk])
+        self.message_user(
+            request,
+            _("%(n)d ta manba «%(t)s» maqolasiga koʻchirildi.") % {"n": moved, "t": target},
+            messages.SUCCESS,
+        )
+
+
+@admin.register(ReviewArticle)
+class ReviewQueueAdmin(ArticleAdmin):
+    """The editors' landing page: everything waiting for a human decision, most important first."""
+
+    list_display = (
+        "title",
+        "review_reason",
+        "importance",
+        "primary_institution",
+        "category",
+        "ai_confidence",
+        "created_at",
+    )
+    list_filter = ("review_reason", "primary_institution", "category", "content_type")
+    date_hierarchy = None
+
+    def get_queryset(self, request: HttpRequest) -> QuerySet[Article]:
+        return (
+            super()
+            .get_queryset(request)
+            .filter(status=ArticleStatus.REVIEW)
+            .order_by("-importance", "created_at")
+        )
 
 
 @admin.register(Event)

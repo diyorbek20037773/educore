@@ -174,3 +174,16 @@ def prune_runs(days: int = 180) -> int:
 
     cutoff = timezone.now() - timedelta(days=days)
     return AIRun.objects.filter(created_at__lt=cutoff).exclude(output=None).update(output=None)
+
+
+@shared_task(bind=True, name="ai.regenerate_article", acks_late=True, max_retries=MAX_RETRIES)
+def regenerate_article(self: Any, article_id: int) -> dict[str, Any]:
+    """Admin action / merge refresh: rewrite an article from all of its sources."""
+    try:
+        return runner.regenerate_article(article_id).as_dict()
+    except ProviderTransientError as exc:
+        if self.request.retries < self.max_retries:
+            raise self.retry(exc=exc, countdown=backoff_seconds(self.request.retries)) from exc
+        return {"status": "failed", "error": str(exc)}
+    except (ProviderPermanentError, BudgetExhaustedError) as exc:
+        return {"status": "failed", "error": str(exc)}

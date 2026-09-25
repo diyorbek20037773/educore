@@ -454,3 +454,12 @@ class Story(SanitizedHTMLMixin, TimeStampedModel):
 
     def get_absolute_url(self) -> str:
         return reverse("web:story_detail", kwargs={"slug": self.slug})
+
+
+class ReviewArticle(Article):
+    """Proxy for the editorial review queue (the Tahririyat landing page, SPEC §8)."""
+
+    class Meta:
+        proxy = True
+        verbose_name = _("review queue item")
+        verbose_name_plural = _("review queue")

@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from modeltranslation.translator import TranslationOptions, register
 
-from apps.content.models import Admission, Article, ArticleMedia, Category, Event, Story, Tag
+from apps.content.models import Admission, Article, ArticleMedia, Category, Event, ReviewArticle, Story, Tag
 
 
 @register(Category)
@@ -40,3 +40,10 @@ class AdmissionTranslationOptions(TranslationOptions):
 @register(Story)
 class StoryTranslationOptions(TranslationOptions):
     fields = ("title", "person_role", "quote", "body")
+
+
+@register(ReviewArticle)
+class ReviewArticleTranslationOptions(TranslationOptions):
+    """Proxy of Article (review queue); modeltranslation reuses the parent's columns."""
+
+    fields = ("title", "lead", "body", "seo_title", "seo_description")
