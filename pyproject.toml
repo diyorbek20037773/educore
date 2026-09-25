@@ -84,6 +84,7 @@ ignore = [
 [tool.ruff.lint.per-file-ignores]
 "**/tests/**" = ["S105", "S106", "S311", "N802"]
 "config/settings/*.py" = ["F405", "F403"]
+"apps/core/seeds/*.py" = ["E501"]  # long Uzbek data strings
 
 [tool.ruff.lint.isort]
 known-first-party = ["apps", "config"]
