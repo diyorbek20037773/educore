@@ -71,3 +71,10 @@ locks. **Decision:** `@alpinejs/csp`; ECharts loaded on reveal; `redis` (noevict
 `worker-ai -c 1` holds the model, `worker-media -c 1`, `worker -c 2` for the rest. **Consequences:** predictable memory (< 6 GB total).
 
 <!-- Claude Code: append ADR-013+ below as decisions are made during implementation. -->
+
+## ADR-013 — Tailwind source CSS lives in `assets/css/input.css`, not under `static/`
+**Status:** accepted (2026-09-25). **Context:** `django-tailwind-cli` 4.8 warns (W001) that a source CSS inside
+`STATICFILES_DIRS` is collected by `collectstatic`, and `CompressedManifestStaticFilesStorage` then fails on its
+`@import "tailwindcss"`. CLAUDE.md §4 / T0.7 name `static/src/css/input.css`. **Decision:** keep the source at
+`assets/css/input.css` (outside `STATICFILES_DIRS`); the built file goes to `static/css/output.css` (git-ignored,
+built in the image). **Consequences:** the path in CLAUDE.md §4 is superseded by this ADR; `make tailwind*` use the setting.

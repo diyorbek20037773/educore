@@ -5,8 +5,8 @@
 
 ## Current focus
 - Phase: **0 — Bootstrap**
-- Current task: T0.1
-- Last updated: (date, by whom)
+- Current task: T0.4
+- Last updated: 2026-09-25, Claude Code
 
 ## Human actions needed (owner)
 | # | Needed for | What exactly | Status |
@@ -26,7 +26,7 @@
 ### Phase 0 — Bootstrap
 - [x] T0.1 repo + .gitignore — 2026-09-25 · `git init -b main`, `.gitignore` + `.gitattributes` (LF enforced for Docker scripts on Windows)
 - [x] T0.2 pyproject + uv lock — 2026-09-25 · 139 pkgs locked (Django 5.2.17, Telethon 1.45.0, Celery 5.6.3, anthropic 1.8.0, fastembed 0.8.1)
-- [ ] T0.3 Django project + settings split + apps + custom User
+- [x] T0.3 Django project + settings split + apps + custom User — 2026-09-25 · 11 apps, `accounts.User` (email login) + `0001_initial_user`; dev/test import OK, prod refuses missing env; ADR-013
 - [ ] T0.4 Dockerfile, entrypoint, compose.yaml, .env.example
 - [ ] T0.5 Makefile (all targets exist)
 - [ ] T0.6 Celery, beat, health endpoints, logging, metrics

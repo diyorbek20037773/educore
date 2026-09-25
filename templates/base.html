@@ -1,0 +1,12 @@
+{% load static i18n %}<!doctype html>
+{% get_current_language as LANGUAGE_CODE %}
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}EDUCORE{% endblock %}</title>
+</head>
+<body>
+  {% block content %}{% endblock %}
+</body>
+</html>
