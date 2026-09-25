@@ -25,7 +25,7 @@
 
 ### Phase 0 — Bootstrap
 - [x] T0.1 repo + .gitignore — 2026-09-25 · `git init -b main`, `.gitignore` + `.gitattributes` (LF enforced for Docker scripts on Windows)
-- [ ] T0.2 pyproject + uv lock
+- [x] T0.2 pyproject + uv lock — 2026-09-25 · 139 pkgs locked (Django 5.2.17, Telethon 1.45.0, Celery 5.6.3, anthropic 1.8.0, fastembed 0.8.1)
 - [ ] T0.3 Django project + settings split + apps + custom User
 - [ ] T0.4 Dockerfile, entrypoint, compose.yaml, .env.example
 - [ ] T0.5 Makefile (all targets exist)

@@ -1,0 +1,120 @@
+[project]
+name = "educore"
+version = "0.1.0"
+description = "Unified official information & analytics platform of five law-enforcement education institutions of Uzbekistan"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    # Core
+    "django>=5.2,<5.3",
+    "django-environ>=0.12",
+    "psycopg[binary,pool]>=3.2",
+    "gunicorn>=23.0",
+    "whitenoise[brotli]>=6.9",
+    # Background jobs
+    "celery[redis]>=5.5,<6",
+    "django-celery-beat>=2.8",
+    "django-celery-results>=2.6",
+    "redis>=5.2",
+    # Telegram (MTProto user session)
+    "telethon>=1.45,<2",
+    # AI
+    "anthropic>=0.60",
+    "pydantic>=2.10,<3",
+    "fastembed>=0.7",
+    "pgvector>=0.4",
+    # Web / UI
+    "django-htmx>=1.23",
+    "django-tailwind-cli>=4.2",
+    "django-unfold>=0.60",
+    "django-modeltranslation>=0.19",
+    "django-ninja>=1.4",
+    "django-cors-headers>=4.7",
+    "django-simple-history>=3.8",
+    "icalendar>=6.1",
+    # Storage / media
+    "django-storages[s3]>=1.14",
+    "pillow>=11.0",
+    # Safety / security
+    "nh3>=0.2.20",
+    "django-ratelimit>=4.1",
+    "django-csp>=4.0",
+    "django-otp>=1.6",
+    "django-two-factor-auth>=1.17",
+    "django-axes[ipware]>=8.0",
+    "python-magic>=0.4.27",
+    "httpx>=0.28",
+    # Observability
+    "structlog>=25.1",
+    "django-structlog>=9.0",
+    "django-prometheus>=2.3",
+    "sentry-sdk[django,celery]>=2.20",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3",
+    "pytest-django>=4.10",
+    "pytest-cov>=6.0",
+    "factory-boy>=3.3",
+    "freezegun>=1.5",
+    "respx>=0.22",
+    "ruff>=0.9",
+    "mypy>=1.15",
+    "django-stubs[compatible-mypy]>=5.1",
+    "pre-commit>=4.1",
+    "django-debug-toolbar>=5.0",
+]
+
+[tool.uv]
+package = false
+
+[tool.ruff]
+line-length = 110
+target-version = "py312"
+extend-exclude = ["_bundle_original", "static/vendor", "**/migrations/*.py"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "N", "S", "DJ", "ASYNC"]
+ignore = [
+    "S101",   # assert is fine in tests and type narrowing
+    "DJ001",  # nullable CharField is used deliberately for optional external data
+]
+
+[tool.ruff.lint.per-file-ignores]
+"**/tests/**" = ["S105", "S106", "S311", "N802"]
+"config/settings/*.py" = ["F405", "F403"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["apps", "config"]
+
+[tool.mypy]
+python_version = "3.12"
+plugins = ["mypy_django_plugin.main"]
+ignore_missing_imports = true
+warn_unused_ignores = true
+check_untyped_defs = true
+exclude = ["migrations/", "_bundle_original/", "static/"]
+
+[tool.django-stubs]
+django_settings_module = "config.settings.test"
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "config.settings.test"
+python_files = ["test_*.py"]
+addopts = "-q --strict-markers"
+testpaths = ["apps"]
+markers = [
+    "slow: long-running tests",
+]
+filterwarnings = [
+    "ignore::DeprecationWarning:celery.*",
+]
+
+[tool.coverage.run]
+source = ["apps"]
+omit = ["*/migrations/*", "*/tests/*"]
+
+[tool.coverage.report]
+skip_empty = true
+show_missing = false
