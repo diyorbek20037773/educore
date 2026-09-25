@@ -5,7 +5,7 @@
 
 ## Current focus
 - Phase: **1 — Domain models, seeds, admin** (Phase 0 done 2026-09-25)
-- Current task: T1.4
+- Current task: T1.5
 - Last updated: 2026-09-25, Claude Code
 
 ## Human actions needed (owner)
@@ -49,7 +49,7 @@
 - [x] T1.1 models + translations + history + indexes — 2026-09-25 · all SPEC §2 models (26 + 2 historical), `translation.py` in core/institutions/content, simple-history on Article/Appeal after modeltranslation (history has `_uz_cyrl/_ru/_en`), HNSW + GIN indexes, hex/contrast validators (ADR-007 palette tested)
 - [x] T1.2 named migrations + extensions + triggers — 2026-09-25 · `core.0001_postgres_extensions` (vector, pg_trgm, unaccent), descriptive names, DB triggers keep `search_vector` (post text; article title A / lead+ru/en title B / body C); `makemigrations --check` clean
 - [x] T1.3 seed_all (create-only) + sync_roles — 2026-09-25 · 5 institutions (+SVG logos, 15 contacts, 40 KPI placeholders), 5 sources, 16 categories, 12 tags, 21 professions, 25 programs (5/institution, 6 levels), 6 pages, 16 FAQ, 4 roles, 13 beat rows; second run creates 0 (ADR-018, ADR-019)
-- [ ] T1.4 unfold admin for every model
+- [x] T1.4 unfold admin for every model — 2026-09-25 · every model registered (filters/search/inlines/actions: mark verified, publish/archive/review/feature/pin, source resolve/backfill/gapcheck/disable, post skip, outbox retry), SPEC §8 sidebar, dashboard callback with live counts, 2FA-only admin (ADR-020). Pipeline actions (reprocess/regenerate/re-translate/merge) arrive with T2.6/T3.4
 - [ ] T1.5 translit + sanitize + translit_po
 - [ ] T1.6 factories + selectors + query-count tests
 - [ ] AC1.1 · [ ] AC1.2 · [ ] AC1.3

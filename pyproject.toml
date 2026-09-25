@@ -111,6 +111,7 @@ markers = [
 filterwarnings = [
     "ignore::DeprecationWarning:celery.*",
     "ignore:No directory at:UserWarning",
+    "ignore:The default scheme will be changed:django.utils.deprecation.RemovedInDjango60Warning",
 ]
 
 [tool.coverage.run]

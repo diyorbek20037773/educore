@@ -96,9 +96,10 @@ MIDDLEWARE = [
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django_otp.middleware.OTPMiddleware",
+    "apps.accounts.middleware.RequireTwoFactorForStaff",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "csp.middleware.CSPMiddleware",
+    "apps.core.middleware.EducoreCSPMiddleware",
     "django_htmx.middleware.HtmxMiddleware",
     "simple_history.middleware.HistoryRequestMiddleware",
     "django_structlog.middlewares.RequestMiddleware",
@@ -313,6 +314,8 @@ SENTRY_DSN: str = env("SENTRY_DSN", default="")
 LOG_LEVEL: str = env("LOG_LEVEL", default="INFO")
 PROMETHEUS_EXPORT_MIGRATIONS = False
 
+from config.unfold import SIDEBAR_NAVIGATION  # noqa: E402
+
 # --- Unfold admin ----------------------------------------------------------------------------------
 UNFOLD = {
     "SITE_TITLE": "EDUCORE",
@@ -320,6 +323,8 @@ UNFOLD = {
     "SITE_SYMBOL": "school",
     "SHOW_HISTORY": True,
     "SHOW_VIEW_ON_SITE": True,
+    "DASHBOARD_CALLBACK": "apps.ops.dashboard.dashboard_callback",
+    "SIDEBAR": {"show_search": True, "show_all_applications": True, "navigation": SIDEBAR_NAVIGATION},
     "COLORS": {
         "primary": {
             "50": "232 238 248",

@@ -120,3 +120,13 @@ arrive in later phases; beat would otherwise publish unknown task names every fe
 official sites (gov.uz, akademiya.fvv.uz, akadmvd.uz, proacademy.uz, mgjxu.uz, customs.uz); every institution,
 program, profession and metric is `needs_verification=True`; official program classifier codes and KPI values are
 left empty rather than guessed. **Consequences:** the owner completes them in admin (HA9); the site shows "—".
+
+## ADR-020 — Relaxed CSP for the admin only; 2FA views under the secret admin path
+**Status:** accepted (2026-09-25). **Context:** Unfold renders Alpine expressions and inline styles that need
+`unsafe-eval`/`unsafe-inline`; SPEC NFR-SEC-2c requires a strict nonce CSP for the site. **Decision:**
+`EducoreCSPMiddleware` replaces `script-src`/`style-src`/`img-src` (without nonce, so `unsafe-inline` is honoured) only
+for paths under `/<ADMIN_URL_PATH>/`; the public site keeps `script-src 'self' 'nonce-…'`. django-two-factor-auth
+URLs are mounted at `/<ADMIN_URL_PATH>/account/…`, the admin login redirects there, and
+`RequireTwoFactorForStaff` sends unverified staff to setup (no device) or to the 2FA login (device, unverified).
+**Consequences:** admin attack surface is limited by the secret path, mandatory TOTP, axes lockout and the optional
+`ADMIN_IP_ALLOWLIST` (T7.2); the public CSP stays strict.
