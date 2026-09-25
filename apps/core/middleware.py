@@ -13,6 +13,25 @@ from apps.core import health
 from apps.core.net import ip_in_cidrs
 
 
+class TrustedProxyMiddleware:
+    """Set `REMOTE_ADDR` from `X-Forwarded-For` only when the direct peer is our reverse proxy (NFR-SEC-2b).
+
+    Must be first in the stack: rate limits, axes, IP allowlists and page-view hashing all read
+    `REMOTE_ADDR`. The first hop is the client as seen by Caddy; spoofed headers from elsewhere are ignored.
+    """
+
+    def __init__(self, get_response: Callable[[HttpRequest], HttpResponse]) -> None:
+        self.get_response = get_response
+
+    def __call__(self, request: HttpRequest) -> HttpResponse:
+        forwarded = request.META.get("HTTP_X_FORWARDED_FOR", "")
+        if forwarded and ip_in_cidrs(request.META.get("REMOTE_ADDR"), settings.TRUSTED_PROXY_CIDRS):
+            client = forwarded.split(",")[0].strip()
+            if ip_in_cidrs(client, ("0.0.0.0/0", "::/0")):
+                request.META["REMOTE_ADDR"] = client
+        return self.get_response(request)
+
+
 class HealthMiddleware:
     """Answer `/healthz` and `/readyz` before host validation and SSL redirects.
 

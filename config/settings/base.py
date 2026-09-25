@@ -85,6 +85,7 @@ LOCAL_APPS = [
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 MIDDLEWARE = [
+    "apps.core.middleware.TrustedProxyMiddleware",  # first: everything below reads REMOTE_ADDR
     "django_prometheus.middleware.PrometheusBeforeMiddleware",
     "apps.core.middleware.HealthMiddleware",  # before Security/Common: any Host, no SSL redirect
     "django.middleware.security.SecurityMiddleware",
@@ -101,6 +102,8 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "apps.core.middleware.EducoreCSPMiddleware",
     "django_htmx.middleware.HtmxMiddleware",
+    "apps.web.middleware.HtmxVaryMiddleware",
+    "apps.web.middleware.MaintenanceMiddleware",
     "simple_history.middleware.HistoryRequestMiddleware",
     "django_structlog.middlewares.RequestMiddleware",
     "axes.middleware.AxesMiddleware",
@@ -170,7 +173,9 @@ AXES_FAILURE_LIMIT = 5
 AXES_COOLOFF_TIME = 0.5  # hours = 30 min
 AXES_LOCKOUT_PARAMETERS = [["username", "ip_address"]]
 AXES_RESET_ON_SUCCESS = True
-AXES_IPWARE_PROXY_COUNT = 1
+# TrustedProxyMiddleware already resolved the client into REMOTE_ADDR (ADR-025).
+AXES_IPWARE_PROXY_COUNT = 0
+AXES_IPWARE_META_PRECEDENCE_ORDER = ("REMOTE_ADDR",)
 
 # --- i18n / time -----------------------------------------------------------------------------------
 LANGUAGE_CODE = "uz"

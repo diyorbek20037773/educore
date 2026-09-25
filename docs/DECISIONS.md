@@ -174,3 +174,13 @@ so retries resume where they failed. `EMBEDDING_BACKEND=auto` uses deterministic
 `AI_PROVIDER=mock` (no 470 MB download in dev/CI) and fastembed otherwise; production images bake the model in with
 `--build-arg PREFETCH_EMBEDDINGS=1` (`manage.py ai_warm_embeddings`). Mock runs are logged with cost 0 so they never
 consume the real daily budget. **Consequences:** AS-7 is reproducible; dev stays fully offline.
+
+## ADR-025 — Client IP resolved once by TrustedProxyMiddleware; axes reads REMOTE_ADDR only
+**Status:** accepted (2026-09-25). **Context:** SPEC NFR-SEC-2 sets `AXES_IPWARE_PROXY_COUNT=1`, while NFR-SEC-2b
+makes `TrustedProxyMiddleware` rewrite `REMOTE_ADDR` from the first `X-Forwarded-For` hop (only when the peer is in
+`TRUSTED_PROXY_CIDRS`) and says everything afterwards uses `REMOTE_ADDR`. With ipware, a proxy count of 1 over
+`REMOTE_ADDR` alone yields no IP at all, and reading `X-Forwarded-For` again would trust spoofed headers from
+untrusted peers. **Decision:** the middleware is first in the stack; axes uses
+`AXES_IPWARE_META_PRECEDENCE_ORDER=("REMOTE_ADDR",)` with `AXES_IPWARE_PROXY_COUNT=0`. Rate limits (`key="ip"`),
+IP allowlists and page-view hashing already read `REMOTE_ADDR`. **Consequences:** one place decides the client
+IP; lockouts work behind Caddy and cannot be dodged with a forged header.
