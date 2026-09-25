@@ -36,6 +36,7 @@ def test_readyz_detail_for_allowlisted(client: Client) -> None:
     body = response.json()
     assert body["checks"] == {"database": True, "redis": True, "migrations": True}
     assert "ingestor_heartbeat_age_seconds" in body
+    assert body["sources"] == []
 
 
 def test_metrics_forbidden_outside_allowlist(client: Client) -> None:

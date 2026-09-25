@@ -71,4 +71,23 @@ def readiness(detailed: bool) -> dict[str, Any]:
     if detailed:
         payload["checks"] = checks
         payload["ingestor_heartbeat_age_seconds"] = ingestor_heartbeat_age_seconds()
+        payload["sources"] = source_statuses()
     return payload
+
+
+def source_statuses() -> list[dict[str, Any]]:
+    """Per-source status for `/readyz` detail (FR-TG-10); empty when the database is unavailable."""
+    from apps.telegram.models import TelegramSource
+
+    try:
+        return [
+            {
+                "username": s.username,
+                "status": s.status,
+                "last_message_at": s.last_message_at.isoformat() if s.last_message_at else None,
+                "last_gapcheck_at": s.last_gapcheck_at.isoformat() if s.last_gapcheck_at else None,
+            }
+            for s in TelegramSource.objects.filter(is_active=True).order_by("pk")
+        ]
+    except Exception:
+        return []
