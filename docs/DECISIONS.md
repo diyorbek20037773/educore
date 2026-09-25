@@ -106,3 +106,17 @@ Lucide 1.48.0 sprite under `static/vendor/` (versions in `VERSIONS.md`); fonts a
 nothing uses embeddings before Phase 3 and the ONNX file (~470 MB) dominates build time and image size.
 **Decision:** the Phase 0 image does not pre-download it; T3.1 adds the download step (cached in the
 `fastembed_cache` volume in dev). **Consequences:** Phase 0 images are smaller; AC0.3 is unaffected.
+
+## ADR-018 — Beat schedule rows are created for every task, enabled only once the task exists
+**Status:** accepted (2026-09-25). **Context:** `seed_all` must create the full beat schedule (AC5.2), but most tasks
+arrive in later phases; beat would otherwise publish unknown task names every few seconds. **Decision:**
+`apps/core/services/beat.py` holds the authoritative table (CLAUDE.md §11) and `sync_beat_schedule()` upserts one
+`PeriodicTask` per entry with `enabled = task is registered in the Celery app`. **Consequences:** re-running
+`seed_all` after a phase lands enables its tasks automatically; the table lives in one place.
+
+## ADR-019 — Seeded institution facts: verified where public, otherwise flagged; no invented codes
+**Status:** accepted (2026-09-25). **Context:** SPEC §12 asks for realistic seed content; T1.3 asks to verify names.
+**Decision:** names, parent bodies, websites, e-mails and one phone were taken from the channels' about texts and
+official sites (gov.uz, akademiya.fvv.uz, akadmvd.uz, proacademy.uz, mgjxu.uz, customs.uz); every institution,
+program, profession and metric is `needs_verification=True`; official program classifier codes and KPI values are
+left empty rather than guessed. **Consequences:** the owner completes them in admin (HA9); the site shows "—".
