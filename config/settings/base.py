@@ -265,6 +265,7 @@ AI_DAILY_USD_BUDGET: float = env.float("AI_DAILY_USD_BUDGET", default=5.0)
 AI_TRANSLATE_TO: list[str] = env.list("AI_TRANSLATE_TO", default=["ru", "en"])
 AI_PRICING_JSON: str = env("AI_PRICING_JSON", default="")
 EMBEDDING_MODEL: str = env("EMBEDDING_MODEL", default="intfloat/multilingual-e5-small")
+EMBEDDING_BACKEND: str = env("EMBEDDING_BACKEND", default="auto")  # auto | fastembed | fake
 FASTEMBED_CACHE_DIR: str = env("FASTEMBED_CACHE_DIR", default=str(BASE_DIR / ".cache" / "fastembed"))
 PROMPT_VERSION_OVERRIDE: str = env("PROMPT_VERSION_OVERRIDE", default="")
 

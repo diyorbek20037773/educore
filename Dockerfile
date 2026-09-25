@@ -35,6 +35,13 @@ RUN DJANGO_SETTINGS_MODULE=config.settings.dev SECRET_KEY=build-only-dummy \
     && DJANGO_SETTINGS_MODULE=config.settings.dev SECRET_KEY=build-only-dummy \
         python manage.py collectstatic --noinput --verbosity 0 \
     && rm -rf .django_tailwind_cli
+# Embedding model (≈ 470 MB) baked into production images; dev/CI keep it in the `fastembed_cache` volume.
+ARG PREFETCH_EMBEDDINGS=0
+RUN if [ "$PREFETCH_EMBEDDINGS" = "1" ]; then \
+        DJANGO_SETTINGS_MODULE=config.settings.dev SECRET_KEY=build-only-dummy \
+        FASTEMBED_CACHE_DIR=/app/.cache/fastembed EMBEDDING_BACKEND=fastembed \
+        python manage.py ai_warm_embeddings; \
+    fi
 
 # ---------------------------------------------------------------------------------------------------
 FROM base AS final

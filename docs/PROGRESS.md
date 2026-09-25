@@ -5,7 +5,7 @@
 
 ## Current focus
 - Phase: **3 — AI editorial pipeline** (Phase 2 done except HA2-dependent AC2.2–AC2.4)
-- Current task: T3.1
+- Current task: T3.2
 - Last updated: 2026-09-25, Claude Code
 
 ## Human actions needed (owner)
@@ -68,7 +68,11 @@
 - [ ] AC2.2 · [ ] AC2.3 · [ ] AC2.4 — **waiting for HA2** (real Telegram account + test channel); everything they exercise is covered by the fixture tests above
 
 ### Phase 3 — AI editorial pipeline
-- [ ] T3.1 · [ ] T3.2 · [ ] T3.3 · [ ] T3.4 · [ ] T3.5
+- [x] T3.1 providers, pricing, budget, runs, embeddings, schemas, prompts — 2026-09-25 · `AnthropicProvider` (structured outputs, cacheable system block, typed error mapping), deterministic `MockProvider`, pricing table (+`AI_PRICING_JSON`), atomic `AIBudgetDay` guard, `call_llm` (cache, budget, one schema retry, AIRun), fastembed e5-small custom model + `FakeEmbedding`, Pydantic schemas with word-boundary truncation, prompts `v1/*.md` (ADR-023, ADR-024)
+- [ ] T3.2 process_post stages
+- [ ] T3.3 translate, digest, ai_reprocess
+- [ ] T3.4 editorial admin
+- [ ] T3.5 golden set + ai-eval + tests
 - [ ] HA3 received
 - [ ] AC3.1 · [ ] AC3.2 · [ ] AC3.3 (latency measured: ___ s; cost/post: $___)
 
