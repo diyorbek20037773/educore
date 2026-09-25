@@ -1,0 +1,48 @@
+# Secrets — never commit
+.env
+.env.*
+!.env.example
+*.session
+*.session-journal
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+
+# Django
+media/
+staticfiles/
+/data/
+*.sqlite3
+/static/css/output.css
+
+# Tailwind standalone binary downloaded by django-tailwind-cli
+.django_tailwind_cli/
+
+# Node (Lighthouse / Playwright only)
+node_modules/
+lighthouse-*.html
+lighthouse-*.json
+
+# Editors / OS
+.idea/
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Local-only
+_bundle_original/
+backups/
+*.dump
+.claude/settings.local.json
