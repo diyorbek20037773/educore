@@ -1,0 +1,26 @@
+[
+ {
+  "_": "MessageService",
+  "id": 401,
+  "peer_id": {
+   "_": "PeerChannel",
+   "channel_id": 1234567890
+  },
+  "date": "2026-09-20T09:30:00+00:00",
+  "action": {
+   "_": "MessageActionPinMessage"
+  },
+  "out": false,
+  "mentioned": null,
+  "media_unread": null,
+  "reactions_are_possible": null,
+  "silent": null,
+  "post": null,
+  "legacy": null,
+  "from_id": null,
+  "saved_peer_id": null,
+  "reply_to": null,
+  "reactions": null,
+  "ttl_period": null
+ }
+]

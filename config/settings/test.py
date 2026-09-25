@@ -2,8 +2,10 @@
 
 from __future__ import annotations
 
+import re
+
 from config.settings.base import *  # noqa: F403
-from config.settings.base import BASE_DIR
+from config.settings.base import BASE_DIR, REDIS_URL
 
 DEBUG = False
 SECRET_KEY = "test-secret-key-not-for-production"  # noqa: S105
@@ -34,3 +36,6 @@ STORAGES = {
 }
 AXES_ENABLED = False
 RATELIMIT_ENABLE = True
+
+# Isolated Redis database for tests (locks, heartbeat, counters) — never the dev/prod keyspace.
+REDIS_URL = re.sub(r"/\d+$", "/15", REDIS_URL)
