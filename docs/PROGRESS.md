@@ -4,8 +4,8 @@
 > git history is the source of truth for resuming work after a context reset.
 
 ## Current focus
-- Phase: **2 — Telegram ingestion** (Phase 1 done 2026-09-25)
-- Current task: T2.1
+- Phase: **3 — AI editorial pipeline** (Phase 2 done except HA2-dependent AC2.2–AC2.4)
+- Current task: T3.1
 - Last updated: 2026-09-25, Claude Code
 
 ## Human actions needed (owner)
@@ -57,9 +57,15 @@
 - [x] AC1.3 — `pytest apps/core apps/institutions apps/content` → 298 passed; translit tests 218 passed (207-word corpus both directions + round trip)
 
 ### Phase 2 — Telegram ingestion
-- [ ] T2.1 · [ ] T2.2 · [ ] T2.3 · [ ] T2.4 · [ ] T2.5 · [ ] T2.6
+- [x] T2.1 ingestor package — 2026-09-25 · client, leader lock (Lua renew, tolerant to Redis outages), heartbeat, bootstrap/resolve+join, handlers (new/album/edit/delete), normalize → DTO (UTF-16 entities, reactions, forwards), album-aware repository (grouped_id + item-id mapping), bounded media downloader (limits, 120 s), IngestionRequest poller + executors, gap check (two-miss rule), engagement refresh, source refresh loop
+- [x] T2.2 commands — 2026-09-25 · `telegram_login` (refuses while leader lock held), `telegram_ingest` (SIGTERM-graceful, exit 2 when unauthorized), `telegram_backfill` (enqueue / `--standalone` guarded), `telegram_gapcheck`, `ingestor_health`
+- [x] T2.3 Celery tasks — 2026-09-25 · `telegram.relay_outbox` (SKIP LOCKED, 15-min lock, waits for `ai.process_post`), `request_gapcheck`, `request_engagement_refresh`, `request_media_retry`, `cleanup_outbox`, `media.process_media` (WebP 1600/800/400 + ffmpeg poster), `ops.check_heartbeat` (stale/recovered alerts, sources offline/live); 6 beat rows enabled (ADR-022)
+- [x] T2.4 storage — 2026-09-25 · `apps/telegram/storage.py` (local/s3 via Django storages, `telegram/{username}/{yyyy}/{mm}/{message_id}/{n}.{ext}`), `{% media_url media "800" %}` / `{% media_srcset %}` with fallbacks
+- [x] T2.5 tests — 2026-09-25 · 66 telegram tests on revived Telethon fixtures + fake client: single, album (+late item), edit (hash change / views only), delete (+partial album), forwarded, service, oversized video, sticker, outbox uniqueness, two concurrent relays (each event once), leader lock, backfill grouping/idempotency/AI limit, FloodWait, gap check, new source picked up without restart
+- [x] T2.6 admin + readiness — 2026-09-25 · sources monitor (status, lag, counters, resolve/backfill/gapcheck/disable), posts (raw JSON, media thumbs, skip), media, requests, outbox retry; `/readyz` detail adds heartbeat age + per-source status (allowlist)
 - [ ] HA2 received
-- [ ] AC2.1 · [ ] AC2.2 · [ ] AC2.3 · [ ] AC2.4
+- [x] AC2.1 — `pytest apps/telegram` → 66 passed; coverage `apps/telegram` **86 %**
+- [ ] AC2.2 · [ ] AC2.3 · [ ] AC2.4 — **waiting for HA2** (real Telegram account + test channel); everything they exercise is covered by the fixture tests above
 
 ### Phase 3 — AI editorial pipeline
 - [ ] T3.1 · [ ] T3.2 · [ ] T3.3 · [ ] T3.4 · [ ] T3.5
@@ -96,6 +102,7 @@
 ## Log (newest first)
 | Date | Phase/Task | Note |
 |---|---|---|
+| 2026-09-25 | Phase 2 | ingestor, commands, tasks, derivatives, heartbeat alerts; AC2.1 green (86 % coverage); AC2.2–2.4 wait for HA2 |
 | 2026-09-25 | Phase 1 | models, migrations, seeds, admin + 2FA, translit, sanitizer, factories/selectors; AC1.1–AC1.3 green (305 tests) |
 | 2026-09-25 | Phase 0 | bootstrap complete; AC0.1–AC0.4 green; HA0 pending |
 | — | — | project bootstrapped from the specification bundle |
