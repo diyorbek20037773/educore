@@ -1,2 +1,12 @@
 {% extends "base.html" %}
-{% block content %}<main><h1>EDUCORE</h1></main>{% endblock %}
+{% load i18n %}
+{% block content %}
+<section class="container-page py-16">
+  <div class="card p-8">
+    <p class="text-sm font-semibold uppercase tracking-widest text-gold-text">{% translate "Rasmiy axborot-tahliliy platforma" %}</p>
+    <h1 class="mt-2 text-4xl text-brand md:text-5xl">EDUCORE</h1>
+    <p class="mt-4 max-w-2xl text-lg text-ink-2">{% translate "Huquqni muhofaza qilish taʼlim muassasalarining yagona rasmiy axborot-tahliliy platformasi" %}</p>
+    <button type="button" class="mt-6 rounded-md border border-line px-4 py-2 text-sm font-semibold" x-data="themeToggle" x-on:click="toggle" x-text="label"></button>
+  </div>
+</section>
+{% endblock %}
