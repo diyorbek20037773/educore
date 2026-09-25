@@ -9,6 +9,7 @@ from pathlib import Path
 
 import django.conf.locale
 import environ
+from csp.constants import NONCE, SELF
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
@@ -85,6 +86,7 @@ INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 MIDDLEWARE = [
     "django_prometheus.middleware.PrometheusBeforeMiddleware",
+    "apps.core.middleware.HealthMiddleware",  # before Security/Common: any Host, no SSL redirect
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -219,6 +221,7 @@ FILE_UPLOAD_PERMISSIONS = 0o640
 
 TAILWIND_CLI_SRC_CSS = "assets/css/input.css"  # outside STATICFILES_DIRS (ADR-013)
 TAILWIND_CLI_DIST_CSS = "css/output.css"
+TAILWIND_CLI_VERSION = "4.3.3"
 
 # --- Celery ----------------------------------------------------------------------------------------
 CELERY_BROKER_URL: str = env("CELERY_BROKER_URL", default="redis://localhost:6379/1")
@@ -243,7 +246,9 @@ CELERY_WORKER_HIJACK_ROOT_LOGGER = False
 TELEGRAM_API_ID: int = env.int("TELEGRAM_API_ID", default=0)
 TELEGRAM_API_HASH: str = env("TELEGRAM_API_HASH", default="")
 TELEGRAM_PHONE: str = env("TELEGRAM_PHONE", default="")
-TELEGRAM_SESSION_PATH: str = env("TELEGRAM_SESSION_PATH", default=str(BASE_DIR / "data" / "telegram" / "educore"))
+TELEGRAM_SESSION_PATH: str = env(
+    "TELEGRAM_SESSION_PATH", default=str(BASE_DIR / "data" / "telegram" / "educore.session")
+)
 TELEGRAM_BACKFILL_LIMIT: int = env.int("TELEGRAM_BACKFILL_LIMIT", default=500)
 BACKFILL_AI_LIMIT_PER_SOURCE: int = env.int("BACKFILL_AI_LIMIT_PER_SOURCE", default=150)
 TELEGRAM_BACKFILL_MAX_MEDIA_MB: int = env.int("TELEGRAM_BACKFILL_MAX_MEDIA_MB", default=20)
@@ -287,16 +292,16 @@ RATELIMIT_USE_CACHE = "default"
 
 CONTENT_SECURITY_POLICY = {
     "DIRECTIVES": {
-        "default-src": ["'self'"],
-        "script-src": ["'self'", "https://challenges.cloudflare.com"],
-        "style-src": ["'self'"],
-        "img-src": ["'self'", "data:"],
-        "font-src": ["'self'"],
-        "connect-src": ["'self'"],
+        "default-src": [SELF],
+        "script-src": [SELF, NONCE, "https://challenges.cloudflare.com"],
+        "style-src": [SELF, NONCE],
+        "img-src": [SELF, "data:"],
+        "font-src": [SELF],
+        "connect-src": [SELF],
         "frame-src": ["https://challenges.cloudflare.com"],
         "frame-ancestors": ["'none'"],
-        "base-uri": ["'self'"],
-        "form-action": ["'self'"],
+        "base-uri": [SELF],
+        "form-action": [SELF],
         "object-src": ["'none'"],
     },
 }
@@ -335,3 +340,10 @@ UNFOLD = {
 TWO_FACTOR_PATCH_ADMIN = False
 OTP_TOTP_ISSUER = "EDUCORE"
 
+
+# --- Logging (structlog JSON) ----------------------------------------------------------------------
+from config.logging import build_logging, configure_structlog  # noqa: E402
+
+LOGGING = build_logging(LOG_LEVEL, json=env.bool("LOG_JSON", default=True))
+configure_structlog()
+DJANGO_STRUCTLOG_CELERY_ENABLED = True

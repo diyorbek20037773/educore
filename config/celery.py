@@ -5,6 +5,7 @@ from __future__ import annotations
 import os
 
 from celery import Celery
+from django_structlog.celery.steps import DjangoStructLogInitStep
 from kombu import Exchange, Queue
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings.dev")
@@ -32,6 +33,9 @@ app.conf.task_routes = {
 }
 
 app.autodiscover_tasks()
+
+# JSON logs with request/task context in workers (django-structlog).
+app.steps["worker"].add(DjangoStructLogInitStep)
 
 
 @app.task(name="core.ping", ignore_result=False)
