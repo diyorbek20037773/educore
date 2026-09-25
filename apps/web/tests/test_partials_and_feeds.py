@@ -144,3 +144,33 @@ def test_robots_manifest_humans(client: Client, db: None) -> None:
     manifest = json.loads(client.get("/manifest.webmanifest").content)
     assert manifest["name"] == "EDUCORE" and any(i["sizes"] == "512x512" for i in manifest["icons"])
     assert client.get("/humans.txt").status_code == 200
+
+
+@pytest.mark.parametrize(
+    "name", ["home", "event_list", "program_list", "profession_list", "story_list", "search"]
+)
+def test_list_query_counts_do_not_grow_with_data(client: Client, site_data: SiteData, name: str) -> None:
+    from apps.content.tests.factories import EventFactory, StoryFactory
+
+    url = reverse(f"web:{name}") + ("?q=akademiya" if name == "search" else "")
+    client.get(url)
+    with CaptureQueriesContext(connection) as before:
+        client.get(url)
+    for _n in range(8):
+        ArticleFactory(primary_institution=site_data.institution, category=site_data.article.category)
+        EventFactory(institution=site_data.institution)
+        StoryFactory(institution=site_data.institution)
+    from django.core.cache import cache
+
+    cache.clear()
+    client.get(url)
+    with CaptureQueriesContext(connection) as after:
+        client.get(url)
+    assert len(after.captured_queries) <= len(before.captured_queries), name
+
+
+def test_theme_toggle_and_skip_link_present(client: Client, site_data: SiteData) -> None:
+    body = client.get("/").content.decode()
+    assert 'x-data="themeToggle"' in body and "aria-pressed" in body
+    assert 'class="skip-link" href="#main"' in body
+    assert 'localStorage.getItem("educore-theme")' in body

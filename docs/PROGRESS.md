@@ -5,7 +5,7 @@
 
 ## Current focus
 - Phase: **4 — Public website** (Phase 3 done except HA3-dependent AC3.3)
-- Current task: T4.7
+- Current task: AC4.1
 - Last updated: 2026-09-25, Claude Code
 
 ## Human actions needed (owner)
@@ -85,7 +85,7 @@
 - [x] T4.4 i18n — 2026-09-25 · `i18n_patterns` (uz unprefixed), switcher keeps the path, 768-string catalogs: ru/en written, uz labels for English field names, uz_Cyrl via `translit-po` (format-spec fix), 100 % translated; fallback notice; hreflang uz-Latn/uz-Cyrl/ru/en/x-default; `.mo` compiled in image + CI (not committed)
 - [x] T4.5 SEO — 2026-09-25 · i18n sitemaps with alternates (7 sections), RSS ×3, JSON-LD (WebSite, Organization, CollegeOrUniversity, NewsArticle, Event, BreadcrumbList — validated in tests), OG/Twitter (cover or default image), canonical, robots, manifest, humans
 - [x] T4.6 perf/security — 2026-09-25 · home/global/chart caches keyed by `content_version`, WhiteNoise, WebP srcset + lazy images, fonts subset, ECharts lazy on reveal, strict nonce CSP (Alpine CSP, `allowEval=false`), `TrustedProxyMiddleware` first (ADR-025), maintenance 503, `Vary` on HTMX headers, Permissions-Policy
-- [ ] T4.7
+- [x] T4.7 tests — 2026-09-25 · 58 web tests: every route 200 in 4 languages, partials are fragments, boosted/history requests get full pages, query counts constant as data grows (news, home, events, programs, professions, stories, search), chart contract + CSV, RSS/sitemap XML, JSON-LD validity, 404/410/preview, maintenance, proxy IP, headers, theme toggle; `apps/web` 83–100 % per module, overall 92 % (484 passed). Playwright e2e left optional
 - [ ] AC4.1 · [ ] AC4.2 (scores: perf __ / seo __ / a11y __ / bp __) · [ ] AC4.3
 
 ### Phase 5 — Analytics
