@@ -72,7 +72,7 @@ package = false
 [tool.ruff]
 line-length = 110
 target-version = "py312"
-extend-exclude = ["_bundle_original", "static/vendor", "**/migrations/*.py"]
+extend-exclude = ["_bundle_original", "static/vendor", "**/migrations/*.py", "docs", "*.md"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "B", "UP", "N", "S", "DJ", "ASYNC"]
@@ -102,13 +102,14 @@ django_settings_module = "config.settings.test"
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "config.settings.test"
 python_files = ["test_*.py"]
-addopts = "-q --strict-markers"
+addopts = "-q --strict-markers --ds=config.settings.test"
 testpaths = ["apps"]
 markers = [
     "slow: long-running tests",
 ]
 filterwarnings = [
     "ignore::DeprecationWarning:celery.*",
+    "ignore:No directory at:UserWarning",
 ]
 
 [tool.coverage.run]

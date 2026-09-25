@@ -1,0 +1,26 @@
+# Run `uv run pre-commit install` once; hooks mirror `make lint`.
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.16.9
+    hooks:
+      - id: ruff
+        args: [--fix]
+      - id: ruff-format
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: check-added-large-files
+        args: [--maxkb=1200]
+      - id: check-yaml
+        exclude: ^compose(\.prod)?\.yaml$
+      - id: check-toml
+      - id: end-of-file-fixer
+        exclude: ^static/vendor/
+      - id: trailing-whitespace
+        exclude: ^static/vendor/
+      - id: detect-private-key
+  - repo: https://github.com/Yelp/detect-secrets
+    rev: v1.5.0
+    hooks:
+      - id: detect-secrets
+        args: [--exclude-files, "uv\.lock|static/vendor/.*|\.env\.example"]

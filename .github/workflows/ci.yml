@@ -1,0 +1,117 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  UV_FROZEN: "1"
+  PYTHON_VERSION: "3.12"
+
+jobs:
+  lint:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+      - run: uv python install ${{ env.PYTHON_VERSION }}
+      - run: uv sync --group dev
+      - name: ruff check (mirrors make lint)
+        run: uv run ruff check .
+      - name: ruff format --check
+        run: uv run ruff format --check .
+      - name: mypy (soft)
+        run: uv run mypy apps config || true
+
+  test:
+    runs-on: ubuntu-24.04
+    services:
+      db:
+        image: pgvector/pgvector:pg17
+        env:
+          POSTGRES_DB: educore
+          POSTGRES_USER: educore
+          POSTGRES_PASSWORD: educore
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U educore" --health-interval 5s --health-timeout 5s --health-retries 20
+      redis:
+        image: redis:7-alpine
+        ports: ["6379:6379"]
+        options: >-
+          --health-cmd "redis-cli ping" --health-interval 5s --health-timeout 3s --health-retries 20
+    env:
+      DJANGO_SETTINGS_MODULE: config.settings.test
+      DATABASE_URL: postgres://educore:educore@localhost:5432/educore
+      REDIS_URL: redis://localhost:6379/0
+      CACHE_URL: redis://localhost:6379/2
+      CELERY_BROKER_URL: redis://localhost:6379/1
+    steps:
+      - uses: actions/checkout@v4
+      - name: System packages
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends libmagic1 ffmpeg gettext postgresql-client
+      - name: Database extensions (template1 so the test database inherits them)
+        run: psql postgres://educore:educore@localhost:5432/educore -f docker/postgres/init.sql
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+      - run: uv python install ${{ env.PYTHON_VERSION }}
+      - run: uv sync --group dev
+      - name: Migrations are complete
+        run: uv run python manage.py makemigrations --check --dry-run
+      - name: Tests with coverage (mirrors make test / make cov)
+        run: uv run pytest -q --cov=apps --cov-report=term --cov-report=html
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: htmlcov
+          path: htmlcov
+      - name: check --deploy with prod settings
+        env:
+          DJANGO_SETTINGS_MODULE: config.settings.prod
+          SECRET_KEY: check-deploy-dummy-key-0123456789abcdefghijklmnopqrstuvwxyz0123
+          ALLOWED_HOSTS: educore.example.uz
+          SITE_URL: https://educore.example.uz
+          DEBUG: "false"
+        run: uv run python manage.py check --deploy --fail-level WARNING
+
+  security:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - name: pip-audit (locked production dependencies)
+        run: |
+          uv export --frozen --no-dev --no-hashes --format requirements-txt > /tmp/requirements.txt
+          uvx pip-audit --strict --disable-pip -r /tmp/requirements.txt
+
+  build:
+    runs-on: ubuntu-24.04
+    needs: [lint, test]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v3
+      - name: Build image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          target: final
+          load: true
+          tags: educore:ci
+          build-args: GIT_SHA=${{ github.sha }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+      - name: Trivy (fail on fixable CRITICAL)
+        uses: aquasecurity/trivy-action@0.33.1
+        with:
+          image-ref: educore:ci
+          severity: CRITICAL
+          ignore-unfixed: true
+          exit-code: "1"
