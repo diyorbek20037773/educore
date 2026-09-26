@@ -17,7 +17,9 @@ Nothing here changes the VPS setup (`compose.prod.yaml`, Caddy, `docs/DEVOPS.md`
    Railway reads `railway.json` and builds the `Dockerfile`.
 2. In the same project: **+ Create** → **Database / Template** → search **pgvector** → deploy.
    Then **+ Create** → **Database** → **Redis**.
-3. `educore` service → **Settings → Volumes** → add a volume mounted at `/data`.
+3. Add a volume mounted at `/data` to `educore` (volumes are not under the service Settings): right-click the
+   `educore` card on the project canvas → **Attach Volume**, or **Ctrl/Cmd + K** → "Create Volume", or
+   **+ Create → Volume** → pick `educore`; enter mount path `/data`.
 4. `educore` service → **Settings → Networking** → **Generate Domain** (gives `*.up.railway.app`).
 5. `educore` service → **Variables** → **Raw Editor**, paste and fill (service names in `${{…}}` must match yours):
 
