@@ -1,0 +1,12 @@
+{% load i18n %}{% autoescape off %}{% blocktranslate with name=appeal.full_name %}Hurmatli {{ name }}!{% endblocktranslate %}
+
+{% blocktranslate with code=appeal.tracking_code %}{{ code }} raqamli murojaatingizga javob berildi:{% endblocktranslate %}
+
+{{ message.body }}
+
+{% translate "Murojaat holati va barcha javoblar:" %}
+{{ tracking_url }}
+
+{% translate "Ushbu xat avtomatik yuborildi, unga javob qaytarmang." %}
+EDUCORE
+{% endautoescape %}

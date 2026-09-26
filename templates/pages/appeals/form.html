@@ -6,9 +6,6 @@
   <p class="mt-2 max-w-2xl text-ink-2">{% translate "Savol, taklif yoki shikoyatingizni muassasaga yoʻllang. Murojaatingizga kuzatish kodi beriladi." %}</p>
   <div class="mt-8 grid gap-10 lg:grid-cols-12">
     <div class="lg:col-span-8">
-      {% if accepted %}
-        <p class="notice">{% icon "info" "size-4 flex-none mt-0.5" %}<span>{% translate "Maʼlumotlar toʻgʻri toʻldirildi. Murojaatlarni qabul qilish tez orada ishga tushadi." %}</span></p>
-      {% endif %}
       <form class="card grid gap-5 p-6" method="post" enctype="multipart/form-data" novalidate>
         {% csrf_token %}
         {% if form.non_field_errors %}<p class="field-error" role="alert">{{ form.non_field_errors|join:" " }}</p>{% endif %}
@@ -27,7 +24,8 @@
           <label for="{{ form.consent.id_for_label }}" class="text-sm">{{ form.consent.label }} (<a class="underline" href="{% url 'web:privacy' %}">{% translate "Maxfiylik siyosati" %}</a>)</label>
         </div>
         {% if form.consent.errors %}<p class="field-error">{{ form.consent.errors|join:" " }}</p>{% endif %}
-        {% if turnstile_site_key %}<div class="cf-turnstile" data-sitekey="{{ turnstile_site_key }}"></div>{% endif %}
+        {% if turnstile_enabled %}<div class="cf-turnstile" data-sitekey="{{ turnstile_site_key }}" data-language="{{ LANGUAGE_CODE|slice:':2' }}"></div>
+        <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" nonce="{{ request.csp_nonce }}" async defer></script>{% endif %}
         <button type="submit" class="btn-primary self-start">{% icon "send" "size-4" %}{% translate "Yuborish" %}</button>
       </form>
     </div>

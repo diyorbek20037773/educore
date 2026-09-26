@@ -1,4 +1,4 @@
-"""Public appeal form (SPEC §6.10). Submission, rate limiting and Turnstile are wired in Phase 6."""
+"""Public appeal form and tracking form (SPEC §6.10); submission logic lives in `services.submission`."""
 
 from __future__ import annotations
 
@@ -10,11 +10,10 @@ from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 
 from apps.appeals.models import AppealTopic
+from apps.appeals.services.submission import validate_attachment
 from apps.institutions.models import Institution
 
 PHONE_RE = re.compile(r"^\+998\d{9}$")
-MAX_ATTACHMENT_BYTES = 5 * 1024 * 1024
-ALLOWED_ATTACHMENT_TYPES = ("application/pdf", "image/jpeg", "image/png")
 
 
 def normalize_phone(value: str) -> str:
@@ -46,7 +45,10 @@ class AppealForm(forms.Form):
         label=_("Murojaat matni"), min_length=20, max_length=5000, widget=forms.Textarea(attrs={"rows": 6})
     )
     attachment = forms.FileField(
-        label=_("Ilova (ixtiyoriy)"), required=False, help_text=_("PDF, JPG yoki PNG, 5 MB gacha")
+        label=_("Ilova (ixtiyoriy)"),
+        required=False,
+        help_text=_("PDF, JPG, PNG yoki DOCX, 5 MB gacha"),
+        widget=forms.ClearableFileInput(attrs={"accept": ".pdf,.jpg,.jpeg,.png,.docx"}),
     )
     consent = forms.BooleanField(label=_("Shaxsiy maʼlumotlarimni qayta ishlashga roziman"))
     # Honeypot: humans never see or fill it.
@@ -77,12 +79,9 @@ class AppealForm(forms.Form):
 
     def clean_attachment(self) -> Any:
         upload = self.cleaned_data.get("attachment")
-        if upload is None:
+        if not upload:
             return None
-        if upload.size > MAX_ATTACHMENT_BYTES:
-            raise ValidationError(_("Fayl hajmi 5 MB dan oshmasligi kerak."))
-        if getattr(upload, "content_type", "") not in ALLOWED_ATTACHMENT_TYPES:
-            raise ValidationError(_("Faqat PDF, JPG yoki PNG fayllar qabul qilinadi."))
+        validate_attachment(upload)
         return upload
 
     def is_bot(self) -> bool:
@@ -93,7 +92,9 @@ class TrackForm(forms.Form):
     code = forms.CharField(
         label=_("Kuzatish kodi"),
         max_length=20,
-        widget=forms.TextInput(attrs={"class": "form-input", "autocomplete": "off", "placeholder": "EDU-…"}),
+        widget=forms.TextInput(
+            attrs={"class": "form-input", "autocomplete": "off", "placeholder": "EDC-2026-000000"}
+        ),
     )
 
     def clean_code(self) -> str:

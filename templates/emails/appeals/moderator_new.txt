@@ -1,0 +1,9 @@
+{% autoescape off %}Yangi murojaat: {{ appeal.tracking_code }}
+
+Muassasa: {{ institution }}
+Mavzu: {{ appeal.get_topic_display }}
+Ilovalar: {{ appeal.attachments.count }}
+
+Boshqaruv panelida koʻrish:
+{{ admin_url }}
+{% endautoescape %}

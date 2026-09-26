@@ -192,7 +192,8 @@ def test_appeal_form_validation(client: Client, site_data: SiteData) -> None:
         "message": "Qabul hujjatlari boʻyicha savolim bor, iltimos javob bering.",
         "consent": "on",
     }
-    assert "Maʼlumotlar toʻgʻri toʻldirildi" in client.post(url, valid).content.decode()
+    response = client.post(url, valid)
+    assert response.status_code == 302 and "/murojaat/yuborildi/EDC-" in response["Location"]
 
 
 def test_appeal_tracking(client: Client, site_data: SiteData) -> None:

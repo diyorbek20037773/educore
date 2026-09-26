@@ -1,0 +1,11 @@
+{% load i18n %}{% autoescape off %}{% blocktranslate with name=appeal.full_name %}Hurmatli {{ name }}!{% endblocktranslate %}
+
+{% translate "Murojaatingiz qabul qilindi." %}
+{% translate "Kuzatish kodi:" %} {{ appeal.tracking_code }}
+
+{% translate "Murojaatlar odatda 15 ish kuni ichida koʻrib chiqiladi. Holatni quyidagi havola orqali tekshirishingiz mumkin:" %}
+{{ tracking_url }}
+
+{% translate "Ushbu xat avtomatik yuborildi, unga javob qaytarmang." %}
+EDUCORE
+{% endautoescape %}

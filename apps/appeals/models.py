@@ -88,6 +88,7 @@ class Appeal(TimeStampedModel):
     answered_at = models.DateTimeField(_("answered at"), null=True, blank=True)
     closed_at = models.DateTimeField(_("closed at"), null=True, blank=True)
     internal_note = models.TextField(_("internal note"), blank=True)
+    anonymized_at = models.DateTimeField(_("anonymized at"), null=True, blank=True)
 
     class Meta:
         ordering = ("-created_at",)

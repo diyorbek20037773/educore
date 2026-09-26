@@ -6,7 +6,8 @@
 ## Current focus
 - Phase: **6 — Appeals** (Phases 4–5 done; Phase 3 done except HA3-dependent AC3.3)
 - Current task: Phase 6 — T6.1
-- Last updated: 2026-09-25, Claude Code
+- Last updated: 2026-09-26, Claude Code
+- **Owner priority (2026-09-26): temporary deployment on Railway (railway.com) now; real VPS later (Phase 8).**
 
 ## Human actions needed (owner)
 | # | Needed for | What exactly | Status |
@@ -25,6 +26,7 @@
 - GNU make is not installed on the dev machine yet (asked in HA0); Phase 0 checks were run with the equivalent
   `docker compose` commands from the Makefile.
 - Prod image is 1.45 GB uncompressed (target ≤ 900 MB): trim in T8.1 (static ffmpeg, drop gettext from runtime).
+- New appeal UI strings (timeline, e-mails, errors) need ru/en/uz-Cyrl catalog entries (`make messages`).
 - Gunicorn access/error logs are plain text; switch to JSON in T7.3.
 
 ## Phase checklist
@@ -99,7 +101,10 @@
 - [x] AC5.2 — 2026-09-25 · `seed_all` → 14 beat rows, 12 enabled; `ops.check_ai_failure_rate` and `ops.review_digest` stay disabled until their tasks exist (Phase 7, ADR-018)
 
 ### Phase 6 — Appeals
-- [ ] T6.1 · [ ] T6.2 · [ ] T6.3 · [ ] T6.4
+- [x] T6.1 submission — 2026-09-26 · shared service (`appeals/services/submission.py`): libmagic sniff + extension match (pdf/jpg/png/docx, docx zip check), ≤ 5 MB, private storage opaque names, random `EDC-YYYY-NNNNNN` codes, shared 5/h/IP limit (only accepted submissions count, 429 + `Retry-After`), honeypot, Turnstile (flagged, fails closed), success redirect, tracking page with status timeline (30/m/IP), confirmation e-mail + moderator alert (ops bot/log + `APPEALS_NOTIFY_EMAILS`, no PII) via `appeals.notify_new`
+- [x] T6.2 admin inbox — 2026-09-26 · status actions with `answered_at`/`closed_at`, "assign to me", public reply → answered + e-mail (`appeals.notify_reply`, `notified_at`), internal notes, CSV export (BOM, formula-safe), SLA overdue filter (> 15 working days), staff-only attachment download (`appeals.view_appeal`); `anonymize_appeals` (24 months, attachments + applicant messages + history rows, `anonymized_at`)
+- [ ] T6.3 API `POST /api/v1/appeals` — with the API in T7.1
+- [x] T6.4 tests — 2026-09-26 · 22 appeal tests (happy path + attachment + e-mail, rate limit, invalid attempts not counted, honeypot, invalid/oversized files, Turnstile, tracking timeline/public replies, reply e-mail, notes, SLA, CSV, anonymization, download permission); full suite 520 passed
 - [ ] AC6.1
 
 ### Phase 7 — API, hardening, observability
