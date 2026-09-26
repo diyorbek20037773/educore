@@ -305,7 +305,9 @@ Conventions: every model has `created_at`, `updated_at` (abstract `TimeStampedMo
   suggestions, chart data loads. `hx-boost` on nav links with `hx-push-url`. Skeletons while loading.
 
 ### 6.2 Home `/`
-1. **Hero band**: featured article (large card: cover, category chip, institution chip, title, lead,
+0. **Intro** (ADR‑028): headline with gradient second line, one‑sentence lead, 8 section launcher tiles
+   (Yangiliklar, Muassasalar, Yoʻnalishlar, Qabul, Kasblar, Tadbirlar, Analitika, Murojaat).
+1. **Hero band** ("Soʻnggi yangiliklar"): featured article (large card: cover, category chip, institution chip, title, lead,
    time) + 3 secondary cards. Selection: `is_pinned` > `is_featured` (valid) > highest `importance` in 24 h.
 2. **KPI strip** (5 tiles with sparklines, 30 days): Muassasalar (5), Bugungi yangiliklar, Yaqin tadbirlar,
    Yoʻnalishlar, Kasblar. Tiles link to sections.
@@ -322,7 +324,7 @@ Conventions: every model has `created_at`, `updated_at` (abstract `TimeStampedMo
 8. **Kasblar**: 6 profession cards (icon, name, summary, institutions dots).
 9. **Tadbirlar**: next 6 events (date block, title, institution, location).
 10. **Motivatsiya**: story carousel (quote, person, institution).
-11. **Analitika teaser**: 3 mini stats + link. **Murojaat CTA** band.
+11. **Promo panels**: Murojaat CTA, Analitika teaser (3 mini stats + link), Qabul CTA.
 Caching: home fragments cached 30–60 s (Redis), invalidated on publish.
 
 ### 6.3 Institutions
@@ -402,21 +404,23 @@ age and per‑source status only for `METRICS_IP_ALLOWLIST`/staff), `/metrics` (
 ## 7. Design system
 
 ### 7.1 Principles
-Official, premium, data‑first, calm. Dense but breathable: 8‑pt spacing, 12‑column grid (max 1320 px),
-card modules with 1 px borders and soft elevation, serif display headlines, sans body, generous whitespace
-around numbers. Everything must work in light and dark, on 360 px phones, with keyboard only.
+Official, premium, data‑first — visual language after timeshighereducation.com (ADR‑028): black chrome (header,
+footer), white canvas, bold sans headlines, one violet accent, a blue‑pink‑orange gradient used sparingly, rounded
+image tiles, section headers with a "Barchasi →" link. 8‑pt spacing, 12‑column grid (max 1320 px), generous
+whitespace around numbers. Everything must work in light and dark, on 360 px phones, with keyboard only.
 
-### 7.2 Tokens (Tailwind 4 `@theme` in `static/src/css/input.css`)
-- Surfaces: `--color-surface: #FFFFFF`, `--color-surface-2: #F6F7F9`, `--color-line: #E5E7EB`;
-  dark: `#0B1220`, `#111A2E`, `#1F2A44`.
-- Ink: `#0F172A` primary, `#475569` secondary, `#94A3B8` muted; dark: `#E5EAF3`, `#A9B4C7`, `#6B7793`.
-- Brand: navy `--color-brand: #0B1F3A` (900), `#12294D` (800), `#1B3A6B` (700), `#E8EEF8` (100);
-  gold accent `#C9A227` (decorative only: rules, underlines, small marks; text‑safe gold `#7C5E0A`).
+### 7.2 Tokens (Tailwind 4 `@theme` in `assets/css/input.css`)
+- Surfaces: `--color-surface: #FFFFFF`, `--color-surface-2: #F4F4F5`, `--color-line: #E4E4E7`;
+  dark: `#09090B`, `#18181B`, `#2E2E33`. Chrome (header/footer): `#09090B` in both themes.
+- Ink: `#232323` primary, `#595959` secondary, `#838383` muted (non‑text only); dark: `#F4F4F5`, `#B0B0B0`, `#838383`.
+- Brand: indigo `#272457` (900, table heads, panels), `#432EA7` (800), violet accent `#6933F7` (700: links, primary
+  buttons, CTA; dark accent `#A78BFA`), `#F0EBFF` (100). Gradient `linear-gradient(225deg, #4352FF 15%, #DE1B7C 86%,
+  #FE4537 99%)` for the intro headline, logo mark, active‑nav underline and footer bar only.
 - Status: success `#1B7F4C`, warning `#B7791F`, danger `#B42318`, info `#1F55B0` — always icon + label.
-- Radius 8/12/16; shadows `sm`/`md` low‑alpha; motion 150–200 ms; `prefers-reduced-motion` respected.
-- Typography: display/headlines **Source Serif 4** (600/700), UI/body **Manrope** (400/500/600/700),
+- Radius 8/16/24; shadows `sm`/`md` low‑alpha; motion 150–300 ms; `prefers-reduced-motion` respected.
+- Typography: UI, body and headlines **Manrope** (400–800); **Source Serif 4** only for motivation quotes;
   mono **JetBrains Mono** for codes — all self‑hosted woff2 in `static/fonts` (download via `make fonts`),
-  `font-display: swap`. Scale: 12/14/16/18/20/24/30/36/48.
+  `font-display: swap`. Scale: 12/14/16/18/20/24/30/36/48/60.
 - Uzbek typography: use `ʻ` (U+02BB) for oʻ/gʻ and `ʼ` (U+02BC) for tutuq belgisi in all UI copy and content;
   sanitizer normalizes `'`, `’`, `‘`, `` ` `` inside Uzbek words to these.
 
@@ -445,7 +449,7 @@ CSV link), `timeline`, `event_row`, `event_calendar`, `profession_card`, `progra
   | 5 | Jamoat xavfsizligi universiteti | `#0E97A5` | `#0B7381` |
 
   Changing any of these requires re‑validation (see `docs/DECISIONS.md` ADR‑007) — do not eyeball.
-- Sequential (heatmaps, single‑measure bars): navy ramp `#E8EEF8 → #0B1F3A` (light), `#1F2A44 → #9DB4E3` (dark).
+- Sequential (heatmaps, single‑measure bars): violet ramp `#F0EBFF → #272457` (light), `#2A2440 → #C4B5FD` (dark).
 - Never dual axes; two measures → two charts. Legend always for ≥ 2 series plus direct end‑labels for ≤ 4;
   a table view for every chart; values/labels in ink colors, never series colors.
 - Sparklines: inline SVG (no ECharts) for KPI tiles and cards.

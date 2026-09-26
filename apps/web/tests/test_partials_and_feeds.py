@@ -39,7 +39,7 @@ def test_news_filters_and_infinite_scroll(client: Client, site_data: SiteData) -
     assert "<html" not in results and 'id="results"' in results
     assert 'hx-trigger="revealed"' in results
     page2 = client.get(url, {"page": 2}, **HTMX).content.decode()
-    assert "<html" not in page2 and "card" in page2
+    assert "<html" not in page2 and "<article" in page2
     empty = client.get(url, {"category": "yoq-kategoriya"}, **HTMX).content.decode()
     assert "topilmadi" in empty
 

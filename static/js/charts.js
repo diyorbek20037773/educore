@@ -30,8 +30,8 @@
 
   function sequential(n) {
     var dark = document.documentElement.getAttribute("data-theme") === "dark";
-    return dark ? ["#1F2A44", "#34507F", "#5476B4", "#7A97CF", "#9DB4E3"].slice(0, n || 5)
-                : ["#E8EEF8", "#B9C8E3", "#7D97C4", "#3D5E97", "#0B1F3A"].slice(0, n || 5);
+    return dark ? ["#2A2440", "#3F3470", "#5B48A6", "#8468E0", "#C4B5FD"].slice(0, n || 5)
+                : ["#F0EBFF", "#C9B8FD", "#9B7BFA", "#6933F7", "#272457"].slice(0, n || 5);
   }
 
   function baseOption() {

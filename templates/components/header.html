@@ -4,23 +4,22 @@
   <div class="topbar no-print">
     <div class="container-page flex items-center justify-between gap-3 py-2 text-xs sm:text-sm">
       <div class="flex min-w-0 items-center gap-3">
-        <span class="hidden truncate text-ink-2 sm:inline">{% today_label %}</span>
+        <span class="hidden truncate text-white/75 sm:inline">{% today_label %}</span>
         {% if live_last_post_at %}
           <a href="{% url 'web:news_list' %}" class="live-badge" title="{% translate 'Oxirgi xabar' %}">
             <span class="live-dot" aria-hidden="true"></span>LIVE
-            <span class="text-ink-2">{{ live_last_post_at|time_ago }}</span>
+            <span class="text-white/75">{{ live_last_post_at|time_ago }}</span>
           </a>
         {% endif %}
       </div>
       <div class="flex items-center gap-1">
         {% include "components/language_switch.html" %}
         {% include "components/theme_toggle.html" %}
-        <a href="{% url 'web:search' %}" class="icon-btn" aria-label="{% translate 'Qidiruv' %}">{% icon "search" "size-4" %}</a>
       </div>
     </div>
   </div>
   <div class="mainbar">
-    <div class="container-page flex items-center justify-between gap-4 py-3">
+    <div class="container-page flex items-center justify-between gap-2 py-3 lg:gap-4">
       <a href="{% url 'web:home' %}" class="brand" aria-label="EDUCORE — {% translate 'Bosh sahifa' %}">
         <span class="brand-mark" aria-hidden="true">E</span>
         <span class="flex flex-col leading-tight">
@@ -31,6 +30,7 @@
       <nav class="primary-nav hidden lg:block" aria-label="{% translate 'Asosiy menyu' %}">
         {% include "components/nav_links.html" with mode="desktop" %}
       </nav>
+      <a href="{% url 'web:search' %}" class="icon-btn ml-auto lg:ml-0" aria-label="{% translate 'Qidiruv' %}">{% icon "search" "size-5" %}</a>
       <button type="button" class="icon-btn lg:hidden" x-on:click="toggleDrawer" x-bind:aria-expanded="drawerExpanded"
               aria-controls="mobile-drawer" aria-label="{% translate 'Menyuni ochish' %}">{% icon "menu" %}</button>
     </div>

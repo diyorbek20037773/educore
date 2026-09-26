@@ -1,4 +1,4 @@
-/* EDUCORE design tokens (SPEC §7.2). Source lives outside STATICFILES_DIRS (ADR-013). */
+/* EDUCORE design tokens (SPEC §7.2, THE-inspired — ADR-028). Source lives outside STATICFILES_DIRS (ADR-013). */
 @import "tailwindcss";
 @import "./fonts.css";
 @import "./components.css";
@@ -34,14 +34,20 @@
   --color-ink-2: var(--ink-2);
   --color-ink-muted: var(--ink-muted);
 
-  /* Brand */
-  --color-brand-900: #0b1f3a;
-  --color-brand-800: #12294d;
-  --color-brand-700: #1b3a6b;
-  --color-brand-100: #e8eef8;
+  /* Brand: black chrome, indigo panels, violet accent, blue-pink-orange gradient (ADR-028) */
+  --color-chrome: #09090b;
+  --color-brand-900: #272457;
+  --color-brand-800: #432ea7;
+  --color-brand-700: #6933f7;
+  --color-brand-100: #f0ebff;
   --color-brand: var(--brand);
-  --color-gold: #c9a227;
-  --color-gold-text: #7c5e0a;
+  --color-accent: var(--accent);
+  --color-accent-2: #4352ff;
+  --color-pink: #de1b7c;
+  --color-orange: #fe4537;
+  /* Legacy names kept for existing markup: decorative accent (was gold) */
+  --color-gold: var(--accent);
+  --color-gold-text: var(--accent);
 
   /* Status (always paired with an icon + label) */
   --color-success: #1b7f4c;
@@ -57,10 +63,10 @@
   --color-inst-5: #0e97a5;
 
   --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --shadow-sm: 0 1px 2px rgb(15 23 42 / 0.06);
-  --shadow-md: 0 4px 12px rgb(15 23 42 / 0.08);
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --shadow-sm: 0 1px 2px rgb(9 9 11 / 0.05);
+  --shadow-md: 0 8px 24px rgb(9 9 11 / 0.1);
   --container-page: 1320px;
   --ease-standard: cubic-bezier(0.2, 0, 0, 1);
 }
@@ -69,25 +75,29 @@
   :root {
     color-scheme: light;
     --surface: #ffffff;
-    --surface-2: #f6f7f9;
-    --line: #e5e7eb;
-    --ink: #0f172a;
-    --ink-2: #475569;
-    --ink-muted: #94a3b8;
-    --brand: #0b1f3a;
-    --chart-grid: #e5e7eb;
+    --surface-2: #f4f4f5;
+    --line: #e4e4e7;
+    --ink: #232323;
+    --ink-2: #595959;
+    --ink-muted: #838383;
+    --brand: #272457;
+    --accent: #6933f7;
+    --chart-grid: #e4e4e7;
+    --gradient-brand: linear-gradient(225deg, #4352ff 15%, #de1b7c 86%, #fe4537 99%);
   }
 
   [data-theme="dark"] {
     color-scheme: dark;
-    --surface: #0b1220;
-    --surface-2: #111a2e;
-    --line: #1f2a44;
-    --ink: #e5eaf3;
-    --ink-2: #a9b4c7;
-    --ink-muted: #6b7793;
-    --brand: #9db4e3;
-    --chart-grid: #1f2a44;
+    --surface: #09090b;
+    --surface-2: #18181b;
+    --line: #2e2e33;
+    --ink: #f4f4f5;
+    --ink-2: #b0b0b0;
+    --ink-muted: #838383;
+    --brand: #c4b5fd;
+    --accent: #a78bfa;
+    --chart-grid: #2e2e33;
+    --gradient-brand: linear-gradient(225deg, #7c86ff 15%, #f0569f 86%, #ff7a6e 99%);
   }
 
   html {
@@ -101,13 +111,14 @@
   h1,
   h2,
   h3 {
-    font-family: var(--font-serif);
-    font-weight: 650;
-    letter-spacing: -0.01em;
+    font-family: var(--font-sans);
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    color: inherit;
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-info);
+    outline: 2px solid var(--color-accent);
     outline-offset: 2px;
   }
 
@@ -137,7 +148,7 @@
     top: -3rem;
     z-index: 50;
     border-radius: var(--radius-sm);
-    background: var(--color-brand-900);
+    background: var(--color-chrome);
     padding: 0.5rem 1rem;
     color: #fff;
   }
@@ -181,7 +192,7 @@
 
   .auth-card .auth-brand {
     margin-bottom: 1.5rem;
-    font-family: var(--font-serif);
+    font-family: var(--font-sans);
     font-size: var(--text-xl);
     font-weight: 700;
     color: var(--color-brand);
@@ -233,13 +244,13 @@
   }
 
   .btn-primary {
-    border-color: var(--color-brand-900);
-    background: var(--color-brand-900);
+    border-color: var(--color-brand-700);
+    background: var(--color-brand-700);
     color: #fff;
   }
 
   .btn-primary:hover {
-    background: var(--color-brand-700);
+    background: var(--color-brand-800);
   }
 
   .btn-secondary {

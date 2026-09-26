@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-25 15:49+0500\n"
+"POT-Creation-Date: 2026-09-26 13:08+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,17 +30,17 @@ msgstr ""
 msgid "Sanalar"
 msgstr ""
 
-#: apps/accounts/models.py:49 apps/appeals/models.py:63
+#: apps/accounts/models.py:49 apps/appeals/models.py:68
 #: apps/institutions/models.py:41 apps/institutions/models.py:83
 msgid "e-mail"
 msgstr "E-pochta"
 
-#: apps/accounts/models.py:50 apps/appeals/models.py:61
+#: apps/accounts/models.py:50 apps/appeals/models.py:66
 #: apps/institutions/models.py:32
 msgid "full name"
 msgstr "F.I.Sh."
 
-#: apps/accounts/models.py:51 apps/appeals/models.py:62
+#: apps/accounts/models.py:51 apps/appeals/models.py:67
 #: apps/institutions/models.py:42 apps/institutions/models.py:82
 msgid "phone"
 msgstr "Telefon"
@@ -125,7 +125,7 @@ msgstr "narx (USD)"
 msgid "duration (ms)"
 msgstr "davomiylik (ms)"
 
-#: apps/ai/models.py:75 apps/appeals/models.py:67 apps/content/models.py:127
+#: apps/ai/models.py:75 apps/appeals/models.py:72 apps/content/models.py:127
 #: apps/content/models.py:361 apps/telegram/models.py:57
 #: apps/telegram/models.py:118 apps/telegram/models.py:276
 msgid "status"
@@ -254,7 +254,7 @@ msgstr "kunlik statistika"
 msgid "daily statistics"
 msgstr "kunlik statistika"
 
-#: apps/analytics/models.py:41 apps/appeals/models.py:54
+#: apps/analytics/models.py:41 apps/appeals/models.py:59
 #: apps/content/models.py:214 apps/content/models.py:276
 #: apps/content/models.py:343 apps/content/models.py:410
 #: apps/core/models.py:168 apps/institutions/models.py:58
@@ -311,19 +311,73 @@ msgstr "oxirgi qidirilgan vaqt"
 msgid "search query"
 msgstr "qidiruv soʻrovi"
 
-#: apps/appeals/admin.py:59
+#: apps/appeals/admin.py:34
+msgid "Fayl"
+msgstr ""
+
+#: apps/appeals/admin.py:45
+msgid "javob yoki izoh"
+msgstr ""
+
+#: apps/appeals/admin.py:46
+msgid "Yozishmalar (ochiq javob murojaatchiga e-pochta orqali yuboriladi)"
+msgstr ""
+
+#: apps/appeals/admin.py:50 apps/appeals/admin.py:128
+msgid "SLA"
+msgstr ""
+
+#: apps/appeals/admin.py:54
+msgid "Muddati oʻtgan (> 15 ish kuni)"
+msgstr ""
+
+#: apps/appeals/admin.py:66
+#, python-format
+msgid "%(n)d ta murojaat yangilandi."
+msgstr ""
+
+#: apps/appeals/admin.py:93
+msgid "Holat: koʻrib chiqilmoqda"
+msgstr ""
+
+#: apps/appeals/admin.py:94
+msgid "Holat: javob berildi"
+msgstr ""
+
+#: apps/appeals/admin.py:95
+msgid "Holat: yopilgan"
+msgstr ""
+
+#: apps/appeals/admin.py:96
+msgid "Holat: rad etilgan"
+msgstr ""
+
+#: apps/appeals/admin.py:111
 msgid "Murojaatchi"
 msgstr ""
 
-#: apps/appeals/admin.py:60
+#: apps/appeals/admin.py:112
 msgid "Matn"
 msgstr ""
 
-#: apps/appeals/admin.py:61
+#: apps/appeals/admin.py:114
 msgid "Texnik"
 msgstr ""
 
-#: apps/appeals/forms.py:29 apps/web/services/charts.py:166
+#: apps/appeals/admin.py:135
+msgid "Menga biriktirish"
+msgstr ""
+
+#: apps/appeals/admin.py:145
+#, python-format
+msgid "%(n)d ta murojaat sizga biriktirildi."
+msgstr ""
+
+#: apps/appeals/admin.py:148
+msgid "CSV eksport"
+msgstr ""
+
+#: apps/appeals/forms.py:28 apps/web/services/charts.py:166
 #: templates/admin/index.html:40 templates/components/institution_chips.html:3
 #: templates/components/program_table.html:4
 #: templates/pages/appeals/track.html:22
@@ -331,236 +385,253 @@ msgstr ""
 msgid "Muassasa"
 msgstr ""
 
-#: apps/appeals/forms.py:32
+#: apps/appeals/forms.py:31
 msgid "Umumiy murojaat"
 msgstr ""
 
-#: apps/appeals/forms.py:34 templates/pages/appeals/track.html:21
+#: apps/appeals/forms.py:33 templates/pages/appeals/track.html:21
 msgid "Mavzu"
 msgstr ""
 
-#: apps/appeals/forms.py:35
+#: apps/appeals/forms.py:34
 msgid "F.I.Sh."
 msgstr ""
 
-#: apps/appeals/forms.py:37 templates/pages/institutions/contacts.html:7
+#: apps/appeals/forms.py:36 templates/pages/institutions/contacts.html:7
 #: templates/pages/institutions/contacts.html:15
 #: templates/pages/static_page.html:14
 msgid "Telefon"
 msgstr ""
 
-#: apps/appeals/forms.py:39
+#: apps/appeals/forms.py:38
 msgid "+998 XX XXX XX XX formatida"
 msgstr ""
 
-#: apps/appeals/forms.py:43 templates/pages/institutions/contacts.html:8
+#: apps/appeals/forms.py:42 templates/pages/institutions/contacts.html:8
 #: templates/pages/institutions/contacts.html:15
 #: templates/pages/static_page.html:13
 msgid "E-pochta"
 msgstr ""
 
-#: apps/appeals/forms.py:46
+#: apps/appeals/forms.py:45
 msgid "Murojaat matni"
 msgstr ""
 
-#: apps/appeals/forms.py:49
+#: apps/appeals/forms.py:48
 msgid "Ilova (ixtiyoriy)"
 msgstr ""
 
-#: apps/appeals/forms.py:49
-msgid "PDF, JPG yoki PNG, 5 MB gacha"
+#: apps/appeals/forms.py:50
+msgid "PDF, JPG, PNG yoki DOCX, 5 MB gacha"
 msgstr ""
 
-#: apps/appeals/forms.py:51
+#: apps/appeals/forms.py:53
 msgid "Shaxsiy maʼlumotlarimni qayta ishlashga roziman"
 msgstr ""
 
-#: apps/appeals/forms.py:74
+#: apps/appeals/forms.py:76
 msgid ""
 "Telefon raqami +998 bilan boshlanib, 12 ta raqamdan iborat boʻlishi kerak."
 msgstr ""
 
-#: apps/appeals/forms.py:83
-msgid "Fayl hajmi 5 MB dan oshmasligi kerak."
-msgstr ""
-
-#: apps/appeals/forms.py:85
-msgid "Faqat PDF, JPG yoki PNG fayllar qabul qilinadi."
-msgstr ""
-
-#: apps/appeals/forms.py:94
+#: apps/appeals/forms.py:93
 msgid "Kuzatish kodi"
 msgstr ""
 
-#: apps/appeals/models.py:28 apps/content/models.py:63 apps/core/models.py:149
+#: apps/appeals/models.py:33 apps/content/models.py:63 apps/core/models.py:149
 #: apps/web/views/education.py:68 apps/web/views/institutions.py:144
-#: config/unfold.py:33 templates/components/footer.html:31
+#: config/unfold.py:33 templates/components/footer.html:32
 #: templates/components/nav_links.html:13
 #: templates/components/nav_links.html:21
 #: templates/pages/education/admissions.html:5
 #: templates/pages/education/program_detail.html:28
-#: templates/pages/home.html:64
+#: templates/pages/home.html:21 templates/pages/home.html:83
+#: templates/pages/home.html:162
 msgid "Qabul"
 msgstr ""
 
-#: apps/appeals/models.py:29
+#: apps/appeals/models.py:34
 msgid "Taʼlim jarayoni"
 msgstr ""
 
-#: apps/appeals/models.py:30
+#: apps/appeals/models.py:35
 msgid "Kursant va talabalar"
 msgstr ""
 
-#: apps/appeals/models.py:31
+#: apps/appeals/models.py:36
 msgid "Shikoyat"
 msgstr ""
 
-#: apps/appeals/models.py:32
+#: apps/appeals/models.py:37
 msgid "Taklif"
 msgstr ""
 
-#: apps/appeals/models.py:33
+#: apps/appeals/models.py:38
 msgid "Hamkorlik"
 msgstr ""
 
-#: apps/appeals/models.py:34 apps/content/models.py:70
+#: apps/appeals/models.py:39 apps/content/models.py:70
 #: apps/content/models.py:265 apps/telegram/models.py:247
 #: apps/web/services/charts.py:121
 msgid "Boshqa"
 msgstr ""
 
-#: apps/appeals/models.py:38
+#: apps/appeals/models.py:43
 msgid "Yangi"
 msgstr ""
 
-#: apps/appeals/models.py:39
+#: apps/appeals/models.py:44 apps/web/views/appeals.py:131
 msgid "Koʻrib chiqilmoqda"
 msgstr ""
 
-#: apps/appeals/models.py:40
+#: apps/appeals/models.py:45 apps/web/views/appeals.py:132
 msgid "Javob berildi"
 msgstr ""
 
-#: apps/appeals/models.py:41 apps/content/models.py:335
+#: apps/appeals/models.py:46 apps/content/models.py:335
 msgid "Yopilgan"
 msgstr ""
 
-#: apps/appeals/models.py:42 apps/content/models.py:78
+#: apps/appeals/models.py:47 apps/content/models.py:78
 msgid "Rad etilgan"
 msgstr ""
 
-#: apps/appeals/models.py:46
+#: apps/appeals/models.py:51
 msgid "Oddiy"
 msgstr ""
 
-#: apps/appeals/models.py:47
+#: apps/appeals/models.py:52
 msgid "Yuqori"
 msgstr ""
 
-#: apps/appeals/models.py:51
+#: apps/appeals/models.py:56
 msgid "tracking code"
 msgstr "kuzatish kodi"
 
-#: apps/appeals/models.py:60 apps/core/models.py:165
+#: apps/appeals/models.py:65 apps/core/models.py:165
 msgid "topic"
 msgstr "mavzu"
 
-#: apps/appeals/models.py:64 apps/ops/models.py:24
+#: apps/appeals/models.py:69 apps/ops/models.py:24
 msgid "message"
 msgstr "xabar"
 
-#: apps/appeals/models.py:65
+#: apps/appeals/models.py:70
 msgid "consent to data processing"
 msgstr "maʼlumotlarni qayta ishlashga rozilik"
 
-#: apps/appeals/models.py:70
+#: apps/appeals/models.py:75
 msgid "priority"
 msgstr "ustuvorlik"
 
-#: apps/appeals/models.py:74
+#: apps/appeals/models.py:79
 msgid "assigned to"
 msgstr "masʼul xodim"
 
-#: apps/appeals/models.py:80
+#: apps/appeals/models.py:85
 msgid "IP hash"
 msgstr "IP xeshi"
 
-#: apps/appeals/models.py:81
+#: apps/appeals/models.py:86
 msgid "user agent"
 msgstr ""
 
-#: apps/appeals/models.py:82 apps/telegram/models.py:181
+#: apps/appeals/models.py:87 apps/telegram/models.py:181
 msgid "language"
 msgstr "til"
 
-#: apps/appeals/models.py:83
+#: apps/appeals/models.py:88
 msgid "answered at"
 msgstr "javob berilgan vaqt"
 
-#: apps/appeals/models.py:84
+#: apps/appeals/models.py:89
 msgid "closed at"
 msgstr "yopilgan vaqt"
 
-#: apps/appeals/models.py:85
+#: apps/appeals/models.py:90
 msgid "internal note"
 msgstr "ichki izoh"
 
-#: apps/appeals/models.py:89 apps/appeals/models.py:108
-#: apps/appeals/models.py:130
+#: apps/appeals/models.py:91
+#, fuzzy
+#| msgid "notified at"
+msgid "anonymized at"
+msgstr "xabardor qilingan vaqt"
+
+#: apps/appeals/models.py:95 apps/appeals/models.py:114
+#: apps/appeals/models.py:136
 msgid "appeal"
 msgstr "murojaat"
 
-#: apps/appeals/models.py:90
+#: apps/appeals/models.py:96
 msgid "appeals"
 msgstr "murojaatlar"
 
-#: apps/appeals/models.py:111
+#: apps/appeals/models.py:117
 msgid "file"
 msgstr "fayl"
 
-#: apps/appeals/models.py:113
+#: apps/appeals/models.py:119
 msgid "original name"
 msgstr "asl nomi"
 
-#: apps/appeals/models.py:114 apps/telegram/models.py:268
+#: apps/appeals/models.py:120 apps/telegram/models.py:268
 msgid "size (bytes)"
 msgstr "hajmi (bayt)"
 
-#: apps/appeals/models.py:115 apps/telegram/models.py:267
+#: apps/appeals/models.py:121 apps/telegram/models.py:267
 msgid "MIME type"
 msgstr "MIME turi"
 
-#: apps/appeals/models.py:119
+#: apps/appeals/models.py:125
 msgid "appeal attachment"
 msgstr "murojaat ilovasi"
 
-#: apps/appeals/models.py:120
+#: apps/appeals/models.py:126
 msgid "appeal attachments"
 msgstr "murojaat ilovalari"
 
-#: apps/appeals/models.py:134 apps/content/models.py:153
+#: apps/appeals/models.py:140 apps/content/models.py:153
 msgid "author"
 msgstr "muallif"
 
-#: apps/appeals/models.py:140 apps/telegram/models.py:161
+#: apps/appeals/models.py:146 apps/telegram/models.py:161
 msgid "text"
 msgstr "matn"
 
-#: apps/appeals/models.py:141
+#: apps/appeals/models.py:147
 msgid "visible to applicant"
 msgstr "murojaatchiga koʻrinadi"
 
-#: apps/appeals/models.py:142
+#: apps/appeals/models.py:148
 msgid "notified at"
 msgstr "xabardor qilingan vaqt"
 
-#: apps/appeals/models.py:146
+#: apps/appeals/models.py:152
 msgid "appeal message"
 msgstr "murojaat xabari"
 
-#: apps/appeals/models.py:147
+#: apps/appeals/models.py:153
 msgid "appeal messages"
 msgstr "murojaat xabarlari"
+
+#: apps/appeals/services/notifications.py:39
+#, python-format
+msgid "Murojaatingiz qabul qilindi: %(code)s"
+msgstr ""
+
+#: apps/appeals/services/notifications.py:77
+#, python-format
+msgid "Murojaatingizga javob: %(code)s"
+msgstr ""
+
+#: apps/appeals/services/submission.py:77
+msgid "Fayl hajmi 5 MB dan oshmasligi kerak."
+msgstr ""
+
+#: apps/appeals/services/submission.py:81
+msgid "Faqat PDF, JPG, PNG yoki DOCX fayllar qabul qilinadi."
+msgstr ""
 
 #: apps/content/admin.py:37
 msgid "Asl xabar"
@@ -1134,8 +1205,9 @@ msgid "Aloqa"
 msgstr ""
 
 #: apps/core/admin.py:29 apps/web/views/analytics.py:44 config/unfold.py:74
-#: templates/components/footer.html:32 templates/components/nav_links.html:30
-#: templates/pages/analytics.html:5 templates/pages/home.html:53
+#: templates/components/footer.html:33 templates/components/nav_links.html:30
+#: templates/pages/analytics.html:5 templates/pages/home.html:24
+#: templates/pages/home.html:72 templates/pages/home.html:151
 msgid "Analitika"
 msgstr ""
 
@@ -1277,13 +1349,13 @@ msgstr ""
 
 #: apps/core/models.py:151 apps/institutions/models.py:98
 #: apps/web/views/education.py:98 templates/components/nav_links.html:15
-#: templates/components/nav_links.html:23 templates/pages/home.html:95
+#: templates/components/nav_links.html:23 templates/pages/home.html:114
 msgid "Kursantlar"
 msgstr ""
 
 #: apps/core/models.py:152 apps/institutions/models.py:97
 #: apps/web/views/education.py:92 templates/components/nav_links.html:14
-#: templates/components/nav_links.html:22 templates/pages/home.html:95
+#: templates/components/nav_links.html:22 templates/pages/home.html:114
 msgid "Talabalar"
 msgstr ""
 
@@ -1291,15 +1363,16 @@ msgstr ""
 #: apps/web/views/professions.py:48 config/unfold.py:64
 #: templates/components/nav_links.html:27 templates/pages/analytics.html:22
 #: templates/pages/education/program_detail.html:27
-#: templates/pages/home.html:33 templates/pages/home.html:103
-#: templates/pages/professions/list.html:5 templates/pages/search.html:22
+#: templates/pages/home.html:22 templates/pages/home.html:52
+#: templates/pages/home.html:122 templates/pages/professions/list.html:5
+#: templates/pages/search.html:22
 msgid "Kasblar"
 msgstr ""
 
-#: apps/core/models.py:154 apps/web/views/appeals.py:38
-#: apps/web/views/appeals.py:47 apps/web/views/appeals.py:70
-#: templates/components/footer.html:33 templates/components/nav_links.html:31
-#: templates/pages/appeals/form.html:5
+#: apps/core/models.py:154 apps/web/views/appeals.py:55
+#: apps/web/views/appeals.py:84 apps/web/views/appeals.py:109
+#: templates/components/footer.html:34 templates/components/nav_links.html:31
+#: templates/pages/appeals/form.html:5 templates/pages/home.html:25
 msgid "Murojaat"
 msgstr ""
 
@@ -1328,6 +1401,7 @@ msgid "Brend"
 msgstr ""
 
 #: apps/institutions/admin.py:72 templates/admin/index.html:41
+#: templates/pages/appeals/track.html:24
 msgid "Holat"
 msgstr ""
 
@@ -1442,13 +1516,13 @@ msgstr ""
 #: apps/institutions/models.py:100 apps/web/views/education.py:36
 #: apps/web/views/education.py:56 apps/web/views/institutions.py:134
 #: config/unfold.py:63 templates/components/admission_card.html:19
-#: templates/components/footer.html:30
+#: templates/components/footer.html:31
 #: templates/components/institution_card.html:9
 #: templates/components/nav_links.html:12
 #: templates/components/nav_links.html:20 templates/pages/analytics.html:21
-#: templates/pages/education/program_list.html:5 templates/pages/home.html:32
-#: templates/pages/home.html:78 templates/pages/professions/detail.html:25
-#: templates/pages/search.html:21
+#: templates/pages/education/program_list.html:5 templates/pages/home.html:20
+#: templates/pages/home.html:51 templates/pages/home.html:97
+#: templates/pages/professions/detail.html:25 templates/pages/search.html:21
 msgid "Yoʻnalishlar"
 msgstr ""
 
@@ -2205,26 +2279,46 @@ msgid "%(n)d kun oldin"
 msgstr ""
 
 #: apps/web/views/_helpers.py:16 templates/components/breadcrumbs.html:4
-#: templates/components/header.html:24 templates/components/nav_links.html:3
+#: templates/components/header.html:23 templates/components/nav_links.html:3
 #: templates/errors/_error.html:9
 msgid "Bosh sahifa"
 msgstr ""
 
-#: apps/web/views/appeals.py:47
+#: apps/web/views/appeals.py:34
+msgid "Juda koʻp murojaat yuborildi. Iltimos, bir soatdan keyin qayta urining."
+msgstr ""
+
+#: apps/web/views/appeals.py:45
+msgid "Xavfsizlik tekshiruvidan oʻtilmadi. Sahifani yangilab qayta urining."
+msgstr ""
+
+#: apps/web/views/appeals.py:84
 msgid "Yuborildi"
 msgstr ""
 
-#: apps/web/views/appeals.py:70 templates/pages/appeals/form.html:35
+#: apps/web/views/appeals.py:109 templates/pages/appeals/form.html:33
 #: templates/pages/appeals/track.html:6
 msgid "Murojaatni kuzatish"
+msgstr ""
+
+#: apps/web/views/appeals.py:130
+msgid "Qabul qilindi"
+msgstr ""
+
+#: apps/web/views/appeals.py:133
+msgid "Yopildi"
+msgstr ""
+
+#: apps/web/views/appeals.py:134
+msgid "Rad etildi"
 msgstr ""
 
 #: apps/web/views/events.py:92 apps/web/views/events.py:111
 #: apps/web/views/institutions.py:182 config/unfold.py:32
 #: templates/components/institution_card.html:10
 #: templates/components/nav_links.html:28 templates/pages/education/hub.html:11
-#: templates/pages/events/list.html:5 templates/pages/home.html:110
-#: templates/pages/search.html:23
+#: templates/pages/events/list.html:5 templates/pages/home.html:23
+#: templates/pages/home.html:129 templates/pages/search.html:23
 msgid "Tadbirlar"
 msgstr ""
 
@@ -2242,14 +2336,15 @@ msgstr ""
 
 #: apps/web/views/institutions.py:38 apps/web/views/institutions.py:69
 #: apps/web/views/institutions.py:103 config/unfold.py:61
-#: templates/components/footer.html:10 templates/components/nav_links.html:4
+#: templates/components/footer.html:11 templates/components/nav_links.html:4
 #: templates/pages/analytics.html:11 templates/pages/analytics.html:18
-#: templates/pages/home.html:29 templates/pages/home.html:42
-#: templates/pages/institutions/list.html:6 templates/pages/search.html:19
+#: templates/pages/home.html:19 templates/pages/home.html:48
+#: templates/pages/home.html:61 templates/pages/institutions/list.html:6
+#: templates/pages/search.html:19
 msgid "Muassasalar"
 msgstr ""
 
-#: apps/web/views/institutions.py:69 templates/pages/home.html:42
+#: apps/web/views/institutions.py:69 templates/pages/home.html:61
 #: templates/pages/institutions/list.html:7
 msgid "Taqqoslash"
 msgstr ""
@@ -2260,9 +2355,9 @@ msgstr ""
 
 #: apps/web/views/institutions.py:172 apps/web/views/news.py:73
 #: apps/web/views/news.py:117 apps/web/views/news.py:158
-#: templates/components/footer.html:29 templates/components/nav_links.html:5
+#: templates/components/footer.html:30 templates/components/nav_links.html:5
 #: templates/pages/education/program_detail.html:29
-#: templates/pages/news/list.html:6
+#: templates/pages/home.html:18 templates/pages/news/list.html:6
 msgid "Yangiliklar"
 msgstr ""
 
@@ -2274,14 +2369,14 @@ msgstr ""
 msgid "Koʻp oʻqilgan"
 msgstr ""
 
-#: apps/web/views/search.py:27 templates/components/header.html:18
+#: apps/web/views/search.py:27 templates/components/header.html:33
 #: templates/errors/_error.html:9 templates/pages/search.html:6
 msgid "Qidiruv"
 msgstr ""
 
 #: apps/web/views/stories.py:20 apps/web/views/stories.py:38
 #: templates/components/nav_links.html:29 templates/pages/education/hub.html:16
-#: templates/pages/home.html:114 templates/pages/stories/list.html:5
+#: templates/pages/home.html:133 templates/pages/stories/list.html:5
 msgid "Motivatsiya"
 msgstr ""
 
@@ -2426,23 +2521,23 @@ msgid "Manbalar yoʻq"
 msgstr ""
 
 #: templates/base.html:8 templates/base.html:20
-#: templates/components/footer.html:6
+#: templates/components/footer.html:7
 msgid ""
 "Huquqni muhofaza qilish taʼlim muassasalarining yagona rasmiy axborot-"
 "tahliliy platformasi"
 msgstr ""
 
-#: templates/base.html:50
+#: templates/base.html:49
 msgid "Asosiy mazmunga oʻtish"
 msgstr ""
 
-#: templates/components/admission_card.html:11 templates/pages/home.html:71
+#: templates/components/admission_card.html:11 templates/pages/home.html:90
 #, python-brace-format
 msgid "Tugashiga {d} kun qoldi"
 msgstr ""
 
 #: templates/components/admission_card.html:11
-#: templates/components/program_table.html:4 templates/pages/home.html:71
+#: templates/components/program_table.html:4 templates/pages/home.html:90
 msgid "Muddat"
 msgstr ""
 
@@ -2465,7 +2560,7 @@ msgid "Hujjat topshirish"
 msgstr ""
 
 #: templates/components/article_card.html:9
-#: templates/components/article_card.html:33
+#: templates/components/article_card.html:36
 #: templates/pages/news/detail.html:19
 msgid "Yangilangan"
 msgstr ""
@@ -2494,33 +2589,33 @@ msgstr ""
 msgid "Koʻp beriladigan savollar"
 msgstr ""
 
-#: templates/components/footer.html:7
+#: templates/components/footer.html:8
 msgid "Manba: muassasalarning rasmiy Telegram kanallari"
 msgstr ""
 
-#: templates/components/footer.html:19
+#: templates/components/footer.html:20
 #: templates/pages/institutions/contacts.html:9
 msgid "Veb-sayt"
 msgstr ""
 
-#: templates/components/footer.html:27
+#: templates/components/footer.html:28
 msgid "Sayt xaritasi"
 msgstr ""
 
-#: templates/components/footer.html:41
+#: templates/components/footer.html:42
 msgid "Barcha huquqlar himoyalangan."
 msgstr ""
 
-#: templates/components/footer.html:42
+#: templates/components/footer.html:43
 msgid ""
 "Maqolalar rasmiy manbalar asosida tayyorlanadi va manbaga havola beriladi."
 msgstr ""
 
-#: templates/components/header.html:28
+#: templates/components/header.html:27
 msgid "Rasmiy axborot-tahliliy platforma"
 msgstr ""
 
-#: templates/components/header.html:31
+#: templates/components/header.html:30
 msgid "Asosiy menyu"
 msgstr ""
 
@@ -2538,7 +2633,8 @@ msgstr ""
 
 #: templates/components/institution_chips.html:4
 #: templates/pages/education/admissions.html:12
-#: templates/pages/education/hub.html:7 templates/partials/live_items.html:10
+#: templates/pages/education/hub.html:7 templates/pages/home.html:31
+#: templates/partials/live_items.html:10
 msgid "Barchasi"
 msgstr ""
 
@@ -2558,11 +2654,11 @@ msgstr ""
 msgid "Menyuni yopish"
 msgstr ""
 
-#: templates/components/nav_links.html:12
+#: templates/components/nav_links.html:12 templates/pages/home.html:20
 msgid "Taʼlim dasturlari katalogi"
 msgstr ""
 
-#: templates/components/nav_links.html:13
+#: templates/components/nav_links.html:13 templates/pages/home.html:21
 msgid "Muddatlar, talablar, hujjatlar"
 msgstr ""
 
@@ -2640,6 +2736,40 @@ msgstr ""
 msgid "Yakunlandi"
 msgstr ""
 
+#: templates/emails/appeals/confirmation.txt:1
+#: templates/emails/appeals/reply.txt:1
+#, python-format
+msgid "Hurmatli %(name)s!"
+msgstr ""
+
+#: templates/emails/appeals/confirmation.txt:3
+msgid "Murojaatingiz qabul qilindi."
+msgstr ""
+
+#: templates/emails/appeals/confirmation.txt:4
+msgid "Kuzatish kodi:"
+msgstr ""
+
+#: templates/emails/appeals/confirmation.txt:6
+msgid ""
+"Murojaatlar odatda 15 ish kuni ichida koʻrib chiqiladi. Holatni quyidagi "
+"havola orqali tekshirishingiz mumkin:"
+msgstr ""
+
+#: templates/emails/appeals/confirmation.txt:9
+#: templates/emails/appeals/reply.txt:10
+msgid "Ushbu xat avtomatik yuborildi, unga javob qaytarmang."
+msgstr ""
+
+#: templates/emails/appeals/reply.txt:3
+#, python-format
+msgid "%(code)s raqamli murojaatingizga javob berildi:"
+msgstr ""
+
+#: templates/emails/appeals/reply.txt:7
+msgid "Murojaat holati va barcha javoblar:"
+msgstr ""
+
 #: templates/errors/404.html:3 templates/errors/404.html:5
 msgid "Sahifa topilmadi"
 msgstr ""
@@ -2675,16 +2805,16 @@ msgstr ""
 msgid "Qoʻllash"
 msgstr ""
 
-#: templates/pages/analytics.html:19 templates/pages/home.html:30
+#: templates/pages/analytics.html:19 templates/pages/home.html:49
 msgid "Bugungi yangiliklar"
 msgstr ""
 
-#: templates/pages/analytics.html:20 templates/pages/home.html:31
+#: templates/pages/analytics.html:20 templates/pages/home.html:50
 #: templates/pages/institutions/events.html:5
 msgid "Yaqin tadbirlar"
 msgstr ""
 
-#: templates/pages/analytics.html:26 templates/pages/home.html:56
+#: templates/pages/analytics.html:26 templates/pages/home.html:75
 msgid "Faollik dinamikasi"
 msgstr ""
 
@@ -2735,7 +2865,7 @@ msgid "Qabul jadvali"
 msgstr ""
 
 #: templates/pages/analytics.html:36
-#: templates/pages/education/admissions.html:8 templates/pages/home.html:74
+#: templates/pages/education/admissions.html:8 templates/pages/home.html:93
 msgid "Hozircha ochiq qabul eʼlonlari yoʻq."
 msgstr ""
 
@@ -2745,25 +2875,19 @@ msgid ""
 "kuzatish kodi beriladi."
 msgstr ""
 
-#: templates/pages/appeals/form.html:10
-msgid ""
-"Maʼlumotlar toʻgʻri toʻldirildi. Murojaatlarni qabul qilish tez orada ishga "
-"tushadi."
-msgstr ""
-
-#: templates/pages/appeals/form.html:27
+#: templates/pages/appeals/form.html:24
 msgid "Maxfiylik siyosati"
 msgstr ""
 
-#: templates/pages/appeals/form.html:31
+#: templates/pages/appeals/form.html:29
 msgid "Yuborish"
 msgstr ""
 
-#: templates/pages/appeals/form.html:35
+#: templates/pages/appeals/form.html:33
 msgid "Kuzatish kodi orqali holatni tekshiring."
 msgstr ""
 
-#: templates/pages/appeals/form.html:36
+#: templates/pages/appeals/form.html:34
 msgid "Muassasalar aloqalari"
 msgstr ""
 
@@ -2796,11 +2920,11 @@ msgstr ""
 msgid "Yuborilgan"
 msgstr ""
 
-#: templates/pages/appeals/track.html:24
+#: templates/pages/appeals/track.html:31
 msgid "Javoblar"
 msgstr ""
 
-#: templates/pages/appeals/track.html:25
+#: templates/pages/appeals/track.html:32
 msgid "Hozircha javob yoʻq."
 msgstr ""
 
@@ -2816,7 +2940,7 @@ msgstr ""
 msgid "Soʻnggi maqolalar"
 msgstr ""
 
-#: templates/pages/education/hub.html:11 templates/pages/home.html:111
+#: templates/pages/education/hub.html:11 templates/pages/home.html:130
 #: templates/pages/institutions/events.html:5
 msgid "Yaqin tadbirlar yoʻq."
 msgstr ""
@@ -2907,7 +3031,7 @@ msgstr ""
 msgid "Roʻyxat"
 msgstr ""
 
-#: templates/pages/events/list.html:10 templates/pages/home.html:110
+#: templates/pages/events/list.html:10 templates/pages/home.html:129
 msgid "Taqvim"
 msgstr ""
 
@@ -2923,86 +3047,138 @@ msgstr ""
 msgid "Huquqni muhofaza qilish taʼlim muassasalari axborot platformasi"
 msgstr ""
 
-#: templates/pages/home.html:12
-msgid "Asosiy yangiliklar"
+#: templates/pages/home.html:13
+msgid "Huquqni muhofaza qilish taʼlimi"
 msgstr ""
 
-#: templates/pages/home.html:21
+#: templates/pages/home.html:13
+msgid "yagona axborot platformasida"
+msgstr ""
+
+#: templates/pages/home.html:15
+msgid ""
+"Beshta taʼlim muassasasining rasmiy yangiliklari, yoʻnalishlari, qabul "
+"maʼlumotlari va tahliliy koʻrsatkichlari — real vaqtda, bir joyda."
+msgstr ""
+
+#: templates/pages/home.html:17
+msgid "Boʻlimlar"
+msgstr ""
+
+#: templates/pages/home.html:18
+msgid "Rasmiy kanallardan har kuni yangilanadigan xabarlar"
+msgstr ""
+
+#: templates/pages/home.html:19
+msgid "Beshta muassasa profili va taqqoslash"
+msgstr ""
+
+#: templates/pages/home.html:22
+msgid "Qaysi kasbga qayerda oʻqish mumkin"
+msgstr ""
+
+#: templates/pages/home.html:23
+msgid "Yaqinlashayotgan tadbirlar taqvimi"
+msgstr ""
+
+#: templates/pages/home.html:24
+msgid "Faollik, mavzular va taqqoslash grafiklari"
+msgstr ""
+
+#: templates/pages/home.html:25
+msgid "Savol yoki taklifingizni muassasaga yoʻllang"
+msgstr ""
+
+#: templates/pages/home.html:31 templates/pages/institutions/overview.html:21
+msgid "Soʻnggi yangiliklar"
+msgstr ""
+
+#: templates/pages/home.html:40
 msgid "Yangiliklar tez orada paydo boʻladi."
 msgstr ""
 
-#: templates/pages/home.html:26
+#: templates/pages/home.html:45
 msgid "Asosiy koʻrsatkichlar"
 msgstr ""
 
-#: templates/pages/home.html:53
+#: templates/pages/home.html:72
 msgid "Faollik va mavzular"
 msgstr ""
 
-#: templates/pages/home.html:56
+#: templates/pages/home.html:75
 msgid "Soʻnggi 12 oy, muassasalar kesimida"
 msgstr ""
 
-#: templates/pages/home.html:58
+#: templates/pages/home.html:77
 msgid "Mavzular taqsimoti"
 msgstr ""
 
-#: templates/pages/home.html:58
+#: templates/pages/home.html:77
 msgid "Soʻnggi 30 kun"
 msgstr ""
 
-#: templates/pages/home.html:64
+#: templates/pages/home.html:83
 msgid "Taʼlim va qabul"
 msgstr ""
 
-#: templates/pages/home.html:87 templates/pages/professions/detail.html:25
+#: templates/pages/home.html:106 templates/pages/professions/detail.html:25
 msgid "Barcha yoʻnalishlar"
 msgstr ""
 
-#: templates/pages/home.html:94
+#: templates/pages/home.html:113
 msgid "Kursantlar va talabalar"
 msgstr ""
 
-#: templates/pages/home.html:103
+#: templates/pages/home.html:122
 msgid "Barcha kasblar"
 msgstr ""
 
-#: templates/pages/home.html:114
+#: templates/pages/home.html:133
 msgid "Barcha hikoyalar"
 msgstr ""
 
-#: templates/pages/home.html:122
+#: templates/pages/home.html:141
 msgid "Analitika va murojaat"
 msgstr ""
 
-#: templates/pages/home.html:124
-msgid "Maqolalar (30 kun)"
-msgstr ""
-
-#: templates/pages/home.html:125
-msgid "Jami maqolalar"
-msgstr ""
-
-#: templates/pages/home.html:126
-msgid "Manba kanallar"
-msgstr ""
-
-#: templates/pages/home.html:127
-msgid "Toʻliq analitika"
-msgstr ""
-
-#: templates/pages/home.html:130
+#: templates/pages/home.html:144
 msgid "Murojaat yuboring"
 msgstr ""
 
-#: templates/pages/home.html:130
+#: templates/pages/home.html:145
 msgid ""
 "Savol, taklif yoki shikoyatingizni muassasaga yoʻllang va holatini kuzatib "
 "boring."
 msgstr ""
 
-#: templates/pages/home.html:131
+#: templates/pages/home.html:147
 msgid "Murojaat qilish"
+msgstr ""
+
+#: templates/pages/home.html:153
+msgid "Maqolalar (30 kun)"
+msgstr ""
+
+#: templates/pages/home.html:154
+msgid "Jami maqolalar"
+msgstr ""
+
+#: templates/pages/home.html:155
+msgid "Manba kanallar"
+msgstr ""
+
+#: templates/pages/home.html:158
+msgid "Toʻliq analitika"
+msgstr ""
+
+#: templates/pages/home.html:163
+msgid ""
+"Qabul muddatlari, talablar va kerakli hujjatlar — barcha muassasalar "
+"boʻyicha."
+msgstr ""
+
+#: templates/pages/home.html:165
+msgid "Batafsil"
 msgstr ""
 
 #: templates/pages/institutions/_base.html:14
@@ -3090,10 +3266,6 @@ msgstr ""
 
 #: templates/pages/institutions/overview.html:16
 msgid "tasdiqlanmoqda"
-msgstr ""
-
-#: templates/pages/institutions/overview.html:21
-msgid "Soʻnggi yangiliklar"
 msgstr ""
 
 #: templates/pages/institutions/overview.html:27

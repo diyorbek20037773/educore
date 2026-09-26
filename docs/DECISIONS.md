@@ -212,3 +212,17 @@ the only way in, so `TRUSTED_PROXY_CIDRS=0.0.0.0/0,::/0`. The Dockerfile drops i
 rejects cache mounts without its own id format). **Consequences:** no horizontal scaling and one noisy neighbour
 (AI worker) shares CPU with web — acceptable for a preview; single Redis without the `noeviction`/`allkeys-lru`
 split. Everything reverts to the SPEC topology on the VPS; nothing Railway-specific is read by the application code.
+
+## ADR-028 — Public UI restyled after timeshighereducation.com
+**Status:** accepted (2026-09-26). **Context:** the owner asked for the public frontend to look like
+timeshighereducation.com (THE). SPEC §7.1–7.2 described a navy/gold palette with serif headlines. **Decision:** keep
+the structure, components and every SPEC §6 section; restyle to THE's visual language: black header and footer
+(`--color-chrome #09090B`), white body, all-sans bold headings (Manrope, self-hosted, standing in for THE's Open Sans),
+violet accent `#6933F7` (links, primary buttons, pill CTA), indigo panels `#272457`/`#432EA7` (table heads, promo
+panels), THE's blue-pink-orange gradient (`#4352FF → #DE1B7C → #FE4537`) for the intro headline, active-nav underline,
+logo mark and footer bar; 16 px card radius; article tiles without a box (rounded image, bold title, grey kicker);
+section headers "Title … Barchasi →". The home page gains THE's intro (gradient headline + 8 section launcher tiles)
+before the hero band, and the closing CTA becomes three promo panels (appeal, analytics, admissions). Sequential chart
+ramp becomes violet. Institution colours (ADR-007) are unchanged. Source Serif stays only for motivation quotes and
+is no longer preloaded. All text pairs checked ≥ 4.5:1 (accent on white 6.15, on `#F4F4F5` 5.59). **Consequences:**
+SPEC §7.1–7.2 and §6.2 updated; no copying of THE assets, names or content, only the layout and palette idiom.

@@ -110,7 +110,13 @@
 
 ### Interim — Railway preview hosting (owner request 2026-09-26, ADR-027)
 - [x] R.1 — 2026-09-26 · `railway.json` (Dockerfile build, `/healthz` check), `docker/railway/start.sh` (migrate, seeds, superuser, optional demo seed, workers, beat, optional ingestor, gunicorn on `$PORT`), Dockerfile without BuildKit cache mount, webp/woff2 MIME types, `docs/RAILWAY.md` (step-by-step + variables); simulated locally as root with prod settings on a fresh DB: migrations + seeds + 38 demo articles, all key pages 200, workers ping, `check --deploy` clean
+- [x] R.3 — 2026-09-26 · prod settings reject unfilled `<placeholder>` values and invalid `ADMIN_URL_PATH` with a clear message
 - [ ] R.2 — owner creates the Railway project (repo + pgvector + Redis + volume + variables, `docs/RAILWAY.md`) and shares the domain; then smoke-test the live URL
+
+### Interim — THE-style redesign (owner request 2026-09-26, ADR-028)
+- [x] D.1 — 2026-09-26 · tokens (black chrome, violet accent, brand gradient, 16 px radius, sans headings), header/footer,
+  article tiles, section headers, home intro + launcher + promo panels, violet chart ramp, ru/en/uz‑Cyrl strings;
+  verified with headless Edge at 1440 px (light/dark) and 375 px (no horizontal scroll); contrast ≥ 4.5:1; 520 tests
 
 ### Phase 7 — API, hardening, observability
 - [ ] T7.1 · [ ] T7.2 · [ ] T7.3 · [ ] T7.4
@@ -130,6 +136,7 @@
 ## Log (newest first)
 | Date | Phase/Task | Note |
 |---|---|---|
+| 2026-09-26 | Redesign | public UI restyled after timeshighereducation.com (ADR-028); Railway placeholder guard |
 | 2026-09-26 | Phase 6 / Railway | appeals backend + inbox + anonymization (T6.1, T6.2, T6.4); Railway all-in-one deployment prepared and simulated (ADR-027); 520 tests |
 | 2026-09-25 | Phase 3 | providers, full process_post pipeline, translations, digest, editorial admin, golden set, seed_demo; AC3.1–3.2 green; AC3.3 waits for HA3 |
 | 2026-09-25 | Phase 2 | ingestor, commands, tasks, derivatives, heartbeat alerts; AC2.1 green (86 % coverage); AC2.2–2.4 wait for HA2 |

@@ -74,7 +74,7 @@ def manifest(request: HttpRequest) -> HttpResponse:
         "scope": "/",
         "display": "standalone",
         "background_color": "#FFFFFF",
-        "theme_color": "#0B1F3A",
+        "theme_color": "#09090B",
         "icons": [
             {"src": static("img/icon-192.png"), "sizes": "192x192", "type": "image/png"},
             {"src": static("img/icon-512.png"), "sizes": "512x512", "type": "image/png"},
