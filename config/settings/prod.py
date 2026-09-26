@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import os
+import re
 
 from django.core.exceptions import ImproperlyConfigured
 
@@ -19,7 +20,7 @@ if _railway_domain:
             os.environ[_name] = _value
 
 from config.settings.base import *  # noqa: E402, F403
-from config.settings.base import env  # noqa: E402
+from config.settings.base import ADMIN_URL_PATH, env  # noqa: E402
 
 _REQUIRED = ("SECRET_KEY", "ALLOWED_HOSTS", "DATABASE_URL", "REDIS_URL", "SITE_URL")
 _EMPTY = ("", "https:", "http:")
@@ -29,6 +30,16 @@ if _missing:
         f"Missing required environment variables: {', '.join(_missing)} "
         "(Railway: generate a domain; ${{<service>.DATABASE_URL}} must name your Postgres service)"
     )
+_placeholders = [
+    name
+    for name in ("SECRET_KEY", "ADMIN_URL_PATH", "DJANGO_SUPERUSER_EMAIL", "DJANGO_SUPERUSER_PASSWORD")
+    if re.fullmatch(r"<.*>", env(name, default="").strip(), flags=re.DOTALL)
+]
+if _placeholders:
+    _names = ", ".join(_placeholders)
+    raise ImproperlyConfigured(f"Fill in real values instead of the <placeholder> text for: {_names}.")
+if not re.fullmatch(r"[a-z0-9][a-z0-9-]{3,63}", ADMIN_URL_PATH):
+    raise ImproperlyConfigured("ADMIN_URL_PATH must use only lowercase letters, digits and '-' (4-64 chars).")
 if env.bool("DEBUG", default=False):
     raise ImproperlyConfigured("DEBUG must be false in production.")
 if env("SECRET_KEY").startswith(("CHANGE_ME", "insecure")) or len(env("SECRET_KEY")) < 50:
