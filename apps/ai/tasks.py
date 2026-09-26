@@ -11,6 +11,7 @@ from typing import Any
 
 import structlog
 from celery import shared_task
+from django.conf import settings
 from django.db import connection
 from django.db.models import F
 from django.utils import timezone
@@ -154,9 +155,11 @@ def translate_article(self: Any, article_id: int, lang: str) -> str:
 
 @shared_task(name="ai.weekly_digest", ignore_result=True)
 def weekly_digest() -> int | None:
-    """Monday 07:00: "Haftalik sharh" to review (FR-AI-8)."""
+    """Monday 07:00: "Haftalik sharh" to review (FR-AI-8); off in `CONTENT_MODE=verbatim` (ADR-033)."""
     from apps.ai.translation import weekly_digest as _digest
 
+    if settings.CONTENT_MODE != "ai":
+        return None
     try:
         article = _digest()
     except (BudgetExhaustedError, ProviderPermanentError, ProviderTransientError) as exc:

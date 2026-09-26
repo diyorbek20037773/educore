@@ -14,6 +14,7 @@ PASSWORD_HASHERS = ["django.contrib.auth.hashers.MD5PasswordHasher"]
 
 # The real provider must never be called from tests (AI_PIPELINE §4). Not overridable by env.
 AI_PROVIDER = "mock"
+CONTENT_MODE = "ai"
 ANTHROPIC_API_KEY = ""
 EMBEDDING_BACKEND = "fake"
 OPS_TELEGRAM_BOT_TOKEN = ""

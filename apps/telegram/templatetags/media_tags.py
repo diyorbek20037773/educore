@@ -35,3 +35,11 @@ def media_srcset(media: TelegramMedia | None) -> str:
     derivatives = media.derivatives or {}
     parts = [f"{storage_url(derivatives[s])} {s}w" for s in reversed(DERIVATIVE_SIZES) if derivatives.get(s)]
     return ", ".join(parts)
+
+
+@register.simple_tag
+def media_file_url(media: TelegramMedia | None) -> str:
+    """URL of the stored original file (videos are played from it), or ""."""
+    if media is None or not media.original:
+        return ""
+    return storage_url(media.original.name)

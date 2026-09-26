@@ -69,11 +69,19 @@ DJANGO_SUPERUSER_PASSWORD=
 
 ## Real data (when the keys arrive)
 
-- **AI (HA3):** `AI_PROVIDER=anthropic`, `ANTHROPIC_API_KEY=…`, `AI_DAILY_USD_BUDGET=…`; set `SEED_DEMO=0`
-  and archive the demo articles in admin.
-- **Telegram (HA2):** add `TELEGRAM_API_ID`, `TELEGRAM_API_HASH`, `TELEGRAM_PHONE`; then, with the Railway CLI,
-  `railway ssh` into the `educore` service and run `python manage.py telegram_login` (enter the code sent to
-  Telegram). Set `RUN_INGESTOR=1` and redeploy. Backfill: admin → Sources → "backfill".
+- **Content mode:** `CONTENT_MODE=verbatim` (default) publishes every post unchanged with its photos and videos and
+  needs no AI key (ADR-033). Set `SEED_DEMO=0` and archive the demo articles in admin.
+- **AI (optional, only with `CONTENT_MODE=ai`):** `AI_PROVIDER=anthropic`, `ANTHROPIC_API_KEY=…`,
+  `AI_DAILY_USD_BUDGET=…`.
+- **Telegram (HA2):** add `TELEGRAM_API_ID`, `TELEGRAM_API_HASH`, `TELEGRAM_PHONE`, and `TELEGRAM_MAX_MEDIA_MB`
+  (largest video to download, default 200). Log in once from your computer:
+  1. install the Railway CLI (`npm i -g @railway/cli`, or `scoop install railway`);
+  2. `railway login` (opens the browser), then `railway link` and pick the project, environment and `educore`
+     service;
+  3. `railway ssh` (a shell inside the running container), then `python manage.py telegram_login` and type the code
+     Telegram sends to the account (and the 2FA password if the account has one); `exit`.
+  The session is stored on the volume (`/data/telegram`). Set `RUN_INGESTOR=1` and redeploy.
+  Backfill: admin → Sources → "backfill".
 - **E-mail (HA7):** `EMAIL_URL=smtp+tls://user:pass@smtp.example.uz:587`, `DEFAULT_FROM_EMAIL`,
   `APPEALS_NOTIFY_EMAILS`. **Alerts:** `OPS_TELEGRAM_BOT_TOKEN`, `OPS_TELEGRAM_CHAT_ID`.
   **Turnstile:** `TURNSTILE_SITE_KEY`, `TURNSTILE_SECRET_KEY`.

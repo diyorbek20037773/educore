@@ -7,6 +7,7 @@ from datetime import timedelta
 from typing import Any
 
 import structlog
+from django.conf import settings
 from django.db import transaction
 from django.db.models import F
 from django.utils import timezone
@@ -100,12 +101,14 @@ def write_article(
     selection: MediaSelection,
     cluster_id: int | None,
     extra_meta: dict[str, Any],
+    ai_generated: bool = True,
 ) -> Article:
     """Create the article for a post or update (regenerate) an existing one; history records every save."""
     created = article is None
     institution_name = ctx.institution.short_name if ctx.institution else ""
     category = Category.objects.get(slug=extraction.category_slug)
-    article = article or Article(ai_generated=True, cluster_id=cluster_id)
+    article = article or Article(cluster_id=cluster_id)
+    article.ai_generated = ai_generated
     title = unique_title(draft.title, institution_name, exclude_pk=article.pk)
     article.title_uz = title
     article.lead_uz = draft.lead
@@ -166,7 +169,8 @@ def after_save(article_id: int) -> None:
     article = Article.objects.filter(pk=article_id).first()
     if article is None:
         return
-    if article.status == ArticleStatus.PUBLISHED and not SKIP_TRANSLATIONS.get():
+    ai_mode = settings.CONTENT_MODE == "ai"
+    if article.status == ArticleStatus.PUBLISHED and ai_mode and not SKIP_TRANSLATIONS.get():
         from config.celery import app
 
         status = article.translation_status or {}

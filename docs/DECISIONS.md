@@ -285,3 +285,22 @@ brief: no separate `data/institutions.json` (the database is the CMS), invented 
 logos are not used, the navy wallpaper keeps its colours in dark mode while the panel follows the theme.
 **Consequences:** new `assets/css/skin.css`, components `side_rail.html` and `feature_card_wide.html`; SPEC §6.3
 updated. When the owner verifies metrics in admin (HA9) students/cadets/faculty/partners badges appear automatically.
+
+## ADR-033 — `CONTENT_MODE=verbatim`: Telegram posts are published as they are, without AI
+**Status:** accepted (2026-09-26). **Context:** the owner decided that the site must show every institution's
+Telegram post unchanged — no AI rewriting into articles, no fact-guard, no AI translation — and that every post
+must be pulled with its text, photos and videos. This overrides SPEC FR-AI-1…8 and non-negotiable 4 by explicit
+owner instruction (CLAUDE.md preamble). **Decision:** a new setting `CONTENT_MODE ∈ {verbatim, ai}` (default
+`verbatim`; tests pin `ai`). In verbatim mode `ai.process_post` keeps its outbox/idempotency semantics but calls
+`apps/ai/pipeline/verbatim.py` instead of the LLM stages: the article body is the post text converted to HTML
+(Telegram bold/italic/blockquote/links kept via UTF-16 entity offsets, then `sanitize_html`), the title is the first
+meaningful line (links, hashtags and emoji removed; `<institution> — <date>` for media-only posts), hashtags become
+tags, the category comes from the deterministic keyword map, every downloaded photo and video is attached in
+Telegram order (cover = first photo, else first video) and the article detail page plays videos with a native
+`<video>` element. Only deleted, service and empty posts are skipped. Posts are published immediately unless
+publishing is switched off in admin (`review` does not hold them). No dedupe merge (each post stays its own
+article), no structured objects, no ru/en translation, no weekly digest; `ai_generated=False` and source
+attribution stay. Backfill emits an outbox event and downloads full media for **every** backfilled post
+(`TELEGRAM_BACKFILL_LIMIT`), because a verbatim post costs nothing. **Consequences:** `ANTHROPIC_API_KEY` is no
+longer needed (HA3 is optional). The AI pipeline stays in the code and returns with `CONTENT_MODE=ai`; switching
+modes rewrites articles on their next edit or `ai_reprocess`. Disk use grows with videos (`TELEGRAM_MAX_MEDIA_MB`).

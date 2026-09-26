@@ -14,7 +14,7 @@
 |---|---|---|---|
 | HA0 | Phase 0 | GitHub repository + remote URL; GNU make (`winget install ezwinports.make`); Chrome (Node 22 already present) | done 2026-09-25: `origin` = github.com/diyorbek20037773/educore, `main` pushed, CI green (lint, test, security/pip-audit, build + Trivy); Chrome present; GNU make still missing (optional) |
 | HA2 | Phase 2 | `TELEGRAM_API_ID`, `TELEGRAM_API_HASH` from https://my.telegram.org → "API development tools"; dedicated phone number; run `make tg-login` and enter the code; a private test channel you administer | pending |
-| HA3 | Phase 3 | `ANTHROPIC_API_KEY` (https://platform.claude.com) | pending |
+| HA3 | Phase 3 | `ANTHROPIC_API_KEY` (https://platform.claude.com) — optional since ADR-033 (`CONTENT_MODE=verbatim`) | not needed |
 | HA7 | Phase 7 | optional: Turnstile keys, ops bot token + chat id, SMTP, Sentry DSN | pending |
 | HA8 | Phase 8 | VPS (Ubuntu 24.04, ≥ 4 vCPU/8 GB/80 GB), domain + DNS A record, GitHub secrets `DEPLOY_HOST`, `DEPLOY_USER`, `DEPLOY_SSH_KEY`, `GHCR_PAT`; your `age` public key for backups | pending |
 | HR | Railway preview | Railway account/project: deploy the repo, add **pgvector** + **Redis** templates, a volume at `/data`, the variables from `docs/RAILWAY.md`, generate a domain; send the URL | pending |
@@ -136,8 +136,9 @@
 ## Log (newest first)
 | Date | Phase/Task | Note |
 |---|---|---|
-| 2026-09-26 | Railway | deploy no longer crashes on `<…>` variable hints; generated SECRET_KEY/admin path on the volume (ADR-032) |
+| 2026-09-26 | Owner decision | `CONTENT_MODE=verbatim`: posts published unchanged with all photos/videos, no AI; video player on the article page (ADR-033) |
 | 2026-09-26 | Redesign | `/muassasalar/` in THE rankings wallpaper layout: sub-nav, rotating featured banner, navy side rails with stat badges from real data, mobile strip (ADR-031); 545 tests |
+| 2026-09-26 | Railway | deploy no longer crashes on `<…>` variable hints; generated SECRET_KEY/admin path on the volume (ADR-032) |
 | 2026-09-26 | Redesign | full-width layout, no empty side areas on wide screens (ADR-030) |
 | 2026-09-26 | Redesign | THE homepage spec applied 1:1: Open Sans, grey page + white cards, 56 px black header, new home layout (ADR-029); 520 tests |
 | 2026-09-26 | Redesign | public UI restyled after timeshighereducation.com (ADR-028); Railway placeholder guard |

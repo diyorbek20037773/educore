@@ -8,12 +8,13 @@ from dataclasses import dataclass
 from typing import Any
 
 import structlog
+from django.conf import settings
 from django.db import transaction
 from django.utils import timezone
 
 from apps.ai.embeddings import get_embedder
 from apps.ai.models import EventCluster, Provider
-from apps.ai.pipeline import articles, dedupe, rules
+from apps.ai.pipeline import articles, dedupe, rules, verbatim
 from apps.ai.pipeline.context import PostContext, base_prompt_context, load_context, models, system_prompt
 from apps.ai.pipeline.structured import upsert_structured
 from apps.ai.prompts import prompt_version, render
@@ -49,13 +50,21 @@ def _institution_usernames() -> set[str]:
     return {u.lower() for u in TelegramSource.objects.values_list("username", flat=True)}
 
 
+def _verbatim() -> bool:
+    return settings.CONTENT_MODE == "verbatim"
+
+
+def _pipeline_version() -> str:
+    return verbatim.VERBATIM_VERSION if _verbatim() else prompt_version()
+
+
 def _already_done(article: Article | None, post: TelegramPost) -> bool:
     if article is None:
         return False
     meta = article.ai_meta or {}
     return (
         meta.get("source_hashes", {}).get(str(post.pk)) == post.content_hash
-        and meta.get("prompt_version") == prompt_version()
+        and meta.get("prompt_version") == _pipeline_version()
     )
 
 
@@ -206,6 +215,8 @@ def _process(post_id: int, event_type: str, *, force: bool) -> Outcome:
         _set_status(post, ProcessingStatus.PROCESSED)
         return Outcome("noop", article.pk if article else None)
     _set_status(post, ProcessingStatus.PROCESSING)
+    if _verbatim():
+        return _process_verbatim(ctx, article, force=force)
 
     started = time.monotonic()
     reason = rules.triage(post, ctx.media, _institution_usernames())
@@ -265,6 +276,35 @@ def _process(post_id: int, event_type: str, *, force: bool) -> Outcome:
         article_id=article.pk if article else None,
     )
     return _finish(ctx, extraction, draft, factcheck, article, cluster_id)
+
+
+def _process_verbatim(ctx: PostContext, article: Article | None, *, force: bool) -> Outcome:
+    """Publish the post as it is: no LLM, no dedupe, no structured objects (ADR-033)."""
+    post = ctx.post
+    started = time.monotonic()
+    reason = verbatim.skip_reason(post, ctx.media)
+    log_rule_run("triage", {"skip": reason, "mode": "verbatim"}, post_id=post.pk, started=started)
+    if reason and not force:
+        _set_status(post, ProcessingStatus.SKIPPED, skip_reason=reason)
+        return Outcome("skipped", None, reason)
+    extraction, draft, factcheck = verbatim.build(ctx)
+    selection = verbatim.select_media(ctx.media)
+    decision = verbatim.decision(ctx.publish_mode)
+    with transaction.atomic():
+        article = articles.write_article(
+            ctx,
+            article=article,
+            extraction=extraction,
+            draft=draft,
+            factcheck=factcheck,
+            decision=decision,
+            selection=selection,
+            cluster_id=article.cluster_id if article else None,
+            extra_meta={"prompt_version": verbatim.VERBATIM_VERSION, "mode": "verbatim"},
+            ai_generated=False,
+        )
+        _set_status(post, ProcessingStatus.PROCESSED, processing_error="")
+    return Outcome(article.status, article.pk, decision.reason)
 
 
 def _finish(
@@ -346,6 +386,8 @@ def regenerate_article(article_id: int) -> Outcome:
     )
     if primary is None:
         return Outcome("noop", article_id, "no sources")
+    if _verbatim():
+        return _process(primary.post_id, OutboxEventType.EDITED, force=True)
     ctx = load_context(primary.post_id)
     norm = rules.normalize(ctx.post, ctx.media, list(ctx.source.signature_patterns or []))
     system = system_prompt(ctx)

@@ -35,7 +35,9 @@ async def backfill(
 ) -> dict[str, int]:
     """Import the newest `limit` messages (albums grouped); outbox events only for the newest `ai_limit`."""
     limit = limit or settings.TELEGRAM_BACKFILL_LIMIT
-    ai_limit = settings.BACKFILL_AI_LIMIT_PER_SOURCE if ai_limit is None else ai_limit
+    if ai_limit is None:
+        # verbatim mode costs nothing per post, so every backfilled post is published with all of its media
+        ai_limit = limit if settings.CONTENT_MODE == "verbatim" else settings.BACKFILL_AI_LIMIT_PER_SOURCE
     entity = await entity_for(client, source)
     posts = events = 0
     offset_id = 0

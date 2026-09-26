@@ -270,6 +270,8 @@ TELEGRAM_MAX_MEDIA_MB: int = env.int("TELEGRAM_MAX_MEDIA_MB", default=200)
 TELEGRAM_MEDIA_CONCURRENCY: int = env.int("TELEGRAM_MEDIA_CONCURRENCY", default=2)
 
 # --- AI --------------------------------------------------------------------------------------------
+# verbatim = publish Telegram posts as they are (no LLM calls); ai = the editorial pipeline (ADR-033)
+CONTENT_MODE: str = env("CONTENT_MODE", default="verbatim")
 AI_PROVIDER: str = env("AI_PROVIDER", default="mock")
 ANTHROPIC_API_KEY: str = env("ANTHROPIC_API_KEY", default="")
 AI_MODEL: str = env("AI_MODEL", default="claude-sonnet-5")
