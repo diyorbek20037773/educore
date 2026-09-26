@@ -26,11 +26,9 @@ Nothing here changes the VPS setup (`compose.prod.yaml`, Caddy, `docs/DEVOPS.md`
 ```
 DJANGO_SETTINGS_MODULE=config.settings.prod
 RAILWAY_RUN_UID=0
-SECRET_KEY=<python -c "import secrets; print(secrets.token_urlsafe(64))">
 ALLOWED_HOSTS=${{RAILWAY_PUBLIC_DOMAIN}}
 SITE_URL=https://${{RAILWAY_PUBLIC_DOMAIN}}
 CSRF_TRUSTED_ORIGINS=https://${{RAILWAY_PUBLIC_DOMAIN}}
-ADMIN_URL_PATH=<secret-admin-path, e.g. boshqaruv-7x3k: lowercase letters, digits, dashes>
 DATABASE_URL=${{pgvector.DATABASE_URL}}
 REDIS_URL=${{Redis.REDIS_URL}}/0
 CELERY_BROKER_URL=${{Redis.REDIS_URL}}/1
@@ -47,9 +45,17 @@ PUBLISH_MODE=auto
 SEED_DEMO=1
 RUN_INGESTOR=0
 WEB_CONCURRENCY=2
-DJANGO_SUPERUSER_EMAIL=<admin e-mail>
-DJANGO_SUPERUSER_PASSWORD=<strong password>
+DJANGO_SUPERUSER_EMAIL=
+DJANGO_SUPERUSER_PASSWORD=
 ```
+
+   Type your own e-mail and a strong password after the two `DJANGO_SUPERUSER_*` lines (this creates the admin user).
+   `SECRET_KEY` and `ADMIN_URL_PATH` are optional on Railway (ADR-032): when they are missing, still contain a
+   `<…>` hint or are invalid, a random value is generated once and kept on the `/data` volume; the deploy log
+   prints the generated admin path (`railway: ADMIN_URL_PATH not set; admin panel is at /boshqaruv-xxxxxx/`).
+   To choose your own, add `SECRET_KEY` (≥ 50 random characters) and `ADMIN_URL_PATH` (lowercase letters,
+   digits, dashes, e.g. `boshqaruv-7x3k`). `<…>` hints in `DJANGO_SUPERUSER_*` never stop the site; they only
+   skip creating the admin user.
 
    `ALLOWED_HOSTS`, `SITE_URL` and `CSRF_TRUSTED_ORIGINS` may be omitted: prod settings derive them from
    `RAILWAY_PUBLIC_DOMAIN` (step 4 must be done first). For `DATABASE_URL`, prefer **+ New Variable → Add

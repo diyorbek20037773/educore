@@ -251,3 +251,17 @@ left and right; the owner asked for the content to fill the screen. **Decision:*
 and the footer span the full viewport with side gutters only (16 px phones, 32 px from 768 px, 48 px from 1536 px);
 header, content and footer share the same edges. Grids keep their column counts (cards grow). Long text blocks keep
 their own max widths (hero lead 900 px). **Consequences:** supersedes the 944 px column in ADR-029 and SPEC §7.2.
+
+## ADR-032 — Railway starts even when variables still hold the `<…>` hints from the guide
+**Status:** accepted (2026-09-26). **Context:** the first Railway deploy crashed on every start with
+`ImproperlyConfigured: Fill in real values instead of the <placeholder> text for: DJANGO_SUPERUSER_EMAIL,
+DJANGO_SUPERUSER_PASSWORD` because the variables were pasted from `docs/RAILWAY.md` unchanged; the health check
+never passed ("Application failed to respond"). **Decision:** optional variables never block startup:
+`DJANGO_SUPERUSER_*` that are empty or hold a `<…>`/`CHANGE_ME` hint are treated as unset (the admin user is simply
+not created and the deploy log says so). On Railway only, `SECRET_KEY` and `ADMIN_URL_PATH` that are missing,
+hints or invalid fall back to random values generated once and stored on the `/data` volume (`.secret_key`,
+`.admin_url_path`), so every process and every redeploy share them; the deploy log prints the generated admin path.
+A real value always wins. On the VPS (`compose.prod.yaml`) both stay mandatory. The guide no longer contains `<…>`
+hints. **Consequences:** `config/settings/prod.py`, `docker/railway/start.sh`, `docs/RAILWAY.md`; covered by
+`apps/ops/tests/test_prod_settings.py`; simulated locally with the exact failing variables (migrate, seeds, demo
+content, `/healthz` 200).
