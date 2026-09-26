@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-26 20:03+0500\n"
+"POT-Creation-Date: 2026-09-26 22:51+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -378,7 +378,7 @@ msgstr "ССВ экспорт"
 #: templates/admin/index.html:40 templates/components/institution_chips.html:3
 #: templates/components/program_table.html:4
 #: templates/pages/appeals/track.html:22 templates/pages/home.html:153
-#: templates/pages/institutions/list.html:17
+#: templates/pages/institutions/list.html:108
 msgid "Muassasa"
 msgstr "Муассаса"
 
@@ -437,7 +437,7 @@ msgid "Kuzatish kodi"
 msgstr "Кузатиш коди"
 
 #: apps/appeals/models.py:33 apps/content/models.py:63 apps/core/models.py:149
-#: apps/web/views/education.py:68 apps/web/views/institutions.py:144
+#: apps/web/views/education.py:68 apps/web/views/institutions.py:151
 #: config/unfold.py:33 templates/components/footer.html:19
 #: templates/components/nav_links.html:13
 #: templates/components/nav_links.html:21
@@ -1194,9 +1194,9 @@ msgid "Boʻsh qiymat .env dagi standart qiymatni bildiradi."
 msgstr "Бўш қиймат .энв даги стандарт қийматни билдиради."
 
 #: apps/core/admin.py:26 apps/institutions/admin.py:57
-#: apps/web/views/institutions.py:195
+#: apps/web/views/institutions.py:202
 #: templates/components/admission_card.html:14
-#: templates/pages/institutions/list.html:17
+#: templates/pages/institutions/list.html:108
 msgid "Aloqa"
 msgstr "Алоқа"
 
@@ -1204,6 +1204,8 @@ msgstr "Алоқа"
 #: templates/components/footer.html:20 templates/components/nav_links.html:30
 #: templates/pages/analytics.html:5 templates/pages/home.html:25
 #: templates/pages/home.html:39 templates/pages/home.html:80
+#: templates/pages/institutions/list.html:13
+#: templates/pages/institutions/list.html:94
 msgid "Analitika"
 msgstr "Аналитика"
 
@@ -1510,14 +1512,16 @@ msgid "Professor-oʻqituvchilar"
 msgstr "Профессор-ўқитувчилар"
 
 #: apps/institutions/models.py:100 apps/web/views/education.py:36
-#: apps/web/views/education.py:56 apps/web/views/institutions.py:134
+#: apps/web/views/education.py:56 apps/web/views/institutions.py:141
 #: config/unfold.py:63 templates/components/admission_card.html:19
+#: templates/components/feature_card_wide.html:15
 #: templates/components/footer.html:18
 #: templates/components/institution_card.html:7
 #: templates/components/nav_links.html:12
 #: templates/components/nav_links.html:20 templates/pages/analytics.html:21
 #: templates/pages/education/program_list.html:5 templates/pages/home.html:35
 #: templates/pages/home.html:63 templates/pages/home.html:130
+#: templates/pages/institutions/list.html:12
 #: templates/pages/professions/detail.html:25 templates/pages/search.html:21
 msgid "Yoʻnalishlar"
 msgstr "Йўналишлар"
@@ -2250,10 +2254,67 @@ msgstr "Ўзгариш"
 msgid "Yil"
 msgstr "Йил"
 
-#: apps/web/services/charts.py:252 apps/web/views/institutions.py:81
+#: apps/web/services/charts.py:252 apps/web/views/institutions.py:88
 #: templates/pages/institutions/compare.html:12
 msgid "Koʻrsatkich"
 msgstr "Кўрсаткич"
+
+#: apps/web/services/showcase.py:102
+msgid "30 kunda|yangiliklar|soni boʻyicha"
+msgstr "30 кунда|янгиликлар|сони бўйича"
+
+#: apps/web/services/showcase.py:103
+#, python-format
+msgid "30 kunlik yangiliklar soni boʻyicha %(rank)s-oʻrin"
+msgstr "30 кунлик янгиликлар сони бўйича %(rank)s-ўрин"
+
+#: apps/web/services/showcase.py:111
+msgid "jami|rasmiy|maqolalar"
+msgstr "жами|расмий|мақолалар"
+
+#: apps/web/services/showcase.py:112
+#, python-format
+msgid "Jami rasmiy maqolalar soni boʻyicha %(rank)s-oʻrin"
+msgstr "Жами расмий мақолалар сони бўйича %(rank)s-ўрин"
+
+#: apps/web/services/showcase.py:125
+msgid "taʼlim|yoʻnalishi"
+msgstr "%(n)s та йўналиш"
+
+#: apps/web/services/showcase.py:126
+#, python-format
+msgid "%(n)s ta taʼlim yoʻnalishi"
+msgstr "%(n)s та йўналиш"
+
+#: apps/web/services/showcase.py:132
+msgid "yaqin|tadbir"
+msgstr "яқин|тадбир"
+
+#: apps/web/services/showcase.py:132
+#, python-format
+msgid "%(n)s ta yaqin tadbir"
+msgstr "%(n)s та мақола"
+
+#: apps/web/services/showcase.py:138
+msgid "yilda|tashkil|topgan"
+msgstr "йилда|ташкил|топган"
+
+#: apps/web/services/showcase.py:139
+#, python-format
+msgid "%(year)s-yilda tashkil topgan"
+msgstr "%(year)s-йилда ташкил топган"
+
+#: apps/web/services/showcase.py:145
+msgid "(30 kunlik faollik boʻyicha)"
+msgstr "(30 кунлик фаоллик бўйича)"
+
+#: apps/web/services/showcase.py:147
+msgid "Platformadagi rasmiy maqolalar"
+msgstr "Платформадаги расмий мақолалар"
+
+#: apps/web/services/showcase.py:150
+msgid "Rasmiy Telegram kanali"
+msgstr "Расмий Телеграм канали"
 
 #: apps/web/templatetags/web_tags.py:145
 msgid "hozirgina"
@@ -2311,7 +2372,8 @@ msgid "Rad etildi"
 msgstr "Рад этилди"
 
 #: apps/web/views/events.py:92 apps/web/views/events.py:111
-#: apps/web/views/institutions.py:182 config/unfold.py:32
+#: apps/web/views/institutions.py:189 config/unfold.py:32
+#: templates/components/feature_card_wide.html:16
 #: templates/components/institution_card.html:8
 #: templates/components/nav_links.html:28
 #: templates/pages/education/hub.html:11 templates/pages/events/list.html:5
@@ -2332,26 +2394,26 @@ msgstr "ЭДУСОРЕ — сўнгги янгиликлар"
 msgid "Huquqni muhofaza qilish taʼlim muassasalarining rasmiy yangiliklari"
 msgstr "Ҳуқуқни муҳофаза қилиш таълим муассасаларининг расмий янгиликлари"
 
-#: apps/web/views/institutions.py:38 apps/web/views/institutions.py:69
-#: apps/web/views/institutions.py:103 config/unfold.py:61
+#: apps/web/views/institutions.py:45 apps/web/views/institutions.py:76
+#: apps/web/views/institutions.py:110 config/unfold.py:61
 #: templates/components/footer.html:9 templates/components/nav_links.html:4
 #: templates/pages/analytics.html:11 templates/pages/analytics.html:18
 #: templates/pages/home.html:34 templates/pages/home.html:60
-#: templates/pages/home.html:70 templates/pages/institutions/list.html:6
+#: templates/pages/home.html:70 templates/pages/institutions/list.html:7
 #: templates/pages/search.html:19
 msgid "Muassasalar"
 msgstr "Муассасалар"
 
-#: apps/web/views/institutions.py:69 templates/pages/home.html:70
-#: templates/pages/institutions/list.html:7
+#: apps/web/views/institutions.py:76 templates/pages/home.html:70
+#: templates/pages/institutions/list.html:10
 msgid "Taqqoslash"
 msgstr "Таққослаш"
 
-#: apps/web/views/institutions.py:156
+#: apps/web/views/institutions.py:163
 msgid "Talabalar va kursantlar"
 msgstr "Талабалар ва курсантлар"
 
-#: apps/web/views/institutions.py:172 apps/web/views/news.py:73
+#: apps/web/views/institutions.py:179 apps/web/views/news.py:73
 #: apps/web/views/news.py:117 apps/web/views/news.py:158
 #: templates/components/footer.html:17 templates/components/nav_links.html:5
 #: templates/pages/education/program_detail.html:29
@@ -2369,7 +2431,7 @@ msgstr "Кўп ўқилган"
 
 #: apps/web/views/search.py:27 templates/components/footer.html:41
 #: templates/components/header.html:15 templates/errors/_error.html:9
-#: templates/pages/search.html:6
+#: templates/pages/institutions/list.html:16 templates/pages/search.html:6
 msgid "Qidiruv"
 msgstr "Қидирув"
 
@@ -2591,6 +2653,15 @@ msgstr "Ушбу саҳифа ҳали таржима қилинмаган"
 msgid "Koʻp beriladigan savollar"
 msgstr "Кўп бериладиган саволлар"
 
+#: templates/components/feature_card_wide.html:14
+#: templates/components/institution_card.html:6
+msgid "Yangiliklar (30 kun)"
+msgstr "Янгиликлар (30 кун)"
+
+#: templates/components/feature_card_wide.html:18
+msgid "Profilni koʻrish"
+msgstr "Профилни кўриш"
+
 #: templates/components/footer.html:11
 #: templates/pages/institutions/contacts.html:9
 msgid "Veb-sayt"
@@ -2627,6 +2698,7 @@ msgid "Asosiy menyu"
 msgstr "Асосий меню"
 
 #: templates/components/header.html:14
+#: templates/pages/institutions/list.html:17
 msgid "Murojaat holatini kuzatish"
 msgstr "Мурожаат ҳолатини кузатиш"
 
@@ -2638,14 +2710,11 @@ msgstr "Менюни очиш"
 msgid "Yuklanmoqda…"
 msgstr "Юкланмоқда…"
 
-#: templates/components/institution_card.html:6
-msgid "Yangiliklar (30 kun)"
-msgstr "Янгиликлар (30 кун)"
-
 #: templates/components/institution_chips.html:4
 #: templates/pages/education/admissions.html:12
 #: templates/pages/education/hub.html:7 templates/pages/home.html:45
 #: templates/pages/home.html:94 templates/pages/home.html:155
+#: templates/pages/institutions/list.html:9
 #: templates/partials/live_items.html:10
 msgid "Barchasi"
 msgstr "Барчаси"
@@ -2679,12 +2748,12 @@ msgid "Xizmat va tayyorgarlik"
 msgstr "Хизмат ва тайёргарлик"
 
 #: templates/components/pagination.html:4 templates/pages/home.html:196
-#: templates/pages/news/detail.html:57
+#: templates/pages/news/detail.html:62
 msgid "Oldingi"
 msgstr "Олдинги"
 
 #: templates/components/pagination.html:6 templates/pages/home.html:197
-#: templates/pages/news/detail.html:58
+#: templates/pages/news/detail.html:63
 msgid "Keyingi"
 msgstr "Кейинги"
 
@@ -2710,6 +2779,18 @@ msgstr "Улашиш"
 #: templates/components/share_buttons.html:6
 msgid "Havolani nusxalash"
 msgstr "Ҳаволани нусхалаш"
+
+#: templates/components/side_rail.html:3
+msgid "Taʼlim muassasalari koʻrsatkichlari"
+msgstr "Таълим муассасалари кўрсаткичлари"
+
+#: templates/components/side_rail.html:24
+msgid "Oldingi muassasa"
+msgstr "Олдинги муассаса"
+
+#: templates/components/side_rail.html:25
+msgid "Keyingi muassasa"
+msgstr "Кейинги муассаса"
 
 #: templates/components/source_attribution.html:4
 #: templates/pages/education/program_detail.html:24
@@ -2746,6 +2827,10 @@ msgstr "Қабул очиқ"
 #: templates/components/timeline.html:5
 msgid "Yakunlandi"
 msgstr "Якунланди"
+
+#: templates/components/video_player.html:1
+msgid "Brauzeringiz videoni koʻrsata olmaydi."
+msgstr "Браузерингиз видеони кўрсата олмайди."
 
 #: templates/emails/appeals/confirmation.txt:1
 #: templates/emails/appeals/reply.txt:1
@@ -2870,6 +2955,7 @@ msgstr "Телеграм, битта хабарга"
 
 #: templates/pages/analytics.html:32
 #: templates/pages/institutions/compare.html:6
+#: templates/pages/institutions/list.html:90
 msgid "Muassasalarni taqqoslash"
 msgstr "Муассасаларни таққослаш"
 
@@ -3234,7 +3320,7 @@ msgid "Yillar kesimida"
 msgstr "Йиллар кесимида"
 
 #: templates/pages/institutions/contacts.html:6
-#: templates/pages/institutions/list.html:17
+#: templates/pages/institutions/list.html:108
 #: templates/pages/static_page.html:15
 msgid "Manzil"
 msgstr "Манзил"
@@ -3259,11 +3345,78 @@ msgstr "Мурожаат юбориш"
 msgid "Oʻtgan tadbirlar"
 msgstr "Ўтган тадбирлар"
 
-#: templates/pages/institutions/list.html:6
-msgid "Huquqni muhofaza qilish sohasidagi beshta oliy taʼlim muassasasi."
-msgstr "Ҳуқуқни муҳофаза қилиш соҳасидаги бешта олий таълим муассасаси."
+#: templates/pages/institutions/list.html:5
+msgid "Muassasalar boʻlimi"
+msgstr "Муассасалар бўлими"
 
-#: templates/pages/institutions/list.html:16
+#: templates/pages/institutions/list.html:15
+msgid "Keyingi havolalar"
+msgstr "Кейинги ҳаволалар"
+
+#: templates/pages/institutions/list.html:23
+msgid "Tanlangan muassasa"
+msgstr "Танланган муассаса"
+
+#: templates/pages/institutions/list.html:27
+msgid "profilni koʻrish"
+msgstr "профилни кўриш"
+
+#: templates/pages/institutions/list.html:29
+msgid ""
+"Huquqni muhofaza qilish sohasidagi <strong>5 ta oliy taʼlim</strong> "
+"muassasasidan biri"
+msgstr ""
+"Ҳуқуқни муҳофаза қилиш соҳасидаги <strong>5 та олий таълим</strong> "
+"муассасасидан бири"
+
+#: templates/pages/institutions/list.html:44
+#, python-format
+msgid "%(name)s banneri"
+msgstr "%(name)s баннери"
+
+#: templates/pages/institutions/list.html:73
+msgid "Taʼlim muassasalari"
+msgstr "Таълим муассасалари"
+
+#: templates/pages/institutions/list.html:74
+msgid ""
+"Huquqni muhofaza qilish sohasidagi beshta oliy taʼlim muassasasi bir "
+"platformada: rasmiy Telegram kanallaridan olingan yangiliklar, taʼlim "
+"yoʻnalishlari, qabul, tadbirlar va solishtirma koʻrsatkichlar. Yon "
+"panellardagi raqamlar platformadagi maʼlumotlar asosida avtomatik "
+"hisoblanadi."
+msgstr ""
+"Ҳуқуқни муҳофаза қилиш соҳасидаги бешта олий таълим муассасаси бир "
+"платформада: расмий Телеграм каналларидан олинган янгиликлар, таълим "
+"йўналишлари, қабул, тадбирлар ва солиштирма кўрсаткичлар. Ён панеллардаги "
+"рақамлар платформадаги маълумотлар асосида автоматик ҳисобланади."
+
+#: templates/pages/institutions/list.html:77
+msgid "Muassasalar profillari"
+msgstr "Муассасалар профиллари"
+
+#: templates/pages/institutions/list.html:86
+msgid "Solishtirish va tahlil"
+msgstr "Солиштириш ва таҳлил"
+
+#: templates/pages/institutions/list.html:89
+msgid "Koʻrsatkichlar jadvali va diagrammalar, CSV eksport"
+msgstr "Кўрсаткичлар жадвали ва диаграммалар, ССВ экспорт"
+
+#: templates/pages/institutions/list.html:93
+msgid "Faollik dinamikasi va mavzular taqsimoti"
+msgstr "Фаоллик динамикаси ва мавзулар тақсимоти"
+
+#: templates/pages/institutions/list.html:97
+msgid "Barcha muassasalarning taʼlim dasturlari"
+msgstr "Барча муассасаларнинг таълим дастурлари"
+
+#: templates/pages/institutions/list.html:98
+msgid "Yoʻnalishlar katalogi"
+msgstr "Йўналишлар каталоги"
+
+#: templates/pages/institutions/list.html:104
+#: templates/pages/institutions/list.html:107
 msgid "Manzillar"
 msgstr "Манзиллар"
 
@@ -3312,19 +3465,19 @@ msgstr "Олдиндан кўриш: мақола ҳали эълон қилин
 msgid "%(n)s daqiqa oʻqish"
 msgstr "%(n)s дақиқа ўқиш"
 
-#: templates/pages/news/detail.html:31 templates/pages/news/detail.html:47
+#: templates/pages/news/detail.html:33 templates/pages/news/detail.html:49
 msgid "Rasmni kattalashtirish"
 msgstr "Расмни катталаштириш"
 
-#: templates/pages/news/detail.html:39
+#: templates/pages/news/detail.html:41
 msgid "Mundarija"
 msgstr "Мундарижа"
 
-#: templates/pages/news/detail.html:45
+#: templates/pages/news/detail.html:47
 msgid "Galereya"
 msgstr "Галерея"
 
-#: templates/pages/news/detail.html:64
+#: templates/pages/news/detail.html:69
 #: templates/pages/professions/detail.html:26
 msgid "Aloqador maqolalar"
 msgstr "Алоқадор мақолалар"

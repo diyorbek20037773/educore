@@ -331,8 +331,11 @@ Layout follows the timeshighereducation.com homepage (ADR‑029): grey page, ful
 Caching: home fragments cached 30–60 s (Redis), invalidated on publish.
 
 ### 6.3 Institutions
-- `/muassasalar/` — list: cards + comparison CTA + map (Leaflet is **not** used; static map image or
-  OpenStreetMap iframe is optional; default: address + link).
+- `/muassasalar/` — list in THE's rankings "wallpaper" layout (ADR‑031): white sticky section sub‑nav, rotating
+  featured‑institution banner, two sticky navy side rails with red stat badges computed from platform data
+  (activity ranks, programs, events, verified metrics only; a strip under the banner below 1280 px), and a white
+  panel with a gradient H1, wide institution cards, comparison/analytics/programs cards and the address table
+  (Leaflet is **not** used; static map image or OpenStreetMap iframe is optional; default: address + link).
 - `/muassasalar/<slug>/` — profile with brand color header, logo, full name, parent body, founded, contacts,
   Telegram subscribers; tabs (server‑rendered sub‑routes): **Umumiy** (description, mission, KPIs from
   `InstitutionMetric`, charts: 12‑month news dynamics, category mix, posting‑hour heatmap), **Yoʻnalishlar**

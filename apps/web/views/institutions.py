@@ -18,6 +18,7 @@ from apps.core.models import FAQ, FAQTopic
 from apps.institutions import selectors
 from apps.institutions.models import Institution, InstitutionMetric, MetricKey
 from apps.web.services.home import cached, institution_cards
+from apps.web.services.showcase import activity_totals, build_showcase, split_rails
 from apps.web.views._helpers import breadcrumbs, is_htmx, paginate
 
 TABS = (
@@ -33,8 +34,14 @@ TABS = (
 
 @require_GET
 def institution_list(request: HttpRequest) -> HttpResponse:
+    cards = cached("institutions", institution_cards)
+    showcase = build_showcase(cards, cached("showcase_totals", activity_totals))
+    rail_left, rail_right = split_rails(showcase)
     context = {
-        "institution_cards": cached("institutions", institution_cards),
+        "institution_cards": cards,
+        "showcase": showcase,
+        "rail_left": rail_left,
+        "rail_right": rail_right,
         **breadcrumbs(request, (_("Muassasalar"), request.path)),
     }
     return render(request, "pages/institutions/list.html", context)

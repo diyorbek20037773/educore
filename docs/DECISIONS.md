@@ -265,3 +265,23 @@ A real value always wins. On the VPS (`compose.prod.yaml`) both stay mandatory. 
 hints. **Consequences:** `config/settings/prod.py`, `docker/railway/start.sh`, `docs/RAILWAY.md`; covered by
 `apps/ops/tests/test_prod_settings.py`; simulated locally with the exact failing variables (migrate, seeds, demo
 content, `/healthz` 200).
+
+## ADR-031 — `/muassasalar/` uses THE's rankings "wallpaper" layout, rails filled from real data only
+**Status:** accepted (2026-09-26). **Context:** the owner asked for THE's World University Rankings page layout
+(white sticky sub-nav, full-width featured banner, two navy side rails with red stat badges, white content panel)
+with the rails showing educational institutions. THE's reference data (invented universities, rank claims such as
+"#1 in the UAE") cannot be copied: the platform publishes official information only (non-negotiable 4).
+**Decision:** the layout is applied to the institutions list `/muassasalar/` (the section that plays THE's
+"Rankings" role). Every number is computed by `apps/web/services/showcase.py` from data the platform holds: dense
+rank among the five institutions by published articles in 30 days and in total, counts of active programs and
+upcoming events, the founding year, and `InstitutionMetric` values **only when `needs_verification=False`**; an
+institution with no data shows fewer badges, never placeholders. The banner rotates through all five institutions
+(8 s cross-fade), the left rail starts at the first institution and the right rail at the second (10 s slide), all
+pause on hover/focus and hidden tabs and do not autoplay under reduced motion (Alpine `rotator`, `marquee`,
+`subnav` components; no inline styles, CSP intact). Below 1280 px the rails become an auto-scrolling strip under
+the banner (30 px/s, pauses on hover/touch, manual scroll-snap under reduced motion). Institution logos are shown
+on white discs instead of being recoloured white (the seeded SVG emblems are multi-colour). Deviations from the
+brief: no separate `data/institutions.json` (the database is the CMS), invented institutions and real-university
+logos are not used, the navy wallpaper keeps its colours in dark mode while the panel follows the theme.
+**Consequences:** new `assets/css/skin.css`, components `side_rail.html` and `feature_card_wide.html`; SPEC §6.3
+updated. When the owner verifies metrics in admin (HA9) students/cadets/faculty/partners badges appear automatically.

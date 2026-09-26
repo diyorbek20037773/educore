@@ -1,0 +1,29 @@
+{% load i18n web_tags %}{# Navy side rail (THE wallpaper rail): stat badges of one institution at a time, rotating. items: list[Showcase], side: left|right #}
+{% if items %}
+<aside class="side-rail is-{{ side }}" aria-label="{% translate 'Taʼlim muassasalari koʻrsatkichlari' %}" aria-roledescription="carousel"
+       x-data="rotator" data-interval="10000" x-on:mouseenter="pause" x-on:mouseleave="resume" x-on:focusin="pause" x-on:focusout="resume">
+  <div class="rail-slides">
+    {% for item in items %}{% with inst=item.institution %}
+    <a class="rail-slide{% if forloop.first %} is-active{% endif %}" data-slide href="{{ inst.get_absolute_url }}">
+      {% if inst.hero_image %}<img class="rail-bg" src="{{ inst.hero_image.url }}" alt="" loading="lazy">{% endif %}
+      {% for badge in item.badges %}
+        <span class="stat-badge">
+          <span class="stat-number" aria-label="{{ badge.aria }}">{{ badge.number }}</span>
+          <span class="stat-lines" aria-hidden="true">{% for line in badge.lines %}<span>{{ line }}</span>{% endfor %}</span>
+        </span>
+      {% endfor %}
+      <span class="rail-identity">
+        {% if inst.logo %}<img src="{{ inst.logo.url }}" alt="" width="64" height="64" class="rail-logo" loading="lazy">{% else %}<span class="rail-logo is-mono" aria-hidden="true">{{ inst.abbreviation }}</span>{% endif %}
+        <span class="rail-name">{{ inst.short_name }}</span>
+      </span>
+    </a>
+    {% endwith %}{% endfor %}
+  </div>
+  {% if items|length > 1 %}
+  <div class="rail-arrows">
+    <button type="button" x-on:click="prev" aria-label="{% translate 'Oldingi muassasa' %}">{% icon "chevron-up" "size-6" %}</button>
+    <button type="button" x-on:click="next" aria-label="{% translate 'Keyingi muassasa' %}">{% icon "chevron-down" "size-6" %}</button>
+  </div>
+  {% endif %}
+</aside>
+{% endif %}

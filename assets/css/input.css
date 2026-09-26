@@ -4,6 +4,7 @@
 @import "./components.css";
 @import "./chrome.css";
 @import "./cards.css";
+@import "./skin.css";
 
 @source "../../templates";
 @source "../../apps";

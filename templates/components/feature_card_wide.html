@@ -1,0 +1,20 @@
+{% load i18n web_tags %}{# THE rankings "FeatureCardWide": image left (50 %), title, text, outline button. inst: annotated Institution #}
+<article class="wide-card inst-{{ inst.order }}">
+  <div class="wide-art">
+    {% if inst.hero_image %}<img src="{{ inst.hero_image.url }}" alt="" loading="lazy">{% else %}
+      <span class="wide-art-fallback" aria-hidden="true">
+        {% if inst.logo %}<img src="{{ inst.logo.url }}" alt="" width="120" height="120" class="wide-logo" loading="lazy">{% else %}<span class="wide-logo is-mono">{{ inst.abbreviation }}</span>{% endif %}
+      </span>
+    {% endif %}
+  </div>
+  <div class="wide-body">
+    <h3 class="wide-title">{{ inst.short_name }}: {{ inst.full_name }}</h3>
+    {% if inst.description %}<p class="wide-text line-clamp-3">{{ inst.description|striptags|truncatewords:40 }}</p>{% endif %}
+    <dl class="wide-kpis">
+      <div><dt>{% translate "Yangiliklar (30 kun)" %}</dt><dd>{{ inst.news_30|default:0 }}</dd></div>
+      <div><dt>{% translate "Yoʻnalishlar" %}</dt><dd>{{ inst.programs_n|default:0 }}</dd></div>
+      <div><dt>{% translate "Tadbirlar" %}</dt><dd>{{ inst.events_n|default:0 }}</dd></div>
+    </dl>
+    <a class="btn-outline" href="{{ inst.get_absolute_url }}">{% translate "Profilni koʻrish" %}{% icon "arrow-right" "size-4" %}<span class="sr-only">: {{ inst.short_name }}</span></a>
+  </div>
+</article>

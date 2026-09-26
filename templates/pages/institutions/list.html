@@ -1,22 +1,119 @@
 {% extends "base.html" %}
 {% load i18n web_tags %}
-{% block content %}
-<section class="container-page py-8">
-  <div class="flex flex-wrap items-end justify-between gap-4">
-    <div><h1 class="text-3xl md:text-4xl">{% translate "Muassasalar" %}</h1><p class="mt-2 max-w-2xl text-ink-2">{% translate "Huquqni muhofaza qilish sohasidagi beshta oliy taʼlim muassasasi." %}</p></div>
-    <a class="btn-primary" href="{% url 'web:institution_compare' %}">{% icon "chart-column" "size-4" %}{% translate "Taqqoslash" %}</a>
+{# THE "World University Rankings" wallpaper layout (ADR-031): sub-nav, featured banner, navy side rails, white panel #}
+{% block main %}
+<nav class="subnav" aria-label="{% translate 'Muassasalar boʻlimi' %}" x-data="subnav">
+  <div class="subnav-inner">
+    <a class="subnav-title" href="{% url 'web:institution_list' %}">{% translate "Muassasalar" %}</a>
+    <ul class="subnav-links" x-ref="list">
+      <li><a class="is-active" href="{% url 'web:institution_list' %}" aria-current="page">{% translate "Barchasi" %}</a></li>
+      <li><a href="{% url 'web:institution_compare' %}">{% translate "Taqqoslash" %}</a></li>
+      {% for item in showcase %}<li><a href="{{ item.institution.get_absolute_url }}">{{ item.institution.short_name }}</a></li>{% endfor %}
+      <li><a href="{% url 'web:program_list' %}">{% translate "Yoʻnalishlar" %}</a></li>
+      <li><a href="{% url 'web:analytics' %}">{% translate "Analitika" %}</a></li>
+    </ul>
+    <button type="button" class="subnav-more" x-on:click="scrollNext" aria-label="{% translate 'Keyingi havolalar' %}">{% icon "chevron-right" "size-5" %}</button>
+    <a class="subnav-icon" href="{% url 'web:search' %}" aria-label="{% translate 'Qidiruv' %}">{% icon "search" "size-6" %}</a>
+    <a class="subnav-icon" href="{% url 'web:appeal_track' %}" aria-label="{% translate 'Murojaat holatini kuzatish' %}"><span class="user-badge">{% icon "user" "size-4" %}</span></a>
   </div>
-  <div class="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-    {% for card in institution_cards %}
-      {% include "components/institution_card.html" with inst=card.institution news_30=card.institution.news_30 programs_n=card.institution.programs_n events_n=card.institution.events_n spark=card.spark %}
-    {% endfor %}
+</nav>
+
+<div class="skin">
+  {% if showcase %}
+  <section class="skin-banner" role="region" aria-roledescription="carousel" aria-label="{% translate 'Tanlangan muassasa' %}"
+           x-data="rotator" data-interval="8000" x-on:mouseenter="pause" x-on:mouseleave="resume" x-on:focusin="pause" x-on:focusout="resume">
+    {% for item in showcase %}{% with inst=item.institution %}
+    <a class="banner-slide{% if forloop.first %} is-active{% endif %}" data-slide href="{{ inst.get_absolute_url }}"
+       aria-label="{{ inst.short_name }} — {% translate 'profilni koʻrish' %}">
+      <span class="banner-col banner-statement">
+        <span>{% blocktranslate trimmed %}Huquqni muhofaza qilish sohasidagi <strong>5 ta oliy taʼlim</strong> muassasasidan biri{% endblocktranslate %}</span>
+        {% if item.banner_highlight %}<em><strong>{{ item.banner_highlight }}</strong> {{ item.banner_sub }}</em>{% endif %}
+      </span>
+      <span class="banner-col banner-identity">
+        {% if inst.logo %}<img src="{{ inst.logo.url }}" alt="" width="90" height="90" class="banner-logo" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}">{% else %}<span class="banner-logo is-mono" aria-hidden="true">{{ inst.abbreviation }}</span>{% endif %}
+        <span class="banner-names"><span class="banner-full">{{ inst.full_name }}</span><span class="banner-name">{{ inst.short_name }}</span></span>
+      </span>
+      {% if item.stat_value %}
+      <span class="banner-col banner-stat"><span>{{ item.stat_top }}</span><strong>{{ item.stat_value }}</strong></span>
+      {% endif %}
+    </a>
+    {% endwith %}{% endfor %}
+    {% if showcase|length > 1 %}
+    <div class="banner-dots">
+      {% for item in showcase %}<button type="button" class="dot{% if forloop.first %} is-active{% endif %}" data-dot="{{ forloop.counter0 }}" x-on:click="go"
+              aria-label="{% blocktranslate with name=item.institution.short_name %}{{ name }} banneri{% endblocktranslate %}"></button>{% endfor %}
+    </div>
+    {% endif %}
+  </section>
+
+  {# < 1280 px: the rail badges become an auto-scrolling strip under the banner #}
+  <div class="inst-strip" x-data="marquee" x-on:mouseenter="pause" x-on:mouseleave="resume" x-on:touchstart.passive="pause" x-on:touchend.passive="resume">
+    <ul class="strip-track" x-ref="track">
+      {% for pass in "ab" %}
+        {% for item in showcase %}{% for badge in item.badges|slice:":2" %}
+        <li{% if pass == "b" %} aria-hidden="true"{% endif %}>
+          <a class="strip-item" href="{{ item.institution.get_absolute_url }}"{% if pass == "b" %} tabindex="-1"{% endif %}>
+            <span class="strip-number" aria-label="{{ badge.aria }}">{{ badge.number }}</span>
+            <span class="strip-lines" aria-hidden="true">{% for line in badge.lines %}<span>{{ line }}</span>{% endfor %}</span>
+            {% if item.institution.logo %}<img src="{{ item.institution.logo.url }}" alt="{{ item.institution.short_name }}" width="28" height="28" class="strip-logo" loading="lazy">{% else %}<span class="strip-abbr">{{ item.institution.abbreviation }}</span>{% endif %}
+          </a>
+        </li>
+        {% endfor %}{% endfor %}
+      {% endfor %}
+    </ul>
   </div>
-  <div class="mt-10 card overflow-x-auto">
-    <table class="data-table">
-      <caption class="sr-only">{% translate "Manzillar" %}</caption>
-      <thead><tr><th scope="col">{% translate "Muassasa" %}</th><th scope="col">{% translate "Manzil" %}</th><th scope="col">{% translate "Aloqa" %}</th></tr></thead>
-      <tbody>{% for card in institution_cards %}{% with inst=card.institution %}<tr><td><a class="font-semibold hover:underline" href="{{ inst.get_absolute_url }}">{{ inst.short_name }}</a></td><td>{{ inst.address|default:"—" }}</td><td>{{ inst.phone|default:"—" }}</td></tr>{% endwith %}{% endfor %}</tbody>
-    </table>
+  {% endif %}
+
+  <div class="skin-body">
+    {% include "components/side_rail.html" with items=rail_left side="left" %}
+
+    <div class="skin-panel">
+      {% if crumbs %}{% include "components/breadcrumbs.html" %}{% endif %}
+      <div class="panel-inner">
+        <h1 class="gradient-heading"><span class="gradient-text">{% translate "Taʼlim muassasalari" %}</span></h1>
+        <p class="panel-intro">{% translate "Huquqni muhofaza qilish sohasidagi beshta oliy taʼlim muassasasi bir platformada: rasmiy Telegram kanallaridan olingan yangiliklar, taʼlim yoʻnalishlari, qabul, tadbirlar va solishtirma koʻrsatkichlar. Yon panellardagi raqamlar platformadagi maʼlumotlar asosida avtomatik hisoblanadi." %}</p>
+
+        <section class="panel-section" aria-labelledby="inst-title">
+          <h2 id="inst-title" class="panel-h2">{% translate "Muassasalar profillari" %}</h2>
+          <div class="wide-list">
+            {% for card in institution_cards %}
+              {% include "components/feature_card_wide.html" with inst=card.institution %}
+            {% endfor %}
+          </div>
+        </section>
+
+        <section class="panel-section" aria-labelledby="tools-title">
+          <h2 id="tools-title" class="panel-h2">{% translate "Solishtirish va tahlil" %}</h2>
+          <div class="grid gap-6 md:grid-cols-3">
+            <a class="rank-card" href="{% url 'web:institution_compare' %}">
+              <span class="rank-art">{% icon "chart-column" "size-24 [stroke-width:1]" %}<p>{% translate "Koʻrsatkichlar jadvali va diagrammalar, CSV eksport" %}</p></span>
+              <span class="rank-label">{% translate "Muassasalarni taqqoslash" %}</span>
+            </a>
+            <a class="rank-card" href="{% url 'web:analytics' %}">
+              <span class="rank-art">{% icon "chart-line" "size-24 [stroke-width:1]" %}<p>{% translate "Faollik dinamikasi va mavzular taqsimoti" %}</p></span>
+              <span class="rank-label">{% translate "Analitika" %}</span>
+            </a>
+            <a class="rank-card is-muted" href="{% url 'web:program_list' %}">
+              <span class="rank-art">{% icon "graduation-cap" "size-24 [stroke-width:1]" %}<p>{% translate "Barcha muassasalarning taʼlim dasturlari" %}</p></span>
+              <span class="rank-label">{% translate "Yoʻnalishlar katalogi" %}</span>
+            </a>
+          </div>
+        </section>
+
+        <section class="panel-section" aria-labelledby="addr-title">
+          <h2 id="addr-title" class="panel-h2">{% translate "Manzillar" %}</h2>
+          <div class="card overflow-x-auto">
+            <table class="data-table">
+              <caption class="sr-only">{% translate "Manzillar" %}</caption>
+              <thead><tr><th scope="col">{% translate "Muassasa" %}</th><th scope="col">{% translate "Manzil" %}</th><th scope="col">{% translate "Aloqa" %}</th></tr></thead>
+              <tbody>{% for card in institution_cards %}{% with inst=card.institution %}<tr><td><a class="font-semibold hover:underline" href="{{ inst.get_absolute_url }}">{{ inst.short_name }}</a></td><td>{{ inst.address|default:"—" }}</td><td>{{ inst.phone|default:"—" }}</td></tr>{% endwith %}{% endfor %}</tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    {% include "components/side_rail.html" with items=rail_right side="right" %}
   </div>
-</section>
+</div>
 {% endblock %}

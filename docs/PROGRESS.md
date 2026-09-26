@@ -137,6 +137,7 @@
 | Date | Phase/Task | Note |
 |---|---|---|
 | 2026-09-26 | Railway | deploy no longer crashes on `<…>` variable hints; generated SECRET_KEY/admin path on the volume (ADR-032) |
+| 2026-09-26 | Redesign | `/muassasalar/` in THE rankings wallpaper layout: sub-nav, rotating featured banner, navy side rails with stat badges from real data, mobile strip (ADR-031); 545 tests |
 | 2026-09-26 | Redesign | full-width layout, no empty side areas on wide screens (ADR-030) |
 | 2026-09-26 | Redesign | THE homepage spec applied 1:1: Open Sans, grey page + white cards, 56 px black header, new home layout (ADR-029); 520 tests |
 | 2026-09-26 | Redesign | public UI restyled after timeshighereducation.com (ADR-028); Railway placeholder guard |
