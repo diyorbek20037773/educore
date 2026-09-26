@@ -17,6 +17,7 @@
 | HA3 | Phase 3 | `ANTHROPIC_API_KEY` (https://platform.claude.com) | pending |
 | HA7 | Phase 7 | optional: Turnstile keys, ops bot token + chat id, SMTP, Sentry DSN | pending |
 | HA8 | Phase 8 | VPS (Ubuntu 24.04, ≥ 4 vCPU/8 GB/80 GB), domain + DNS A record, GitHub secrets `DEPLOY_HOST`, `DEPLOY_USER`, `DEPLOY_SSH_KEY`, `GHCR_PAT`; your `age` public key for backups | pending |
+| HR | Railway preview | Railway account/project: deploy the repo, add **pgvector** + **Redis** templates, a volume at `/data`, the variables from `docs/RAILWAY.md`, generate a domain; send the URL | pending |
 | HA9 | Phase 9 | official About/contact texts; verify seeded programs/professions/metrics in admin | pending |
 
 ## Blockers
@@ -107,6 +108,10 @@
 - [x] T6.4 tests — 2026-09-26 · 22 appeal tests (happy path + attachment + e-mail, rate limit, invalid attempts not counted, honeypot, invalid/oversized files, Turnstile, tracking timeline/public replies, reply e-mail, notes, SLA, CSV, anonymization, download permission); full suite 520 passed
 - [ ] AC6.1
 
+### Interim — Railway preview hosting (owner request 2026-09-26, ADR-027)
+- [x] R.1 — 2026-09-26 · `railway.json` (Dockerfile build, `/healthz` check), `docker/railway/start.sh` (migrate, seeds, superuser, optional demo seed, workers, beat, optional ingestor, gunicorn on `$PORT`), Dockerfile without BuildKit cache mount, webp/woff2 MIME types, `docs/RAILWAY.md` (step-by-step + variables); simulated locally as root with prod settings on a fresh DB: migrations + seeds + 38 demo articles, all key pages 200, workers ping, `check --deploy` clean
+- [ ] R.2 — owner creates the Railway project (repo + pgvector + Redis + volume + variables, `docs/RAILWAY.md`) and shares the domain; then smoke-test the live URL
+
 ### Phase 7 — API, hardening, observability
 - [ ] T7.1 · [ ] T7.2 · [ ] T7.3 · [ ] T7.4
 - [ ] HA7 (optional) received
@@ -125,6 +130,7 @@
 ## Log (newest first)
 | Date | Phase/Task | Note |
 |---|---|---|
+| 2026-09-26 | Phase 6 / Railway | appeals backend + inbox + anonymization (T6.1, T6.2, T6.4); Railway all-in-one deployment prepared and simulated (ADR-027); 520 tests |
 | 2026-09-25 | Phase 3 | providers, full process_post pipeline, translations, digest, editorial admin, golden set, seed_demo; AC3.1–3.2 green; AC3.3 waits for HA3 |
 | 2026-09-25 | Phase 2 | ingestor, commands, tasks, derivatives, heartbeat alerts; AC2.1 green (86 % coverage); AC2.2–2.4 wait for HA2 |
 | 2026-09-25 | Phase 1 | models, migrations, seeds, admin + 2FA, translit, sanitizer, factories/selectors; AC1.1–AC1.3 green (305 tests) |

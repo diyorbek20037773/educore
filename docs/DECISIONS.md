@@ -195,3 +195,20 @@ publication. Aggregation is idempotent per Asia/Tashkent day. Trend tags, compar
 of IP + user agent (no cookies, no stored IPs); bots, staff, fragments and non-200 responses are not counted; article
 views and search terms are drained atomically (`RENAME`) and added to the DB hourly. **Consequences:** charts lag by
 at most one hour; request handling never depends on Redis (all counter writes are best effort).
+
+## ADR-027 — Temporary Railway hosting as one all-in-one service
+**Status:** accepted (2026-09-26). **Context:** the owner wants the site online on Railway (railway.com) now and
+moves to the VPS (Phase 8, `compose.prod.yaml` + Caddy) later. Railway volumes attach to exactly one service, but
+web (serves `/media/`), the media worker (writes derivatives), the ingestor (session file, downloads) and the
+private appeal attachments all need the same files. **Decision:** one Railway service built from the same
+`Dockerfile` runs `docker/railway/start.sh`: wait for DB/Redis → `migrate` → `seed_all` (create-only) → optional
+superuser / demo seed → Celery worker (`ingest,default,media`), Celery AI worker (`ai`, `-c 1`), beat, optional
+ingestor (`RUN_INGESTOR=1`, restarted in place) and gunicorn on `$PORT`; any core process exiting stops the container
+so Railway restarts it. One volume at `/data` (media, private, telegram session, fastembed cache); Railway mounts
+volumes as root, so `RAILWAY_RUN_UID=0` is required. Postgres comes from Railway's pgvector template (the
+`core.0001` migration creates `vector`, `pg_trgm`, `unaccent`); a single Railway Redis serves broker (db 1), locks
+(db 0) and cache (db 2). Django serves `/media/` (`SERVE_MEDIA=true`) because there is no Caddy. The Railway edge is
+the only way in, so `TRUSTED_PROXY_CIDRS=0.0.0.0/0,::/0`. The Dockerfile drops its BuildKit cache mount (Railway
+rejects cache mounts without its own id format). **Consequences:** no horizontal scaling and one noisy neighbour
+(AI worker) shares CPU with web — acceptable for a preview; single Redis without the `noeviction`/`allkeys-lru`
+split. Everything reverts to the SPEC topology on the VPS; nothing Railway-specific is read by the application code.

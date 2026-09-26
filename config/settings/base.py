@@ -5,6 +5,7 @@
 
 from __future__ import annotations
 
+import mimetypes
 from pathlib import Path
 
 import django.conf.locale
@@ -12,6 +13,10 @@ import environ
 from csp.constants import NONCE, SELF
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
+
+# Slim images lack /etc/mime.types entries for these; media/static responses need the right type.
+mimetypes.add_type("image/webp", ".webp")
+mimetypes.add_type("font/woff2", ".woff2")
 
 env = environ.Env()
 _env_file = BASE_DIR / ".env"

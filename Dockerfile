@@ -25,8 +25,9 @@ RUN apt-get update \
 # INSTALL_DEV=1 adds the dev group (pytest, ruff, …) for the local compose image; prod omits it.
 ARG INSTALL_DEV=0
 COPY pyproject.toml uv.lock ./
-RUN --mount=type=cache,target=/root/.cache/uv \
-    if [ "$INSTALL_DEV" = "1" ]; then uv sync --frozen --no-install-project; \
+# No BuildKit cache mount: Railway rejects cache mounts without its own id format (ADR-027); this layer is
+# still cached by Docker until pyproject.toml/uv.lock change.
+RUN if [ "$INSTALL_DEV" = "1" ]; then uv sync --frozen --no-install-project; \
     else uv sync --frozen --no-install-project --no-dev; fi
 COPY . .
 # Tailwind standalone binary (downloaded by django-tailwind-cli) → static/css/output.css, then collectstatic;
@@ -53,7 +54,7 @@ LABEL org.opencontainers.image.title="educore" \
       org.opencontainers.image.revision=$GIT_SHA
 COPY --from=builder /opt/venv /opt/venv
 COPY --from=builder --chown=app:app /app /app
-RUN chmod +x /app/docker/entrypoint.sh \
+RUN chmod +x /app/docker/entrypoint.sh /app/docker/railway/start.sh \
     && mkdir -p /data/media /data/private /data/telegram /app/.cache/fastembed /tmp/prom \
     && chown -R app:app /data /app/.cache /tmp/prom
 USER app
