@@ -24,6 +24,11 @@ FLOOD_WAIT_CAP_SECONDS = 3600
 GAPCHECK_WINDOW = 100
 
 
+def default_ai_limit(limit: int) -> int:
+    """Posts per source that get an outbox event and full media; all of them in verbatim mode (ADR-033)."""
+    return limit if settings.CONTENT_MODE == "verbatim" else settings.BACKFILL_AI_LIMIT_PER_SOURCE
+
+
 async def backfill(
     client: Any,
     source: SourceInfo,
@@ -35,9 +40,7 @@ async def backfill(
 ) -> dict[str, int]:
     """Import the newest `limit` messages (albums grouped); outbox events only for the newest `ai_limit`."""
     limit = limit or settings.TELEGRAM_BACKFILL_LIMIT
-    if ai_limit is None:
-        # verbatim mode costs nothing per post, so every backfilled post is published with all of its media
-        ai_limit = limit if settings.CONTENT_MODE == "verbatim" else settings.BACKFILL_AI_LIMIT_PER_SOURCE
+    ai_limit = default_ai_limit(limit) if ai_limit is None else ai_limit
     entity = await entity_for(client, source)
     posts = events = 0
     offset_id = 0

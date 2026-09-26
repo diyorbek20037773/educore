@@ -159,3 +159,11 @@ def test_retry_media_downloads_again(run: Run, source: SourceInfo) -> None:
     assert result == {"downloaded": 1, "requested": 1}
     media.refresh_from_db()
     assert media.status == "downloaded" and media.original
+
+
+def test_default_ai_limit_covers_every_post_in_verbatim_mode(settings: Any) -> None:
+    settings.BACKFILL_AI_LIMIT_PER_SOURCE = 150
+    settings.CONTENT_MODE = "verbatim"
+    assert history.default_ai_limit(500) == 500
+    settings.CONTENT_MODE = "ai"
+    assert history.default_ai_limit(500) == 150

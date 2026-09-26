@@ -89,10 +89,8 @@ class TelegramSourceAdmin(EducoreAdmin):
     def request_backfill(self, request: HttpRequest, queryset: QuerySet[TelegramSource]) -> None:
         from django.conf import settings
 
-        params = {
-            "limit": settings.TELEGRAM_BACKFILL_LIMIT,
-            "ai_limit": settings.BACKFILL_AI_LIMIT_PER_SOURCE,
-        }
+        # `ai_limit` is left to the ingestor (all posts in verbatim mode, ADR-033)
+        params = {"limit": settings.TELEGRAM_BACKFILL_LIMIT}
         n = _enqueue(request, queryset, RequestKind.BACKFILL, params)
         self.message_user(request, _("%(n)d ta soʻrov navbatga qoʻyildi.") % {"n": n}, messages.SUCCESS)
 

@@ -20,7 +20,12 @@ class Command(BaseCommand):
     def add_arguments(self, parser: Any) -> None:
         parser.add_argument("--source", help="username without @ (default: all active sources)")
         parser.add_argument("--limit", type=int, default=settings.TELEGRAM_BACKFILL_LIMIT)
-        parser.add_argument("--ai-limit", type=int, default=settings.BACKFILL_AI_LIMIT_PER_SOURCE)
+        parser.add_argument(
+            "--ai-limit",
+            type=int,
+            default=None,
+            help="default: every post in verbatim mode, else BACKFILL_AI_LIMIT_PER_SOURCE",
+        )
         parser.add_argument(
             "--standalone",
             action="store_true",
@@ -34,7 +39,9 @@ class Command(BaseCommand):
             if source is None:
                 raise CommandError(f"Unknown source {options['source']!r}")
             source_id = source.pk
-        params = {"limit": options["limit"], "ai_limit": options["ai_limit"]}
+        params = {"limit": options["limit"]}
+        if options["ai_limit"] is not None:
+            params["ai_limit"] = options["ai_limit"]
         if not options["standalone"]:
             request_id = enqueue_request(RequestKind.BACKFILL, source_id, params)
             self.stdout.write(f"Queued backfill request #{request_id} ({params}); the ingestor executes it.")
