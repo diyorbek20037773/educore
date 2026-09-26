@@ -1,6 +1,9 @@
-{% load web_tags %}
-<a href="{{ url }}" class="card card-link flex flex-col gap-2 p-4">
-  <span class="kpi-label">{{ label }}</span>
-  <span class="kpi-value">{{ value|intcomma_uz }}</span>
-  {% if spark %}{% sparkline spark %}{% else %}<span class="h-8" aria-hidden="true"></span>{% endif %}
+{% load web_tags %}{# THE "jobs" tile: line icon, bold value, small label; 30-day sparkline when available #}
+<a href="{{ url }}" class="stat-tile">
+  {% if icon_name %}<span class="stat-icon hidden sm:grid lg:hidden xl:grid">{% icon icon_name "size-10 [stroke-width:1.5]" %}</span>{% endif %}
+  <span class="flex min-w-0 flex-1 flex-col">
+    <span class="kpi-value">{{ value|intcomma_uz }}</span>
+    <span class="stat-sub">{{ label }}</span>
+    {% if spark %}<span class="sparkline mt-1">{% sparkline spark "currentColor" 120 20 %}</span>{% endif %}
+  </span>
 </a>

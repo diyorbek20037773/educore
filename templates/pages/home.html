@@ -2,167 +2,214 @@
 {% load i18n web_tags static media_tags %}
 {% block title %}EDUCORE — {% translate "Huquqni muhofaza qilish taʼlim muassasalari axborot platformasi" %}{% endblock %}
 {% block title_suffix %}{% endblock %}
-{% block head %}{% if hero.cover_media %}<link rel="preload" as="image" href="{% media_url hero.cover_media '800' %}" imagesrcset="{% media_srcset hero.cover_media %}" imagesizes="(min-width: 1024px) 60vw, 100vw" fetchpriority="high">{% endif %}{% endblock %}
+{% block head %}{% if hero.cover_media %}<link rel="preload" as="image" href="{% media_url hero.cover_media '800' %}" imagesrcset="{% media_srcset hero.cover_media %}" imagesizes="(min-width: 1024px) 218px, (min-width: 640px) 50vw, 100vw" fetchpriority="high">{% endif %}{% endblock %}
 {% block jsonld %}<script type="application/ld+json" nonce="{{ request.csp_nonce }}">{"@context":"https://schema.org","@type":"WebSite","name":"EDUCORE","url":"{{ site_url }}/","potentialAction":{"@type":"SearchAction","target":"{{ site_url }}{% url 'web:search' %}?q={query}","query-input":"required name=query"}}</script>
 <script type="application/ld+json" nonce="{{ request.csp_nonce }}">{"@context":"https://schema.org","@type":"Organization","name":"EDUCORE","url":"{{ site_url }}/","logo":"{{ site_url }}{% static 'img/icon-512.png' %}","subOrganization":[{% for inst in nav_institutions %}{"@type":"CollegeOrUniversity","name":{{ inst.full_name|jsonld }},"url":"{{ site_url }}{{ inst.get_absolute_url }}"}{% if not forloop.last %},{% endif %}{% endfor %}]}</script>{% endblock %}
 {% block content %}
-{# 0. Intro + section launcher (THE-style, ADR-028) #}
-<section class="container-page pt-10 md:pt-16" aria-labelledby="intro-title">
-  <div class="max-w-4xl">
-    <h1 id="intro-title" class="text-4xl leading-tight md:text-6xl md:leading-[1.08]">
-      {% translate "Huquqni muhofaza qilish taʼlimi" %}<br><span class="gradient-text">{% translate "yagona axborot platformasida" %}</span>
-    </h1>
-    <p class="mt-5 max-w-2xl text-lg text-ink-2">{% translate "Beshta taʼlim muassasasining rasmiy yangiliklari, yoʻnalishlari, qabul maʼlumotlari va tahliliy koʻrsatkichlari — real vaqtda, bir joyda." %}</p>
-  </div>
-  <nav class="mt-10 grid grid-cols-2 gap-3 lg:grid-cols-4" aria-label="{% translate 'Boʻlimlar' %}">
-    <a class="launch-tile" href="{% url 'web:news_list' %}"><span class="launch-icon">{% icon "newspaper" %}</span><span class="launch-title">{% translate "Yangiliklar" %}</span><span class="launch-text">{% translate "Rasmiy kanallardan har kuni yangilanadigan xabarlar" %}</span></a>
-    <a class="launch-tile" href="{% url 'web:institution_list' %}"><span class="launch-icon">{% icon "landmark" %}</span><span class="launch-title">{% translate "Muassasalar" %}</span><span class="launch-text">{% translate "Beshta muassasa profili va taqqoslash" %}</span></a>
-    <a class="launch-tile" href="{% url 'web:program_list' %}"><span class="launch-icon">{% icon "graduation-cap" %}</span><span class="launch-title">{% translate "Yoʻnalishlar" %}</span><span class="launch-text">{% translate "Taʼlim dasturlari katalogi" %}</span></a>
-    <a class="launch-tile" href="{% url 'web:admissions' %}"><span class="launch-icon">{% icon "clipboard-check" %}</span><span class="launch-title">{% translate "Qabul" %}</span><span class="launch-text">{% translate "Muddatlar, talablar, hujjatlar" %}</span></a>
-    <a class="launch-tile" href="{% url 'web:profession_list' %}"><span class="launch-icon">{% icon "briefcase" %}</span><span class="launch-title">{% translate "Kasblar" %}</span><span class="launch-text">{% translate "Qaysi kasbga qayerda oʻqish mumkin" %}</span></a>
-    <a class="launch-tile" href="{% url 'web:event_list' %}"><span class="launch-icon">{% icon "calendar-days" %}</span><span class="launch-title">{% translate "Tadbirlar" %}</span><span class="launch-text">{% translate "Yaqinlashayotgan tadbirlar taqvimi" %}</span></a>
-    <a class="launch-tile" href="{% url 'web:analytics' %}"><span class="launch-icon">{% icon "chart-line" %}</span><span class="launch-title">{% translate "Analitika" %}</span><span class="launch-text">{% translate "Faollik, mavzular va taqqoslash grafiklari" %}</span></a>
-    <a class="launch-tile" href="{% url 'web:appeal_form' %}"><span class="launch-icon">{% icon "message-square" %}</span><span class="launch-title">{% translate "Murojaat" %}</span><span class="launch-text">{% translate "Savol yoki taklifingizni muassasaga yoʻllang" %}</span></a>
-  </nav>
+{# Layout follows the timeshighereducation.com homepage (ADR-029); every SPEC §6.2 block is kept. #}
+<div class="container-page">
+
+{# 0. Hero: gradient first word, second line, one-sentence lead #}
+<section class="page-hero" aria-labelledby="intro-title">
+  {% if live_last_post_at %}
+    <a href="{% url 'web:news_list' %}" class="live-badge mb-5" title="{% translate 'Oxirgi xabar' %}"><span class="live-dot" aria-hidden="true"></span>LIVE <span class="font-normal text-ink-2">{{ live_last_post_at|time_ago }}</span></a>
+  {% endif %}
+  <h1 id="intro-title"><span class="gradient-text">{% translate "Yagona" %}</span><br>{% translate "huquqni muhofaza qilish taʼlimi axborot platformasi" %}</h1>
+  <p>{% translate "Beshta taʼlim muassasasining rasmiy yangiliklari, yoʻnalishlari, qabul maʼlumotlari va tahliliy koʻrsatkichlari — real vaqtda, bir joyda." %}</p>
 </section>
 
-{# 1. Hero band #}
-<section class="container-page mt-16" aria-labelledby="latest-title">
-  <div class="section-title"><h2 id="latest-title">{% translate "Soʻnggi yangiliklar" %}</h2><a class="more-link" href="{% url 'web:news_list' %}">{% translate "Barchasi" %} {% icon "arrow-right" "size-4" %}</a></div>
+{# 1. Announcement banner: analytics teaser (3 mini stats) #}
+<a class="banner-card" href="{% url 'web:analytics' %}">
+  {% icon "chart-line" "line-icon" %}
+  <span class="min-w-0 flex-1">
+    <span class="banner-title block">{% translate "Analitika" %}</span>
+    <span class="banner-text block">{% translate "Maqolalar (30 kun)" %}: <strong>{{ teaser.articles_30|intcomma_uz }}</strong> · {% translate "Jami maqolalar" %}: <strong>{{ teaser.articles_total|intcomma_uz }}</strong> · {% translate "Manba kanallar" %}: <strong>{{ nav_institutions|length }}</strong></span>
+  </span>
+  {% icon "move-right" "arrow-long" %}
+</a>
+
+{# 2. Section launcher: 8 feature cards (4 × 2) #}
+<nav class="grid-4 mt-6" aria-label="{% translate 'Boʻlimlar' %}">
+  {% url 'web:news_list' as u %}{% include "components/feature_card.html" with url=u title=_("Yangiliklar") text=_("Rasmiy kanallardan har kuni yangilanadigan xabarlar") icon_name="newspaper" %}
+  {% url 'web:institution_list' as u %}{% include "components/feature_card.html" with url=u title=_("Muassasalar") text=_("Beshta muassasa profili va taqqoslash") icon_name="landmark" %}
+  {% url 'web:program_list' as u %}{% include "components/feature_card.html" with url=u title=_("Yoʻnalishlar") text=_("Taʼlim dasturlari katalogi") icon_name="graduation-cap" %}
+  {% url 'web:admissions' as u %}{% include "components/feature_card.html" with url=u title=_("Qabul") text=_("Muddatlar, talablar, hujjatlar") icon_name="clipboard-check" %}
+  {% url 'web:profession_list' as u %}{% include "components/feature_card.html" with url=u title=_("Kasblar") text=_("Qaysi kasbga qayerda oʻqish mumkin") icon_name="briefcase" %}
+  {% url 'web:event_list' as u %}{% include "components/feature_card.html" with url=u title=_("Tadbirlar") text=_("Yaqinlashayotgan tadbirlar taqvimi") icon_name="calendar-days" %}
+  {% url 'web:analytics' as u %}{% include "components/feature_card.html" with url=u title=_("Analitika") text=_("Faollik, mavzular va taqqoslash grafiklari") icon_name="chart-column" %}
+  {% url 'web:appeal_form' as u %}{% include "components/feature_card.html" with url=u title=_("Murojaat") text=_("Savol yoki taklifingizni muassasaga yoʻllang") icon_name="message-square" %}
+</nav>
+
+{# 3. Latest news: featured selection (pinned > featured > important) as four article cards #}
+<section class="section" aria-labelledby="latest-title">
+  <div class="section-title"><h2 id="latest-title">{% translate "Soʻnggi yangiliklar" %}</h2><a class="more-link" href="{% url 'web:news_list' %}">{% translate "Barchasi" %}</a></div>
   {% if hero %}
-    <div class="grid gap-8 lg:grid-cols-12">
-      <div class="min-w-0 lg:col-span-7">{% include "components/article_card.html" with article=hero variant="hero" %}</div>
-      <div class="flex min-w-0 flex-col divide-y divide-line lg:col-span-5 lg:-mt-4">
-        {% for article in hero_secondary %}{% include "components/article_card.html" with variant="compact" %}{% endfor %}
-      </div>
+    <div class="grid-4">
+      {% include "components/article_card.html" with article=hero %}
+      {% for article in hero_secondary %}{% include "components/article_card.html" %}{% endfor %}
     </div>
   {% else %}
     {% include "components/empty_state.html" with message=_("Yangiliklar tez orada paydo boʻladi.") %}
   {% endif %}
 </section>
 
-{# 2. KPI strip #}
-<section class="container-page mt-14" aria-label="{% translate 'Asosiy koʻrsatkichlar' %}">
-  <div class="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-5">
-    {% for kpi in kpis %}
-      {% if kpi.key == "institutions" %}{% url kpi.url as u %}{% include "components/kpi_tile.html" with label=_("Muassasalar") value=kpi.value url=u spark=kpi.spark %}
-      {% elif kpi.key == "news_today" %}{% url kpi.url as u %}{% include "components/kpi_tile.html" with label=_("Bugungi yangiliklar") value=kpi.value url=u spark=kpi.spark %}
-      {% elif kpi.key == "events" %}{% url kpi.url as u %}{% include "components/kpi_tile.html" with label=_("Yaqin tadbirlar") value=kpi.value url=u spark=kpi.spark %}
-      {% elif kpi.key == "programs" %}{% url kpi.url as u %}{% include "components/kpi_tile.html" with label=_("Yoʻnalishlar") value=kpi.value url=u spark=kpi.spark %}
-      {% else %}{% url kpi.url as u %}{% include "components/kpi_tile.html" with label=_("Kasblar") value=kpi.value url=u spark=kpi.spark %}{% endif %}
+{# 4. KPI tiles (THE "Latest jobs" tiles) #}
+<section class="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-5" aria-label="{% translate 'Asosiy koʻrsatkichlar' %}">
+  {% for kpi in kpis %}
+    {% url kpi.url as u %}
+    {% if kpi.key == "institutions" %}{% include "components/kpi_tile.html" with label=_("Muassasalar") value=kpi.value url=u spark=kpi.spark icon_name="landmark" %}
+    {% elif kpi.key == "news_today" %}{% include "components/kpi_tile.html" with label=_("Bugungi yangiliklar") value=kpi.value url=u spark=kpi.spark icon_name="newspaper" %}
+    {% elif kpi.key == "events" %}{% include "components/kpi_tile.html" with label=_("Yaqin tadbirlar") value=kpi.value url=u spark=kpi.spark icon_name="calendar-days" %}
+    {% elif kpi.key == "programs" %}{% include "components/kpi_tile.html" with label=_("Yoʻnalishlar") value=kpi.value url=u spark=kpi.spark icon_name="graduation-cap" %}
+    {% else %}{% include "components/kpi_tile.html" with label=_("Kasblar") value=kpi.value url=u spark=kpi.spark icon_name="briefcase" %}{% endif %}
+  {% endfor %}
+</section>
+
+{# 5. Institutions (THE "Our partners" cards) #}
+<section class="section" aria-labelledby="inst-title">
+  <div class="section-title"><h2 id="inst-title">{% translate "Muassasalar" %}</h2><a class="more-link" href="{% url 'web:institution_compare' %}">{% translate "Taqqoslash" %}</a></div>
+  <div class="grid-4">
+    {% for card in institution_cards %}
+      {% include "components/institution_card.html" with inst=card.institution news_30=card.institution.news_30 programs_n=card.institution.programs_n events_n=card.institution.events_n spark=card.spark %}
     {% endfor %}
   </div>
 </section>
 
-{# 3. Live panel + 4. Institutions #}
-<div class="container-page mt-16 grid gap-10 lg:grid-cols-12">
-  <div class="min-w-0 lg:col-span-5">{% include "partials/live_items.html" with active_filter="" %}</div>
-  <section class="min-w-0 lg:col-span-7" aria-labelledby="inst-title">
-    <div class="section-title"><h2 id="inst-title">{% translate "Muassasalar" %}</h2><a class="more-link" href="{% url 'web:institution_compare' %}">{% translate "Taqqoslash" %} {% icon "arrow-right" "size-4" %}</a></div>
-    <div class="grid gap-4 sm:grid-cols-2">
-      {% for card in institution_cards %}
-        {% include "components/institution_card.html" with inst=card.institution news_30=card.institution.news_30 programs_n=card.institution.programs_n events_n=card.institution.events_n spark=card.spark %}
-      {% endfor %}
-    </div>
-  </section>
-</div>
-
-{# 5. Charts band #}
-<section class="container-page mt-16" aria-labelledby="charts-title">
-  <div class="section-title"><h2 id="charts-title">{% translate "Faollik va mavzular" %}</h2><a class="more-link" href="{% url 'web:analytics' %}">{% translate "Analitika" %} {% icon "arrow-right" "size-4" %}</a></div>
-  <div class="grid gap-6 lg:grid-cols-2">
-    {% url 'web:analytics_data' 'activity' as activity_url %}
-    {% include "components/chart_card.html" with chart_id="home-activity" title=_("Faollik dinamikasi") description=_("Soʻnggi 12 oy, muassasalar kesimida") data_url=activity_url|add:"?period=12m" %}
-    {% url 'web:analytics_data' 'categories' as categories_url %}
-    {% include "components/chart_card.html" with chart_id="home-categories" title=_("Mavzular taqsimoti") description=_("Soʻnggi 30 kun") data_url=categories_url|add:"?days=30" %}
-  </div>
-</section>
-
-{# 6. Education and admissions #}
-<section class="container-page mt-16" aria-labelledby="edu-title">
-  <div class="section-title"><h2 id="edu-title">{% translate "Taʼlim va qabul" %}</h2><a class="more-link" href="{% url 'web:admissions' %}">{% translate "Qabul" %} {% icon "arrow-right" "size-4" %}</a></div>
+{# 6. Live panel + charts band #}
+<section class="section" aria-labelledby="charts-title">
+  <div class="section-title"><h2 id="charts-title">{% translate "Faollik va mavzular" %}</h2><a class="more-link" href="{% url 'web:analytics' %}">{% translate "Analitika" %}</a></div>
   <div class="grid gap-6 lg:grid-cols-12">
-    <div class="space-y-3 min-w-0 lg:col-span-5">
-      {% for adm in admissions %}
-        <article class="card inst-{{ adm.institution.order }} inst-stripe p-4">
-          <p class="text-xs font-semibold uppercase text-ink-2">{{ adm.institution.short_name }}</p>
-          <h3 class="mt-1 font-sans text-base font-bold">{{ adm.title }}</h3>
-          {% if adm.ends_at %}<p class="mt-2 text-sm text-ink-2" x-data="countdown" data-end="{{ adm.ends_at|date:'Y-m-d' }}T23:59:59" data-template="{% translate 'Tugashiga {d} kun qoldi' %}"><span x-text="label">{% translate "Muddat" %}: {{ adm.ends_at|uz_date }}</span></p>{% endif %}
-        </article>
-      {% empty %}
-        {% include "components/empty_state.html" with message=_("Hozircha ochiq qabul eʼlonlari yoʻq.") %}
-      {% endfor %}
-    </div>
-    <div class="card p-5 min-w-0 lg:col-span-7">
-      <h3 class="font-sans text-lg font-bold">{% translate "Yoʻnalishlar" %}</h3>
-      <div class="mt-3 grid gap-4 sm:grid-cols-2">
-        {% for group in programs_by_institution %}
-          <div>
-            <p class="flex items-center gap-2 text-sm font-semibold"><span class="inst-dot inst-{{ group.institution.order }}"></span>{{ group.institution.short_name }}</p>
-            <ul class="mt-1 space-y-1 text-sm">{% for program in group.programs %}<li><a class="hover:underline" href="{{ program.get_absolute_url }}">{{ program.name }}</a> <span class="text-ink-2">· {{ program.get_level_display }}</span></li>{% endfor %}</ul>
-          </div>
-        {% endfor %}
-      </div>
-      <a href="{% url 'web:program_list' %}" class="btn-primary mt-5">{% translate "Barcha yoʻnalishlar" %}</a>
+    <div class="min-w-0 lg:col-span-5">{% include "partials/live_items.html" with active_filter="" %}</div>
+    <div class="grid min-w-0 content-start gap-6 lg:col-span-7">
+      {% url 'web:analytics_data' 'activity' as activity_url %}
+      {% include "components/chart_card.html" with chart_id="home-activity" title=_("Faollik dinamikasi") description=_("Soʻnggi 12 oy, muassasalar kesimida") data_url=activity_url|add:"?period=12m" %}
+      {% url 'web:analytics_data' 'categories' as categories_url %}
+      {% include "components/chart_card.html" with chart_id="home-categories" title=_("Mavzular taqsimoti") description=_("Soʻnggi 30 kun") data_url=categories_url|add:"?days=30" %}
     </div>
   </div>
 </section>
 
-{# 7. Cadets and students #}
-<section class="container-page mt-16" aria-labelledby="cs-title">
+{# 7. Professions (THE "Latest rankings" dark cards) #}
+<section class="section" aria-labelledby="prof-title">
+  <div class="section-title"><h2 id="prof-title">{% translate "Kasblar" %}</h2><a class="more-link" href="{% url 'web:profession_list' %}">{% translate "Barchasi" %}</a></div>
+  <div class="grid-3">
+    {% for profession in professions|slice:":5" %}{% include "components/profession_card.html" with variant="dark" %}{% endfor %}
+    <a class="rank-card is-muted" href="{% url 'web:profession_list' %}">
+      <span class="rank-art">{% icon "graduation-cap" "size-24 [stroke-width:1]" %}</span>
+      <span class="rank-label">{% translate "Qaysi kasbga qayerda oʻqish mumkin" %}</span>
+    </a>
+  </div>
+</section>
+
+{# 8. Cadets and students (THE "Study abroad": image + title, no meta) #}
+<section class="section" aria-labelledby="cs-title">
   <div class="section-title"><h2 id="cs-title">{% translate "Kursantlar va talabalar" %}</h2>
     <span class="flex gap-4"><a class="more-link" href="{% url 'web:cadets_hub' %}">{% translate "Kursantlar" %}</a><a class="more-link" href="{% url 'web:students_hub' %}">{% translate "Talabalar" %}</a></span></div>
-  <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-    {% for article in cadet_student_articles %}{% include "components/article_card.html" %}{% empty %}{% include "components/empty_state.html" %}{% endfor %}
+  <div class="grid-4">
+    {% for article in cadet_student_articles|slice:":4" %}{% include "components/article_card.html" with no_meta=True %}{% empty %}{% include "components/empty_state.html" %}{% endfor %}
   </div>
 </section>
 
-{# 8. Professions #}
-<section class="container-page mt-16" aria-labelledby="prof-title">
-  <div class="section-title"><h2 id="prof-title">{% translate "Kasblar" %}</h2><a class="more-link" href="{% url 'web:profession_list' %}">{% translate "Barcha kasblar" %} {% icon "arrow-right" "size-4" %}</a></div>
-  <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">{% for profession in professions %}{% include "components/profession_card.html" %}{% endfor %}</div>
+{# 9. Education and admissions: open admissions as tiles, top programs by institution #}
+<section class="section" aria-labelledby="edu-title">
+  <div class="section-title"><h2 id="edu-title">{% translate "Taʼlim va qabul" %}</h2><a class="more-link" href="{% url 'web:admissions' %}">{% translate "Qabul" %}</a></div>
+  <div class="grid-4">
+    {% for adm in admissions|slice:":4" %}
+      <article class="stat-tile inst-{{ adm.institution.order }}">
+        <span class="stat-icon">{% icon "clipboard-check" "size-10 [stroke-width:1.5]" %}</span>
+        <div class="min-w-0">
+          <h3 class="stat-name line-clamp-2"><a href="{% url 'web:admissions' %}" class="after:absolute after:inset-0">{{ adm.title }}</a></h3>
+          <p class="stat-sub">{{ adm.institution.short_name }}{% if adm.ends_at %} · <span x-data="countdown" data-end="{{ adm.ends_at|date:'Y-m-d' }}T23:59:59" data-template="{% translate 'Tugashiga {d} kun qoldi' %}"><span x-text="label">{% translate "Muddat" %}: {{ adm.ends_at|uz_date }}</span></span>{% endif %}</p>
+        </div>
+      </article>
+    {% empty %}
+      <p class="stat-tile text-ink-2 sm:col-span-2 lg:col-span-4">{% translate "Hozircha ochiq qabul eʼlonlari yoʻq." %}</p>
+    {% endfor %}
+  </div>
+  <div class="card mt-6 p-6">
+    <h3 class="text-lg font-bold">{% translate "Yoʻnalishlar" %}</h3>
+    <div class="mt-4 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {% for group in programs_by_institution %}
+        <div>
+          <p class="flex items-center gap-2 text-sm font-semibold text-heading"><span class="inst-dot inst-{{ group.institution.order }}"></span>{{ group.institution.short_name }}</p>
+          <ul class="mt-1 space-y-1 text-sm">{% for program in group.programs %}<li><a class="hover:underline" href="{{ program.get_absolute_url }}">{{ program.name }}</a> <span class="text-ink-2">· {{ program.get_level_display }}</span></li>{% endfor %}</ul>
+        </div>
+      {% endfor %}
+    </div>
+    <a href="{% url 'web:program_list' %}" class="btn-primary mt-6">{% translate "Barcha yoʻnalishlar" %}</a>
+  </div>
 </section>
 
-{# 9. Events + 10. Motivation #}
-<div class="container-page mt-16 grid gap-8 lg:grid-cols-12">
-  <section class="min-w-0 lg:col-span-5" aria-labelledby="ev-title">
-    <div class="section-title"><h2 id="ev-title">{% translate "Tadbirlar" %}</h2><a class="more-link" href="{% url 'web:event_list' %}">{% translate "Taqvim" %} {% icon "arrow-right" "size-4" %}</a></div>
-    <div class="card divide-y divide-line px-4">{% for event in events %}{% include "components/event_row.html" %}{% empty %}<p class="py-6 text-center text-ink-2">{% translate "Yaqin tadbirlar yoʻq." %}</p>{% endfor %}</div>
-  </section>
-  <section class="min-w-0 lg:col-span-7" aria-labelledby="mot-title">
-    <div class="section-title"><h2 id="mot-title">{% translate "Motivatsiya" %}</h2><a class="more-link" href="{% url 'web:story_list' %}">{% translate "Barcha hikoyalar" %} {% icon "arrow-right" "size-4" %}</a></div>
-    <div class="flex snap-x gap-4 overflow-x-auto pb-2">
-      {% for story in stories %}<div class="w-80 flex-none snap-start">{% include "components/story_card.html" %}</div>{% empty %}{% include "components/empty_state.html" %}{% endfor %}
+{# 10. Profession search banner (THE career search) #}
+<section class="cta-banner mt-6" aria-labelledby="career-title">
+  <div class="min-w-0 flex-1">
+    <h2 id="career-title">{% translate "Kelajakdagi kasbingizni izlayapsizmi?" %}</h2>
+    <form class="cta-search" action="{% url 'web:profession_list' %}" method="get" role="search">
+      <div class="cta-field">
+        <label for="career-q">{% translate "Kasb" %}</label>
+        <input id="career-q" type="search" name="q" maxlength="100" placeholder="{% translate 'Kasb nomi yoki kalit soʻz' %}">
+      </div>
+      <div class="cta-field">
+        <label for="career-inst">{% translate "Muassasa" %}</label>
+        <select id="career-inst" name="inst">
+          <option value="">{% translate "Barchasi" %}</option>
+          {% for inst in nav_institutions %}<option value="{{ inst.slug }}">{{ inst.short_name }}</option>{% endfor %}
+        </select>
+      </div>
+      <button type="submit" class="btn-purple">{% icon "search" "size-4" %}{% translate "Qidirish" %}</button>
+    </form>
+  </div>
+  <span class="cta-art" aria-hidden="true">{% icon "scale" "size-28 [stroke-width:1]" %}</span>
+</section>
+
+{# 11. Events (THE "Latest resources": text-only, 3 × 2) #}
+<section class="section" aria-labelledby="ev-title">
+  <div class="section-title"><h2 id="ev-title">{% translate "Tadbirlar" %}</h2><a class="more-link" href="{% url 'web:event_list' %}">{% translate "Taqvim" %}</a></div>
+  <div class="resource-grid">
+    {% for event in events %}
+      <article class="resource-item">
+        <h3 class="resource-title line-clamp-3"><a href="{{ event.get_absolute_url }}" class="after:absolute after:inset-0">{{ event.title }}</a></h3>
+        <p class="mt-2 flex flex-wrap items-center gap-x-2 text-[13px] text-ink-2">
+          <time datetime="{{ event.starts_at|date:'c' }}">{{ event.starts_at|uz_date }}, {{ event.starts_at|time:"H:i" }}</time>
+          {% if event.institution %}<span class="meta-dot" aria-hidden="true"></span><a class="resource-tag mt-0" href="{{ event.institution.get_absolute_url }}">{{ event.institution.short_name }}</a>{% endif %}
+        </p>
+      </article>
+    {% empty %}
+      <p class="text-ink-2">{% translate "Yaqin tadbirlar yoʻq." %}</p>
+    {% endfor %}
+  </div>
+</section>
+
+{# 12. Motivation: story carousel with round prev/next buttons #}
+<section class="section" aria-labelledby="mot-title" x-data="carousel">
+  <div class="section-title"><h2 id="mot-title">{% translate "Motivatsiya" %}</h2><a class="more-link" href="{% url 'web:story_list' %}">{% translate "Barcha hikoyalar" %}</a></div>
+  {% if stories %}
+    <div class="carousel" x-ref="track">
+      {% for story in stories %}
+        <article class="resource-item">
+          <blockquote class="resource-title line-clamp-4">{{ story.quote|default:story.title }}</blockquote>
+          <a class="resource-tag after:absolute after:inset-0" href="{{ story.get_absolute_url }}">{{ story.person_name }}{% if story.institution %} · {{ story.institution.short_name }}{% endif %}</a>
+        </article>
+      {% endfor %}
     </div>
-  </section>
+    <div class="mt-8 flex justify-end gap-2">
+      <button type="button" class="carousel-btn" x-on:click="prev" aria-label="{% translate 'Oldingi' %}">{% icon "chevron-left" "size-4" %}</button>
+      <button type="button" class="carousel-btn" x-on:click="next" aria-label="{% translate 'Keyingi' %}">{% icon "chevron-right" "size-4" %}</button>
+    </div>
+  {% else %}
+    {% include "components/empty_state.html" %}
+  {% endif %}
+</section>
+
+{# 13. Appeal CTA (announcement-banner style) #}
+<a class="banner-card section" href="{% url 'web:appeal_form' %}">
+  {% icon "message-square" "line-icon" %}
+  <span class="min-w-0 flex-1">
+    <span class="banner-title block">{% translate "Murojaat yuboring" %}</span>
+    <span class="banner-text block">{% translate "Savol, taklif yoki shikoyatingizni muassasaga yoʻllang va holatini kuzatib boring." %}</span>
+  </span>
+  {% icon "move-right" "arrow-long" %}
+</a>
+
 </div>
-
-{# 11. Analytics teaser + appeal CTA — THE-style promo panels #}
-<section class="container-page mt-16 grid gap-4 md:grid-cols-3" aria-label="{% translate 'Analitika va murojaat' %}">
-  <div class="promo">
-    <div>
-      <h2 class="text-2xl text-white">{% translate "Murojaat yuboring" %}</h2>
-      <p class="mt-2 text-sm">{% translate "Savol, taklif yoki shikoyatingizni muassasaga yoʻllang va holatini kuzatib boring." %}</p>
-    </div>
-    <a href="{% url 'web:appeal_form' %}" class="btn-light">{% translate "Murojaat qilish" %} {% icon "arrow-right" "size-4" %}</a>
-  </div>
-  <div class="promo promo-2">
-    <div>
-      <h2 class="text-2xl text-white">{% translate "Analitika" %}</h2>
-      <dl class="mt-4 grid grid-cols-3 gap-3">
-        <div><dt class="text-xs text-white/75">{% translate "Maqolalar (30 kun)" %}</dt><dd class="text-2xl font-extrabold">{{ teaser.articles_30|intcomma_uz }}</dd></div>
-        <div><dt class="text-xs text-white/75">{% translate "Jami maqolalar" %}</dt><dd class="text-2xl font-extrabold">{{ teaser.articles_total|intcomma_uz }}</dd></div>
-        <div><dt class="text-xs text-white/75">{% translate "Manba kanallar" %}</dt><dd class="text-2xl font-extrabold">{{ nav_institutions|length }}</dd></div>
-      </dl>
-    </div>
-    <a href="{% url 'web:analytics' %}" class="btn-light">{% translate "Toʻliq analitika" %} {% icon "arrow-right" "size-4" %}</a>
-  </div>
-  <div class="promo promo-3">
-    <div>
-      <h2 class="text-2xl text-white">{% translate "Qabul" %}</h2>
-      <p class="mt-2 text-sm">{% translate "Qabul muddatlari, talablar va kerakli hujjatlar — barcha muassasalar boʻyicha." %}</p>
-    </div>
-    <a href="{% url 'web:admissions' %}" class="btn-light">{% translate "Batafsil" %} {% icon "arrow-right" "size-4" %}</a>
-  </div>
-</section>
 {% endblock %}

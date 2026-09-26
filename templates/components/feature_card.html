@@ -1,0 +1,6 @@
+{% load web_tags %}{# THE feature card: title, muted text, outline icon + long arrow pinned to the bottom (ADR-029) #}
+<a class="feature-card" href="{{ url }}">
+  <span class="feature-title">{{ title }}</span>
+  <span class="feature-text">{{ text }}</span>
+  <span class="card-foot">{% icon icon_name "line-icon" %}{% icon "move-right" "arrow-long" %}</span>
+</a>

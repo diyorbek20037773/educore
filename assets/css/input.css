@@ -1,7 +1,9 @@
-/* EDUCORE design tokens (SPEC §7.2, THE-inspired — ADR-028). Source lives outside STATICFILES_DIRS (ADR-013). */
+/* EDUCORE design tokens (SPEC §7.2, THE homepage design — ADR-028, ADR-029). Source lives outside STATICFILES_DIRS (ADR-013). */
 @import "tailwindcss";
 @import "./fonts.css";
 @import "./components.css";
+@import "./chrome.css";
+@import "./cards.css";
 
 @source "../../templates";
 @source "../../apps";
@@ -11,7 +13,7 @@
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 @theme {
-  --font-sans: "Manrope Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-sans: "Open Sans Variable", "Open Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-serif: "Source Serif 4 Variable", ui-serif, Georgia, "Times New Roman", serif;
   --font-mono: "JetBrains Mono Variable", ui-monospace, "SFMono-Regular", Menlo, monospace;
 
@@ -33,9 +35,13 @@
   --color-ink: var(--ink);
   --color-ink-2: var(--ink-2);
   --color-ink-muted: var(--ink-muted);
+  --color-heading: var(--heading);
+  --color-page: var(--page);
 
   /* Brand: black chrome, indigo panels, violet accent, blue-pink-orange gradient (ADR-028) */
-  --color-chrome: #09090b;
+  --color-chrome: #000000;
+  --color-footer: #09090b;
+  --color-brand-red: #e41c38;
   --color-brand-900: #272457;
   --color-brand-800: #432ea7;
   --color-brand-700: #6933f7;
@@ -66,20 +72,25 @@
   --radius-md: 16px;
   --radius-lg: 24px;
   --shadow-sm: 0 1px 2px rgb(9 9 11 / 0.05);
-  --shadow-md: 0 8px 24px rgb(9 9 11 / 0.1);
-  --container-page: 1320px;
+  --shadow-md: 0 8px 24px rgb(0 0 0 / 0.08);
+  --shadow-nav: 0 5px 5px 0 rgb(0 0 0 / 0.1);
+  /* THE content column is 944 px; + 2 × 16 px gutter */
+  --container-page: 976px;
+  --container-wide: 1312px;
   --ease-standard: cubic-bezier(0.2, 0, 0, 1);
 }
 
 @layer base {
   :root {
     color-scheme: light;
+    --page: #f2f2f2;
     --surface: #ffffff;
-    --surface-2: #f4f4f5;
-    --line: #e4e4e7;
+    --surface-2: #f2f2f2;
+    --line: #e2e2e2;
     --ink: #232323;
-    --ink-2: #595959;
-    --ink-muted: #838383;
+    --heading: #3a3a3a;
+    --ink-2: #6b6b6b;
+    --ink-muted: #6b6b6b;
     --brand: #272457;
     --accent: #6933f7;
     --chart-grid: #e4e4e7;
@@ -88,12 +99,14 @@
 
   [data-theme="dark"] {
     color-scheme: dark;
-    --surface: #09090b;
-    --surface-2: #18181b;
+    --page: #0b0b0d;
+    --surface: #18181b;
+    --surface-2: #232326;
     --line: #2e2e33;
-    --ink: #f4f4f5;
+    --ink: #e4e4e7;
+    --heading: #fafafa;
     --ink-2: #b0b0b0;
-    --ink-muted: #838383;
+    --ink-muted: #9a9a9a;
     --brand: #c4b5fd;
     --accent: #a78bfa;
     --chart-grid: #2e2e33;
@@ -102,8 +115,10 @@
 
   html {
     font-family: var(--font-sans);
-    background: var(--color-surface);
+    background: var(--color-page);
     color: var(--color-ink);
+    font-size: 16px;
+    line-height: 1.5;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
@@ -113,12 +128,11 @@
   h3 {
     font-family: var(--font-sans);
     font-weight: 700;
-    letter-spacing: -0.015em;
-    color: inherit;
+    color: var(--color-heading);
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-accent);
+    outline: 2px solid var(--color-brand-700);
     outline-offset: 2px;
   }
 
@@ -139,6 +153,13 @@
     margin-inline: auto;
     width: 100%;
     max-width: var(--container-page);
+    padding-inline: 1rem;
+  }
+
+  .container-wide {
+    margin-inline: auto;
+    width: 100%;
+    max-width: var(--container-wide);
     padding-inline: 1rem;
   }
 

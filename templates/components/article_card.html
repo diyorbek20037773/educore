@@ -1,4 +1,4 @@
-{% load i18n web_tags %}{# variant: hero | standard | compact — THE-style tiles (ADR-028) #}
+{% load i18n web_tags %}{# variant: hero | standard | compact; no_meta hides the meta line — THE-style tiles (ADR-028, ADR-029) #}
 {% if variant == "hero" %}
 <article class="tile group">
   {% include "components/cover.html" with ratio="aspect-[16/9]" eager=True sizes="(min-width: 1024px) 60vw, 100vw" %}
@@ -28,13 +28,16 @@
 <article class="tile group h-full">
   {% include "components/cover.html" with ratio="aspect-[16/10]" %}
   <div class="flex flex-1 flex-col">
-    <h3 class="tile-title text-base line-clamp-3"><a href="{{ article.get_absolute_url }}" class="after:absolute after:inset-0">{{ article.title }}</a></h3>
-    <p class="kicker mt-1.5 flex flex-wrap items-center gap-x-2">
-      <span>{{ article.category.name }}</span>
-      {% if article.primary_institution %}<span aria-hidden="true">·</span><span class="inline-flex items-center gap-1.5"><span class="inst-dot inst-{{ article.primary_institution.order }}"></span>{{ article.primary_institution.abbreviation }}</span>{% endif %}
-      <span aria-hidden="true">·</span><time datetime="{{ article.published_at|date:'c' }}">{{ article.published_at|uz_date }}</time>
+    <h3 class="tile-title line-clamp-3"><a href="{{ article.get_absolute_url }}" class="after:absolute after:inset-0">{{ article.title }}</a></h3>
+    {% if not no_meta %}
+    <p class="kicker mt-2 flex flex-wrap items-center gap-x-2">
+      <time datetime="{{ article.published_at|date:'c' }}">{{ article.published_at|uz_date }}</time>
+      <span class="meta-dot" aria-hidden="true"></span>
+      <a href="{% url 'web:news_list' %}?category={{ article.category.slug }}">{{ article.category.name }}</a>
+      {% if article.primary_institution %}<span class="meta-dot" aria-hidden="true"></span><span class="inline-flex items-center gap-1.5"><span class="inst-dot inst-{{ article.primary_institution.order }}"></span>{{ article.primary_institution.abbreviation }}</span>{% endif %}
       {% if article.edited_at %}<span class="badge-updated">{% translate "Yangilangan" %}</span>{% endif %}
     </p>
+    {% endif %}
   </div>
 </article>
 {% endif %}

@@ -278,6 +278,14 @@
 <symbol id="moon" viewBox="0 0 24 24">
       <path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401" />
     </symbol>
+<symbol id="move-right" viewBox="0 0 24 24">
+      <path d="M18 8L22 12L18 16" />
+      <path d="M2 12H22" />
+    </symbol>
+<symbol id="move-up-right" viewBox="0 0 24 24">
+      <path d="M13 5H19V11" />
+      <path d="M19 5L5 19" />
+    </symbol>
 <symbol id="newspaper" viewBox="0 0 24 24">
       <path d="M15 18h-5" />
       <path d="M18 14h-8" />
@@ -431,6 +439,10 @@
       <path d="M12 13v7a2 2 0 0 0 4 0" />
       <path d="M12 2v2" />
       <path d="M20.992 13a1 1 0 0 0 .97-1.274 10.284 10.284 0 0 0-19.923 0A1 1 0 0 0 3 13z" />
+    </symbol>
+<symbol id="user" viewBox="0 0 24 24">
+      <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+      <circle cx="12" cy="7" r="4" />
     </symbol>
 <symbol id="users" viewBox="0 0 24 24">
       <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />

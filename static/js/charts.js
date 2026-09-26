@@ -38,7 +38,7 @@
     var ink = css("--ink-2") || "#475569";
     var grid = css("--chart-grid") || "#E5E7EB";
     return {
-      textStyle: { fontFamily: "Manrope Variable, system-ui, sans-serif", color: ink },
+      textStyle: { fontFamily: "Open Sans Variable, system-ui, sans-serif", color: ink },
       grid: { left: 8, right: 16, top: 36, bottom: 8, containLabel: true },
       legend: { top: 0, icon: "roundRect", itemWidth: 10, itemHeight: 10, textStyle: { color: ink } },
       tooltip: { trigger: "axis", axisPointer: { type: "line" } },

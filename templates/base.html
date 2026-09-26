@@ -35,7 +35,7 @@
     })();
   </script>
   <meta name="htmx-config" content='{"allowEval": false, "allowScriptTags": false, "includeIndicatorStyles": false, "inlineScriptNonce": "{{ request.csp_nonce }}", "inlineStyleNonce": "{{ request.csp_nonce }}", "historyCacheSize": 0}'>
-  <link rel="preload" href="{% static 'fonts/manrope-latin-wght-normal.woff2' %}" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="{% static 'fonts/open-sans-latin-wght-normal.woff2' %}" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="{% static 'css/output.css' %}">
   <script src="{% static 'vendor/htmx/htmx.min.js' %}" defer></script>
   <script src="{% static 'js/app.js' %}" defer></script>
@@ -44,7 +44,7 @@
   {% block head %}{% endblock %}
   {% block jsonld %}{% endblock %}
 </head>
-<body class="min-h-screen bg-surface text-ink antialiased" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+<body class="min-h-screen bg-page text-ink antialiased" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
   <div id="page-progress" class="page-progress" aria-hidden="true"></div>
   <a class="skip-link" href="#main">{% translate "Asosiy mazmunga oʻtish" %}</a>
   {% block header %}{% include "components/header.html" %}{% endblock %}
@@ -56,5 +56,6 @@
   </main>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
   {% block footer %}{% include "components/footer.html" %}{% endblock %}
+  <div class="no-print">{% include "components/theme_toggle.html" with fab=True %}</div>
 </body>
 </html>

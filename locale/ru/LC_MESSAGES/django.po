@@ -2,13 +2,13 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-26 13:08+0500\n"
+"POT-Creation-Date: 2026-09-26 20:04+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,7 +16,9 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
+"(n%100>=11 && n%100<=14)? 2 : 3);\n"
 
 #: apps/accounts/admin.py:41
 msgid "Shaxsiy maʼlumotlar"
@@ -65,8 +67,8 @@ msgstr "Результат"
 msgid "OK"
 msgstr "OK"
 
-#: apps/ai/models.py:42 apps/telegram/models.py:100
-#: apps/telegram/models.py:150 apps/telegram/models.py:254
+#: apps/ai/models.py:42 apps/telegram/models.py:100 apps/telegram/models.py:150
+#: apps/telegram/models.py:254
 msgid "Xato"
 msgstr "Ошибка"
 
@@ -131,8 +133,7 @@ msgstr "Длительность (мс)"
 msgid "status"
 msgstr "Статус"
 
-#: apps/ai/models.py:76 apps/telegram/models.py:130
-#: apps/telegram/models.py:278
+#: apps/ai/models.py:76 apps/telegram/models.py:130 apps/telegram/models.py:278
 msgid "error"
 msgstr "Ошибка"
 
@@ -152,8 +153,7 @@ msgstr "Запуск AI"
 msgid "AI runs"
 msgstr "Запуски AI"
 
-#: apps/ai/models.py:97 apps/analytics/models.py:15
-#: apps/analytics/models.py:38
+#: apps/ai/models.py:97 apps/analytics/models.py:15 apps/analytics/models.py:38
 msgid "date"
 msgstr "Дата"
 
@@ -383,7 +383,7 @@ msgstr "Экспорт CSV"
 #: apps/appeals/forms.py:28 apps/web/services/charts.py:166
 #: templates/admin/index.html:40 templates/components/institution_chips.html:3
 #: templates/components/program_table.html:4
-#: templates/pages/appeals/track.html:22
+#: templates/pages/appeals/track.html:22 templates/pages/home.html:153
 #: templates/pages/institutions/list.html:17
 msgid "Muassasa"
 msgstr "Учреждение"
@@ -443,13 +443,12 @@ msgstr "Код отслеживания"
 
 #: apps/appeals/models.py:33 apps/content/models.py:63 apps/core/models.py:149
 #: apps/web/views/education.py:68 apps/web/views/institutions.py:144
-#: config/unfold.py:33 templates/components/footer.html:32
+#: config/unfold.py:33 templates/components/footer.html:19
 #: templates/components/nav_links.html:13
 #: templates/components/nav_links.html:21
 #: templates/pages/education/admissions.html:5
 #: templates/pages/education/program_detail.html:28
-#: templates/pages/home.html:21 templates/pages/home.html:83
-#: templates/pages/home.html:162
+#: templates/pages/home.html:36 templates/pages/home.html:115
 msgid "Qabul"
 msgstr "Приём"
 
@@ -841,7 +840,7 @@ msgstr "Мероприятие"
 msgid "Yoʻnalish"
 msgstr "Направление"
 
-#: apps/content/models.py:65
+#: apps/content/models.py:65 templates/pages/home.html:149
 msgid "Kasb"
 msgstr "Профессия"
 
@@ -882,8 +881,7 @@ msgstr "В архиве"
 msgid "lead"
 msgstr "Лид"
 
-#: apps/content/models.py:95 apps/content/models.py:417
-#: apps/core/models.py:116
+#: apps/content/models.py:95 apps/content/models.py:417 apps/core/models.py:116
 msgid "body"
 msgstr "Текст"
 
@@ -1207,9 +1205,9 @@ msgid "Aloqa"
 msgstr "Контакты"
 
 #: apps/core/admin.py:29 apps/web/views/analytics.py:44 config/unfold.py:74
-#: templates/components/footer.html:33 templates/components/nav_links.html:30
-#: templates/pages/analytics.html:5 templates/pages/home.html:24
-#: templates/pages/home.html:72 templates/pages/home.html:151
+#: templates/components/footer.html:20 templates/components/nav_links.html:30
+#: templates/pages/analytics.html:5 templates/pages/home.html:25
+#: templates/pages/home.html:39 templates/pages/home.html:80
 msgid "Analitika"
 msgstr "Аналитика"
 
@@ -1352,13 +1350,13 @@ msgstr "Образование"
 
 #: apps/core/models.py:151 apps/institutions/models.py:98
 #: apps/web/views/education.py:98 templates/components/nav_links.html:15
-#: templates/components/nav_links.html:23 templates/pages/home.html:114
+#: templates/components/nav_links.html:23 templates/pages/home.html:107
 msgid "Kursantlar"
 msgstr "Курсанты"
 
 #: apps/core/models.py:152 apps/institutions/models.py:97
 #: apps/web/views/education.py:92 templates/components/nav_links.html:14
-#: templates/components/nav_links.html:22 templates/pages/home.html:114
+#: templates/components/nav_links.html:22 templates/pages/home.html:107
 msgid "Talabalar"
 msgstr "Студенты"
 
@@ -1366,16 +1364,16 @@ msgstr "Студенты"
 #: apps/web/views/professions.py:48 config/unfold.py:64
 #: templates/components/nav_links.html:27 templates/pages/analytics.html:22
 #: templates/pages/education/program_detail.html:27
-#: templates/pages/home.html:22 templates/pages/home.html:52
-#: templates/pages/home.html:122 templates/pages/professions/list.html:5
+#: templates/pages/home.html:37 templates/pages/home.html:64
+#: templates/pages/home.html:94 templates/pages/professions/list.html:5
 #: templates/pages/search.html:22
 msgid "Kasblar"
 msgstr "Профессии"
 
 #: apps/core/models.py:154 apps/web/views/appeals.py:55
 #: apps/web/views/appeals.py:84 apps/web/views/appeals.py:109
-#: templates/components/footer.html:34 templates/components/nav_links.html:31
-#: templates/pages/appeals/form.html:5 templates/pages/home.html:25
+#: templates/components/footer.html:21 templates/components/nav_links.html:31
+#: templates/pages/appeals/form.html:5 templates/pages/home.html:40
 msgid "Murojaat"
 msgstr "Обращение"
 
@@ -1519,12 +1517,12 @@ msgstr "Профессорско-преподавательский состав
 #: apps/institutions/models.py:100 apps/web/views/education.py:36
 #: apps/web/views/education.py:56 apps/web/views/institutions.py:134
 #: config/unfold.py:63 templates/components/admission_card.html:19
-#: templates/components/footer.html:31
-#: templates/components/institution_card.html:9
+#: templates/components/footer.html:18
+#: templates/components/institution_card.html:7
 #: templates/components/nav_links.html:12
 #: templates/components/nav_links.html:20 templates/pages/analytics.html:21
-#: templates/pages/education/program_list.html:5 templates/pages/home.html:20
-#: templates/pages/home.html:51 templates/pages/home.html:97
+#: templates/pages/education/program_list.html:5 templates/pages/home.html:35
+#: templates/pages/home.html:63 templates/pages/home.html:130
 #: templates/pages/professions/detail.html:25 templates/pages/search.html:21
 msgid "Yoʻnalishlar"
 msgstr "Направления"
@@ -2281,14 +2279,13 @@ msgid "%(n)d kun oldin"
 msgstr "%(n)d дн. назад"
 
 #: apps/web/views/_helpers.py:16 templates/components/breadcrumbs.html:4
-#: templates/components/header.html:23 templates/components/nav_links.html:3
+#: templates/components/header.html:5 templates/components/nav_links.html:3
 #: templates/errors/_error.html:9
 msgid "Bosh sahifa"
 msgstr "Главная"
 
 #: apps/web/views/appeals.py:34
-msgid ""
-"Juda koʻp murojaat yuborildi. Iltimos, bir soatdan keyin qayta urining."
+msgid "Juda koʻp murojaat yuborildi. Iltimos, bir soatdan keyin qayta urining."
 msgstr "Отправлено слишком много обращений. Пожалуйста, попробуйте через час."
 
 #: apps/web/views/appeals.py:45
@@ -2319,11 +2316,10 @@ msgstr "Отклонено"
 
 #: apps/web/views/events.py:92 apps/web/views/events.py:111
 #: apps/web/views/institutions.py:182 config/unfold.py:32
-#: templates/components/institution_card.html:10
-#: templates/components/nav_links.html:28
-#: templates/pages/education/hub.html:11 templates/pages/events/list.html:5
-#: templates/pages/home.html:23 templates/pages/home.html:129
-#: templates/pages/search.html:23
+#: templates/components/institution_card.html:8
+#: templates/components/nav_links.html:28 templates/pages/education/hub.html:11
+#: templates/pages/events/list.html:5 templates/pages/home.html:38
+#: templates/pages/home.html:167 templates/pages/search.html:23
 msgid "Tadbirlar"
 msgstr "Мероприятия"
 
@@ -2342,15 +2338,15 @@ msgstr ""
 
 #: apps/web/views/institutions.py:38 apps/web/views/institutions.py:69
 #: apps/web/views/institutions.py:103 config/unfold.py:61
-#: templates/components/footer.html:11 templates/components/nav_links.html:4
+#: templates/components/footer.html:9 templates/components/nav_links.html:4
 #: templates/pages/analytics.html:11 templates/pages/analytics.html:18
-#: templates/pages/home.html:19 templates/pages/home.html:48
-#: templates/pages/home.html:61 templates/pages/institutions/list.html:6
+#: templates/pages/home.html:34 templates/pages/home.html:60
+#: templates/pages/home.html:70 templates/pages/institutions/list.html:6
 #: templates/pages/search.html:19
 msgid "Muassasalar"
 msgstr "Учреждения"
 
-#: apps/web/views/institutions.py:69 templates/pages/home.html:61
+#: apps/web/views/institutions.py:69 templates/pages/home.html:70
 #: templates/pages/institutions/list.html:7
 msgid "Taqqoslash"
 msgstr "Сравнение"
@@ -2361,9 +2357,9 @@ msgstr "Студенты и курсанты"
 
 #: apps/web/views/institutions.py:172 apps/web/views/news.py:73
 #: apps/web/views/news.py:117 apps/web/views/news.py:158
-#: templates/components/footer.html:30 templates/components/nav_links.html:5
+#: templates/components/footer.html:17 templates/components/nav_links.html:5
 #: templates/pages/education/program_detail.html:29
-#: templates/pages/home.html:18 templates/pages/news/list.html:6
+#: templates/pages/home.html:33 templates/pages/news/list.html:6
 msgid "Yangiliklar"
 msgstr "Новости"
 
@@ -2375,15 +2371,15 @@ msgstr "Сначала старые"
 msgid "Koʻp oʻqilgan"
 msgstr "Самые читаемые"
 
-#: apps/web/views/search.py:27 templates/components/header.html:33
-#: templates/errors/_error.html:9 templates/pages/search.html:6
+#: apps/web/views/search.py:27 templates/components/footer.html:41
+#: templates/components/header.html:15 templates/errors/_error.html:9
+#: templates/pages/search.html:6
 msgid "Qidiruv"
 msgstr "Поиск"
 
 #: apps/web/views/stories.py:20 apps/web/views/stories.py:38
-#: templates/components/nav_links.html:29
-#: templates/pages/education/hub.html:16 templates/pages/home.html:133
-#: templates/pages/stories/list.html:5
+#: templates/components/nav_links.html:29 templates/pages/education/hub.html:16
+#: templates/pages/home.html:185 templates/pages/stories/list.html:5
 msgid "Motivatsiya"
 msgstr "Мотивация"
 
@@ -2519,7 +2515,7 @@ msgstr "Источники Telegram"
 msgid "Kanal"
 msgstr "Канал"
 
-#: templates/admin/index.html:41 templates/components/header.html:9
+#: templates/admin/index.html:41 templates/pages/home.html:15
 msgid "Oxirgi xabar"
 msgstr "Последнее сообщение"
 
@@ -2528,7 +2524,7 @@ msgid "Manbalar yoʻq"
 msgstr "Источников нет"
 
 #: templates/base.html:8 templates/base.html:20
-#: templates/components/footer.html:7
+#: templates/components/footer.html:6
 msgid ""
 "Huquqni muhofaza qilish taʼlim muassasalarining yagona rasmiy axborot-"
 "tahliliy platformasi"
@@ -2540,13 +2536,13 @@ msgstr ""
 msgid "Asosiy mazmunga oʻtish"
 msgstr "Перейти к основному содержанию"
 
-#: templates/components/admission_card.html:11 templates/pages/home.html:90
+#: templates/components/admission_card.html:11 templates/pages/home.html:122
 #, python-brace-format
 msgid "Tugashiga {d} kun qoldi"
 msgstr "До окончания осталось {d} дн."
 
 #: templates/components/admission_card.html:11
-#: templates/components/program_table.html:4 templates/pages/home.html:90
+#: templates/components/program_table.html:4 templates/pages/home.html:122
 msgid "Muddat"
 msgstr "Срок"
 
@@ -2569,7 +2565,7 @@ msgid "Hujjat topshirish"
 msgstr "Подать документы"
 
 #: templates/components/article_card.html:9
-#: templates/components/article_card.html:36
+#: templates/components/article_card.html:38
 #: templates/pages/news/detail.html:19
 msgid "Yangilangan"
 msgstr "Обновлено"
@@ -2598,39 +2594,47 @@ msgstr "Эта страница ещё не переведена"
 msgid "Koʻp beriladigan savollar"
 msgstr "Часто задаваемые вопросы"
 
-#: templates/components/footer.html:8
-msgid "Manba: muassasalarning rasmiy Telegram kanallari"
-msgstr "Источник: официальные Telegram-каналы учреждений"
-
-#: templates/components/footer.html:20
+#: templates/components/footer.html:11
 #: templates/pages/institutions/contacts.html:9
 msgid "Veb-sayt"
 msgstr "Веб-сайт"
 
-#: templates/components/footer.html:28
+#: templates/components/footer.html:15
 msgid "Sayt xaritasi"
 msgstr "Карта сайта"
 
-#: templates/components/footer.html:42
+#: templates/components/footer.html:30
+msgid "Manba: muassasalarning rasmiy Telegram kanallari"
+msgstr "Источник: официальные Telegram-каналы учреждений"
+
+#: templates/components/footer.html:35
 msgid "Barcha huquqlar himoyalangan."
 msgstr "Все права защищены."
 
-#: templates/components/footer.html:43
+#: templates/components/footer.html:36
 msgid ""
 "Maqolalar rasmiy manbalar asosida tayyorlanadi va manbaga havola beriladi."
 msgstr ""
 "Статьи готовятся на основе официальных источников со ссылкой на "
 "первоисточник."
 
-#: templates/components/header.html:27
-msgid "Rasmiy axborot-tahliliy platforma"
-msgstr "Официальная информационно-аналитическая платформа"
+#: templates/components/header.html:7
+msgid "Axborot"
+msgstr "Информационная"
 
-#: templates/components/header.html:30
+#: templates/components/header.html:7
+msgid "Platformasi"
+msgstr "Платформа"
+
+#: templates/components/header.html:9
 msgid "Asosiy menyu"
 msgstr "Главное меню"
 
-#: templates/components/header.html:35
+#: templates/components/header.html:14
+msgid "Murojaat holatini kuzatish"
+msgstr "Отслеживание обращения"
+
+#: templates/components/header.html:17
 msgid "Menyuni ochish"
 msgstr "Открыть меню"
 
@@ -2638,13 +2642,14 @@ msgstr "Открыть меню"
 msgid "Yuklanmoqda…"
 msgstr "Загрузка…"
 
-#: templates/components/institution_card.html:8
+#: templates/components/institution_card.html:6
 msgid "Yangiliklar (30 kun)"
 msgstr "Новости (30 дней)"
 
 #: templates/components/institution_chips.html:4
 #: templates/pages/education/admissions.html:12
-#: templates/pages/education/hub.html:7 templates/pages/home.html:31
+#: templates/pages/education/hub.html:7 templates/pages/home.html:45
+#: templates/pages/home.html:94 templates/pages/home.html:155
 #: templates/partials/live_items.html:10
 msgid "Barchasi"
 msgstr "Все"
@@ -2661,15 +2666,11 @@ msgstr "Закрыть"
 msgid "Mobil menyu"
 msgstr "Мобильное меню"
 
-#: templates/components/mobile_drawer.html:7
-msgid "Menyuni yopish"
-msgstr "Закрыть меню"
-
-#: templates/components/nav_links.html:12 templates/pages/home.html:20
+#: templates/components/nav_links.html:12 templates/pages/home.html:35
 msgid "Taʼlim dasturlari katalogi"
 msgstr "Каталог образовательных программ"
 
-#: templates/components/nav_links.html:13 templates/pages/home.html:21
+#: templates/components/nav_links.html:13 templates/pages/home.html:36
 msgid "Muddatlar, talablar, hujjatlar"
 msgstr "Сроки, требования, документы"
 
@@ -2681,11 +2682,13 @@ msgstr "Студенческая жизнь и возможности"
 msgid "Xizmat va tayyorgarlik"
 msgstr "Служба и подготовка"
 
-#: templates/components/pagination.html:4 templates/pages/news/detail.html:57
+#: templates/components/pagination.html:4 templates/pages/home.html:196
+#: templates/pages/news/detail.html:57
 msgid "Oldingi"
 msgstr "Предыдущая"
 
-#: templates/components/pagination.html:6 templates/pages/news/detail.html:58
+#: templates/components/pagination.html:6 templates/pages/home.html:197
+#: templates/pages/news/detail.html:58
 msgid "Keyingi"
 msgstr "Следующая"
 
@@ -2824,16 +2827,16 @@ msgstr "%(n)s дн."
 msgid "Qoʻllash"
 msgstr "Применить"
 
-#: templates/pages/analytics.html:19 templates/pages/home.html:49
+#: templates/pages/analytics.html:19 templates/pages/home.html:61
 msgid "Bugungi yangiliklar"
 msgstr "Новости сегодня"
 
-#: templates/pages/analytics.html:20 templates/pages/home.html:50
+#: templates/pages/analytics.html:20 templates/pages/home.html:62
 #: templates/pages/institutions/events.html:5
 msgid "Yaqin tadbirlar"
 msgstr "Ближайшие мероприятия"
 
-#: templates/pages/analytics.html:26 templates/pages/home.html:75
+#: templates/pages/analytics.html:26 templates/pages/home.html:85
 msgid "Faollik dinamikasi"
 msgstr "Динамика активности"
 
@@ -2884,7 +2887,7 @@ msgid "Qabul jadvali"
 msgstr "График приёма"
 
 #: templates/pages/analytics.html:36
-#: templates/pages/education/admissions.html:8 templates/pages/home.html:93
+#: templates/pages/education/admissions.html:8 templates/pages/home.html:126
 msgid "Hozircha ochiq qabul eʼlonlari yoʻq."
 msgstr "Открытых объявлений о приёме пока нет."
 
@@ -2922,8 +2925,7 @@ msgstr "Ваш код отслеживания:"
 
 #: templates/pages/appeals/success.html:10
 msgid ""
-"Murojaatlar odatda 15 ish kuni ichida koʻrib chiqiladi. Kodni saqlab "
-"qoʻying."
+"Murojaatlar odatda 15 ish kuni ichida koʻrib chiqiladi. Kodni saqlab qoʻying."
 msgstr ""
 "Обращения обычно рассматриваются в течение 15 рабочих дней. Сохраните код."
 
@@ -2964,7 +2966,7 @@ msgstr "Новости о приёме"
 msgid "Soʻnggi maqolalar"
 msgstr "Последние статьи"
 
-#: templates/pages/education/hub.html:11 templates/pages/home.html:130
+#: templates/pages/education/hub.html:11 templates/pages/home.html:178
 #: templates/pages/institutions/events.html:5
 msgid "Yaqin tadbirlar yoʻq."
 msgstr "Ближайших мероприятий нет."
@@ -3055,7 +3057,7 @@ msgstr "Исходная статья"
 msgid "Roʻyxat"
 msgstr "Список"
 
-#: templates/pages/events/list.html:10 templates/pages/home.html:129
+#: templates/pages/events/list.html:10 templates/pages/home.html:167
 msgid "Taqvim"
 msgstr "Календарь"
 
@@ -3072,15 +3074,15 @@ msgid "Huquqni muhofaza qilish taʼlim muassasalari axborot platformasi"
 msgstr ""
 "Информационная платформа образовательных учреждений правоохранительной сферы"
 
-#: templates/pages/home.html:13
-msgid "Huquqni muhofaza qilish taʼlimi"
-msgstr "Правоохранительное образование"
+#: templates/pages/home.html:17
+msgid "Yagona"
+msgstr "Единая"
 
-#: templates/pages/home.html:13
-msgid "yagona axborot platformasida"
-msgstr "на единой информационной платформе"
+#: templates/pages/home.html:17
+msgid "huquqni muhofaza qilish taʼlimi axborot platformasi"
+msgstr "информационная платформа правоохранительного образования"
 
-#: templates/pages/home.html:15
+#: templates/pages/home.html:18
 msgid ""
 "Beshta taʼlim muassasasining rasmiy yangiliklari, yoʻnalishlari, qabul "
 "maʼlumotlari va tahliliy koʻrsatkichlari — real vaqtda, bir joyda."
@@ -3089,129 +3091,113 @@ msgstr ""
 "аналитические показатели пяти учебных заведений — в реальном времени и в "
 "одном месте."
 
-#: templates/pages/home.html:17
+#: templates/pages/home.html:26
+msgid "Maqolalar (30 kun)"
+msgstr "Статьи (30 дней)"
+
+#: templates/pages/home.html:26
+msgid "Jami maqolalar"
+msgstr "Всего статей"
+
+#: templates/pages/home.html:26
+msgid "Manba kanallar"
+msgstr "Каналы-источники"
+
+#: templates/pages/home.html:32
 msgid "Boʻlimlar"
 msgstr "Разделы"
 
-#: templates/pages/home.html:18
+#: templates/pages/home.html:33
 msgid "Rasmiy kanallardan har kuni yangilanadigan xabarlar"
 msgstr "Ежедневно обновляемые сообщения официальных каналов"
 
-#: templates/pages/home.html:19
+#: templates/pages/home.html:34
 msgid "Beshta muassasa profili va taqqoslash"
 msgstr "Профили пяти учебных заведений и сравнение"
 
-#: templates/pages/home.html:22
+#: templates/pages/home.html:37 templates/pages/home.html:99
 msgid "Qaysi kasbga qayerda oʻqish mumkin"
 msgstr "Где можно выучиться на какую профессию"
 
-#: templates/pages/home.html:23
+#: templates/pages/home.html:38
 msgid "Yaqinlashayotgan tadbirlar taqvimi"
 msgstr "Календарь предстоящих мероприятий"
 
-#: templates/pages/home.html:24
+#: templates/pages/home.html:39
 msgid "Faollik, mavzular va taqqoslash grafiklari"
 msgstr "Графики активности, тематики и сравнения"
 
-#: templates/pages/home.html:25
+#: templates/pages/home.html:40
 msgid "Savol yoki taklifingizni muassasaga yoʻllang"
 msgstr "Направьте вопрос или предложение в учебное заведение"
 
-#: templates/pages/home.html:31 templates/pages/institutions/overview.html:21
+#: templates/pages/home.html:45 templates/pages/institutions/overview.html:21
 msgid "Soʻnggi yangiliklar"
 msgstr "Последние новости"
 
-#: templates/pages/home.html:40
+#: templates/pages/home.html:52
 msgid "Yangiliklar tez orada paydo boʻladi."
 msgstr "Новости скоро появятся."
 
-#: templates/pages/home.html:45
+#: templates/pages/home.html:57
 msgid "Asosiy koʻrsatkichlar"
 msgstr "Ключевые показатели"
 
-#: templates/pages/home.html:72
+#: templates/pages/home.html:80
 msgid "Faollik va mavzular"
 msgstr "Активность и темы"
 
-#: templates/pages/home.html:75
+#: templates/pages/home.html:85
 msgid "Soʻnggi 12 oy, muassasalar kesimida"
 msgstr "Последние 12 месяцев, в разрезе учреждений"
 
-#: templates/pages/home.html:77
+#: templates/pages/home.html:87
 msgid "Mavzular taqsimoti"
 msgstr "Распределение тем"
 
-#: templates/pages/home.html:77
+#: templates/pages/home.html:87
 msgid "Soʻnggi 30 kun"
 msgstr "Последние 30 дней"
 
-#: templates/pages/home.html:83
-msgid "Taʼlim va qabul"
-msgstr "Образование и приём"
-
-#: templates/pages/home.html:106 templates/pages/professions/detail.html:25
-msgid "Barcha yoʻnalishlar"
-msgstr "Все направления"
-
-#: templates/pages/home.html:113
+#: templates/pages/home.html:106
 msgid "Kursantlar va talabalar"
 msgstr "Курсанты и студенты"
 
-#: templates/pages/home.html:122
-msgid "Barcha kasblar"
-msgstr "Все профессии"
+#: templates/pages/home.html:115
+msgid "Taʼlim va qabul"
+msgstr "Образование и приём"
 
-#: templates/pages/home.html:133
+#: templates/pages/home.html:139 templates/pages/professions/detail.html:25
+msgid "Barcha yoʻnalishlar"
+msgstr "Все направления"
+
+#: templates/pages/home.html:146
+msgid "Kelajakdagi kasbingizni izlayapsizmi?"
+msgstr "Ищете свою будущую профессию?"
+
+#: templates/pages/home.html:150
+msgid "Kasb nomi yoki kalit soʻz"
+msgstr "Название профессии или ключевое слово"
+
+#: templates/pages/home.html:159
+msgid "Qidirish"
+msgstr "Найти"
+
+#: templates/pages/home.html:185
 msgid "Barcha hikoyalar"
 msgstr "Все истории"
 
-#: templates/pages/home.html:141
-msgid "Analitika va murojaat"
-msgstr "Аналитика и обращения"
-
-#: templates/pages/home.html:144
+#: templates/pages/home.html:208
 msgid "Murojaat yuboring"
 msgstr "Направьте обращение"
 
-#: templates/pages/home.html:145
+#: templates/pages/home.html:209
 msgid ""
 "Savol, taklif yoki shikoyatingizni muassasaga yoʻllang va holatini kuzatib "
 "boring."
 msgstr ""
 "Направьте вопрос, предложение или жалобу в учреждение и отслеживайте его "
 "статус."
-
-#: templates/pages/home.html:147
-msgid "Murojaat qilish"
-msgstr "Подать обращение"
-
-#: templates/pages/home.html:153
-msgid "Maqolalar (30 kun)"
-msgstr "Статьи (30 дней)"
-
-#: templates/pages/home.html:154
-msgid "Jami maqolalar"
-msgstr "Всего статей"
-
-#: templates/pages/home.html:155
-msgid "Manba kanallar"
-msgstr "Каналы-источники"
-
-#: templates/pages/home.html:158
-msgid "Toʻliq analitika"
-msgstr "Полная аналитика"
-
-#: templates/pages/home.html:163
-msgid ""
-"Qabul muddatlari, talablar va kerakli hujjatlar — barcha muassasalar "
-"boʻyicha."
-msgstr ""
-"Сроки приёма, требования и необходимые документы — по всем учебным "
-"заведениям."
-
-#: templates/pages/home.html:165
-msgid "Batafsil"
-msgstr "Подробнее"
 
 #: templates/pages/institutions/_base.html:14
 #, python-format
@@ -3439,8 +3425,7 @@ msgid "Boshqa hikoyalar"
 msgstr "Другие истории"
 
 #: templates/pages/stories/list.html:6
-msgid ""
-"Kursantlar, talabalar va bitiruvchilarning ilhomlantiruvchi hikoyalari."
+msgid "Kursantlar, talabalar va bitiruvchilarning ilhomlantiruvchi hikoyalari."
 msgstr "Вдохновляющие истории курсантов, студентов и выпускников."
 
 #: templates/partials/event_results.html:5
@@ -3509,9 +3494,43 @@ msgstr "Предложения"
 msgid "Boshqaruv paneliga kirish"
 msgstr "Войти в панель управления"
 
+#~ msgid "Rasmiy axborot-tahliliy platforma"
+#~ msgstr "Официальная информационно-аналитическая платформа"
+
+#~ msgid "Menyuni yopish"
+#~ msgstr "Закрыть меню"
+
+#~ msgid "Huquqni muhofaza qilish taʼlimi"
+#~ msgstr "Правоохранительное образование"
+
+#~ msgid "yagona axborot platformasida"
+#~ msgstr "на единой информационной платформе"
+
+#~ msgid "Barcha kasblar"
+#~ msgstr "Все профессии"
+
+#~ msgid "Analitika va murojaat"
+#~ msgstr "Аналитика и обращения"
+
+#~ msgid "Murojaat qilish"
+#~ msgstr "Подать обращение"
+
+#~ msgid "Toʻliq analitika"
+#~ msgstr "Полная аналитика"
+
 #~ msgid ""
-#~ "Maʼlumotlar toʻgʻri toʻldirildi. Murojaatlarni qabul qilish tez orada ishga "
-#~ "tushadi."
+#~ "Qabul muddatlari, talablar va kerakli hujjatlar — barcha muassasalar "
+#~ "boʻyicha."
+#~ msgstr ""
+#~ "Сроки приёма, требования и необходимые документы — по всем учебным "
+#~ "заведениям."
+
+#~ msgid "Batafsil"
+#~ msgstr "Подробнее"
+
+#~ msgid ""
+#~ "Maʼlumotlar toʻgʻri toʻldirildi. Murojaatlarni qabul qilish tez orada "
+#~ "ishga tushadi."
 #~ msgstr "Данные заполнены корректно. Приём обращений скоро будет запущен."
 
 #~ msgid "Asosiy yangiliklar"

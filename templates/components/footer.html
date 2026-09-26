@@ -1,46 +1,45 @@
 {% load i18n web_tags %}
+{# THE-style footer: #09090B, 700 px inner column, link columns, divider, copyright + social icons (ADR-029) #}
 <footer class="site-footer" hx-boost="true" hx-indicator="#page-progress">
-  <div class="gradient-bar" aria-hidden="true"></div>
-  <div class="container-page grid gap-10 py-14 md:grid-cols-12">
-    <div class="md:col-span-4">
-      <div class="brand"><span class="brand-mark" aria-hidden="true">E</span><span class="brand-name text-2xl">EDUCORE</span></div>
-      <p class="mt-3 max-w-sm text-sm text-white/70">{% translate "Huquqni muhofaza qilish taʼlim muassasalarining yagona rasmiy axborot-tahliliy platformasi" %}</p>
-      <p class="mt-4 text-sm text-white/70">{% icon "radio" "size-4 inline -mt-0.5" %} {% translate "Manba: muassasalarning rasmiy Telegram kanallari" %}</p>
+  <div class="footer-inner">
+    <div class="brand"><span class="brand-mark" aria-hidden="true">EDU</span><span class="brand-name">EDUCORE</span></div>
+    <p class="mt-3 max-w-md text-sm text-[#d5d5d5]">{% translate "Huquqni muhofaza qilish taʼlim muassasalarining yagona rasmiy axborot-tahliliy platformasi" %}</p>
+    <div class="mt-10 grid gap-10 sm:grid-cols-3">
+      <div>
+        <h2 class="footer-title">{% translate "Muassasalar" %}</h2>
+        <ul class="footer-links mt-2">
+          {% for inst in nav_institutions %}<li class="flex items-center gap-2"><a href="{{ inst.get_absolute_url }}">{{ inst.short_name }}</a>{% if inst.website_url %}<a href="{{ inst.website_url }}" rel="noopener" target="_blank" aria-label="{{ inst.short_name }} — {% translate "Veb-sayt" %}">{% icon "external-link" "size-3.5" %}</a>{% endif %}</li>{% endfor %}
+        </ul>
+      </div>
+      <div>
+        <h2 class="footer-title">{% translate "Sayt xaritasi" %}</h2>
+        <ul class="footer-links mt-2">
+          <li><a href="{% url 'web:news_list' %}">{% translate "Yangiliklar" %}</a></li>
+          <li><a href="{% url 'web:program_list' %}">{% translate "Yoʻnalishlar" %}</a></li>
+          <li><a href="{% url 'web:admissions' %}">{% translate "Qabul" %}</a></li>
+          <li><a href="{% url 'web:analytics' %}">{% translate "Analitika" %}</a></li>
+          <li><a href="{% url 'web:appeal_form' %}">{% translate "Murojaat" %}</a></li>
+          {% for page in footer_pages %}<li><a href="{{ page.get_absolute_url }}">{{ page.title }}</a></li>{% endfor %}
+        </ul>
+      </div>
+      <div>
+        <h2 class="footer-title">Telegram</h2>
+        <ul class="footer-links mt-2">
+          {% for inst in nav_institutions %}{% if inst.telegram_username %}<li><a href="https://t.me/{{ inst.telegram_username }}" rel="noopener" target="_blank">@{{ inst.telegram_username }}</a></li>{% endif %}{% endfor %}
+        </ul>
+        <p class="mt-3 text-xs text-[#d5d5d5]">{% translate "Manba: muassasalarning rasmiy Telegram kanallari" %}</p>
+      </div>
     </div>
-    <div class="md:col-span-5">
-      <h2 class="footer-title">{% translate "Muassasalar" %}</h2>
-      <ul class="mt-3 space-y-3">
-        {% for inst in nav_institutions %}
-          <li class="flex items-start gap-3">
-            <span class="inst-dot inst-{{ inst.order }} mt-1.5" aria-hidden="true"></span>
-            <div class="min-w-0">
-              <a href="{{ inst.get_absolute_url }}" class="font-semibold">{{ inst.short_name }}</a>
-              <div class="flex flex-wrap gap-x-3 text-xs text-white/70">
-                {% if inst.telegram_username %}<a href="https://t.me/{{ inst.telegram_username }}" rel="noopener" target="_blank" class="inline-block py-1.5">Telegram</a>{% endif %}
-                {% if inst.website_url %}<a href="{{ inst.website_url }}" rel="noopener" target="_blank" class="inline-block py-1.5">{% translate "Veb-sayt" %}</a>{% endif %}
-              </div>
-            </div>
-          </li>
-        {% endfor %}
-      </ul>
-    </div>
-    <div class="md:col-span-3">
-      <h2 class="footer-title">{% translate "Sayt xaritasi" %}</h2>
-      <ul class="mt-3 space-y-2 text-sm">
-        <li><a href="{% url 'web:news_list' %}">{% translate "Yangiliklar" %}</a></li>
-        <li><a href="{% url 'web:program_list' %}">{% translate "Yoʻnalishlar" %}</a></li>
-        <li><a href="{% url 'web:admissions' %}">{% translate "Qabul" %}</a></li>
-        <li><a href="{% url 'web:analytics' %}">{% translate "Analitika" %}</a></li>
-        <li><a href="{% url 'web:appeal_form' %}">{% translate "Murojaat" %}</a></li>
-        {% for page in footer_pages %}<li><a href="{{ page.get_absolute_url }}">{{ page.title }}</a></li>{% endfor %}
-        <li><a href="{% url 'web:rss' %}">RSS</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="border-t border-white/15">
-    <div class="container-page flex flex-col gap-2 py-5 text-xs text-white/70 sm:flex-row sm:justify-between">
-      <span>© {% now "Y" %} EDUCORE. {% translate "Barcha huquqlar himoyalangan." %}</span>
-      <span>{% translate "Maqolalar rasmiy manbalar asosida tayyorlanadi va manbaga havola beriladi." %}</span>
+    <div class="footer-bottom flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+      <div>
+        <p>Copyright © {% now "Y" %} EDUCORE. {% translate "Barcha huquqlar himoyalangan." %}</p>
+        <p class="mt-1">{% translate "Maqolalar rasmiy manbalar asosida tayyorlanadi va manbaga havola beriladi." %}</p>
+      </div>
+      <div class="footer-social">
+        <a href="{% url 'web:rss' %}" aria-label="RSS">{% icon "rss" "size-5" %}</a>
+        {% with first=nav_institutions|first %}{% if first.telegram_username %}<a href="https://t.me/{{ first.telegram_username }}" rel="noopener" target="_blank" aria-label="Telegram">{% icon "send" "size-5" %}</a>{% endif %}{% endwith %}
+        <a href="{% url 'web:search' %}" aria-label="{% translate 'Qidiruv' %}">{% icon "search" "size-5" %}</a>
+      </div>
     </div>
   </div>
 </footer>

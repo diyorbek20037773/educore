@@ -305,26 +305,29 @@ Conventions: every model has `created_at`, `updated_at` (abstract `TimeStampedMo
   suggestions, chart data loads. `hx-boost` on nav links with `hx-push-url`. Skeletons while loading.
 
 ### 6.2 Home `/`
-0. **Intro** (ADR‑028): headline with gradient second line, one‑sentence lead, 8 section launcher tiles
-   (Yangiliklar, Muassasalar, Yoʻnalishlar, Qabul, Kasblar, Tadbirlar, Analitika, Murojaat).
-1. **Hero band** ("Soʻnggi yangiliklar"): featured article (large card: cover, category chip, institution chip, title, lead,
-   time) + 3 secondary cards. Selection: `is_pinned` > `is_featured` (valid) > highest `importance` in 24 h.
+Layout follows the timeshighereducation.com homepage (ADR‑029): grey page, 944 px column, flat white 16 px cards.
+0. **Intro** (ADR‑028/029): two‑line headline with the first word in the brand gradient, one‑sentence lead, LIVE badge;
+   an analytics announcement banner (3 mini stats); 8 section feature cards in a 4 × 2 grid (Yangiliklar, Muassasalar,
+   Yoʻnalishlar, Qabul, Kasblar, Tadbirlar, Analitika, Murojaat) with an outline icon and a long arrow.
+1. **Hero band** ("Soʻnggi yangiliklar"): the 4 selected articles as equal image cards (16:10 cover, bold title,
+   meta `date • category`). Selection: `is_pinned` > `is_featured` (valid) > highest `importance` in 24 h.
 2. **KPI strip** (5 tiles with sparklines, 30 days): Muassasalar (5), Bugungi yangiliklar, Yaqin tadbirlar,
    Yoʻnalishlar, Kasblar. Tiles link to sections.
 3. **Jonli lenta** (live panel): latest 12 published articles across all sources; filter chips
    `Barchasi · FVV · IIV · DBQ · HMQA · JXU` (institution `abbreviation`); HTMX poll every `live_panel_refresh_seconds`; `aria-live=polite`;
    new items slide in with a subtle highlight; shows time‑ago and source badge.
-4. **Muassasalar**: five cards (logo, color stripe, short name, 3 KPIs: yangiliklar 30 kun / yoʻnalishlar /
+4. **Muassasalar** (THE "partner" cards): five cards (logo, short and full name, 3 KPIs: yangiliklar 30 kun / yoʻnalishlar /
    yaqin tadbirlar, 30‑day sparkline, link to profile).
-5. **Charts band**: "Faollik dinamikasi" (12 months, one line per institution, fixed colors, legend + direct
+5. **Charts band** (next to the live panel): "Faollik dinamikasi" (12 months, one line per institution, fixed colors, legend + direct
    end labels, crosshair tooltip) and "Mavzular taqsimoti" (last 30 days by category; horizontal bar, single
    hue). Table view toggle on each chart.
 6. **Taʼlim va qabul**: open admissions (countdown to `ends_at`), top programs by institution (tabs), CTA to Qabul.
 7. **Kursantlar va talabalar**: latest 6 articles in `kursantlar`/`talabalar` + hub links.
-8. **Kasblar**: 6 profession cards (icon, name, summary, institutions dots).
-9. **Tadbirlar**: next 6 events (date block, title, institution, location).
-10. **Motivatsiya**: story carousel (quote, person, institution).
-11. **Promo panels**: Murojaat CTA, Analitika teaser (3 mini stats + link), Qabul CTA.
+8. **Kasblar**: 5 dark profession cards (cover or icon, summary, institution dots, white name label) + an
+   "all professions" card; followed by a gradient profession search banner (keyword + institution).
+9. **Tadbirlar**: next 6 events as text items (title, date and time, institution link).
+10. **Motivatsiya**: story carousel (quote, person, institution) with round prev/next buttons.
+11. **Murojaat CTA** banner (the analytics teaser is the intro banner; Qabul is covered by block 6).
 Caching: home fragments cached 30–60 s (Redis), invalidated on publish.
 
 ### 6.3 Institutions
@@ -410,22 +413,27 @@ image tiles, section headers with a "Barchasi →" link. 8‑pt spacing, 12‑co
 whitespace around numbers. Everything must work in light and dark, on 360 px phones, with keyboard only.
 
 ### 7.2 Tokens (Tailwind 4 `@theme` in `assets/css/input.css`)
-- Surfaces: `--color-surface: #FFFFFF`, `--color-surface-2: #F4F4F5`, `--color-line: #E4E4E7`;
-  dark: `#09090B`, `#18181B`, `#2E2E33`. Chrome (header/footer): `#09090B` in both themes.
-- Ink: `#232323` primary, `#595959` secondary, `#838383` muted (non‑text only); dark: `#F4F4F5`, `#B0B0B0`, `#838383`.
+- Page `--color-page: #F2F2F2`, cards `--color-surface: #FFFFFF`, `--color-surface-2: #F2F2F2`,
+  `--color-line: #E2E2E2`; dark: `#0B0B0D`, `#18181B`, `#232326`, `#2E2E33`. Header `#000000` (56 px, sticky,
+  `0 5px 5px rgb(0 0 0 / .1)`), footer `#09090B`, in both themes. Logo badge red `#E41C38`.
+- Ink: `#232323` body, `#3A3A3A` headings, `#6B6B6B` secondary; dark: `#E4E4E7`, `#FAFAFA`, `#B0B0B0`.
+- Layout: content column 944 px (`--container-page: 976px` incl. 16 px gutters); 24 px grid gaps; 80 px between
+  home sections; cards flat at rest, `0 8px 24px rgb(0 0 0 / .08)` + 2 px lift on hover; transitions 0.2 s.
 - Brand: indigo `#272457` (900, table heads, panels), `#432EA7` (800), violet accent `#6933F7` (700: links, primary
   buttons, CTA; dark accent `#A78BFA`), `#F0EBFF` (100). Gradient `linear-gradient(225deg, #4352FF 15%, #DE1B7C 86%,
   #FE4537 99%)` for the intro headline, logo mark, active‑nav underline and footer bar only.
 - Status: success `#1B7F4C`, warning `#B7791F`, danger `#B42318`, info `#1F55B0` — always icon + label.
 - Radius 8/16/24; shadows `sm`/`md` low‑alpha; motion 150–300 ms; `prefers-reduced-motion` respected.
-- Typography: UI, body and headlines **Manrope** (400–800); **Source Serif 4** only for motivation quotes;
+- Typography: UI, body and headlines **Open Sans** (variable 300–800; body 16/24, H1 48/60 bold, section
+  titles 26/600, card titles 24/600, meta 12); **Source Serif 4** only for motivation quotes;
   mono **JetBrains Mono** for codes — all self‑hosted woff2 in `static/fonts` (download via `make fonts`),
   `font-display: swap`. Scale: 12/14/16/18/20/24/30/36/48/60.
 - Uzbek typography: use `ʻ` (U+02BB) for oʻ/gʻ and `ʼ` (U+02BC) for tutuq belgisi in all UI copy and content;
   sanitizer normalizes `'`, `’`, `‘`, `` ` `` inside Uzbek words to these.
 
 ### 7.3 Components (`templates/components/`)
-`header`, `mega_nav`, `mobile_drawer`, `live_badge`, `kpi_tile` (value, label, delta, sparkline),
+`header`, `mega_nav`, `mobile_drawer`, `live_badge`, `feature_card` (title, text, outline icon, long arrow),
+`kpi_tile` (value, label, delta, sparkline),
 `article_card` (hero / standard / compact), `institution_card`, `institution_badge` (dot + name),
 `category_chip`, `source_attribution`, `chart_card` (title, description, filters slot, canvas, table toggle,
 CSV link), `timeline`, `event_row`, `event_calendar`, `profession_card`, `program_table`, `story_card`,

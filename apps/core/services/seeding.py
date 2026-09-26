@@ -52,7 +52,7 @@ def placeholder_logo_svg(abbreviation: str, color: str) -> str:
         '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" '
         f'aria-label="{escape(abbreviation)}">'
         f'<rect width="120" height="120" rx="24" fill="{escape(color)}"/>'
-        f'<text x="60" y="60" dy=".35em" text-anchor="middle" font-family="Manrope, Arial, sans-serif" '
+        f'<text x="60" y="60" dy=".35em" text-anchor="middle" font-family="Open Sans, Arial, sans-serif" '
         f'font-weight="700" font-size="{size}" fill="#FFFFFF">{escape(abbreviation)}</text></svg>'
     )
 

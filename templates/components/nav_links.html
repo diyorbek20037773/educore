@@ -1,5 +1,5 @@
 {% load i18n %}{% with p=request.path %}
-<ul class="{% if mode == 'desktop' %}flex items-center gap-1{% else %}flex flex-col gap-1{% endif %}">
+<ul class="{% if mode == 'desktop' %}flex items-center gap-1 whitespace-nowrap 2xl:gap-3.5{% else %}flex flex-col{% endif %}">
   <li><a class="nav-link{% if request.resolver_match.url_name == 'home' %} is-active{% endif %}" href="{% url 'web:home' %}"{% if request.resolver_match.url_name == 'home' %} aria-current="page"{% endif %}>{% translate "Bosh sahifa" %}</a></li>
   <li><a class="nav-link{% if '/muassasalar/' in p %} is-active{% endif %}" href="{% url 'web:institution_list' %}">{% translate "Muassasalar" %}</a></li>
   <li><a class="nav-link{% if '/yangiliklar/' in p %} is-active{% endif %}" href="{% url 'web:news_list' %}">{% translate "Yangiliklar" %}</a></li>
@@ -16,7 +16,7 @@
       </div>
     {% else %}
       <span class="nav-group-label">{% translate "Taʼlim" %}</span>
-      <ul class="ml-3 flex flex-col gap-1">
+      <ul class="ml-3 flex flex-col">
         <li><a class="nav-link" href="{% url 'web:program_list' %}">{% translate "Yoʻnalishlar" %}</a></li>
         <li><a class="nav-link" href="{% url 'web:admissions' %}">{% translate "Qabul" %}</a></li>
         <li><a class="nav-link" href="{% url 'web:students_hub' %}">{% translate "Talabalar" %}</a></li>
@@ -28,6 +28,6 @@
   <li><a class="nav-link{% if '/tadbirlar/' in p %} is-active{% endif %}" href="{% url 'web:event_list' %}">{% translate "Tadbirlar" %}</a></li>
   <li><a class="nav-link{% if '/motivatsiya/' in p %} is-active{% endif %}" href="{% url 'web:story_list' %}">{% translate "Motivatsiya" %}</a></li>
   <li><a class="nav-link{% if '/analitika/' in p %} is-active{% endif %}" href="{% url 'web:analytics' %}">{% translate "Analitika" %}</a></li>
-  <li><a class="nav-link nav-cta{% if '/murojaat/' in p %} is-active{% endif %}" href="{% url 'web:appeal_form' %}">{% translate "Murojaat" %}</a></li>
+  <li><a class="nav-link{% if '/murojaat/' in p %} is-active{% endif %}" href="{% url 'web:appeal_form' %}">{% translate "Murojaat" %}</a></li>
 </ul>
 {% endwith %}

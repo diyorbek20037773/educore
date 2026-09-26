@@ -136,6 +136,7 @@
 ## Log (newest first)
 | Date | Phase/Task | Note |
 |---|---|---|
+| 2026-09-26 | Redesign | THE homepage spec applied 1:1: Open Sans, grey page + white cards, 56 px black header, new home layout (ADR-029); 520 tests |
 | 2026-09-26 | Redesign | public UI restyled after timeshighereducation.com (ADR-028); Railway placeholder guard |
 | 2026-09-26 | Phase 6 / Railway | appeals backend + inbox + anonymization (T6.1, T6.2, T6.4); Railway all-in-one deployment prepared and simulated (ADR-027); 520 tests |
 | 2026-09-25 | Phase 3 | providers, full process_post pipeline, translations, digest, editorial admin, golden set, seed_demo; AC3.1–3.2 green; AC3.3 waits for HA3 |

@@ -1,279 +1,7 @@
-/* EDUCORE components (SPEC §7.3). Plain CSS on design tokens; Tailwind utilities do the layout. */
+/* EDUCORE components (SPEC §7.3); chrome and card system in chrome.css / cards.css. Plain CSS on design tokens; Tailwind utilities do the layout. */
 @layer components {
   [x-cloak] {
     display: none !important;
-  }
-
-  /* --- header (THE-style black chrome, ADR-028) --------------------------------------------- */
-  .site-header {
-    position: sticky;
-    top: 0;
-    z-index: 40;
-    background: var(--color-chrome);
-    color: #fff;
-  }
-
-  [data-theme="dark"] .site-header {
-    border-bottom: 1px solid var(--color-line);
-  }
-
-  .topbar {
-    border-bottom: 1px solid rgb(255 255 255 / 0.1);
-    color: rgb(255 255 255 / 0.72);
-  }
-
-  .mainbar {
-    background: var(--color-chrome);
-  }
-
-  .brand {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.7rem;
-    color: #fff;
-  }
-
-  .brand-mark {
-    display: grid;
-    place-items: center;
-    width: 2.5rem;
-    height: 2.5rem;
-    border-radius: 10px;
-    background: var(--gradient-brand);
-    color: #fff;
-    font-size: 1.3rem;
-    font-weight: 800;
-  }
-
-  .brand-name {
-    font-weight: 800;
-    letter-spacing: 0.06em;
-    font-size: 1.25rem;
-    color: inherit;
-  }
-
-  .brand-tagline {
-    font-size: var(--text-xs);
-    color: rgb(255 255 255 / 0.64);
-  }
-
-  .nav-link {
-    display: block;
-    position: relative;
-    border-radius: var(--radius-sm);
-    padding: 0.6rem 0.7rem;
-    font-size: var(--text-sm);
-    font-weight: 600;
-    color: var(--color-ink-2);
-    transition: color 150ms var(--ease-standard);
-  }
-
-  .nav-link:hover,
-  .nav-link.is-active {
-    color: var(--color-ink);
-    background: var(--color-surface-2);
-  }
-
-  .site-header .primary-nav .nav-link {
-    color: rgb(255 255 255 / 0.82);
-    background: transparent;
-  }
-
-  .site-header .primary-nav .nav-link:hover,
-  .site-header .primary-nav .nav-link.is-active {
-    color: #fff;
-  }
-
-  .primary-nav .nav-link.is-active::after {
-    content: "";
-    position: absolute;
-    inset: auto 0.7rem 0.05rem;
-    height: 3px;
-    border-radius: 3px;
-    background: var(--gradient-brand);
-  }
-
-  .site-header .primary-nav .nav-cta,
-  .nav-cta {
-    margin-left: 0.25rem;
-    border-radius: 999px;
-    background: var(--color-brand-700);
-    padding-inline: 1rem;
-    color: #fff;
-  }
-
-  .site-header .primary-nav .nav-cta:hover,
-  .nav-cta:hover {
-    background: var(--color-brand-800);
-    color: #fff;
-  }
-
-  .primary-nav .nav-cta.is-active::after {
-    display: none;
-  }
-
-  .nav-group-label {
-    display: block;
-    padding: 0.5rem 0.7rem 0.25rem;
-    font-size: var(--text-xs);
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--color-ink-2);
-  }
-
-  .mega-menu {
-    position: absolute;
-    left: 0;
-    top: calc(100% + 0.75rem);
-    z-index: 50;
-    display: grid;
-    min-width: 34rem;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.25rem;
-    border-radius: var(--radius-md);
-    background: var(--color-surface);
-    padding: 0.75rem;
-    color: var(--color-ink);
-    box-shadow: var(--shadow-md);
-  }
-
-  .mega-menu a {
-    display: flex;
-    flex-direction: column;
-    gap: 0.15rem;
-    border-radius: 12px;
-    padding: 0.8rem 0.9rem;
-  }
-
-  .mega-menu a:hover {
-    background: var(--color-surface-2);
-  }
-
-  .mega-menu strong {
-    font-weight: 700;
-  }
-
-  .mega-menu span {
-    font-size: var(--text-xs);
-    color: var(--color-ink-2);
-  }
-
-  .icon-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 2.25rem;
-    height: 2.25rem;
-    border-radius: 999px;
-    color: var(--color-ink-2);
-  }
-
-  .icon-btn:hover {
-    background: var(--color-surface-2);
-    color: var(--color-ink);
-  }
-
-  .site-header .topbar .icon-btn,
-  .site-header .mainbar .icon-btn {
-    color: rgb(255 255 255 / 0.82);
-  }
-
-  .site-header .topbar .icon-btn:hover,
-  .site-header .mainbar .icon-btn:hover {
-    background: rgb(255 255 255 / 0.1);
-    color: #fff;
-  }
-
-  .popover {
-    position: absolute;
-    top: calc(100% + 0.25rem);
-    z-index: 50;
-    min-width: 10rem;
-    border-radius: 12px;
-    background: var(--color-surface);
-    padding: 0.35rem;
-    color: var(--color-ink);
-    box-shadow: var(--shadow-md);
-  }
-
-  .popover a {
-    display: block;
-    border-radius: 8px;
-    padding: 0.45rem 0.75rem;
-    font-size: var(--text-sm);
-  }
-
-  .popover a:hover,
-  .popover a[aria-current] {
-    background: var(--color-surface-2);
-    font-weight: 600;
-  }
-
-  .live-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    border-radius: 999px;
-    background: rgb(255 255 255 / 0.1);
-    padding: 0.15rem 0.6rem;
-    font-weight: 700;
-    color: #fff;
-  }
-
-  .live-dot {
-    width: 0.5rem;
-    height: 0.5rem;
-    border-radius: 999px;
-    background: var(--color-orange);
-    animation: live-pulse 1.8s ease-in-out infinite;
-  }
-
-  @keyframes live-pulse {
-    50% {
-      opacity: 0.35;
-    }
-  }
-
-  .drawer {
-    position: fixed;
-    inset: 0;
-    z-index: 60;
-  }
-
-  .drawer-backdrop {
-    position: absolute;
-    inset: 0;
-    background: rgb(11 18 32 / 0.55);
-  }
-
-  .drawer-panel {
-    position: absolute;
-    inset-block: 0;
-    right: 0;
-    width: min(20rem, 88vw);
-    overflow-y: auto;
-    background: var(--color-surface);
-    padding: 1rem;
-    color: var(--color-ink);
-    box-shadow: var(--shadow-md);
-  }
-
-  /* --- footer (black, THE-style) ------------------------------------------------------------ */
-  .site-footer {
-    margin-top: 5rem;
-    background: var(--color-chrome);
-    color: #fff;
-  }
-
-  .site-footer a:hover {
-    text-decoration: underline;
-  }
-
-  .footer-title {
-    font-size: var(--text-sm);
-    font-weight: 700;
-    color: #fff;
   }
 
   /* --- institution palette (ADR-007) ---------------------------------------------------------- */
@@ -303,166 +31,6 @@
   .inst-bg { background: var(--inst); color: #fff; }
 
   /* --- cards, chips, badges ------------------------------------------------------------------- */
-  .card {
-    border: 1px solid var(--color-line);
-    border-radius: var(--radius-md);
-    background: var(--color-surface);
-  }
-
-  .card-link {
-    transition: box-shadow 200ms var(--ease-standard), transform 200ms var(--ease-standard);
-  }
-
-  .card-link:hover {
-    box-shadow: var(--shadow-md);
-    transform: translateY(-2px);
-  }
-
-  /* THE article tile: rounded image on top, bold title, small grey kicker; no box */
-  .tile {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-
-  .tile .media-frame img {
-    transition: transform 300ms var(--ease-standard);
-  }
-
-  .tile:hover .media-frame img {
-    transform: scale(1.03);
-  }
-
-  .tile:hover .tile-title {
-    text-decoration: underline;
-    text-underline-offset: 3px;
-  }
-
-  .tile-title {
-    font-weight: 700;
-    line-height: 1.45;
-    color: var(--color-ink);
-  }
-
-  .kicker {
-    font-size: var(--text-sm);
-    color: var(--color-ink-2);
-  }
-
-  .gradient-text {
-    background: var(--gradient-brand);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
-
-  .gradient-bar {
-    height: 4px;
-    background: var(--gradient-brand);
-  }
-
-  /* Section launcher tiles (THE home "News · Rankings · Campus ..." grid) */
-  .launch-tile {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-    border-radius: var(--radius-md);
-    background: var(--color-surface-2);
-    padding: 1.25rem;
-    transition: background-color 200ms var(--ease-standard), transform 200ms var(--ease-standard);
-  }
-
-  .launch-tile:hover {
-    background: var(--color-brand-100);
-    transform: translateY(-2px);
-  }
-
-  [data-theme="dark"] .launch-tile:hover {
-    background: #231c3d;
-  }
-
-  .launch-icon {
-    display: grid;
-    place-items: center;
-    width: 2.5rem;
-    height: 2.5rem;
-    margin-bottom: 0.35rem;
-    border-radius: 12px;
-    background: var(--color-surface);
-    color: var(--color-accent);
-  }
-
-  .launch-title {
-    font-size: var(--text-lg);
-    font-weight: 700;
-  }
-
-  .launch-text {
-    font-size: var(--text-sm);
-    color: var(--color-ink-2);
-  }
-
-  @media (max-width: 639px) {
-    .launch-tile {
-      padding: 1rem;
-    }
-
-    .launch-title {
-      font-size: var(--text-base);
-    }
-
-    .launch-text {
-      display: none;
-    }
-  }
-
-  /* Promotional panels (THE subscribe / demo band) */
-  .promo {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 1.25rem;
-    border-radius: var(--radius-md);
-    background: var(--color-brand-800);
-    padding: 1.5rem;
-    color: #fff;
-  }
-
-  .promo-2 {
-    background: var(--color-brand-900);
-  }
-
-  .promo-3 {
-    background: var(--color-chrome);
-  }
-
-  [data-theme="dark"] .promo-3 {
-    background: var(--color-surface-2);
-  }
-
-  .promo p {
-    color: rgb(255 255 255 / 0.84);
-  }
-
-  .btn-light {
-    display: inline-flex;
-    align-items: center;
-    align-self: flex-start;
-    gap: 0.5rem;
-    border-radius: 999px;
-    background: #fff;
-    padding: 0.6rem 1.2rem;
-    font-size: var(--text-sm);
-    font-weight: 700;
-    color: #09090b;
-  }
-
-  .btn-light:hover {
-    background: rgb(255 255 255 / 0.88);
-  }
-
   .chip {
     display: inline-flex;
     align-items: center;
@@ -527,38 +95,6 @@
     color: #f0b95c;
   }
 
-  .section-title {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .section-title h2 {
-    font-size: var(--text-2xl);
-  }
-
-  @media (min-width: 768px) {
-    .section-title h2 {
-      font-size: var(--text-3xl);
-    }
-  }
-
-  .more-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.3rem;
-    font-size: var(--text-sm);
-    font-weight: 700;
-    color: var(--color-accent);
-  }
-
-  .more-link:hover {
-    text-decoration: underline;
-    text-underline-offset: 3px;
-  }
-
   .kpi-value {
     font-size: var(--text-3xl);
     font-weight: 800;
@@ -577,6 +113,11 @@
     color: var(--color-accent);
   }
 
+  svg.sparkline {
+    max-width: 100%;
+    height: auto;
+  }
+
   .notice {
     display: flex;
     gap: 0.5rem;
@@ -593,10 +134,11 @@
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    border-radius: 999px;
+    border-radius: var(--radius-sm);
     padding: 0.625rem 1.25rem;
     font-size: var(--text-sm);
-    font-weight: 700;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
   }
 
   .btn-primary {
@@ -609,7 +151,8 @@
   }
 
   .btn-secondary {
-    border: 1px solid var(--color-line);
+    border: 1px solid #d5d5d5;
+    background: var(--color-surface);
     color: var(--color-ink);
   }
 

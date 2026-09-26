@@ -226,3 +226,21 @@ before the hero band, and the closing CTA becomes three promo panels (appeal, an
 ramp becomes violet. Institution colours (ADR-007) are unchanged. Source Serif stays only for motivation quotes and
 is no longer preloaded. All text pairs checked ≥ 4.5:1 (accent on white 6.15, on `#F4F4F5` 5.59). **Consequences:**
 SPEC §7.1–7.2 and §6.2 updated; no copying of THE assets, names or content, only the layout and palette idiom.
+Partly superseded by ADR-029.
+
+## ADR-029 — Home and chrome follow the THE homepage spec 1:1
+**Status:** accepted (2026-09-26). **Context:** the owner supplied a detailed THE homepage design spec (tokens,
+typography, section-by-section layout) and asked for it to be applied exactly. **Decision:** Open Sans (self-hosted
+variable woff2, replaces Manrope), grey `#F2F2F2` page with flat white 16 px cards, 944 px content column, 56 px
+black sticky header with a red `#E41C38` logo badge and three-line wordmark, `#D5D5D5` 14 px nav links, red user
+icon (appeal tracking) and search icon; black full-width dropdown menu on small screens; `#09090B` footer with a
+700 px inner column, 40 px link rows, divider, copyright and icons; a round floating button bottom-left (THE's
+accessibility button) carries the theme toggle. Home sections are mapped onto THE's blocks without dropping any
+SPEC §6.2 content: hero, announcement banner (analytics teaser), 8 feature cards, latest news (4 image cards),
+KPI tiles ("jobs" tiles), institutions ("partner" cards), live panel + charts, professions (dark "rankings"
+cards), cadets/students ("study abroad"), admissions tiles + programs, gradient profession search ("career
+search"), events ("resources"), motivation carousel, appeal banner. Deviations: the desktop nav appears from
+1280 px (not 1024 px) because nine Uzbek/Russian links do not fit next to the logo at 1024 px; social icons are
+RSS/Telegram/search (no Facebook/X/YouTube/LinkedIn accounts exist); dark mode is kept (SPEC requirement).
+Contrast: `#6B6B6B` on `#F2F2F2` 4.76:1, on white 5.33:1. **Consequences:** CSS split into `chrome.css` and
+`cards.css`; SPEC §6.2 and §7.2 updated; screenshots at 1280 px and 390 px checked, no horizontal overflow.

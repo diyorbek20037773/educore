@@ -20,7 +20,7 @@ SUBSETS = ("latin", "latin-ext", "cyrillic", "cyrillic-ext")
 
 # (npm package, pinned major, css file, family name used in the design tokens)
 FAMILIES = (
-    ("@fontsource-variable/manrope", "5", "wght.css", "Manrope Variable"),
+    ("@fontsource-variable/open-sans", "5", "wght.css", "Open Sans Variable"),
     ("@fontsource-variable/source-serif-4", "5", "wght.css", "Source Serif 4 Variable"),
     ("@fontsource-variable/jetbrains-mono", "5", "wght.css", "JetBrains Mono Variable"),
 )

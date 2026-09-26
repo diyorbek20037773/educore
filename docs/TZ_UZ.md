@@ -233,7 +233,8 @@ manifest, 404/410/500/texnik ishlar sahifalari, maxfiylik siyosati.
 
 ### 6.1 Dizayn
 Rasmiy, premium, "maʼlumot birinchi": toʻq koʻk (`#0B1F3A`) + oq + tilla urgʻu (`#C9A227`), sarlavhalar uchun
-serif shrift (Source Serif 4), matn uchun Manrope; 12 ustunli toʻr, kartochkalar, yumshoq soyalar; kunduzgi va
+serif shrift (Source Serif 4), matn uchun Open Sans (ADR-029: THE bosh sahifasi uslubi — kulrang fon, oq
+kartochkalar, qora sarlavha paneli); 12 ustunli toʻr, kartochkalar, yumshoq soyalar; kunduzgi va
 tungi rejim; 360 px telefondan boshlab moslashuvchan; WCAG AA (kontrast, klaviatura, ekran oʻquvchilar).
 Grafiklar (Apache ECharts): har muassasa **doimiy oʻz rangida** (rang‑ajrata olmaydiganlar uchun ham
 tekshirilgan palitra), ikki oʻqli grafiklar yoʻq, har grafikda jadval koʻrinishi va CSV. Lighthouse (mobil)

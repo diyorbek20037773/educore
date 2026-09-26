@@ -1,0 +1,318 @@
+/* Site chrome after the THE homepage design (ADR-029): 56 px black bar, black dropdown menu, #09090B footer. */
+@layer components {
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--color-chrome);
+    color: #fff;
+    box-shadow: var(--shadow-nav);
+  }
+
+  .mainbar {
+    height: 56px;
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #fff;
+  }
+
+  .brand-mark {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    flex: none;
+    border-radius: 6px;
+    background: var(--color-brand-red);
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+  }
+
+  .brand-lines {
+    display: flex;
+    flex-direction: column;
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 11px;
+    letter-spacing: 0.02em;
+    color: #fff;
+  }
+
+  .brand-name {
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    font-size: 1.25rem;
+    color: inherit;
+  }
+
+  .nav-link {
+    display: block;
+    position: relative;
+    padding: 14px 7px;
+    font-size: var(--text-sm);
+    font-weight: 400;
+    color: var(--color-ink-2);
+    transition: color 0.2s ease;
+  }
+
+  .nav-link:hover,
+  .nav-link.is-active {
+    color: var(--color-ink);
+  }
+
+  .site-header .nav-link {
+    color: #d5d5d5;
+  }
+
+  .site-header .nav-link:hover,
+  .site-header .nav-link.is-active {
+    color: #fff;
+  }
+
+  .site-header .nav-link.is-active {
+    font-weight: 600;
+  }
+
+  .nav-group-label {
+    display: block;
+    padding: 14px 16px 4px;
+    font-size: var(--text-xs);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #9a9a9a;
+  }
+
+  .mega-menu {
+    position: absolute;
+    left: 0;
+    top: calc(100% + 0.25rem);
+    z-index: 50;
+    display: grid;
+    min-width: 34rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.25rem;
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    padding: 0.75rem;
+    color: var(--color-ink);
+    box-shadow: var(--shadow-md);
+  }
+
+  .mega-menu a {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    border-radius: var(--radius-sm);
+    padding: 0.8rem 0.9rem;
+  }
+
+  .mega-menu a:hover {
+    background: var(--color-surface-2);
+  }
+
+  .mega-menu strong {
+    font-weight: 700;
+    color: var(--color-heading);
+  }
+
+  .mega-menu span {
+    font-size: var(--text-xs);
+    color: var(--color-ink-2);
+  }
+
+  .icon-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 999px;
+    color: var(--color-ink-2);
+    transition: color 0.2s ease, background-color 0.2s ease;
+  }
+
+  .icon-btn:hover {
+    background: var(--color-surface-2);
+    color: var(--color-ink);
+  }
+
+  .site-header .icon-btn {
+    color: #fff;
+  }
+
+  .site-header .icon-btn:hover {
+    background: rgb(255 255 255 / 0.12);
+    color: #fff;
+  }
+
+  .user-badge {
+    display: grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 999px;
+    background: var(--color-brand-red);
+    color: #fff;
+  }
+
+  .popover {
+    position: absolute;
+    top: calc(100% + 0.25rem);
+    z-index: 50;
+    min-width: 10rem;
+    border-radius: 12px;
+    background: var(--color-surface);
+    padding: 0.35rem;
+    color: var(--color-ink);
+    box-shadow: var(--shadow-md);
+  }
+
+  .popover a {
+    display: block;
+    border-radius: 8px;
+    padding: 0.45rem 0.75rem;
+    font-size: var(--text-sm);
+  }
+
+  .popover a:hover,
+  .popover a[aria-current] {
+    background: var(--color-surface-2);
+    font-weight: 600;
+  }
+
+  .live-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    border-radius: 999px;
+    background: var(--color-surface);
+    padding: 0.2rem 0.7rem;
+    font-size: var(--text-xs);
+    font-weight: 700;
+    color: var(--color-heading);
+  }
+
+  .live-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 999px;
+    background: var(--color-brand-red);
+    animation: live-pulse 1.8s ease-in-out infinite;
+  }
+
+  @keyframes live-pulse {
+    50% {
+      opacity: 0.35;
+    }
+  }
+
+  /* Mobile menu: a full-width black dropdown under the 56 px bar */
+  .drawer {
+    position: fixed;
+    inset: 56px 0 0;
+    z-index: 60;
+  }
+
+  .drawer-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgb(0 0 0 / 0.45);
+  }
+
+  .drawer-panel {
+    position: absolute;
+    inset: 0 0 auto;
+    max-height: calc(100vh - 56px);
+    overflow-y: auto;
+    background: var(--color-chrome);
+    padding-block: 0.5rem;
+    color: #fff;
+  }
+
+  .drawer-panel .nav-link {
+    padding: 14px 16px;
+    font-size: var(--text-base);
+    color: #d5d5d5;
+  }
+
+  .drawer-panel .nav-link:hover,
+  .drawer-panel .nav-link.is-active {
+    color: #fff;
+  }
+
+  .site-footer {
+    margin-top: 5rem;
+    background: var(--color-footer);
+    padding: 80px 0 40px;
+    color: #fff;
+  }
+
+  .footer-inner {
+    margin-inline: auto;
+    max-width: calc(700px + 2rem);
+    padding-inline: 1rem;
+  }
+
+  .footer-title {
+    font-size: var(--text-sm);
+    font-weight: 700;
+    color: #fff;
+  }
+
+  .footer-links a {
+    display: inline-block;
+    font-size: 15px;
+    line-height: 40px;
+    color: #d5d5d5;
+    transition: color 0.2s ease;
+  }
+
+  .footer-links a:hover {
+    color: #fff;
+  }
+
+  .footer-bottom {
+    margin-top: 2.5rem;
+    border-top: 1px solid rgb(255 255 255 / 0.2);
+    padding-top: 1.5rem;
+    font-size: var(--text-xs);
+    color: #d5d5d5;
+  }
+
+  .footer-social {
+    display: flex;
+    gap: 40px;
+  }
+
+  .footer-social a {
+    color: #fff;
+  }
+
+  /* Round floating button, bottom-left (THE's accessibility button); here it switches the theme */
+  .fab {
+    position: fixed;
+    left: 16px;
+    bottom: 16px;
+    z-index: 45;
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 999px;
+    background: #1f1f1f;
+    color: #fff;
+    box-shadow: 0 2px 8px rgb(0 0 0 / 0.3);
+    transition: transform 0.2s ease;
+  }
+
+  .fab:hover {
+    transform: scale(1.05);
+  }
+}

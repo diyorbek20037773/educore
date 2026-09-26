@@ -1,7 +1,7 @@
 """Render the PWA icons and the default Open Graph image (`static/img/`) with Pillow.
 
 The mark is drawn geometrically (no font files needed for the icon); the OG image uses the self-hosted
-Manrope/Source Serif TTF when available and falls back to Pillow's default font. Commit the output.
+a Source Serif TTF when available and falls back to Pillow's default font. Commit the output.
 """
 
 from __future__ import annotations

@@ -122,6 +122,24 @@
         },
       };
     });
+
+    /* Home "Motivatsiya" row: round prev/next buttons scroll the track by one visible page. */
+    Alpine.data("carousel", function () {
+      return {
+        scrollBy: function (direction) {
+          var track = this.$refs.track;
+          if (track) {
+            track.scrollBy({ left: direction * track.clientWidth, behavior: "smooth" });
+          }
+        },
+        prev: function () {
+          this.scrollBy(-1);
+        },
+        next: function () {
+          this.scrollBy(1);
+        },
+      };
+    });
   });
 
   /* Boosted navigation replaces the body: never leave the page scroll-locked by an open drawer. */
