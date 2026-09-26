@@ -244,3 +244,10 @@ search"), events ("resources"), motivation carousel, appeal banner. Deviations: 
 RSS/Telegram/search (no Facebook/X/YouTube/LinkedIn accounts exist); dark mode is kept (SPEC requirement).
 Contrast: `#6B6B6B` on `#F2F2F2` 4.76:1, on white 5.33:1. **Consequences:** CSS split into `chrome.css` and
 `cards.css`; SPEC §6.2 and §7.2 updated; screenshots at 1280 px and 390 px checked, no horizontal overflow.
+
+## ADR-030 — Full-width layout instead of THE's 944 px column
+**Status:** accepted (2026-09-26). **Context:** on wide screens the 944 px column (ADR-029) left large empty areas
+left and right; the owner asked for the content to fill the screen. **Decision:** `.container-page`, `.container-wide`
+and the footer span the full viewport with side gutters only (16 px phones, 32 px from 768 px, 48 px from 1536 px);
+header, content and footer share the same edges. Grids keep their column counts (cards grow). Long text blocks keep
+their own max widths (hero lead 900 px). **Consequences:** supersedes the 944 px column in ADR-029 and SPEC §7.2.

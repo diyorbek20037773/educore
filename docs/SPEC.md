@@ -305,7 +305,7 @@ Conventions: every model has `created_at`, `updated_at` (abstract `TimeStampedMo
   suggestions, chart data loads. `hx-boost` on nav links with `hx-push-url`. Skeletons while loading.
 
 ### 6.2 Home `/`
-Layout follows the timeshighereducation.com homepage (ADR‑029): grey page, 944 px column, flat white 16 px cards.
+Layout follows the timeshighereducation.com homepage (ADR‑029): grey page, full‑width column (ADR‑030), flat white 16 px cards.
 0. **Intro** (ADR‑028/029): two‑line headline with the first word in the brand gradient, one‑sentence lead, LIVE badge;
    an analytics announcement banner (3 mini stats); 8 section feature cards in a 4 × 2 grid (Yangiliklar, Muassasalar,
    Yoʻnalishlar, Qabul, Kasblar, Tadbirlar, Analitika, Murojaat) with an outline icon and a long arrow.
@@ -417,7 +417,7 @@ whitespace around numbers. Everything must work in light and dark, on 360 px pho
   `--color-line: #E2E2E2`; dark: `#0B0B0D`, `#18181B`, `#232326`, `#2E2E33`. Header `#000000` (56 px, sticky,
   `0 5px 5px rgb(0 0 0 / .1)`), footer `#09090B`, in both themes. Logo badge red `#E41C38`.
 - Ink: `#232323` body, `#3A3A3A` headings, `#6B6B6B` secondary; dark: `#E4E4E7`, `#FAFAFA`, `#B0B0B0`.
-- Layout: content column 944 px (`--container-page: 976px` incl. 16 px gutters); 24 px grid gaps; 80 px between
+- Layout: full width with 16/32/48 px side gutters (ADR‑030); 24 px grid gaps; 80 px between
   home sections; cards flat at rest, `0 8px 24px rgb(0 0 0 / .08)` + 2 px lift on hover; transitions 0.2 s.
 - Brand: indigo `#272457` (900, table heads, panels), `#432EA7` (800), violet accent `#6933F7` (700: links, primary
   buttons, CTA; dark accent `#A78BFA`), `#F0EBFF` (100). Gradient `linear-gradient(225deg, #4352FF 15%, #DE1B7C 86%,

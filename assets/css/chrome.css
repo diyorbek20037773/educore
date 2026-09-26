@@ -256,8 +256,19 @@
 
   .footer-inner {
     margin-inline: auto;
-    max-width: calc(700px + 2rem);
     padding-inline: 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .footer-inner {
+      padding-inline: 2rem;
+    }
+  }
+
+  @media (min-width: 1536px) {
+    .footer-inner {
+      padding-inline: 3rem;
+    }
   }
 
   .footer-title {
