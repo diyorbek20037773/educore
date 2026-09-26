@@ -49,6 +49,11 @@ DJANGO_SUPERUSER_EMAIL=<admin e-mail>
 DJANGO_SUPERUSER_PASSWORD=<strong password>
 ```
 
+   `ALLOWED_HOSTS`, `SITE_URL` and `CSRF_TRUSTED_ORIGINS` may be omitted: prod settings derive them from
+   `RAILWAY_PUBLIC_DOMAIN` (step 4 must be done first). For `DATABASE_URL`, prefer **+ New Variable → Add
+   Reference** and pick the Postgres service's `DATABASE_URL`, so the service name is always right.
+   If the service's **Settings → Deploy → Custom Start Command** is empty and `railway.json` is not applied, the
+   image entrypoint still switches to `docker/railway/start.sh` on Railway (`RAILWAY_ENVIRONMENT` is set).
 6. Deploy. The first start migrates, seeds, creates the superuser and (with `SEED_DEMO=1`) the demo articles;
    the health check (`/healthz`) turns green after that (timeout 600 s).
 7. Open `https://<domain>/` and `https://<domain>/<ADMIN_URL_PATH>/` → log in → set up TOTP 2FA.

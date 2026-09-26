@@ -6,6 +6,12 @@ set -eu
 
 if [ "${SKIP_WAIT:-0}" = "1" ]; then exec "$@"; fi
 
+# Railway (ADR-027): if the service kept the image's default command (gunicorn) instead of the
+# railway.json start command, run the all-in-one start script, which migrates and starts every process.
+if [ -n "${RAILWAY_ENVIRONMENT:-}${RAILWAY_ENVIRONMENT_NAME:-}" ] && [ "${1:-}" = "gunicorn" ]; then
+    exec /app/docker/railway/start.sh
+fi
+
 python - <<'PY'
 import os
 import sys
