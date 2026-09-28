@@ -269,6 +269,21 @@
     inset: -8px;
   }
 
+  @media (pointer: coarse) {
+    .banner-dots {
+      gap: 32px;
+    }
+
+    .banner-dots .dot::after {
+      inset: -16px;
+    }
+
+    .subnav-more {
+      width: 44px;
+      height: 44px;
+    }
+  }
+
   @media (max-width: 1279px) {
     .banner-slide {
       gap: 1.25rem;

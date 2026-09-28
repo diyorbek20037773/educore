@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-26 22:51+0500\n"
+"POT-Creation-Date: 2026-09-28 09:54+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1754,8 +1754,8 @@ msgstr "Delay"
 msgid "Maʼlumotlarni yangilash (resolve)"
 msgstr "Refresh data (resolve)"
 
-#: apps/telegram/admin.py:86 apps/telegram/admin.py:97
-#: apps/telegram/admin.py:102
+#: apps/telegram/admin.py:86 apps/telegram/admin.py:95
+#: apps/telegram/admin.py:100
 #, python-format
 msgid "%(n)d ta soʻrov navbatga qoʻyildi."
 msgstr "%(n)d request(s) queued."
@@ -1764,62 +1764,62 @@ msgstr "%(n)d request(s) queued."
 msgid "Tarixni yuklash (backfill)"
 msgstr "Load history (backfill)"
 
-#: apps/telegram/admin.py:99
+#: apps/telegram/admin.py:97
 msgid "Boʻshliqlarni tekshirish (gap check)"
 msgstr "Check for gaps (gap check)"
 
-#: apps/telegram/admin.py:104
+#: apps/telegram/admin.py:102
 msgid "Oʻchirish (disable)"
 msgstr "Disable"
 
-#: apps/telegram/admin.py:107
+#: apps/telegram/admin.py:105
 #, python-format
 msgid "%(n)d ta manba oʻchirildi."
 msgstr "%(n)d source(s) disabled."
 
-#: apps/telegram/admin.py:129 templates/pages/events/list.html:8
+#: apps/telegram/admin.py:127 templates/pages/events/list.html:8
 msgid "Koʻrinish"
 msgstr "Display"
 
-#: apps/telegram/admin.py:160
+#: apps/telegram/admin.py:158
 msgid "Xom maʼlumot (JSON)"
 msgstr "Raw data (JSON)"
 
-#: apps/telegram/admin.py:164
+#: apps/telegram/admin.py:162
 msgid "Telegram havola"
 msgstr "Telegram link"
 
-#: apps/telegram/admin.py:170
+#: apps/telegram/admin.py:168
 msgid "Embedding"
 msgstr "Embedding"
 
-#: apps/telegram/admin.py:172
+#: apps/telegram/admin.py:170
 msgid "bor"
 msgstr "yes"
 
-#: apps/telegram/admin.py:174
+#: apps/telegram/admin.py:172
 msgid "Qayta ishlash (AI)"
 msgstr "Process (AI)"
 
-#: apps/telegram/admin.py:181
+#: apps/telegram/admin.py:179
 #, python-format
 msgid "%(n)d ta post navbatga qoʻyildi."
 msgstr "%(n)d post(s) queued."
 
-#: apps/telegram/admin.py:184
+#: apps/telegram/admin.py:182
 msgid "Oʻtkazib yuborish (skip)"
 msgstr "Skip"
 
-#: apps/telegram/admin.py:187
+#: apps/telegram/admin.py:185
 #, python-format
 msgid "%(n)d ta post oʻtkazib yuborildi."
 msgstr "%(n)d post(s) skipped."
 
-#: apps/telegram/admin.py:208
+#: apps/telegram/admin.py:206
 msgid "Qayta urinish (retry)"
 msgstr "Retry"
 
-#: apps/telegram/admin.py:213
+#: apps/telegram/admin.py:211
 #, python-format
 msgid "%(n)d ta hodisa qayta navbatga qoʻyildi."
 msgstr "%(n)d event(s) requeued."
@@ -2814,6 +2814,7 @@ msgid "Asl xabarni koʻrish"
 msgstr "View the original post"
 
 #: templates/components/theme_toggle.html:3
+#: templates/components/theme_toggle.html:6
 msgid "Yorugʻ yoki qorongʻi rejim"
 msgstr "Light or dark mode"
 
@@ -3391,14 +3392,13 @@ msgstr "Educational institutions"
 msgid ""
 "Huquqni muhofaza qilish sohasidagi beshta oliy taʼlim muassasasi bir "
 "platformada: rasmiy Telegram kanallaridan olingan yangiliklar, taʼlim "
-"yoʻnalishlari, qabul, tadbirlar va solishtirma koʻrsatkichlar. Yon "
-"panellardagi raqamlar platformadagi maʼlumotlar asosida avtomatik "
-"hisoblanadi."
+"yoʻnalishlari, qabul, tadbirlar va solishtirma koʻrsatkichlar. Qizil "
+"raqamlar platformadagi maʼlumotlar asosida avtomatik hisoblanadi."
 msgstr ""
 "Five law enforcement higher education institutions on one platform: news "
 "from their official Telegram channels, study programmes, admissions, events "
-"and comparative indicators. The figures in the side panels are calculated "
-"automatically from platform data."
+"and comparative indicators. The red figures are calculated automatically "
+"from platform data."
 
 #: templates/pages/institutions/list.html:77
 msgid "Muassasalar profillari"

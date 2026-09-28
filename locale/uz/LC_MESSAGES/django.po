@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-26 22:51+0500\n"
+"POT-Creation-Date: 2026-09-28 09:54+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1753,8 +1753,8 @@ msgstr ""
 msgid "Maʼlumotlarni yangilash (resolve)"
 msgstr ""
 
-#: apps/telegram/admin.py:86 apps/telegram/admin.py:97
-#: apps/telegram/admin.py:102
+#: apps/telegram/admin.py:86 apps/telegram/admin.py:95
+#: apps/telegram/admin.py:100
 #, python-format
 msgid "%(n)d ta soʻrov navbatga qoʻyildi."
 msgstr ""
@@ -1763,62 +1763,62 @@ msgstr ""
 msgid "Tarixni yuklash (backfill)"
 msgstr ""
 
-#: apps/telegram/admin.py:99
+#: apps/telegram/admin.py:97
 msgid "Boʻshliqlarni tekshirish (gap check)"
 msgstr ""
 
-#: apps/telegram/admin.py:104
+#: apps/telegram/admin.py:102
 msgid "Oʻchirish (disable)"
 msgstr ""
 
-#: apps/telegram/admin.py:107
+#: apps/telegram/admin.py:105
 #, python-format
 msgid "%(n)d ta manba oʻchirildi."
 msgstr ""
 
-#: apps/telegram/admin.py:129 templates/pages/events/list.html:8
+#: apps/telegram/admin.py:127 templates/pages/events/list.html:8
 msgid "Koʻrinish"
 msgstr ""
 
-#: apps/telegram/admin.py:160
+#: apps/telegram/admin.py:158
 msgid "Xom maʼlumot (JSON)"
 msgstr ""
 
-#: apps/telegram/admin.py:164
+#: apps/telegram/admin.py:162
 msgid "Telegram havola"
 msgstr ""
 
-#: apps/telegram/admin.py:170
+#: apps/telegram/admin.py:168
 msgid "Embedding"
 msgstr ""
 
-#: apps/telegram/admin.py:172
+#: apps/telegram/admin.py:170
 msgid "bor"
 msgstr ""
 
-#: apps/telegram/admin.py:174
+#: apps/telegram/admin.py:172
 msgid "Qayta ishlash (AI)"
 msgstr ""
 
-#: apps/telegram/admin.py:181
+#: apps/telegram/admin.py:179
 #, python-format
 msgid "%(n)d ta post navbatga qoʻyildi."
 msgstr ""
 
-#: apps/telegram/admin.py:184
+#: apps/telegram/admin.py:182
 msgid "Oʻtkazib yuborish (skip)"
 msgstr ""
 
-#: apps/telegram/admin.py:187
+#: apps/telegram/admin.py:185
 #, python-format
 msgid "%(n)d ta post oʻtkazib yuborildi."
 msgstr ""
 
-#: apps/telegram/admin.py:208
+#: apps/telegram/admin.py:206
 msgid "Qayta urinish (retry)"
 msgstr ""
 
-#: apps/telegram/admin.py:213
+#: apps/telegram/admin.py:211
 #, python-format
 msgid "%(n)d ta hodisa qayta navbatga qoʻyildi."
 msgstr ""
@@ -2812,6 +2812,7 @@ msgid "Asl xabarni koʻrish"
 msgstr ""
 
 #: templates/components/theme_toggle.html:3
+#: templates/components/theme_toggle.html:6
 msgid "Yorugʻ yoki qorongʻi rejim"
 msgstr ""
 
@@ -3369,9 +3370,8 @@ msgstr ""
 msgid ""
 "Huquqni muhofaza qilish sohasidagi beshta oliy taʼlim muassasasi bir "
 "platformada: rasmiy Telegram kanallaridan olingan yangiliklar, taʼlim "
-"yoʻnalishlari, qabul, tadbirlar va solishtirma koʻrsatkichlar. Yon "
-"panellardagi raqamlar platformadagi maʼlumotlar asosida avtomatik "
-"hisoblanadi."
+"yoʻnalishlari, qabul, tadbirlar va solishtirma koʻrsatkichlar. Qizil "
+"raqamlar platformadagi maʼlumotlar asosida avtomatik hisoblanadi."
 msgstr ""
 
 #: templates/pages/institutions/list.html:77

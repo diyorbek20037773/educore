@@ -304,3 +304,14 @@ attribution stay. Backfill emits an outbox event and downloads full media for **
 (`TELEGRAM_BACKFILL_LIMIT`), because a verbatim post costs nothing. **Consequences:** `ANTHROPIC_API_KEY` is no
 longer needed (HA3 is optional). The AI pipeline stays in the code and returns with `CONTENT_MODE=ai`; switching
 modes rewrites articles on their next edit or `ai_reprocess`. Disk use grows with videos (`TELEGRAM_MAX_MEDIA_MB`).
+
+## ADR-034 — Tablet presentation: touch-size targets, theme switch in the menu
+**Status:** accepted (2026-09-28). **Context:** the owner wants to present the site on a tablet (iPad class,
+768–1366 px, touch). An audit of 11 public pages at 768×1024, 820×1180, 1024×1366 and 1180×820 with touch emulation
+found no horizontal overflow, but the floating theme button covered content below 1280 px and several controls had
+hit areas under 24 px (chart "table view"/CSV links, footer social and external-site icons, sub-nav chevron, banner
+dots). **Decision:** below 1280 px (where the burger menu is used) the floating button is hidden and the theme
+switch is a full-width row at the end of the mobile menu; under `(pointer: coarse)` those controls get ≥ 44 px hit
+areas via min-size/padding without changing their look (desktop with a mouse is unchanged). The `/muassasalar/`
+intro no longer mentions "side panels" because tablets show the badge strip instead. **Consequences:** CSS only in
+`chrome.css` and `skin.css`; `theme_toggle.html` gains a `row` variant.

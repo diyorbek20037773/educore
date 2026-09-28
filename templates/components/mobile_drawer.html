@@ -3,5 +3,6 @@
   <div class="drawer-backdrop" x-on:click="closeDrawer" aria-hidden="true"></div>
   <nav class="drawer-panel" aria-label="{% translate 'Mobil menyu' %}">
     {% include "components/nav_links.html" with mode="mobile" %}
+    {% include "components/theme_toggle.html" with row=True %}
   </nav>
 </div>
