@@ -7,6 +7,7 @@ from typing import Any
 from unittest import mock
 
 import pytest
+from freezegun import freeze_time
 
 from apps.telegram.ingestor import history
 from apps.telegram.ingestor.media import MediaDownloader
@@ -133,6 +134,7 @@ def test_gapcheck_resets_miss_counter_when_seen_again(run: Run, source: SourceIn
     assert not TelegramPost.objects.get(telegram_message_id=102).is_deleted
 
 
+@freeze_time("2026-09-21 12:00:00+05:00")  # the recorded post is dated 2026-09-20; refresh covers 7 days
 def test_refresh_engagement_updates_counters(run: Run, source: SourceInfo) -> None:
     run(
         history.backfill,
