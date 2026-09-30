@@ -1,7 +1,7 @@
 #!/bin/bash
 # Railway (temporary hosting, ADR-027): one service runs every EDUCORE process so they share one volume
-# (/data: media, private attachments, Telegram session). Railway restarts the container if web, a worker
-# or beat exits; the optional ingestor is restarted in place and never takes the site down.
+# (/data: media, private attachments, Telegram session). Workers, beat and the optional ingestor are restarted
+# in place; Railway restarts the container only when the web server exits.
 set -euo pipefail
 
 mkdir -p /data/media /data/private /data/telegram /data/fastembed /tmp/prom
@@ -37,31 +37,36 @@ if [ "${SEED_DEMO:-0}" = "1" ]; then
     python manage.py seed_demo
 fi
 
-pids=()
-celery -A config worker -Q ingest,default,media -c 2 -Ofair -n worker@%h --loglevel INFO &
-pids+=($!)
-celery -A config worker -Q ai -c 1 -Ofair -n worker-ai@%h --loglevel INFO &
-pids+=($!)
-celery -A config beat -S django_celery_beat.schedulers:DatabaseScheduler --loglevel INFO &
-pids+=($!)
+# Celery and the ingestor are restarted in place, so a short Postgres/Redis outage never takes the site down.
+# Only the web server is "core": when gunicorn exits, every child is stopped and the container exits non-zero,
+# so Railway's ON_FAILURE policy restarts it.
+supervise() {
+    local name=$1 delay=$2
+    shift 2
+    while true; do
+        local code=0
+        "$@" || code=$?
+        echo "railway: $name exited ($code), restarting in ${delay} s" >&2
+        sleep "$delay"
+    done
+}
+stop_children() {
+    trap - TERM INT
+    kill -TERM 0 2>/dev/null || true
+    wait || true
+}
+trap 'stop_children; exit 0' TERM INT
 
+supervise worker 10 celery -A config worker -Q ingest,default,media -c 2 -Ofair -n worker@%h --loglevel INFO &
+supervise worker-ai 10 celery -A config worker -Q ai -c 1 -Ofair -n worker-ai@%h --loglevel INFO &
+supervise beat 10 celery -A config beat -S django_celery_beat.schedulers:DatabaseScheduler --loglevel INFO &
 if [ "${RUN_INGESTOR:-0}" = "1" ]; then
-    (
-        while true; do
-            python manage.py telegram_ingest || echo "railway: ingestor exited ($?), restarting in 60 s"
-            sleep 60
-        done
-    ) &
+    supervise ingestor 60 python manage.py telegram_ingest &
 fi
 
-gunicorn config.wsgi:application --bind "0.0.0.0:${PORT:-8000}" --workers "${WEB_CONCURRENCY:-2}" \
-    --threads 4 --timeout 60 --access-logfile - &
-pids+=($!)
-
-trap 'kill -TERM "${pids[@]}" 2>/dev/null; wait' TERM INT
-# Exit (→ Railway restart) as soon as any core process dies.
-wait -n "${pids[@]}" || true
-echo "railway: a core process exited, stopping the container" >&2
-kill -TERM "${pids[@]}" 2>/dev/null || true
-wait
+gunicorn config.wsgi:application --bind "0.0.0.0:${PORT:-8000}" --workers "${WEB_CONCURRENCY:-2}"     --threads 4 --timeout 60 --access-logfile - &
+web_pid=$!
+wait "$web_pid" || true
+echo "railway: web server exited, stopping the container" >&2
+stop_children
 exit 1

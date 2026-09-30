@@ -136,6 +136,7 @@
 ## Log (newest first)
 | Date | Phase/Task | Note |
 |---|---|---|
+| 2026-09-30 | Railway | outage fix: a Postgres blip crashed beat and the container hung (final `wait` blocked on the ingestor loop); workers/beat/ingestor now restart in place, only a web exit restarts the container |
 | 2026-09-28 | Tablet | touch audit of 11 pages at 4 iPad sizes (no overflow); theme switch moved into the menu below 1280 px, ≥ 44 px touch targets (ADR-034) |
 | 2026-09-26 | Owner decision | `CONTENT_MODE=verbatim`: posts published unchanged with all photos/videos, no AI; video player on the article page (ADR-033) |
 | 2026-09-26 | Redesign | `/muassasalar/` in THE rankings wallpaper layout: sub-nav, rotating featured banner, navy side rails with stat badges from real data, mobile strip (ADR-031); 545 tests |
