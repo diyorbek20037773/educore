@@ -67,6 +67,14 @@ DJANGO_SUPERUSER_PASSWORD=
 7. Open `https://<domain>/` and `https://<domain>/<ADMIN_URL_PATH>/` → log in → set up TOTP 2FA.
    Afterwards remove `DJANGO_SUPERUSER_PASSWORD` from the variables.
 
+## Free plan (0.5 GB per service)
+
+The default start does not fit: web + Celery + beat need about 650 MB. Add `RUN_WORKERS=0` and `WEB_CONCURRENCY=1`
+(web only, about 120 MB; ADR-035) and `SEED_DEMO=0`, and set `METRICS_IP_ALLOWLIST=192.0.2.1/32` so `/metrics` stays
+closed. Without workers nothing is processed in the background: no Telegram ingestion, analytics rollups or appeal
+e-mails (tasks wait in Redis). Services sleep when idle, so the first request after a pause is slow, and the
+monthly usage credit is small: when it runs out the site stops until the next month or an upgrade.
+
 ## Real data (when the keys arrive)
 
 - **Content mode:** `CONTENT_MODE=verbatim` (default) publishes every post unchanged with its photos and videos and

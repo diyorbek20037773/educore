@@ -6,7 +6,7 @@
 ## Current focus
 - Phase: **6 — Appeals** (Phases 4–5 done; Phase 3 done except HA3-dependent AC3.3)
 - Current task: Phase 6 — T6.1
-- Last updated: 2026-09-26, Claude Code
+- Last updated: 2026-11-05, Claude Code
 - **Owner priority (2026-09-26): temporary deployment on Railway (railway.com) now; real VPS later (Phase 8).**
 
 ## Human actions needed (owner)
@@ -136,6 +136,7 @@
 ## Log (newest first)
 | Date | Phase/Task | Note |
 |---|---|---|
+| 2026-11-05 | Railway | old project unreachable from the owner's logged-in account, trial expired; workspace moved to the Free plan; web-only `RUN_WORKERS=0` mode verified under 512 MB (ADR-035) |
 | 2026-09-30 | Railway | outage fix: a Postgres blip crashed beat and the container hung (final `wait` blocked on the ingestor loop); workers/beat/ingestor now restart in place, only a web exit restarts the container |
 | 2026-09-28 | Tablet | touch audit of 11 pages at 4 iPad sizes (no overflow); theme switch moved into the menu below 1280 px, ≥ 44 px touch targets (ADR-034) |
 | 2026-09-26 | Owner decision | `CONTENT_MODE=verbatim`: posts published unchanged with all photos/videos, no AI; video player on the article page (ADR-033) |

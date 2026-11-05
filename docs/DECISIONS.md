@@ -315,3 +315,11 @@ switch is a full-width row at the end of the mobile menu; under `(pointer: coars
 areas via min-size/padding without changing their look (desktop with a mouse is unchanged). The `/muassasalar/`
 intro no longer mentions "side panels" because tablets show the badge strip instead. **Consequences:** CSS only in
 `chrome.css` and `skin.css`; `theme_toggle.html` gains a `row` variant.
+
+## ADR-035 — Web-only start for Railway's Free plan
+**Status:** accepted (2026-11-05). **Context:** the Railway trial ended and no payment method is on file, so the
+only plan available without the owner's card is Free (0.5 GB RAM per service, small monthly credit). The all-in-one
+start uses about 650 MB. **Decision:** `RUN_WORKERS=0` skips Celery workers and beat; `start.sh` then runs only
+gunicorn (about 120 MB with `WEB_CONCURRENCY=1`, verified under a 512 MB limit). The default stays `1`.
+**Consequences:** while it is off there is no ingestion, aggregation or e-mail; tasks queue in Redis. This is a
+stopgap for showing the site, not a replacement for the Hobby plan or the VPS (Phase 8).

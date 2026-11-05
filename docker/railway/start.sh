@@ -57,9 +57,14 @@ stop_children() {
 }
 trap 'stop_children; exit 0' TERM INT
 
-supervise worker 10 celery -A config worker -Q ingest,default,media -c 2 -Ofair -n worker@%h --loglevel INFO &
-supervise worker-ai 10 celery -A config worker -Q ai -c 1 -Ofair -n worker-ai@%h --loglevel INFO &
-supervise beat 10 celery -A config beat -S django_celery_beat.schedulers:DatabaseScheduler --loglevel INFO &
+# RUN_WORKERS=0 serves the site only (ADR-035): for Railway's Free plan, where 0.5 GB does not fit Celery.
+if [ "${RUN_WORKERS:-1}" = "1" ]; then
+    supervise worker 10 celery -A config worker -Q ingest,default,media -c 2 -Ofair -n worker@%h --loglevel INFO &
+    supervise worker-ai 10 celery -A config worker -Q ai -c 1 -Ofair -n worker-ai@%h --loglevel INFO &
+    supervise beat 10 celery -A config beat -S django_celery_beat.schedulers:DatabaseScheduler --loglevel INFO &
+else
+    echo "railway: RUN_WORKERS=0, background tasks are queued but not processed" >&2
+fi
 if [ "${RUN_INGESTOR:-0}" = "1" ]; then
     supervise ingestor 60 python manage.py telegram_ingest &
 fi
