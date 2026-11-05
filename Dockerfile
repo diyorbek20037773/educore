@@ -10,7 +10,7 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     PATH=/opt/venv/bin:$PATH \
     FASTEMBED_CACHE_DIR=/app/.cache/fastembed
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends libpq5 ffmpeg libmagic1 curl tini gettext \
+    && apt-get install -y --no-install-recommends libpq5 ffmpeg libmagic1 curl tini gettext redis-server \
     && rm -rf /var/lib/apt/lists/* \
     && groupadd --gid 10001 app \
     && useradd --uid 10001 --gid app --create-home --home-dir /home/app app

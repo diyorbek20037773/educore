@@ -14,6 +14,11 @@ if [ -z "${RAILWAY_VOLUME_MOUNT_PATH:-}" ]; then
     echo "railway: WARNING no volume attached at /data: media, Telegram session and generated keys are lost on redeploy" >&2
 fi
 
+# RUN_LOCAL_REDIS=1 keeps Redis inside this container (ADR-035): for plans with no room for a Redis service.
+if [ "${RUN_LOCAL_REDIS:-0}" = "1" ]; then
+    redis-server --bind 127.0.0.1 --save "" --appendonly no --maxmemory 64mb --maxmemory-policy allkeys-lru &
+fi
+
 # Wait for Postgres/Redis (reuses the image entrypoint's check), then migrate + create-only seeds.
 /app/docker/entrypoint.sh true
 python manage.py migrate --noinput

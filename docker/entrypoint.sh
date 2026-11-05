@@ -5,6 +5,8 @@
 set -eu
 
 if [ "${SKIP_WAIT:-0}" = "1" ]; then exec "$@"; fi
+# start.sh waits by itself, after it has started the optional local Redis (ADR-035).
+if [ "${1:-}" = "/app/docker/railway/start.sh" ]; then exec "$@"; fi
 
 # Railway (ADR-027): if the service kept the image's default command (gunicorn) instead of the
 # railway.json start command, run the all-in-one start script, which migrates and starts every process.

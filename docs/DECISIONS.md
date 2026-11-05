@@ -319,7 +319,10 @@ intro no longer mentions "side panels" because tablets show the badge strip inst
 ## ADR-035 — Web-only start for Railway's Free plan
 **Status:** accepted (2026-11-05). **Context:** the Railway trial ended and no payment method is on file, so the
 only plan available without the owner's card is Free (0.5 GB RAM per service, small monthly credit). The all-in-one
-start uses about 650 MB. **Decision:** `RUN_WORKERS=0` skips Celery workers and beat; `start.sh` then runs only
-gunicorn (about 120 MB with `WEB_CONCURRENCY=1`, verified under a 512 MB limit). The default stays `1`.
+start uses about 650 MB, and the plan refused a Redis service. **Decision:** `RUN_WORKERS=0` skips Celery workers
+and beat; `RUN_LOCAL_REDIS=1` runs a loopback, memory-only `redis-server` in the same container (the image gains the
+`redis-server` package). Together with `WEB_CONCURRENCY=1` that is about 170 MB, verified under a 512 MB limit. Both
+defaults keep the previous behaviour. No application code changes: the Redis cache backend, rate limits and page
+views work as usual, but their data is lost on every restart.
 **Consequences:** while it is off there is no ingestion, aggregation or e-mail; tasks queue in Redis. This is a
 stopgap for showing the site, not a replacement for the Hobby plan or the VPS (Phase 8).

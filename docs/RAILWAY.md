@@ -69,9 +69,11 @@ DJANGO_SUPERUSER_PASSWORD=
 
 ## Free plan (0.5 GB per service)
 
-The default start does not fit: web + Celery + beat need about 650 MB. Add `RUN_WORKERS=0` and `WEB_CONCURRENCY=1`
-(web only, about 120 MB; ADR-035) and `SEED_DEMO=0`, and set `METRICS_IP_ALLOWLIST=192.0.2.1/32` so `/metrics` stays
-closed. Without workers nothing is processed in the background: no Telegram ingestion, analytics rollups or appeal
+The default start does not fit: web + Celery + beat need about 650 MB, and the plan has no room for a Redis service.
+Add `RUN_WORKERS=0`, `RUN_LOCAL_REDIS=1` and `WEB_CONCURRENCY=1` (web + Redis inside one container, about 170 MB;
+ADR-035) with `REDIS_URL=redis://127.0.0.1:6379/0`, `CELERY_BROKER_URL=redis://127.0.0.1:6379/1`,
+`CACHE_URL=redis://127.0.0.1:6379/2`. Also set `SEED_DEMO=0` and `METRICS_IP_ALLOWLIST=192.0.2.1/32` so `/metrics`
+stays closed. Without workers nothing is processed in the background: no Telegram ingestion, analytics rollups or appeal
 e-mails (tasks wait in Redis). Services sleep when idle, so the first request after a pause is slow, and the
 monthly usage credit is small: when it runs out the site stops until the next month or an upgrade.
 
