@@ -12,8 +12,9 @@
 ## Human actions needed (owner)
 | # | Needed for | What exactly | Status |
 |---|---|---|---|
+| 2026-11-08 | Railway / HA2 | educore service had lost its variables and volume (crashed on dev settings → localhost:5432); variables restored, `educore-volume` reattached, start.sh now defaults to prod settings; Telegram logged in, ingestor live on all 5 sources; new domain educore-production-783e.up.railway.app |
 | HA0 | Phase 0 | GitHub repository + remote URL; GNU make (`winget install ezwinports.make`); Chrome (Node 22 already present) | done 2026-09-25: `origin` = github.com/diyorbek20037773/educore, `main` pushed, CI green (lint, test, security/pip-audit, build + Trivy); Chrome present; GNU make still missing (optional) |
-| HA2 | Phase 2 | `TELEGRAM_API_ID`, `TELEGRAM_API_HASH` from https://my.telegram.org → "API development tools"; dedicated phone number; run `make tg-login` and enter the code; a private test channel you administer | pending |
+| HA2 | Phase 2 | `TELEGRAM_API_ID`, `TELEGRAM_API_HASH` from https://my.telegram.org → "API development tools"; dedicated phone number; run `make tg-login` and enter the code; a private test channel you administer | done 2026-11-08 on Railway (`telegram_login` via `railway ssh`); all 5 sources live; private test channel still pending (AC2.3) |
 | HA3 | Phase 3 | `ANTHROPIC_API_KEY` (https://platform.claude.com) — optional since ADR-033 (`CONTENT_MODE=verbatim`) | not needed |
 | HA7 | Phase 7 | optional: Turnstile keys, ops bot token + chat id, SMTP, Sentry DSN | pending |
 | HA8 | Phase 8 | VPS (Ubuntu 24.04, ≥ 4 vCPU/8 GB/80 GB), domain + DNS A record, GitHub secrets `DEPLOY_HOST`, `DEPLOY_USER`, `DEPLOY_SSH_KEY`, `GHCR_PAT`; your `age` public key for backups | pending |
