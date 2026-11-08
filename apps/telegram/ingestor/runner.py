@@ -188,7 +188,9 @@ class Ingestor:
                     "Telegram ingestor is not authorized. Run `make tg-login` on the server.",
                 )  # fmt: skip
                 return EXIT_UNAUTHORIZED
-            await sync_to_async(source_repository.requeue_stale_running)()
+            # Only the leader runs requests, so anything still `running` belongs to a stopped instance
+            # (e.g. a redeploy that killed the previous container mid-backfill): requeue it now.
+            await sync_to_async(source_repository.requeue_stale_running)(older_than_minutes=0)
             await self.refresh_sources()
             write_heartbeat(self.redis)
             self._tasks = [

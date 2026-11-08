@@ -90,3 +90,17 @@ def test_claim_skips_non_pending_and_stale_running_is_requeued() -> None:
     assert requeue_stale_running() == 1
     claimed = claim_next_request()
     assert claimed is not None and claimed.id == stale.pk
+
+
+def test_leader_startup_requeues_a_request_orphaned_moments_ago() -> None:
+    from datetime import timedelta
+
+    from django.utils import timezone
+
+    orphan = IngestionRequestFactory(
+        status=RequestStatus.RUNNING, started_at=timezone.now() - timedelta(minutes=2)
+    )
+    assert requeue_stale_running() == 0
+    assert requeue_stale_running(older_than_minutes=0) == 1
+    orphan.refresh_from_db()
+    assert orphan.status == RequestStatus.PENDING and orphan.started_at is None
