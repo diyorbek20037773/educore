@@ -14,6 +14,20 @@ if [ -z "${RAILWAY_VOLUME_MOUNT_PATH:-}" ]; then
     echo "railway: WARNING no volume attached at /data: media, Telegram session and generated keys are lost on redeploy" >&2
 fi
 
+# Without DJANGO_SETTINGS_MODULE the code falls back to dev settings, whose database default is localhost:5432,
+# so a service with no variables crashed with "connection refused". Railway always runs production settings.
+export DJANGO_SETTINGS_MODULE="${DJANGO_SETTINGS_MODULE:-config.settings.prod}"
+if is_unset "${DATABASE_URL:-}"; then
+    echo "railway: ERROR DATABASE_URL is empty. Add a Postgres (pgvector) service and set" \
+        "DATABASE_URL=\${{<postgres service>.DATABASE_URL}} on this service (docs/RAILWAY.md)" >&2
+    exit 1
+fi
+if is_unset "${REDIS_URL:-}" && [ "${RUN_LOCAL_REDIS:-0}" != "1" ]; then
+    echo "railway: ERROR REDIS_URL is empty. Add a Redis service and set REDIS_URL=\${{Redis.REDIS_URL}}/0," \
+        "or set RUN_LOCAL_REDIS=1 (docs/RAILWAY.md)" >&2
+    exit 1
+fi
+
 # RUN_LOCAL_REDIS=1 keeps Redis inside this container (ADR-035): for plans with no room for a Redis service.
 if [ "${RUN_LOCAL_REDIS:-0}" = "1" ]; then
     redis-server --bind 127.0.0.1 --save "" --appendonly no --maxmemory 64mb --maxmemory-policy allkeys-lru &
